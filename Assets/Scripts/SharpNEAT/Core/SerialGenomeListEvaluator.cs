@@ -17,6 +17,7 @@
  * along with SharpNEAT.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System.Collections.Generic;
+using System.Collections;
 
 namespace SharpNeat.Core
 {
@@ -40,7 +41,7 @@ namespace SharpNeat.Core
         readonly IPhenomeEvaluator<TPhenome> _phenomeEvaluator;
         readonly bool _enablePhenomeCaching;
 
-        delegate void EvaluationMethod(IList<TGenome> genomeList);
+        delegate IEnumerator EvaluationMethod(IList<TGenome> genomeList);
 
         #region Constructor
 
@@ -101,9 +102,10 @@ namespace SharpNeat.Core
         /// Evaluates a list of genomes. Here we decode each genome in series using the contained
         /// IGenomeDecoder and evaluate the resulting TPhenome using the contained IPhenomeEvaluator.
         /// </summary>
-        public void Evaluate(IList<TGenome> genomeList)
+        public IEnumerator Evaluate(IList<TGenome> genomeList)
         {
             _evaluationMethod(genomeList);
+            return null;
         }
 
         /// <summary>
@@ -118,7 +120,7 @@ namespace SharpNeat.Core
 
         #region Private Methods
 
-        private void Evaluate_NonCaching(IList<TGenome> genomeList)
+        private IEnumerator Evaluate_NonCaching(IList<TGenome> genomeList)
         {
             // Decode and evaluate each genome in turn.
             foreach(TGenome genome in genomeList)
@@ -130,15 +132,17 @@ namespace SharpNeat.Core
                     genome.EvaluationInfo.AuxFitnessArr = null;
                 }
                 else
-                {   
-                    FitnessInfo fitnessInfo = _phenomeEvaluator.Evaluate(phenome);
+                {
+                    _phenomeEvaluator.Evaluate(phenome);
+                    FitnessInfo fitnessInfo = _phenomeEvaluator.GetLastFitness();
                     genome.EvaluationInfo.SetFitness(fitnessInfo._fitness);
                     genome.EvaluationInfo.AuxFitnessArr = fitnessInfo._auxFitnessArr;
                 }
             }
+            return null;
         }
 
-        private void Evaluate_Caching(IList<TGenome> genomeList)
+        private IEnumerator Evaluate_Caching(IList<TGenome> genomeList)
         {
             // Decode and evaluate each genome in turn.
             foreach(TGenome genome in genomeList)
@@ -156,12 +160,14 @@ namespace SharpNeat.Core
                     genome.EvaluationInfo.AuxFitnessArr = null;
                 }
                 else
-                {   
-                    FitnessInfo fitnessInfo = _phenomeEvaluator.Evaluate(phenome);
+                {
+                    _phenomeEvaluator.Evaluate(phenome);
+                    FitnessInfo fitnessInfo = _phenomeEvaluator.GetLastFitness();
                     genome.EvaluationInfo.SetFitness(fitnessInfo._fitness);
                     genome.EvaluationInfo.AuxFitnessArr = fitnessInfo._auxFitnessArr;
                 }
             }
+            return null;
         }
 
         #endregion

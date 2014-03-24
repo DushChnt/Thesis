@@ -9,23 +9,38 @@ public class CarMove : MonoBehaviour {
     public bool isRunning = false;
     private GameObject target;
     private IBlackBox brain;
+    Vector3 startPos;
+    float shortestDistance;
 
-    public float GetFitness()
+    public float GetDistance()
     {
         if (target != null)
         {
-            return Vector3.Distance(target.transform.position, transform.position);
+            Vector2 a = new Vector2(target.transform.position.x, target.transform.position.z);
+            Vector2 b = new Vector2(transform.position.x, transform.position.z);
+            return Vector2.Distance(a, b);
         }
         return 0.0f;
     }
 
+    public float GetFitness()
+    {
+        if (Vector3.Distance(transform.position, startPos) < 1)
+        {
+            return 0;
+        }
+        float fit = 1.0f / shortestDistance;
+        print("Fitness: " + fit);
+        return fit;
+    }
+
 	// Use this for initialization
 	void Start () {
-        Time.timeScale = 1;
+        Time.timeScale = 30;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         if (isRunning)
         {
             var direction = target.transform.position - transform.position;
@@ -37,14 +52,15 @@ public class CarMove : MonoBehaviour {
             ISignalArray outputArr = brain.OutputSignalArray;
 
             inputArr[0] = direction.x;
-            inputArr[1] = direction.y;
-            inputArr[2] = direction.z;
+            inputArr[1] = direction.z;
+          //  inputArr[2] = 1; // bias
+           // inputArr[2] = direction.z;
            //inputArr[3] = distance; // Wait and see
 
             brain.Activate();
 
-            var steer = (float)outputArr[0];
-            var gas = (float)outputArr[1];
+            var steer = (float)outputArr[0] * 2 - 1;
+            var gas = (float)outputArr[1] * 2 - 1;
 
           //  var steer = Input.GetAxis("Horizontal");
            // var gas = Input.GetAxis("Vertical");
@@ -57,6 +73,15 @@ public class CarMove : MonoBehaviour {
 
             transform.Rotate(new Vector3(0, turnAngle, 0));
             transform.Translate(Vector3.forward * moveDist);
+
+            PhotoGUI.inX = (float)inputArr[0];
+            PhotoGUI.inZ = (float)inputArr[1];
+            PhotoGUI.outGas = gas;
+            PhotoGUI.outSteer = steer;
+            PhotoGUI.dist = GetDistance();
+            PhotoGUI.currentFitness = 1.0f / PhotoGUI.dist;
+
+            shortestDistance = Mathf.Min(shortestDistance, GetDistance());
         }
 	}
 
@@ -64,6 +89,8 @@ public class CarMove : MonoBehaviour {
         this.target = target;
         this.brain = brain;
         brain.ResetState();
+        this.startPos = transform.position;
+        shortestDistance = int.MaxValue;
         isRunning = true;
     }
 

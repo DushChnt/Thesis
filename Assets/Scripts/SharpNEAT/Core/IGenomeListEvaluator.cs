@@ -17,6 +17,7 @@
  * along with SharpNEAT.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System.Collections.Generic;
+using System.Collections;
 
 namespace SharpNeat.Core
 {
@@ -44,7 +45,7 @@ namespace SharpNeat.Core
         /// <summary>
         /// Evaluates a list of genomes.
         /// </summary>
-        void Evaluate(IList<TGenome> genomeList);  
+        IEnumerator Evaluate(IList<TGenome> genomeList);  
 
         /// <summary>
         /// Reset the internal state of the evaluation scheme if any exists.

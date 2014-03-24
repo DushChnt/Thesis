@@ -16,6 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with SharpNEAT.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System.Collections;
 namespace SharpNeat.Core
 {
     /// <summary>
@@ -39,7 +40,9 @@ namespace SharpNeat.Core
         /// <summary>
         /// Evaluate the provided phenome and return its fitness score.
         /// </summary>
-        FitnessInfo Evaluate(TPhenome phenome);
+        IEnumerator Evaluate(TPhenome phenome);
+
+        FitnessInfo GetLastFitness();
 
         /// <summary>
         /// Reset the internal state of the evaluation scheme if any exists.

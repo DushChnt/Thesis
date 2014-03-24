@@ -25,6 +25,7 @@ using SharpNeat.DistanceMetrics;
 using SharpNeat.EvolutionAlgorithms.ComplexityRegulation;
 using SharpNeat.SpeciationStrategies;
 using SharpNeat.Utility;
+using System.Collections;
 
 namespace SharpNeat.EvolutionAlgorithms
 {
@@ -185,7 +186,7 @@ namespace SharpNeat.EvolutionAlgorithms
         /// <summary>
         /// Progress forward by one generation. Perform one generation/iteration of the evolution algorithm.
         /// </summary>
-        protected override void PerformOneGeneration()
+        protected override IEnumerator PerformOneGeneration()
         {
             // Calculate statistics for each specie (mean fitness, target size, number of offspring to produce etc.)
             int offspringCount;
@@ -206,7 +207,7 @@ namespace SharpNeat.EvolutionAlgorithms
             _genomeList.AddRange(offspringList);
 
             // Evaluate genomes.
-            _genomeListEvaluator.Evaluate(_genomeList);
+            yield return Coroutiner.StartCoroutine( _genomeListEvaluator.Evaluate(_genomeList));
 
             // Integrate offspring into species.
             if(emptySpeciesFlag)

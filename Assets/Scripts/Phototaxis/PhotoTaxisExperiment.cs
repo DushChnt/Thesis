@@ -12,6 +12,7 @@ using SharpNeat.Decoders.Neat;
 using SharpNeat.DistanceMetrics;
 using SharpNeat.SpeciationStrategies;
 using SharpNeat.EvolutionAlgorithms.ComplexityRegulation;
+using SharpNEAT.Core;
 
 public class PhotoTaxisExperiment : INeatExperiment
 {
@@ -25,6 +26,7 @@ public class PhotoTaxisExperiment : INeatExperiment
     string _complexityRegulationStr;
     int? _complexityThreshold;
     string _description;
+    StartEvaluation _se;
 
     public string Name
     {
@@ -38,7 +40,7 @@ public class PhotoTaxisExperiment : INeatExperiment
 
     public int InputCount
     {
-        get { return 3; }
+        get { return 2; }
     }
 
     public int OutputCount
@@ -61,6 +63,11 @@ public class PhotoTaxisExperiment : INeatExperiment
         get { return _neatGenomeParams; }
     }
 
+    public void SetStartEvaluation(StartEvaluation se)
+    {
+        this._se = se;
+    }
+
     public void Initialize(string name, XmlElement xmlConfig)
     {
         _name = name;
@@ -75,6 +82,7 @@ public class PhotoTaxisExperiment : INeatExperiment
         _eaParams.SpecieCount = _specieCount;
         _neatGenomeParams = new NeatGenomeParameters();
         _neatGenomeParams.FeedforwardOnly = _activationScheme.AcyclicNetwork;
+       
     }
 
     public List<NeatGenome> LoadPopulation(XmlReader xr)
@@ -122,11 +130,11 @@ public class PhotoTaxisExperiment : INeatExperiment
         NeatEvolutionAlgorithm<NeatGenome> ea = new NeatEvolutionAlgorithm<NeatGenome>(_eaParams, speciationStrategy, complexityRegulationStrategy);
 
         // Create black box evaluator
-        SimpleEvaluator evaluator = new SimpleEvaluator();
+        PhotoTaxisEvaluator evaluator = new PhotoTaxisEvaluator(_se);
 
         IGenomeDecoder<NeatGenome, IBlackBox> genomeDecoder = CreateGenomeDecoder();
 
-        IGenomeListEvaluator<NeatGenome> innerEvaluator = new SerialGenomeListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator);
+        IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator);
 
         IGenomeListEvaluator<NeatGenome> selectiveEvaluator = new SelectiveGenomeListEvaluator<NeatGenome>(innerEvaluator,
             SelectiveGenomeListEvaluator<NeatGenome>.CreatePredicate_OnceOnly());

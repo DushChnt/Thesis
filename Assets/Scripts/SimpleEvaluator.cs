@@ -8,7 +8,7 @@ public class SimpleEvaluator : IPhenomeEvaluator<IBlackBox> {
     const double StopFitness = 10.0;
     ulong _evalCount;
     bool _stopConditionSatisfied;
-
+    FitnessInfo fitness;
 
 
     public ulong EvaluationCount
@@ -21,8 +21,9 @@ public class SimpleEvaluator : IPhenomeEvaluator<IBlackBox> {
         get { return _stopConditionSatisfied; }
     }
 
-    public FitnessInfo Evaluate(IBlackBox box)
+    public IEnumerator Evaluate(IBlackBox box)
     {
+        this.fitness = FitnessInfo.Zero;
         double fitness = 0;
         double output;
         double pass = 1.0;
@@ -43,7 +44,8 @@ public class SimpleEvaluator : IPhenomeEvaluator<IBlackBox> {
         if (!box.IsStateValid)
         {   // Any black box that gets itself into an invalid state is unlikely to be
             // any good, so lets just bail out here.
-            return FitnessInfo.Zero;
+            this.fitness = FitnessInfo.Zero;
+            return null;
         }
 
         // Read output signal.
@@ -71,7 +73,8 @@ public class SimpleEvaluator : IPhenomeEvaluator<IBlackBox> {
         if (!box.IsStateValid)
         {   // Any black box that gets itself into an invalid state is unlikely to be
             // any good, so lets just bail out here.
-            return FitnessInfo.Zero;
+            this.fitness = FitnessInfo.Zero;
+            return null;
         }
 
         // Read output signal.
@@ -99,7 +102,8 @@ public class SimpleEvaluator : IPhenomeEvaluator<IBlackBox> {
         if (!box.IsStateValid)
         {   // Any black box that gets itself into an invalid state is unlikely to be
             // any good, so lets just bail out here.
-            return FitnessInfo.Zero;
+            this.fitness = FitnessInfo.Zero;
+            return null;
         }
 
         // Read output signal.
@@ -127,7 +131,8 @@ public class SimpleEvaluator : IPhenomeEvaluator<IBlackBox> {
         if (!box.IsStateValid)
         {   // Any black box that gets itself into an invalid state is unlikely to be
             // any good, so lets just bail out here.
-            return FitnessInfo.Zero;
+            this.fitness = FitnessInfo.Zero;
+            return null;
         }
 
         // Read output signal.
@@ -151,10 +156,19 @@ public class SimpleEvaluator : IPhenomeEvaluator<IBlackBox> {
             _stopConditionSatisfied = true;
         }
 
-        return new FitnessInfo(fitness, fitness);
+        this.fitness = new FitnessInfo(fitness, fitness);
+        return null;
     }
 
     public void Reset()
     {       
+    }
+
+
+   
+
+    public FitnessInfo GetLastFitness()
+    {
+        return this.fitness;
     }
 }
