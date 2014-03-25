@@ -36,7 +36,7 @@ public class CarMove : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Time.timeScale = 30;
+        Time.timeScale = 100;
 	}
 	
 	// Update is called once per frame
