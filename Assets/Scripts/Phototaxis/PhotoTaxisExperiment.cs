@@ -40,7 +40,7 @@ public class PhotoTaxisExperiment : INeatExperiment
 
     public int InputCount
     {
-        get { return 2; }
+        get { return 4; }
     }
 
     public int OutputCount

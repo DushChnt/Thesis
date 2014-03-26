@@ -4,6 +4,7 @@ using SharpNeat.Phenomes;
 
 public class CarMove : MonoBehaviour {
 
+    public float SensorRange = 50f;
     public float Speed = 5;
     public float TurnSpeed = 180;
     public bool isRunning = false;
@@ -11,6 +12,7 @@ public class CarMove : MonoBehaviour {
     private IBlackBox brain;
     Vector3 startPos;
     float shortestDistance;
+    
 
     public float GetDistance()
     {
@@ -36,7 +38,7 @@ public class CarMove : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Time.timeScale = 100;
+        Time.timeScale = 30;
 	}
 	
 	// Update is called once per frame
@@ -51,8 +53,36 @@ public class CarMove : MonoBehaviour {
             ISignalArray inputArr = brain.InputSignalArray;
             ISignalArray outputArr = brain.OutputSignalArray;
 
+            RaycastHit hit;
+
+            float leftSensor = 1;
+            float rightSensor = 1;
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0.1f, 0, 1).normalized), out hit, SensorRange))
+            {
+                //  Debug.Log("Hit something!");
+                // Debug.Log("Tag: " + hit.collider.tag);
+                if (hit.collider.tag.Equals("Wall"))
+                {
+                    Debug.DrawLine(transform.position, hit.point, Color.red);
+                    rightSensor = hit.distance / SensorRange;
+                }
+            }
+            if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(-0.1f, 0, 1).normalized), out hit, SensorRange))
+            {
+                //  Debug.Log("Hit something!");
+               //  Debug.Log("Tag: " + hit.collider.tag);
+                if (hit.collider.tag.Equals("Wall"))
+                {
+                    Debug.DrawLine(transform.position, hit.point, Color.red);
+                    leftSensor = hit.distance / SensorRange;
+                }
+            }
+
             inputArr[0] = direction.x;
             inputArr[1] = direction.z;
+            inputArr[2] = rightSensor;
+            inputArr[3] = leftSensor;
           //  inputArr[2] = 1; // bias
            // inputArr[2] = direction.z;
            //inputArr[3] = distance; // Wait and see
