@@ -5,29 +5,33 @@ using System.Xml;
 using SharpNeat.EvolutionAlgorithms;
 using SharpNeat.Genomes.Neat;
 using System;
+using System.Collections.Generic;
 
-public class StartEvaluation : MonoBehaviour {
+public class ParallelStartEvaluation : MonoBehaviour
+{
 
     public GameObject Robot;
     public GameObject Target;
-    CarMove carMove;
+    //CarMove carMove;
     static NeatEvolutionAlgorithm<NeatGenome> _ea;
-    PhotoTaxisExperiment experiment;
-    string filePath = @"Assets\Scripts\Populations\phototaxisChamp.gnm.xml";
+    ParallelExperiment experiment;
+    string filePath = @"Assets\Scripts\Populations\phototaxisChampParallel.gnm.xml";
     public float Duration = 10f;
     public float StoppingFitness = 1f;
+    Dictionary<IBlackBox, CarMove> dict = new Dictionary<IBlackBox, CarMove>();
     DateTime startTime;
 
-	// Use this for initialization
-	void Start () {
-       
+    // Use this for initialization
+    void Start()
+    {
+
         if (Robot != null)
         {
-            
+
         }
-    //    Reset();
+        //    Reset();
         Debug.Log("Starting PhotoTaxis experiment");
-        experiment = new PhotoTaxisExperiment();
+        experiment = new ParallelExperiment();
 
         XmlDocument xmlConfig = new XmlDocument();
         xmlConfig.Load(@"Assets\Scripts\phototaxis.config.xml");
@@ -39,10 +43,10 @@ public class StartEvaluation : MonoBehaviour {
         _ea.UpdateEvent += new EventHandler(ea_UpdateEvent);
         _ea.PausedEvent += new EventHandler(ea_PauseEvent);
 
-        
 
-        
-	}
+
+
+    }
 
     public void StartEA()
     {
@@ -63,7 +67,7 @@ public class StartEvaluation : MonoBehaviour {
     void ea_PauseEvent(object sender, EventArgs e)
     {
         Debug.Log("Done ea'ing (and neat'ing)");
-        
+
         XmlWriterSettings _xwSettings = new XmlWriterSettings();
         _xwSettings.Indent = true;
         // Save genomes to xml file.
@@ -73,26 +77,26 @@ public class StartEvaluation : MonoBehaviour {
             experiment.SavePopulation(xw, _ea.GenomeList);
         }
         // Also save the best genome
-        
+
         using (XmlWriter xw = XmlWriter.Create(filePath, _xwSettings))
         {
             experiment.SavePopulation(xw, new NeatGenome[] { _ea.CurrentChampGenome });
         }
-
         DateTime endTime = DateTime.Now;
         Debug.Log("Total time elapsed: " + (endTime - startTime));
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void RunBest()
     {
         Time.timeScale = 1;
         NeatGenome genome = null;
-        
+
         // Try to load the genome from the XML document.
         try
         {
@@ -101,8 +105,8 @@ public class StartEvaluation : MonoBehaviour {
         }
         catch (Exception e1)
         {
-           print("Error loading genome from file!\nLoading aborted.\n"
-                                     + e1.Message);
+            print("Error loading genome from file!\nLoading aborted.\n"
+                                      + e1.Message);
             return;
         }
 
@@ -112,45 +116,51 @@ public class StartEvaluation : MonoBehaviour {
         // Decode the genome into a phenome (neural network).
         var phenome = genomeDecoder.Decode(genome);
 
-        Reset();
-        carMove.Activate(phenome, Target);
+       // Reset();
+
+        GameObject obj = Instantiate(Robot, new Vector3(20, 1, 0), Quaternion.identity) as GameObject;
+        CarMove car = obj.GetComponent<CarMove>();        
+        car.Activate(phenome, Target);
     }
 
     public void Evaluate(IBlackBox box)
     {
-        Reset();
-        
-        carMove.Activate(box, Target);
+        //Reset();
+        GameObject obj = Instantiate(Robot, new Vector3(20, 1, 0), Quaternion.identity) as GameObject;
+        CarMove car = obj.GetComponent<CarMove>();
+        dict.Add(box, car);
+        car.Activate(box, Target);
     }
 
-    public void StopEvaluation()
+    public void StopEvaluation(IBlackBox box)
     {
         Debug.Log("Stop evaluation");
-        carMove.Stop();
-        Destroy(carMove.gameObject);
+        CarMove car = dict[box];
+        car.Stop();
+        Destroy(car.gameObject);
     }
 
-    public float GetFitness()
+    public float GetFitness(IBlackBox box)
     {
-        if (Robot != null)
+        if (dict.ContainsKey(box))
         {
-            float fit = carMove.GetFitness();
+            float fit = dict[box].GetFitness();
             print("Fitness: " + fit);
             return fit;
         }
         return 0.0f;
     }
 
-    private void Reset()
-    {
-        print("Resetting");
-     //   Robot.transform.position = new Vector3(20, 1, 0);
-      //  Robot.transform.rotation = Quaternion.identity;
-        if (carMove != null)
-        {
-            StopEvaluation();
-        }
-        GameObject obj = Instantiate(Robot, new Vector3(20, 1, 0), Quaternion.identity) as GameObject;
-        carMove = obj.GetComponent<CarMove>();
-    }
+    //private void Reset()
+    //{
+    //    print("Resetting");
+    //    //   Robot.transform.position = new Vector3(20, 1, 0);
+    //    //  Robot.transform.rotation = Quaternion.identity;
+    //    if (carMove != null)
+    //    {
+    //       // StopEvaluation();
+    //    }
+    //    GameObject obj = Instantiate(Robot, new Vector3(20, 1, 0), Quaternion.identity) as GameObject;
+    //    carMove = obj.GetComponent<CarMove>();
+    //}
 }

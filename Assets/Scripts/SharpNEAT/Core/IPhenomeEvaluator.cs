@@ -42,7 +42,7 @@ namespace SharpNeat.Core
         /// </summary>
         IEnumerator Evaluate(TPhenome phenome);
 
-        FitnessInfo GetLastFitness();
+        FitnessInfo GetLastFitness(TPhenome phenome);
 
         /// <summary>
         /// Reset the internal state of the evaluation scheme if any exists.

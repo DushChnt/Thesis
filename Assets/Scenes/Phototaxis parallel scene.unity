@@ -104,7 +104,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 9b17b2b3e4f899b41a3e1cf866d8be5a, type: 2}
+  - {fileID: 2100000, guid: 730d387c3ec91924b8b36a226fc41277, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 525300129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edaa0e3ceb9705f4587b39ae75c7747c, type: 3}
+  m_Script: {fileID: 11500000, guid: 527058ce8309edc4da33a6cf2f7f943a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Robot: {fileID: 100000, guid: 377b386330b68a649bb7ca271bcaee06, type: 2}
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1807478848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a6496051e34e14b88bc77d6b3ec7ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 4531a4398a86c2c45bb00179e85772e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1807478850

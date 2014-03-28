@@ -171,4 +171,10 @@ public class SimpleEvaluator : IPhenomeEvaluator<IBlackBox> {
     {
         return this.fitness;
     }
+
+
+    public FitnessInfo GetLastFitness(IBlackBox phenome)
+    {
+        return this.fitness;
+    }
 }

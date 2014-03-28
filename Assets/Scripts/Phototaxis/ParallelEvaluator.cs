@@ -2,14 +2,17 @@
 using System.Collections;
 using SharpNeat.Phenomes;
 using SharpNeat.Core;
+using System.Collections.Generic;
 
-public class PhotoTaxisEvaluator : IPhenomeEvaluator<IBlackBox>
+public class ParallelEvaluator : IPhenomeEvaluator<IBlackBox>
 {
     ulong _evalCount;
     bool _stopConditionSatisfied;
-    StartEvaluation se;
+    ParallelStartEvaluation se;
     FitnessInfo fitness;
-    
+
+    Dictionary<IBlackBox, FitnessInfo> dict = new Dictionary<IBlackBox, FitnessInfo>();
+
     public ulong EvaluationCount
     {
         get { return _evalCount; }
@@ -20,7 +23,7 @@ public class PhotoTaxisEvaluator : IPhenomeEvaluator<IBlackBox>
         get { return _stopConditionSatisfied; }
     }
 
-    public PhotoTaxisEvaluator(StartEvaluation se)
+    public ParallelEvaluator(ParallelStartEvaluation se)
     {
         this.se = se;
     }
@@ -29,23 +32,24 @@ public class PhotoTaxisEvaluator : IPhenomeEvaluator<IBlackBox>
     {
         if (se != null)
         {
+
             se.Evaluate(box);
             yield return new WaitForSeconds(se.Duration);
-            se.StopEvaluation();
-            float fit = se.GetFitness();
+            se.StopEvaluation(box);
+            float fit = se.GetFitness(box);
             if (fit > se.StoppingFitness)
             {
                 _stopConditionSatisfied = true;
             }
-            this.fitness = new FitnessInfo(fit, fit);
-            
+            FitnessInfo fitness = new FitnessInfo(fit, fit);
+            dict.Add(box, fitness);
         }
     }
-    
+
     public void Reset()
     {
         this.fitness = FitnessInfo.Zero;
-        
+
     }
 
     public FitnessInfo GetLastFitness()
@@ -56,6 +60,12 @@ public class PhotoTaxisEvaluator : IPhenomeEvaluator<IBlackBox>
 
     public FitnessInfo GetLastFitness(IBlackBox phenome)
     {
-        return this.fitness;
+        if (dict.ContainsKey(phenome))
+        {
+            FitnessInfo fit = dict[phenome];
+            dict.Remove(phenome);
+            return fit;
+        }
+        return FitnessInfo.Zero;
     }
 }

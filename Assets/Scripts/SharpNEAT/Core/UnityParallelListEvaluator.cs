@@ -8,11 +8,11 @@ using UnityEngine;
 
 namespace SharpNEAT.Core
 {
-    class UnityListEvaluator<TGenome, TPhenome> : IGenomeListEvaluator<TGenome>
+    class UnityParallelListEvaluator<TGenome, TPhenome> : IGenomeListEvaluator<TGenome>
         where TGenome : class, IGenome<TGenome>
         where TPhenome : class
-	{
-        
+    {
+
         readonly IGenomeDecoder<TGenome, TPhenome> _genomeDecoder;
         readonly IPhenomeEvaluator<TPhenome> _phenomeEvaluator;
 
@@ -21,7 +21,7 @@ namespace SharpNEAT.Core
         /// <summary>
         /// Construct with the provided IGenomeDecoder and IPhenomeEvaluator.
         /// </summary>
-        public UnityListEvaluator(IGenomeDecoder<TGenome, TPhenome> genomeDecoder,
+        public UnityParallelListEvaluator(IGenomeDecoder<TGenome, TPhenome> genomeDecoder,
                                          IPhenomeEvaluator<TPhenome> phenomeEvaluator)
         {
             _genomeDecoder = genomeDecoder;
@@ -47,6 +47,7 @@ namespace SharpNEAT.Core
 
         private IEnumerator evaluateList(IList<TGenome> genomeList)
         {
+            Dictionary<TGenome, TPhenome> dict = new Dictionary<TGenome, TPhenome>();
             foreach (TGenome genome in genomeList)
             {
                 TPhenome phenome = _genomeDecoder.Decode(genome);
@@ -57,8 +58,19 @@ namespace SharpNEAT.Core
                 }
                 else
                 {
-                    yield return Coroutiner.StartCoroutine(_phenomeEvaluator.Evaluate(phenome));
+                    dict.Add(genome, phenome);
+                    Coroutiner.StartCoroutine(_phenomeEvaluator.Evaluate(phenome));
 
+                    
+                }
+            }
+
+            yield return new WaitForSeconds(10f); 
+            foreach (TGenome genome in dict.Keys)
+            {
+                TPhenome phenome = dict[genome];
+                if (phenome != null)
+                {
                     FitnessInfo fitnessInfo = _phenomeEvaluator.GetLastFitness(phenome);
 
                     genome.EvaluationInfo.SetFitness(fitnessInfo._fitness);
