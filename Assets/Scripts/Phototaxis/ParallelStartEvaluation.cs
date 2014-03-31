@@ -50,11 +50,20 @@ public class ParallelStartEvaluation : MonoBehaviour
 
     public void StartEA()
     {
+        Target.GetComponent<TargetMovement>().Activate();
         Time.timeScale = 100;
         if (_ea != null)
         {
             startTime = DateTime.Now;
             _ea.StartContinue();
+        }
+    }
+
+    public void StopEA()
+    {
+        if (_ea != null && _ea.RunState == SharpNeat.Core.RunState.Running)
+        {
+            _ea.Stop();
         }
     }
 
@@ -94,6 +103,7 @@ public class ParallelStartEvaluation : MonoBehaviour
 
     public void RunBest()
     {
+        
         Time.timeScale = 1;
         NeatGenome genome = null;
 
@@ -119,7 +129,8 @@ public class ParallelStartEvaluation : MonoBehaviour
        // Reset();
 
         GameObject obj = Instantiate(Robot, new Vector3(20, 1, 0), Quaternion.identity) as GameObject;
-        CarMove car = obj.GetComponent<CarMove>();        
+        CarMove car = obj.GetComponent<CarMove>();
+        Target.GetComponent<TargetMovement>().Activate();
         car.Activate(phenome, Target);
     }
 

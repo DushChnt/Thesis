@@ -12,7 +12,8 @@ public class CarMove : MonoBehaviour {
     private IBlackBox brain;
     Vector3 startPos;
     float shortestDistance;
-    
+    float totalDistance;
+    long ticks;
 
     public float GetDistance()
     {
@@ -31,7 +32,9 @@ public class CarMove : MonoBehaviour {
         {
             return 0;
         }
-        float fit = 1.0f / shortestDistance;
+   //     float fit = 1.0f / shortestDistance;
+        float avg = totalDistance / ticks;
+        float fit = 1.0f / avg;
         print("Fitness: " + fit);
         return fit;
     }
@@ -39,6 +42,8 @@ public class CarMove : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //Time.timeScale = 1;
+        totalDistance = 0;
+        ticks = 0;
 	}
 	
 	// Update is called once per frame
@@ -46,8 +51,8 @@ public class CarMove : MonoBehaviour {
         if (isRunning)
         {
             var direction = target.transform.position - transform.position;
-           // var distance = direction.magnitude;
-           // distance /= 20f; // Normalize to a radius of 20
+            var distance = 1 / direction.magnitude;
+            //distance /= 20f; // Normalize to a radius of 20
             direction.Normalize();
 
             ISignalArray inputArr = brain.InputSignalArray;
@@ -81,8 +86,9 @@ public class CarMove : MonoBehaviour {
 
             inputArr[0] = direction.x;
             inputArr[1] = direction.z;
-            inputArr[2] = rightSensor;
-            inputArr[3] = leftSensor;
+            inputArr[2] = distance;
+            inputArr[3] = rightSensor;
+            inputArr[4] = leftSensor;
           //  inputArr[2] = 1; // bias
            // inputArr[2] = direction.z;
            //inputArr[3] = distance; // Wait and see
@@ -112,6 +118,8 @@ public class CarMove : MonoBehaviour {
             PhotoGUI.currentFitness = 1.0f / PhotoGUI.dist;
 
             shortestDistance = Mathf.Min(shortestDistance, GetDistance());
+            totalDistance += GetDistance();
+            ticks++;
         }
 	}
 

@@ -16,14 +16,19 @@ public class ParallelPhotoGUI : MonoBehaviour
             "Distance: " + dist + "\n" +
             "Current Fitness: " + currentFitness);
 
-        if (GUI.Button(new Rect(10, 300, 100, 30), "Start EA"))
+        if (GUI.Button(new Rect(10, 160, 100, 30), "Start EA"))
         {
             GameObject.Find("Evaluator").GetComponent<ParallelStartEvaluation>().StartEA();
         }
 
-        if (GUI.Button(new Rect(10, 340, 100, 30), "Run Best"))
+        if (GUI.Button(new Rect(10, 200, 100, 30), "Run Best"))
         {
             GameObject.Find("Evaluator").GetComponent<ParallelStartEvaluation>().RunBest();
+        }
+
+        if (GUI.Button(new Rect(10, 240, 100, 30), "Stop EA"))
+        {
+            GameObject.Find("Evaluator").GetComponent<ParallelStartEvaluation>().StopEA();
         }
     }
 }

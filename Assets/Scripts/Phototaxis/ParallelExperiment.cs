@@ -40,7 +40,7 @@ public class ParallelExperiment : INeatExperiment
 
     public int InputCount
     {
-        get { return 4; }
+        get { return 5; }
     }
 
     public int OutputCount
