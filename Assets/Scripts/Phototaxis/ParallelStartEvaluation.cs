@@ -16,10 +16,12 @@ public class ParallelStartEvaluation : MonoBehaviour
     static NeatEvolutionAlgorithm<NeatGenome> _ea;
     ParallelExperiment experiment;
     string filePath = @"Assets\Scripts\Populations\phototaxisChampParallel.gnm.xml";
-    public float Duration = 10f;
-    public float StoppingFitness = 1f;
+    public float Duration = 20f;
+    public float StoppingFitness = 10f;
     Dictionary<IBlackBox, CarMove> dict = new Dictionary<IBlackBox, CarMove>();
     DateTime startTime;
+    static double bestFitness = 0;
+    static int gensNoImprovement = 0;
 
     // Use this for initialization
     void Start()
@@ -51,7 +53,7 @@ public class ParallelStartEvaluation : MonoBehaviour
     public void StartEA()
     {
         Target.GetComponent<TargetMovement>().Activate();
-        Time.timeScale = 100;
+        Time.timeScale = 15;
         if (_ea != null)
         {
             startTime = DateTime.Now;
@@ -69,8 +71,22 @@ public class ParallelStartEvaluation : MonoBehaviour
 
     static void ea_UpdateEvent(object sender, EventArgs e)
     {
-        Debug.Log(string.Format("gen={0:N0} bestFitness={1:N6}",
-                                _ea.CurrentGeneration, _ea.Statistics._maxFitness));
+        double bf = _ea.Statistics._maxFitness;
+       // print("bf: " + bf + ", bestFitness: " + bestFitness);
+        if (bf > bestFitness)
+        {
+            gensNoImprovement = 0;
+            bestFitness = bf;
+        }
+        else
+        {
+            gensNoImprovement++;
+        }
+        gensNoImprovement = 0;
+
+        Debug.Log(string.Format("gen={0:N0} bestFitness={1:N6} gensNoImprovement={0:N0}",
+                                _ea.CurrentGeneration, _ea.Statistics._maxFitness, gensNoImprovement));
+        
     }
 
     void ea_PauseEvent(object sender, EventArgs e)
@@ -128,8 +144,12 @@ public class ParallelStartEvaluation : MonoBehaviour
 
        // Reset();
 
-        GameObject obj = Instantiate(Robot, new Vector3(20, 1, 0), Quaternion.identity) as GameObject;
+        Vector3 dir = new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f));
+        Vector3 pos = dir.normalized * 20;
+        pos.y = 1;
+        GameObject obj = Instantiate(Robot, pos, Quaternion.identity) as GameObject;
         CarMove car = obj.GetComponent<CarMove>();
+        car.RunBestOnly = true;
         Target.GetComponent<TargetMovement>().Activate();
         car.Activate(phenome, Target);
     }
@@ -137,15 +157,20 @@ public class ParallelStartEvaluation : MonoBehaviour
     public void Evaluate(IBlackBox box)
     {
         //Reset();
-        GameObject obj = Instantiate(Robot, new Vector3(20, 1, 0), Quaternion.identity) as GameObject;
+        // Random starting point in radius 20
+        Vector3 dir = new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f));
+        Vector3 pos = dir.normalized * 20;
+        pos.y = 1;
+        GameObject obj = Instantiate(Robot, pos, Quaternion.identity) as GameObject;
         CarMove car = obj.GetComponent<CarMove>();
+        Target.transform.position = new Vector3(0, 4, 0);
         dict.Add(box, car);
         car.Activate(box, Target);
     }
 
     public void StopEvaluation(IBlackBox box)
     {
-        Debug.Log("Stop evaluation");
+     //   Debug.Log("Stop evaluation");
         CarMove car = dict[box];
         car.Stop();
         Destroy(car.gameObject);
@@ -156,7 +181,7 @@ public class ParallelStartEvaluation : MonoBehaviour
         if (dict.ContainsKey(box))
         {
             float fit = dict[box].GetFitness();
-            print("Fitness: " + fit);
+           // print("Fitness: " + fit);
             return fit;
         }
         return 0.0f;

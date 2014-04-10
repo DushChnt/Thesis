@@ -14,7 +14,7 @@ using SharpNeat.SpeciationStrategies;
 using SharpNeat.EvolutionAlgorithms.ComplexityRegulation;
 using SharpNEAT.Core;
 
-public class ParallelExperiment : INeatExperiment
+public class OptimizationExperiment : INeatExperiment
 {
 
     NeatEvolutionAlgorithmParameters _eaParams;
@@ -26,7 +26,9 @@ public class ParallelExperiment : INeatExperiment
     string _complexityRegulationStr;
     int? _complexityThreshold;
     string _description;
-    ParallelStartEvaluation _se;
+    Optimizer _optimizer;
+    int _inputCount;
+    int _outputCount;
 
     public string Name
     {
@@ -40,12 +42,12 @@ public class ParallelExperiment : INeatExperiment
 
     public int InputCount
     {
-        get { return 6; }
+        get { return _inputCount; }
     }
 
     public int OutputCount
     {
-        get { return 3; }
+        get { return _outputCount; }
     }
 
     public int DefaultPopulationSize
@@ -63,12 +65,18 @@ public class ParallelExperiment : INeatExperiment
         get { return _neatGenomeParams; }
     }
 
-    public void SetStartEvaluation(ParallelStartEvaluation se)
+    public void SetOptimizer(Optimizer se)
     {
-        this._se = se;
+        this._optimizer = se;
     }
 
+
     public void Initialize(string name, XmlElement xmlConfig)
+    {
+        Initialize(name, xmlConfig, 6, 3);
+    }
+
+    public void Initialize(string name, XmlElement xmlConfig, int input, int output)
     {
         _name = name;
         _populationSize = XmlUtils.GetValueAsInt(xmlConfig, "PopulationSize");
@@ -83,6 +91,8 @@ public class ParallelExperiment : INeatExperiment
         _neatGenomeParams = new NeatGenomeParameters();
         _neatGenomeParams.FeedforwardOnly = _activationScheme.AcyclicNetwork;
 
+        _inputCount = input;
+        _outputCount = output;
     }
 
     public List<NeatGenome> LoadPopulation(XmlReader xr)
@@ -131,12 +141,12 @@ public class ParallelExperiment : INeatExperiment
 
         // Create black box evaluator
         //PhotoTaxisEvaluator evaluator = new PhotoTaxisEvaluator(_se);
-        ParallelEvaluator evaluator = new ParallelEvaluator(_se);
+        OptimizationEvaluator evaluator = new OptimizationEvaluator(_optimizer);
 
         IGenomeDecoder<NeatGenome, IBlackBox> genomeDecoder = CreateGenomeDecoder();
 
         //IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator);
-        IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityParallelListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator, _se);
+        IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityParallelListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator, null);
 
         IGenomeListEvaluator<NeatGenome> selectiveEvaluator = new SelectiveGenomeListEvaluator<NeatGenome>(innerEvaluator,
             SelectiveGenomeListEvaluator<NeatGenome>.CreatePredicate_OnceOnly());

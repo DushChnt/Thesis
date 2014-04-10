@@ -173,8 +173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Robot: {fileID: 100000, guid: 377b386330b68a649bb7ca271bcaee06, type: 2}
   Target: {fileID: 1534584524}
-  Duration: 10
-  StoppingFitness: 1
+  Duration: 20
+  StoppingFitness: 30
 --- !u!4 &525300131
 Transform:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveDistance: 10
-  MoveSpeed: 5
+  MoveSpeed: 4
 --- !u!1 &1807478848
 GameObject:
   m_ObjectHideFlags: 0
