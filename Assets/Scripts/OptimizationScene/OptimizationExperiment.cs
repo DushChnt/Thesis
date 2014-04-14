@@ -139,14 +139,13 @@ public class OptimizationExperiment : INeatExperiment
 
         NeatEvolutionAlgorithm<NeatGenome> ea = new NeatEvolutionAlgorithm<NeatGenome>(_eaParams, speciationStrategy, complexityRegulationStrategy);
 
-        // Create black box evaluator
-        //PhotoTaxisEvaluator evaluator = new PhotoTaxisEvaluator(_se);
+        // Create black box evaluator       
         OptimizationEvaluator evaluator = new OptimizationEvaluator(_optimizer);
 
         IGenomeDecoder<NeatGenome, IBlackBox> genomeDecoder = CreateGenomeDecoder();
 
-        //IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator);
-        IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityParallelListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator, null);
+        
+        IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityParallelListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator, _optimizer);
 
         IGenomeListEvaluator<NeatGenome> selectiveEvaluator = new SelectiveGenomeListEvaluator<NeatGenome>(innerEvaluator,
             SelectiveGenomeListEvaluator<NeatGenome>.CreatePredicate_OnceOnly());

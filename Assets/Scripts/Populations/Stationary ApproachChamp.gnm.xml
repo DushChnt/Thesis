@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <ActivationFunctions>
+    <Fn id="0" name="SteepenedSigmoid" prob="1" />
+  </ActivationFunctions>
+  <Networks>
+    <Network id="3729" birthGen="92" fitness="3.1038360595703125">
+      <Nodes>
+        <Node type="bias" id="0" />
+        <Node type="in" id="1" />
+        <Node type="in" id="2" />
+        <Node type="in" id="3" />
+        <Node type="in" id="4" />
+        <Node type="in" id="5" />
+        <Node type="in" id="6" />
+        <Node type="out" id="7" />
+        <Node type="out" id="8" />
+        <Node type="out" id="9" />
+      </Nodes>
+      <Connections>
+        <Con id="11" src="0" tgt="8" wght="3.3794930175465741" />
+        <Con id="31" src="0" tgt="7" wght="-5" />
+        <Con id="35" src="2" tgt="8" wght="0.82916955252598634" />
+        <Con id="45" src="3" tgt="7" wght="5" />
+        <Con id="46" src="6" tgt="8" wght="-4.9628782943640539" />
+      </Connections>
+    </Network>
+  </Networks>
+</Root>

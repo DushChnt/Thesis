@@ -136,12 +136,12 @@ public class ParallelExperiment : INeatExperiment
         IGenomeDecoder<NeatGenome, IBlackBox> genomeDecoder = CreateGenomeDecoder();
 
         //IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator);
-        IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityParallelListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator, _se);
+      //  IGenomeListEvaluator<NeatGenome> innerEvaluator = new UnityParallelListEvaluator<NeatGenome, IBlackBox>(genomeDecoder, evaluator, _se);
 
-        IGenomeListEvaluator<NeatGenome> selectiveEvaluator = new SelectiveGenomeListEvaluator<NeatGenome>(innerEvaluator,
-            SelectiveGenomeListEvaluator<NeatGenome>.CreatePredicate_OnceOnly());
+        //IGenomeListEvaluator<NeatGenome> selectiveEvaluator = new SelectiveGenomeListEvaluator<NeatGenome>(innerEvaluator,
+        //    SelectiveGenomeListEvaluator<NeatGenome>.CreatePredicate_OnceOnly());
 
-        ea.Initialize(selectiveEvaluator, genomeFactory, genomeList);
+     //   ea.Initialize(selectiveEvaluator, genomeFactory, genomeList);
 
         return ea;
     }

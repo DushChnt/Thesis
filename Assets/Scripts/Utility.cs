@@ -22,4 +22,27 @@ public class Utility : MonoBehaviour {
             Debug.Log(message);
         }
     }
+
+    public static float Clamp(float val)
+    {
+        return Clamp(val, 0, 1);
+    }
+
+    public static float Clamp(float val, float min, float max)
+    {
+        if (val < 0)
+        {
+            return 0;
+        }
+        if (val > 1)
+        {
+            return 1;
+        }
+        return val;
+    }
+
+    public static float GenerateNoise(float threshold)
+    {
+        return Random.Range(-threshold, threshold);
+    }
 }

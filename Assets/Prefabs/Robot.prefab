@@ -30,6 +30,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 23: {fileID: 2300002}
   - 54: {fileID: 5400000}
+  - 114: {fileID: 11400000}
   m_Layer: 9
   m_Name: Robot
   m_TagString: Untagged
@@ -143,6 +144,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b113b6bf6553345b8207b8fe989a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SensorRange: 50
+  MeleeRange: 7
+  AttackCoolDown: .699999988
+  Speed: 5
+  TurnSpeed: 180
+  Hits: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

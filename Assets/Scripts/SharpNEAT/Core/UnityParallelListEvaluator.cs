@@ -15,7 +15,7 @@ namespace SharpNEAT.Core
 
         readonly IGenomeDecoder<TGenome, TPhenome> _genomeDecoder;
         readonly IPhenomeEvaluator<TPhenome> _phenomeEvaluator;
-        ParallelStartEvaluation _ps;
+        Optimizer _optimizer;
 
         #region Constructor
 
@@ -24,11 +24,11 @@ namespace SharpNEAT.Core
         /// </summary>
         public UnityParallelListEvaluator(IGenomeDecoder<TGenome, TPhenome> genomeDecoder,
                                          IPhenomeEvaluator<TPhenome> phenomeEvaluator,
-                                          ParallelStartEvaluation ps)
+                                          Optimizer opt)
         {
             _genomeDecoder = genomeDecoder;
             _phenomeEvaluator = phenomeEvaluator;
-            _ps = ps;
+            _optimizer = opt;
         }
 
         #endregion
@@ -68,7 +68,7 @@ namespace SharpNEAT.Core
                 }
             }
 
-            yield return new WaitForSeconds(_ps.Duration); 
+            yield return new WaitForSeconds(_optimizer.Duration); 
             foreach (TGenome genome in dict.Keys)
             {
                 TPhenome phenome = dict[genome];
