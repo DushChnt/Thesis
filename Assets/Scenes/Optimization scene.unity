@@ -598,7 +598,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18cd5b871d1b4a46bf2acb483fb4bdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Duration: 20
+  Trials: 3
+  TrialDuration: 10
   StoppingFitness: 30
   Robot: {fileID: 100002, guid: 10c8c2744fc26524d802c95b4e3df0e0, type: 2}
   Target: {fileID: 1942969269}

@@ -12,7 +12,9 @@ public class Optimizer : MonoBehaviour {
 
     OptimizationExperiment experiment;
     static NeatEvolutionAlgorithm<NeatGenome> _ea;
-    public float Duration;
+    public float Duration { get { return TrialDuration * Trials; } }
+    public int Trials;
+    public float TrialDuration;
     public float StoppingFitness;
     private DateTime startTime;
     public GameObject Robot;

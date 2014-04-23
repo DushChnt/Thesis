@@ -38,9 +38,9 @@ public class RobotController : MonoBehaviour {
 
             float angle = Utility.AngleSigned(direction, transform.forward, transform.up);
 
-            float pie1 = 1;
-            float pie2 = 1;
-            float pie3 = 1;
+            float pie1 = 0;
+            float pie2 = 0;
+            float pie3 = 0;
             float melee = 0;
 
             if (distance < 1)
@@ -48,7 +48,7 @@ public class RobotController : MonoBehaviour {
                 if (angle > -15 && angle < 15)
                 {
                     // We are in front of the car
-                    pie1 = distance;
+                    pie1 = 1 - distance;
                     if (properDistance < MeleeRange)
                     {
                         melee = 1;
@@ -57,11 +57,11 @@ public class RobotController : MonoBehaviour {
                 else if (angle < 30)
                 {
                     // We are in second row of pie slices
-                    pie2 = Utility.Clamp(distance + Utility.GenerateNoise(0.1f));
+                    pie2 = Utility.Clamp( 1 - distance + Utility.GenerateNoise(0.1f));
                 }
                 else if (angle > -30)
                 {
-                    pie3 = Utility.Clamp(distance + Utility.GenerateNoise(0.1f));
+                    pie3 = Utility.Clamp( 1 - distance + Utility.GenerateNoise(0.1f));
                 }
             }
 
@@ -101,7 +101,7 @@ public class RobotController : MonoBehaviour {
             var meleeAttack = (float)outputArr[2];
 
             var moveDist = gas * Speed * Time.deltaTime;
-            var turnAngle = steer * TurnSpeed * Time.deltaTime * gas;
+            var turnAngle = steer * TurnSpeed * Time.deltaTime; // * gas;
 
             if (meleeAttack > 0.5f)
             {
