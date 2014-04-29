@@ -7,6 +7,7 @@ using SharpNeat.Genomes.Neat;
 using System;
 using SharpNeat.Phenomes;
 using System.Collections.Generic;
+using System.IO;
 
 public class Optimizer : MonoBehaviour {
 
@@ -28,12 +29,18 @@ public class Optimizer : MonoBehaviour {
 	void Start () {
         experiment = new OptimizationExperiment();
         XmlDocument xmlConfig = new XmlDocument();
-        xmlConfig.Load(OptimizerParameters.ConfigFile);
+        TextAsset textAsset = (TextAsset)Resources.Load("phototaxis.config");  
+  //      xmlConfig.Load(OptimizerParameters.ConfigFile);
+        xmlConfig.LoadXml(textAsset.text);
         experiment.SetOptimizer(this);
         experiment.Initialize(OptimizerParameters.Name, xmlConfig.DocumentElement, OptimizerParameters.NumInputs, OptimizerParameters.NumOutputs);
-        filePath = string.Format(@"Assets\Scripts\Populations\{0}Champ.gnm.xml", OptimizerParameters.Name);
-        popFilePath = string.Format(@"Assets\Scripts\Populations\{0}.pop.xml", OptimizerParameters.Name);
+        //filePath = string.Format(@"Assets\Scripts\Populations\{0}Champ.gnm.xml", OptimizerParameters.Name);
+        //popFilePath = string.Format(@"Assets\Scripts\Populations\{0}.pop.xml", OptimizerParameters.Name);
         
+       
+            filePath = Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", OptimizerParameters.Name);
+            popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", OptimizerParameters.Name);
+      
 	}
 
     public void Evaluate(IBlackBox box)
@@ -143,6 +150,12 @@ public class Optimizer : MonoBehaviour {
         XmlWriterSettings _xwSettings = new XmlWriterSettings();
         _xwSettings.Indent = true;
         // Save genomes to xml file.        
+        DirectoryInfo dirInf = new DirectoryInfo(Application.persistentDataPath + "/" + "Populations");
+        if (!dirInf.Exists)
+        {
+            Debug.Log("Creating subdirectory"); 
+            dirInf.Create();
+        }
         using (XmlWriter xw = XmlWriter.Create(popFilePath, _xwSettings))
         {
             experiment.SavePopulation(xw, _ea.GenomeList);

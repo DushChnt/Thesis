@@ -34,13 +34,10 @@ public class OptimizationEvaluator : IPhenomeEvaluator<IBlackBox>
         {
 
             optimizer.Evaluate(box);
-            yield return new WaitForSeconds(optimizer.Duration);
+            yield return new WaitForSeconds(optimizer.TrialDuration);
             optimizer.StopEvaluation(box);
             float fit = optimizer.GetFitness(box);
-            if (fit > optimizer.StoppingFitness)
-            {
-                _stopConditionSatisfied = true;
-            }
+           
             FitnessInfo fitness = new FitnessInfo(fit, fit);
             dict.Add(box, fitness);
         }

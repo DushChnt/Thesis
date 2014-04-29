@@ -4,7 +4,7 @@
     <Fn id="0" name="SteepenedSigmoid" prob="1" />
   </ActivationFunctions>
   <Networks>
-    <Network id="9107" birthGen="225" fitness="30.263956069946289">
+    <Network id="12402" birthGen="308" fitness="4.888671875">
       <Nodes>
         <Node type="bias" id="0" />
         <Node type="in" id="1" />
@@ -16,19 +16,20 @@
         <Node type="out" id="7" />
         <Node type="out" id="8" />
         <Node type="out" id="9" />
-        <Node type="hid" id="61" />
-        <Node type="hid" id="72" />
+        <Node type="hid" id="46" />
+        <Node type="hid" id="73" />
       </Nodes>
       <Connections>
-        <Con id="14" src="1" tgt="8" wght="4.8178570411635606" />
-        <Con id="31" src="5" tgt="7" wght="-3.0540204689695707" />
-        <Con id="40" src="3" tgt="7" wght="0.3637512956743591" />
-        <Con id="48" src="1" tgt="7" wght="4.8464042554584363" />
-        <Con id="62" src="4" tgt="61" wght="3.2757212594151497" />
-        <Con id="63" src="61" tgt="8" wght="-0.7490919369132778" />
-        <Con id="65" src="61" tgt="9" wght="4.2859036264322752" />
-        <Con id="73" src="4" tgt="72" wght="2.6705747295072797" />
-        <Con id="74" src="72" tgt="9" wght="3.6405763019781037" />
+        <Con id="31" src="3" tgt="7" wght="2.9713737358004866" />
+        <Con id="32" src="2" tgt="7" wght="2.5548079930061975" />
+        <Con id="35" src="2" tgt="8" wght="-4.9540923899845541" />
+        <Con id="36" src="5" tgt="8" wght="1.6120972473664932" />
+        <Con id="37" src="3" tgt="8" wght="-2.3998044787733743" />
+        <Con id="47" src="3" tgt="46" wght="0.12114271616189382" />
+        <Con id="48" src="46" tgt="8" wght="5" />
+        <Con id="64" src="2" tgt="9" wght="4.2724384816617871" />
+        <Con id="74" src="46" tgt="73" wght="2.89158192930939" />
+        <Con id="75" src="73" tgt="9" wght="4.3050275563818179" />
       </Connections>
     </Network>
   </Networks>

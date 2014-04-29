@@ -5,7 +5,7 @@ public class OptimizerMenuGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        
 	}
 	
 	// Update is called once per frame
@@ -82,6 +82,28 @@ public class OptimizerMenuGUI : MonoBehaviour {
             OptimizerParameters.WApproach = 1;
             buttonClicked = true;
         }
+
+        var rifle_attack = "Rifle Stationary";
+        top += 40;
+        if (GUI.Button(new Rect(10, top, 200, 30), rifle_attack))
+        {
+            OptimizerParameters.Reset();
+            OptimizerParameters.Name = rifle_attack;
+            OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;
+            OptimizerParameters.WMeleeAttack = 0;
+            OptimizerParameters.WApproach = 1f;
+            OptimizerParameters.WRifleAttack = 1f;
+         //   OptimizerParameters.WAngleTowards = 1f;
+            buttonClicked = true;
+        }
+
+        if (GUI.Button(new Rect(250, 10, 200, 60), "BATTLE!"))
+        {
+
+            Application.LoadLevel("Battle Arena");
+        }
+
+        GUI.Label(new Rect(250, 90, 200, 60), Application.persistentDataPath);
 
         if (buttonClicked)
         {

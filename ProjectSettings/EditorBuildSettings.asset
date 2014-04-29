@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Optimizer Menu scene.unity
   - enabled: 1
     path: Assets/Scenes/Optimization scene.unity
+  - enabled: 1
+    path: Assets/Scenes/Battle Arena.unity

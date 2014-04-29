@@ -150,7 +150,8 @@ public class OptimizationExperiment : INeatExperiment
         IGenomeListEvaluator<NeatGenome> selectiveEvaluator = new SelectiveGenomeListEvaluator<NeatGenome>(innerEvaluator,
             SelectiveGenomeListEvaluator<NeatGenome>.CreatePredicate_OnceOnly());
 
-        ea.Initialize(selectiveEvaluator, genomeFactory, genomeList);
+        //ea.Initialize(selectiveEvaluator, genomeFactory, genomeList);
+        ea.Initialize(innerEvaluator, genomeFactory, genomeList);
 
         return ea;
     }

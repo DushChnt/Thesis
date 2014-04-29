@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using SharpNeat.Phenomes;
+using SharpNeat.Genomes.Neat;
+using System.Xml;
+using System;
+using SharpNeat.Domains;
 
 public class Utility : MonoBehaviour {
 
@@ -23,11 +28,23 @@ public class Utility : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Clamps a value between 0 and 1
+    /// </summary>
+    /// <param name="val">value to clamp</param>
+    /// <returns>clamped value between 0 and 1</returns>
     public static float Clamp(float val)
     {
         return Clamp(val, 0, 1);
     }
 
+    /// <summary>
+    /// Clamps a value between specfified min and max
+    /// </summary>
+    /// <param name="val">Value to clamp</param>
+    /// <param name="min">Minimum clamped value</param>
+    /// <param name="max">Maximum clamped value</param>
+    /// <returns></returns>
     public static float Clamp(float val, float min, float max)
     {
         if (val < 0)
@@ -43,6 +60,45 @@ public class Utility : MonoBehaviour {
 
     public static float GenerateNoise(float threshold)
     {
-        return Random.Range(-threshold, threshold);
+        return UnityEngine.Random.Range(-threshold, threshold);
+    }
+
+    public static IBlackBox LoadBrain(string filePath)
+    {
+        OptimizationExperiment experiment = new OptimizationExperiment();
+        XmlDocument xmlConfig = new XmlDocument();
+        TextAsset textAsset = (TextAsset)Resources.Load("phototaxis.config");
+        //      xmlConfig.Load(OptimizerParameters.ConfigFile);
+        xmlConfig.LoadXml(textAsset.text);
+     //   experiment.SetOptimizer(this);
+        experiment.Initialize(OptimizerParameters.Name, xmlConfig.DocumentElement, OptimizerParameters.NumInputs, OptimizerParameters.NumOutputs);
+        return LoadBrain(filePath, experiment);
+    }
+
+    public static IBlackBox LoadBrain(string filePath, INeatExperiment experiment)
+    {
+        NeatGenome genome = null;
+
+
+        // Try to load the genome from the XML document.
+        try
+        {
+            using (XmlReader xr = XmlReader.Create(filePath))
+                genome = NeatGenomeXmlIO.ReadCompleteGenomeList(xr, false, (NeatGenomeFactory)experiment.CreateGenomeFactory())[0];
+        }
+        catch (Exception e1)
+        {
+            print(filePath + " Error loading genome from file!\nLoading aborted.\n"
+                                      + e1.Message + "\nJoe: " + filePath);
+            return null;
+        }
+
+        // Get a genome decoder that can convert genomes to phenomes.
+        var genomeDecoder = experiment.CreateGenomeDecoder();
+
+        // Decode the genome into a phenome (neural network).
+        var phenome = genomeDecoder.Decode(genome);
+
+        return phenome;
     }
 }
