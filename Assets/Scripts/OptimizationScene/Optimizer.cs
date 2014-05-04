@@ -26,22 +26,23 @@ public class Optimizer : MonoBehaviour {
 
     Dictionary<IBlackBox, RobotController> dict = new Dictionary<IBlackBox, RobotController>();
 	// Use this for initialization
-	void Start () {
+    void Start()
+    {
         experiment = new OptimizationExperiment();
         XmlDocument xmlConfig = new XmlDocument();
-        TextAsset textAsset = (TextAsset)Resources.Load("phototaxis.config");  
-  //      xmlConfig.Load(OptimizerParameters.ConfigFile);
+        TextAsset textAsset = (TextAsset)Resources.Load("phototaxis.config");
+        //      xmlConfig.Load(OptimizerParameters.ConfigFile);
         xmlConfig.LoadXml(textAsset.text);
         experiment.SetOptimizer(this);
         experiment.Initialize(OptimizerParameters.Name, xmlConfig.DocumentElement, OptimizerParameters.NumInputs, OptimizerParameters.NumOutputs);
         //filePath = string.Format(@"Assets\Scripts\Populations\{0}Champ.gnm.xml", OptimizerParameters.Name);
         //popFilePath = string.Format(@"Assets\Scripts\Populations\{0}.pop.xml", OptimizerParameters.Name);
-        
-       
-            filePath = Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", OptimizerParameters.Name);
-            popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", OptimizerParameters.Name);
-      
-	}
+
+
+        filePath = Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", OptimizerParameters.Name);
+        popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", OptimizerParameters.Name);
+        popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", "MyPopulation");
+    }
 
     public void Evaluate(IBlackBox box)
     {
@@ -117,7 +118,7 @@ public class Optimizer : MonoBehaviour {
         Utility.DebugLog = true;
         Utility.Log("Starting PhotoTaxis experiment");        
 
-        _ea = experiment.CreateEvolutionAlgorithm();
+        _ea = experiment.CreateEvolutionAlgorithm(popFilePath);
 
         _ea.UpdateEvent += new EventHandler(ea_UpdateEvent);
         _ea.PausedEvent += new EventHandler(ea_PauseEvent);

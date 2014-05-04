@@ -13,6 +13,7 @@ using SharpNeat.DistanceMetrics;
 using SharpNeat.SpeciationStrategies;
 using SharpNeat.EvolutionAlgorithms.ComplexityRegulation;
 using SharpNEAT.Core;
+using System;
 
 public class OptimizationExperiment : INeatExperiment
 {
@@ -114,6 +115,31 @@ public class OptimizationExperiment : INeatExperiment
     public IGenomeFactory<NeatGenome> CreateGenomeFactory()
     {
         return new NeatGenomeFactory(InputCount, OutputCount, _neatGenomeParams);
+    }
+
+    public NeatEvolutionAlgorithm<NeatGenome> CreateEvolutionAlgorithm(string fileName)
+    {
+        List<NeatGenome> genomeList = null;
+        IGenomeFactory<NeatGenome> genomeFactory = CreateGenomeFactory();
+        try
+        {
+            using (XmlReader xr = XmlReader.Create(fileName))
+            {
+                genomeList = LoadPopulation(xr);
+            }
+        }
+        catch (Exception e1)
+        {
+            Utility.Log(fileName + " Error loading genome from file!\nLoading aborted.\n"
+                                      + e1.Message + "\nJoe: " + fileName);
+
+            genomeList = genomeFactory.CreateGenomeList(_populationSize, 0);
+            
+        }
+        
+
+
+        return CreateEvolutionAlgorithm(genomeFactory, genomeList);
     }
 
     public NeatEvolutionAlgorithm<NeatGenome> CreateEvolutionAlgorithm()
