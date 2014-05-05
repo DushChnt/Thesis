@@ -13,10 +13,11 @@ public class GameMasterScript : MonoBehaviour {
             // Load brains
             
             //var brain1 = Utility.LoadBrain(string.Format(@"Assets\Scripts\Populations\{0}Champ.gnm.xml", "Stationary Melee"));
-            var brain1 = Utility.LoadBrain(Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", "Random Attack"));
+            var brain1 = Utility.LoadBrain(Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", "Angle Stationary"));
             BattleGUI.Robot1Name = "Random Attack";
             Robot1.transform.position = new Vector3( Robot1.transform.position.x + Utility.GenerateNoise(5f), 1, Robot1.transform.position.z + Utility.GenerateNoise(5f));
             controller1 = Robot1.GetComponent<RobotController>();
+            controller1.HitLayers = 1 << LayerMask.NameToLayer("Robot");
             controller1.Activate(brain1, Robot2);
 
            // var brain2 = Utility.LoadBrain(string.Format(@"Assets\Scripts\Populations\{0}Champ.gnm.xml", "Simple Attack"));

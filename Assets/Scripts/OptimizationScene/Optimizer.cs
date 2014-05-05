@@ -41,7 +41,7 @@ public class Optimizer : MonoBehaviour {
 
         filePath = Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", OptimizerParameters.Name);
         popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", OptimizerParameters.Name);
-        popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", "MyPopulation");
+        popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", "MyPopulation3");
     }
 
     public void Evaluate(IBlackBox box)

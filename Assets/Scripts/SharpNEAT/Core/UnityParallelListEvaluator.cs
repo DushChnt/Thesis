@@ -103,7 +103,7 @@ namespace SharpNEAT.Core
                     }
                     var fit = fitness;
                     fitness /= _optimizer.Trials; // Averaged fitness
-                    Utility.Log("Total fitness: " + fit + ", averaged fitness: " + fitness);
+                //    Utility.Log("Total fitness: " + fit + ", averaged fitness: " + fitness);
                     if (fit > _optimizer.StoppingFitness)
                     {
                         Utility.Log("Fitness is " + fit + ", stopping now because stopping fitness is " + _optimizer.StoppingFitness);

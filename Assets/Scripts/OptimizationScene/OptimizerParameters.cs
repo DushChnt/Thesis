@@ -11,9 +11,12 @@ public class OptimizerParameters {
     public static float WRangedAttack = 0;
     public static float WApproach = 5f;
     public static float WRifleAttack = 0f;
+    public static float WRifleHits = 0f;
     public static float WAngleTowards = 0f;
+    public static float WRiflePrecision = 0f;
 
     public static TargetMove TargetMoveStrategy = TargetMove.Simple;
+    public static float DistanceToKeep = 0f;
 
     public static string Name = "SimpleTest";
     public static string ConfigFile = @"Assets\Scripts\phototaxis.config.xml";
@@ -24,7 +27,10 @@ public class OptimizerParameters {
         WRangedAttack = 0;
         WApproach = 0;
         WRifleAttack = 0f;
+        WRifleHits = 0f;
         WAngleTowards = 0f;
+        WRiflePrecision = 0f;
+        DistanceToKeep = 0f;
 
         TargetMoveStrategy = TargetMove.Stationary;
         Name = "Test";

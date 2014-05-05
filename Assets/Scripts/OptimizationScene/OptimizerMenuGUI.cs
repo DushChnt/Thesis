@@ -83,19 +83,54 @@ public class OptimizerMenuGUI : MonoBehaviour {
             buttonClicked = true;
         }
 
-        var rifle_attack = "Rifle Stationary";
+        var angle_stationary = "Angle Stationary";
         top += 40;
-        if (GUI.Button(new Rect(10, top, 200, 30), rifle_attack))
+        if (GUI.Button(new Rect(10, top, 200, 30), angle_stationary))
         {
             OptimizerParameters.Reset();
-            OptimizerParameters.Name = rifle_attack;
+            OptimizerParameters.Name = angle_stationary;
             OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;
             OptimizerParameters.WMeleeAttack = 0;
-            OptimizerParameters.WApproach = 1f;
-            OptimizerParameters.WRifleAttack = 1f;
-         //   OptimizerParameters.WAngleTowards = 1f;
+            OptimizerParameters.WApproach = 10f;
+            OptimizerParameters.WRifleAttack = 0;
+            OptimizerParameters.WAngleTowards = 0.1f;
+            OptimizerParameters.DistanceToKeep = 15f;
             buttonClicked = true;
         }
+
+        var rifle_stationary = "Rifle Stationary";
+        top += 40;
+        if (GUI.Button(new Rect(10, top, 200, 30), rifle_stationary))
+        {
+            OptimizerParameters.Reset();
+            OptimizerParameters.Name = rifle_stationary;
+            OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;
+            OptimizerParameters.WMeleeAttack = 0;
+        //    OptimizerParameters.WApproach = 1f;
+            OptimizerParameters.WRifleAttack = 0.1f;
+            OptimizerParameters.WRifleHits = 1f;
+       //     OptimizerParameters.WAngleTowards = 1f;
+       //     OptimizerParameters.DistanceToKeep = 15f;
+            buttonClicked = true;
+        }
+
+        var rifle_markan = "Rifle Markman";
+        top += 40;
+        if (GUI.Button(new Rect(10, top, 200, 30), rifle_markan))
+        {
+            OptimizerParameters.Reset();
+            OptimizerParameters.Name = rifle_markan;
+            OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;
+            OptimizerParameters.WMeleeAttack = 0;
+            //    OptimizerParameters.WApproach = 1f;
+        //    OptimizerParameters.WRifleAttack = 0.1f;
+            OptimizerParameters.WRifleHits = 1f;
+            OptimizerParameters.WRiflePrecision = 10f;
+            //     OptimizerParameters.WAngleTowards = 1f;
+            //     OptimizerParameters.DistanceToKeep = 15f;
+            buttonClicked = true;
+        }
+
 
         if (GUI.Button(new Rect(250, 10, 200, 60), "BATTLE!"))
         {
@@ -107,6 +142,7 @@ public class OptimizerMenuGUI : MonoBehaviour {
 
         if (buttonClicked)
         {
+            Utility.DebugLog = false;
             Application.LoadLevel("Optimization scene");
         }
     }

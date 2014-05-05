@@ -2,8 +2,7 @@
 using System.Collections;
 using SharpNeat.Phenomes;
 
-public class RobotController : MonoBehaviour
-{
+public abstract class BaseController : MonoBehaviour {
 
     bool isRunning;
     private GameObject target;
@@ -15,10 +14,7 @@ public class RobotController : MonoBehaviour
     public float Speed = 5;
     public float TurnSpeed = 180;
     float attackTimer = 0;
-    float rifleTimer = 0;
-    public int Hits = 0;
-    public int RifleHits = 0;
-    public int RifleAttacks = 0;
+    float rifleTimer = 0;   
     Vector3 startPos;
     float shortestDistance;
     float totalDistance;
@@ -34,22 +30,15 @@ public class RobotController : MonoBehaviour
 
     public bool HumanControlled;
 
-    // Use this for initialization
-    void Start()
-    {
-        turret = gameObject.transform.FindChild("Turret");
-        if (HumanControlled)
-        {
+    protected abstract void Attack(float dist, float angle);
+    protected abstract void RifleAttack();
+    public abstract void Activate(IBlackBox box, GameObject target);
+    public abstract void Stop();
 
-            target = GameObject.Find("Target");
-            Utility.DebugLog = true;
-        }
-        else
-        {
-            int targetLayer = LayerMask.NameToLayer("Target");
-            HitLayers = 1 << targetLayer;
-        }
-    }
+	// Use this for initialization
+	void Start () {
+	
+	}
 
     void HumanController()
     {
@@ -125,7 +114,7 @@ public class RobotController : MonoBehaviour
 
             if (angle < 5f && angle > -5f)
             {
-                lof = 1 - Mathf.Abs(angle) / 5f ;
+                lof = 1 - Mathf.Abs(angle) / 5f;
                 totalAngle++;
             }
 
@@ -207,127 +196,9 @@ public class RobotController : MonoBehaviour
             transform.Translate(Vector3.forward * moveDist);
 
             totalDistance += Mathf.Abs(GetDistance() - OptimizerParameters.DistanceToKeep);
-        //    totalAngle += Mathf.Abs(angle);
+            //    totalAngle += Mathf.Abs(angle);
             ticks++;
         }
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (HumanControlled)
-        {
-            HumanController();
-        }
-        else
-        {
-            NetworkController();
-        }
-    }
-
-    public void RifleAttack()
-    {
-        if (rifleTimer > RifleCoolDown)
-        {
-            RifleAttacks++;
-            rifleTimer = 0;
-            RaycastHit hit;
-          //  Utility.Log("Raycasting");
-            Vector3 point = transform.position + transform.forward * SensorRange;
-            bool hitIt = false;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, SensorRange, HitLayers))
-            {
-            //    Utility.Log("Hit " + hit.collider.tag);
-                if (hit.collider.tag.Equals("Target"))
-                {
-                    RifleHits++;
-                    point = hit.point;
-                    hitIt = true;
-                }
-            }
-            if (RunBestOnly)
-            {
-                Utility.Log("RifleHits: " + RifleHits);
-                if (hitIt)
-                {
-                    Debug.DrawLine(transform.position, point, Color.green, 0.1f);
-                }
-                else
-                {
-                    Debug.DrawLine(transform.position, point, Color.red, 0.1f);
-                }
-
-                if (turret != null)
-                {
-                    point = turret.position + turret.forward * SensorRange;
-                    Debug.DrawLine(turret.position, point, Color.cyan, 0.1f);
-                }
-            }
-        }
-
-    }
-
-    public void Attack(float distance, float angle)
-    {
-        if (attackTimer > AttackCoolDown)
-        {
-            if (distance < MeleeRange && angle > -15 && angle < 15)
-            {
-                // Do attack
-
-                attackTimer = 0;
-                Hits++;
-                if (RunBestOnly)
-                {
-                    //   sphere.renderer.material = AttackSphereMat;
-                    //  AttackShowState = true;
-                    Debug.DrawLine(transform.position, target.transform.position, Color.blue, 0.1f);
-                    Utility.Log("Attack! Distance: " + distance + ", angle: " + angle);
-                    Utility.Log("Joe");
-                    if (opponent != null && opponent.health != null)
-                    {
-                        
-                        opponent.health.TakeDamage(10f + Utility.GenerateNoise(1f));
-                    }
-                }
-            }
-        }
-
-    }
-
-    public float GetFitness()
-    {
-        //if (Vector3.Distance(transform.position, startPos) < 1)
-        //{
-        //    return 0;
-        //}
-        float fit = 0;
-        // Approach fitness
-        float approach = 1.0f / (totalDistance / ticks) * OptimizerParameters.WApproach;
-        fit += approach;
-
-        // Melee fitness
-        float melee = Hits * OptimizerParameters.WMeleeAttack;
-        fit += melee;
-
-        // Rifle fitness
-        float rifle = RifleHits * OptimizerParameters.WRifleHits;
-        fit += rifle;
-
-        float rifleAttacks = RifleAttacks * OptimizerParameters.WRifleAttack;
-        fit += rifleAttacks;
-
-        // Markmanship = precision
-        float precision = RifleAttacks > 0 ? (RifleHits / RifleAttacks) * OptimizerParameters.WRiflePrecision : 0;
-        fit += precision;
-
-        // Angle fitness
-
-        float angle = Utility.Clamp(totalAngle / ticks);
-        angle *= OptimizerParameters.WAngleTowards;
-        fit += angle;
-
-        return fit;
     }
 
     public float GetDistance()
@@ -341,19 +212,16 @@ public class RobotController : MonoBehaviour
         return 0.0f;
     }
 
-    public void Activate(IBlackBox box, GameObject target)
+    // Update is called once per frame
+    void FixedUpdate()
     {
-        isRunning = true;
-        this.brain = box;
-        this.brain.ResetState();
-        this.target = target;
-        this.startPos = transform.position;
-        this.health = this.GetComponent<HealthScript>();
-        this.opponent = target.GetComponent<RobotController>();
-    }
-
-    public void Stop()
-    {
-        this.isRunning = false;
+        if (HumanControlled)
+        {
+            HumanController();
+        }
+        else
+        {
+            NetworkController();
+        }
     }
 }
