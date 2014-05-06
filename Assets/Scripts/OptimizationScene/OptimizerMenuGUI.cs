@@ -131,6 +131,19 @@ public class OptimizerMenuGUI : MonoBehaviour {
             buttonClicked = true;
         }
 
+        var flee = "Flee";
+        top += 40;
+        if (GUI.Button(new Rect(10, top, 200, 30), flee))
+        {
+            OptimizerParameters.Reset();
+            OptimizerParameters.Name = flee;
+            OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;
+            OptimizerParameters.MultipleTargets = true;
+            OptimizerParameters.WApproach = 1f;
+            OptimizerParameters.DistanceToKeep = 20f;
+            buttonClicked = true;
+        }
+
 
         if (GUI.Button(new Rect(250, 10, 200, 60), "BATTLE!"))
         {

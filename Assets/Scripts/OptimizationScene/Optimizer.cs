@@ -25,6 +25,8 @@ public class Optimizer : MonoBehaviour {
     string popFilePath;
 
     Dictionary<IBlackBox, RobotController> dict = new Dictionary<IBlackBox, RobotController>();
+    Dictionary<IBlackBox, TargetController> targetDict = new Dictionary<IBlackBox, TargetController>();
+
 	// Use this for initialization
     void Start()
     {
@@ -41,7 +43,7 @@ public class Optimizer : MonoBehaviour {
 
         filePath = Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", OptimizerParameters.Name);
         popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", OptimizerParameters.Name);
-        popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", "MyPopulation3");
+        popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", "MyPopulation4");
     }
 
     public void Evaluate(IBlackBox box)
@@ -54,7 +56,19 @@ public class Optimizer : MonoBehaviour {
         RobotController robo = obj.GetComponent<RobotController>();
         Target.transform.position = new Vector3(0, 1, 0);
         dict.Add(box, robo);
-        robo.Activate(box, Target);
+
+        if (OptimizerParameters.MultipleTargets)
+        {
+            GameObject t = Instantiate(Target, new Vector3(0, 1, 0), Quaternion.identity) as GameObject;
+            TargetController tc = t.AddComponent<TargetController>();
+            tc.Activate(obj.transform);
+            targetDict.Add(box, tc);
+            robo.Activate(box, t);
+        }
+        else
+        {
+            robo.Activate(box, Target);
+        }
     }
 
     public void RunBest()
@@ -90,15 +104,33 @@ public class Optimizer : MonoBehaviour {
         GameObject obj = Instantiate(Robot, pos, Quaternion.identity) as GameObject;
         RobotController robo = obj.GetComponent<RobotController>();
         robo.RunBestOnly = true;
-   
-        Target.GetComponent<TargetController>().Activate();
-        robo.Activate(phenome, Target);
+
+        if (OptimizerParameters.MultipleTargets)
+        {
+            GameObject t = Instantiate(Target, new Vector3(0, 1, 0), Quaternion.identity) as GameObject;
+            TargetController tc = t.AddComponent<TargetController>();
+            tc.Activate(obj.transform);
+            targetDict.Add(phenome, tc);
+            robo.Activate(phenome, t);
+        }
+        else
+        {
+
+            Target.GetComponent<TargetController>().Activate();
+            robo.Activate(phenome, Target);
+        }
     }
 
     public void StopEvaluation(IBlackBox box)
     {
         RobotController robo = dict[box];
         robo.Stop();
+        if (targetDict.ContainsKey(box))
+        {
+            targetDict[box].Stop();
+            Destroy(targetDict[box].gameObject);
+            targetDict.Remove(box);
+        }
         Destroy(robo.gameObject);
     }
 

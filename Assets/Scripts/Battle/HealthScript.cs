@@ -45,7 +45,7 @@ public class HealthScript : MonoBehaviour {
         {
             BattleGUI.Robot2Health = Health;
         }
-        if (Health < 0)
+        if (Health <= 0)
         {
             Destroy(gameObject);
         }

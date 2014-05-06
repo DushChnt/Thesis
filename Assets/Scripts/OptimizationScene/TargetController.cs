@@ -7,11 +7,12 @@ public class TargetController : MonoBehaviour {
     PerformMovement movementHandler;
     bool IsActive = false;
     public float MoveDistance = 10;
-    public float MoveSpeed = 5;
+    public float MoveSpeed = 4;
     private float distanceMoved = 0;
     private bool moveForward = true;    
     Vector3 direction = Vector3.forward;
     float changeProb = 0.5f;
+    private Transform target;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,13 @@ public class TargetController : MonoBehaviour {
             movementHandler();
         }
 	}
+
+    public void Activate(Transform target)
+    {
+        this.target = target;
+        movementHandler = new PerformMovement(ApproachMovement);
+        IsActive = true;
+    }
 
     public void Activate()
     {
@@ -90,6 +98,15 @@ public class TargetController : MonoBehaviour {
     private void AdvancedMovement()
     {
 
+    }
+
+    private void ApproachMovement()
+    {
+        var step = Time.deltaTime * MoveSpeed;
+        Vector3 direction = target.position - transform.position;
+        direction.y = 0;
+        direction.Normalize();
+        transform.Translate(direction * step);
     }
 
     private void RandomMovement()

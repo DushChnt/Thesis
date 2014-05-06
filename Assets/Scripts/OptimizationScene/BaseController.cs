@@ -4,29 +4,29 @@ using SharpNeat.Phenomes;
 
 public abstract class BaseController : MonoBehaviour {
 
-    bool isRunning;
-    private GameObject target;
-    private IBlackBox brain;
+    protected bool isRunning;
+    protected GameObject target;
+    protected IBlackBox brain;
     public float SensorRange = 50f;
     public float MeleeRange = 7f;
     public float AttackCoolDown = 0.7f;
     public float RifleCoolDown = 0.2f;
     public float Speed = 5;
     public float TurnSpeed = 180;
-    float attackTimer = 0;
-    float rifleTimer = 0;   
-    Vector3 startPos;
-    float shortestDistance;
-    float totalDistance;
-    float totalAngle;
-    long ticks;
+    protected float attackTimer = 0;
+    protected float rifleTimer = 0;
+    protected Vector3 startPos;
+    protected float shortestDistance;
+    protected float totalDistance;
+    protected float totalAngle;
+    protected long ticks;
     public bool RunBestOnly = false;
     public HealthScript health;
-    RobotController opponent;
+   // protected RobotController opponent;
 
     public LayerMask HitLayers;
 
-    private Transform turret;
+    protected Transform turret;
 
     public bool HumanControlled;
 

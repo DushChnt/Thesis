@@ -18,6 +18,8 @@ public class OptimizerParameters {
     public static TargetMove TargetMoveStrategy = TargetMove.Simple;
     public static float DistanceToKeep = 0f;
 
+    public static bool MultipleTargets = false;
+
     public static string Name = "SimpleTest";
     public static string ConfigFile = @"Assets\Scripts\phototaxis.config.xml";
 
@@ -31,6 +33,7 @@ public class OptimizerParameters {
         WAngleTowards = 0f;
         WRiflePrecision = 0f;
         DistanceToKeep = 0f;
+        MultipleTargets = false;
 
         TargetMoveStrategy = TargetMove.Stationary;
         Name = "Test";

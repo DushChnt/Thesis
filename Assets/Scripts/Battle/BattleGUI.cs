@@ -5,10 +5,13 @@ public class BattleGUI : MonoBehaviour
 {
     public static float Robot1Health, Robot2Health;
     public static string Robot1Name, Robot2Name;
+    public Camera MainCamera;
+    public Camera RobotCamera;
     // Use this for initialization
     void Start()
     {
-
+        MainCamera.enabled = true;
+        RobotCamera.enabled = false;
     }
 
     // Update is called once per frame
@@ -18,6 +21,16 @@ public class BattleGUI : MonoBehaviour
         if (GUI.Button(new Rect(10, 150, 100, 30), "Back"))
         {
             Application.LoadLevel("Optimizer Menu scene");
+        }
+       
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            MainCamera.enabled = !MainCamera.enabled;
+            RobotCamera.enabled = !RobotCamera.enabled;
         }
     }
 }

@@ -609,7 +609,7 @@ MonoBehaviour:
   Trials: 5
   TrialDuration: 20
   StoppingFitness: 30
-  Robot: {fileID: 100002, guid: 10c8c2744fc26524d802c95b4e3df0e0, type: 2}
+  Robot: {fileID: 100000, guid: 9df6e57225046504d8f82b9d83d8a564, type: 2}
   Target: {fileID: 1942969269}
 --- !u!1 &1938471357
 GameObject:
