@@ -224,7 +224,7 @@ GameObject:
   - 33: {fileID: 404204247}
   - 65: {fileID: 404204246}
   - 23: {fileID: 404204245}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - 33: {fileID: 827680734}
   - 136: {fileID: 827680733}
   - 23: {fileID: 827680732}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,6 +433,18 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 9df6e57225046504d8f82b9d83d8a564, type: 2}
+      propertyPath: HumanControlled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 9df6e57225046504d8f82b9d83d8a564, type: 2}
+      propertyPath: RunBestOnly
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 9df6e57225046504d8f82b9d83d8a564, type: 2}
+      propertyPath: Mortar
+      value: 
+      objectReference: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9df6e57225046504d8f82b9d83d8a564, type: 2}
   m_RootGameObject: {fileID: 1458493818}
@@ -647,7 +659,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1458493819}
   - 114: {fileID: 1458493820}
-  m_Layer: 0
+  - 54: {fileID: 1458493821}
+  m_Layer: 9
   m_Name: ModRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -683,16 +696,32 @@ MonoBehaviour:
   MeleeRange: 7
   AttackCoolDown: .699999988
   RifleCoolDown: .200000003
+  MortarCoolDown: 1.5
   Speed: 5
   TurnSpeed: 180
-  Hits: 0
-  RifleHits: 0
   RunBestOnly: 1
   health: {fileID: 0}
   HitLayers:
     serializedVersion: 2
     m_Bits: 256
+  Mortar: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
   HumanControlled: 1
+--- !u!54 &1458493821
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: 9df6e57225046504d8f82b9d83d8a564,
+    type: 2}
+  m_PrefabInternal: {fileID: 844320957}
+  m_GameObject: {fileID: 1458493818}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1535893474
 Prefab:
   m_ObjectHideFlags: 0
@@ -728,6 +757,14 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e2914c14f0983564e9ed6e9688a93d44, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e2914c14f0983564e9ed6e9688a93d44, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2914c14f0983564e9ed6e9688a93d44, type: 2}
   m_RootGameObject: {fileID: 1942969269}
@@ -744,7 +781,7 @@ GameObject:
   - 33: {fileID: 1765583464}
   - 65: {fileID: 1765583463}
   - 23: {fileID: 1765583462}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -928,7 +965,7 @@ GameObject:
   - 33: {fileID: 1938463961}
   - 65: {fileID: 1938463960}
   - 23: {fileID: 1938463959}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,8 +1085,8 @@ Camera:
   near clip plane: .300000012
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 50
+  orthographic: 1
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1140,7 +1177,7 @@ Transform:
   m_GameObject: {fileID: 1942969269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!114 &1942969274

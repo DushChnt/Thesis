@@ -11,10 +11,12 @@ public abstract class BaseController : MonoBehaviour {
     public float MeleeRange = 7f;
     public float AttackCoolDown = 0.7f;
     public float RifleCoolDown = 0.2f;
+    public float MortarCoolDown = 1.5f;
     public float Speed = 5;
     public float TurnSpeed = 180;
     protected float attackTimer = 0;
     protected float rifleTimer = 0;
+    protected float mortarTimer = 0;
     protected Vector3 startPos;
     protected float shortestDistance;
     protected float totalDistance;
@@ -28,10 +30,13 @@ public abstract class BaseController : MonoBehaviour {
 
     protected Transform turret;
 
+    public GameObject Mortar;
     public bool HumanControlled;
 
     protected abstract void Attack(float dist, float angle);
     protected abstract void RifleAttack();
+    protected abstract void MortarAttack(float distance);
+    public abstract void ReceiveMortarInfo(float hitRate);
     public abstract void Activate(IBlackBox box, GameObject target);
     public abstract void Stop();
 
@@ -71,8 +76,13 @@ public abstract class BaseController : MonoBehaviour {
         {
             turret.Rotate(new Vector3(0, 2, 0));
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            
+            MortarAttack(500);
+        }
         rifleTimer += Time.deltaTime;
-
+        mortarTimer += Time.deltaTime;
         var moveDist = Input.GetAxis("Vertical") * Speed * Time.deltaTime;
         var turnAngle = Input.GetAxis("Horizontal") * TurnSpeed * Time.deltaTime; // * gas;
         transform.Rotate(new Vector3(0, turnAngle, 0));
@@ -191,7 +201,7 @@ public abstract class BaseController : MonoBehaviour {
                 RifleAttack();
             }
             rifleTimer += Time.deltaTime;
-
+            mortarTimer += Time.deltaTime;
             transform.Rotate(new Vector3(0, turnAngle, 0));
             transform.Translate(Vector3.forward * moveDist);
 

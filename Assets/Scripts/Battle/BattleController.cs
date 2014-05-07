@@ -96,4 +96,14 @@ public class BattleController : BaseController {
     {
         this.isRunning = false;
     }
+
+    protected override void MortarAttack(float distance)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ReceiveMortarInfo(float hitRate)
+    {
+        throw new System.NotImplementedException();
+    }
 }

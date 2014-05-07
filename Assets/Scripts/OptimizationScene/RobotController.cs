@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using SharpNeat.Phenomes;
+using System.Collections.Generic;
 
 public class RobotController : BaseController
 {
@@ -67,6 +68,27 @@ public class RobotController : BaseController
             }
         }
 
+    }
+
+    protected override void MortarAttack(float distance)
+    {
+       
+        if (mortarTimer > MortarCoolDown)
+        {
+            mortarTimer = 0;
+            
+            if (turret != null)
+            {
+                
+                GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
+                Rigidbody body = m.GetComponent<Rigidbody>();
+                IList<GameObject> targets = new List<GameObject>();
+                targets.Add(target);
+                m.GetComponent<MortarImpact>().SetTargets(targets, this);
+                var direction = (turret.forward + turret.up * 1f) * distance;
+                body.AddForce(direction);
+            }
+        }
     }
 
     protected override void Attack(float distance, float angle)
@@ -157,5 +179,13 @@ public class RobotController : BaseController
     public override void Stop()
     {
         this.isRunning = false;
+    }
+
+
+
+    public override void ReceiveMortarInfo(float hitRate)
+    {
+        // Do something
+        print("Receiving info");
     }
 }
