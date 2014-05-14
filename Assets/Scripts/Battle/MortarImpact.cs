@@ -39,16 +39,23 @@ public class MortarImpact : MonoBehaviour {
 
                 float distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
                 float dmgRadiusSquared = DamageRadius * DamageRadius;
+                float dmg = -1;
                 if (distFromCenterSquared < dmgRadiusSquared)
                 {
-                    float dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
-                    print("Hit target, percentage: " + dmg * 100 + "%");
-                    owner.ReceiveMortarInfo(dmg);
+                    dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+                //    print("Hit target, percentage: " + dmg * 100 + "%");
+                    
                 }
+                owner.ReceiveMortarInfo(dmg, distFromCenterSquared);
             }
         }
 
-        print("BOOM!");
+    //    print("BOOM!");
         Destroy(gameObject);
     }
+}
+
+public class MortarInfo
+{
+
 }

@@ -153,6 +153,95 @@ public class OptimizerMenuGUI : MonoBehaviour {
 
         GUI.Label(new Rect(250, 90, 200, 60), Application.persistentDataPath);
 
+        if (GUI.Button(new Rect(500, 10, 200, 60), "NETWORK!"))
+        {
+
+            Application.LoadLevel("Network Test");
+        }
+
+      
+
+        
+
+        top = 120;
+        var turret_angle = "Turret Angle";
+        top += 40;
+        if (GUI.Button(new Rect(250, top, 200, 30), turret_angle))
+        {
+            OptimizerParameters.Reset();
+            OptimizerParameters.Name = turret_angle;
+            OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;           
+        //    OptimizerParameters.WApproach = 1f;
+            OptimizerParameters.DistanceToKeep = 30f;
+            OptimizerParameters.WTurretAngleTowards = 10f;
+            buttonClicked = true;
+        }
+
+        var mortar_attack = "Mortar Attack";
+        top += 40;
+        if (GUI.Button(new Rect(250, top, 200, 30), mortar_attack))
+        {
+            OptimizerParameters.Reset();
+            OptimizerParameters.Name = mortar_attack;
+            OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;
+            //    OptimizerParameters.WApproach = 1f;
+            OptimizerParameters.DistanceToKeep = 30f;
+            OptimizerParameters.WTurretAngleTowards = 10f;
+            OptimizerParameters.WMortarAttack = 0.1f;
+            buttonClicked = true;
+        }
+
+        var mortar_hits = "Mortar Hits";
+        top += 40;
+        if (GUI.Button(new Rect(250, top, 200, 30), mortar_hits))
+        {
+            OptimizerParameters.Reset();
+            OptimizerParameters.Name = mortar_hits;
+            OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;
+            //    OptimizerParameters.WApproach = 1f;
+         //   OptimizerParameters.DistanceToKeep = 30f;
+        //    OptimizerParameters.WTurretAngleTowards = 10f;
+          //  OptimizerParameters.WMortarAttack = 0.1f;
+        //    OptimizerParameters.WMortarHits = 10f;
+            OptimizerParameters.WMortarDamage = 1f;
+            buttonClicked = true;
+        }
+
+        var mortar_precision = "Mortar Precision";
+        top += 40;
+        if (GUI.Button(new Rect(250, top, 200, 30), mortar_precision))
+        {
+            OptimizerParameters.Reset();
+            OptimizerParameters.Name = mortar_precision;
+            OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;
+            //    OptimizerParameters.WApproach = 1f;
+            //   OptimizerParameters.DistanceToKeep = 30f;
+            //    OptimizerParameters.WTurretAngleTowards = 10f;
+            //  OptimizerParameters.WMortarAttack = 0.1f;
+            //    OptimizerParameters.WMortarHits = 10f;
+         //   OptimizerParameters.WMortarDamage = 1f;
+            OptimizerParameters.WMortarPrecision = 1f;
+            buttonClicked = true;
+        }
+
+        var mortar_dmg_hit = "Mortar Dmg pr Hit";
+        top += 40;
+        if (GUI.Button(new Rect(250, top, 200, 30), mortar_dmg_hit))
+        {
+            OptimizerParameters.Reset();
+            OptimizerParameters.Name = mortar_dmg_hit;
+            OptimizerParameters.TargetMoveStrategy = TargetMove.Stationary;
+            //    OptimizerParameters.WApproach = 1f;
+            //   OptimizerParameters.DistanceToKeep = 30f;
+            //    OptimizerParameters.WTurretAngleTowards = 10f;
+            //  OptimizerParameters.WMortarAttack = 0.1f;
+            //    OptimizerParameters.WMortarHits = 10f;
+            //   OptimizerParameters.WMortarDamage = 1f;
+        //    OptimizerParameters.WMortarPrecision = 1f;
+            OptimizerParameters.WMortarDamagePerHit = 1f;
+            buttonClicked = true;
+        }
+
         if (buttonClicked)
         {
             Utility.DebugLog = false;

@@ -102,7 +102,7 @@ public class BattleController : BaseController {
         throw new System.NotImplementedException();
     }
 
-    public override void ReceiveMortarInfo(float hitRate)
+    public override void ReceiveMortarInfo(float hitRate, float distFromCenterSquared)
     {
         throw new System.NotImplementedException();
     }

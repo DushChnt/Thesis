@@ -8,7 +8,10 @@ public class RobotController : BaseController
     private int RifleAttacks;
     private int RifleHits;
     private int Hits;
-
+    private int MortarAttacks;
+    private int MortarHits;
+    private float AccMortarDamage;
+    private float MortarHitDamage;
     
 
     // Use this for initialization
@@ -26,7 +29,16 @@ public class RobotController : BaseController
             int targetLayer = LayerMask.NameToLayer("Target");
             HitLayers = 1 << targetLayer;
         }
-    }   
+    }
+
+    public void HumanActivate(GameObject obj)
+    {
+        this.target = obj;
+        this.isRunning = true;
+        this.HumanControlled = true;
+        int targetLayer = LayerMask.NameToLayer("Robot");
+        HitLayers = 1 << targetLayer;
+    }
 
     protected override void RifleAttack()
     {
@@ -34,6 +46,8 @@ public class RobotController : BaseController
         {
             RifleAttacks++;
             rifleTimer = 0;
+            Speed -= RifleSpeedPenalty;
+            RecoveryRate = RifleRecoveryRate;
             RaycastHit hit;
           //  Utility.Log("Raycasting");
             Vector3 point = transform.position + transform.forward * SensorRange;
@@ -70,22 +84,24 @@ public class RobotController : BaseController
 
     }
 
-    protected override void MortarAttack(float distance)
-    {
-       
+    protected override void MortarAttack(float force)
+    {       
         if (mortarTimer > MortarCoolDown)
         {
+         
+        //    print("Force: " + force);
+            MortarAttacks++;
             mortarTimer = 0;
-            
+            Speed -= MortarSpeedPenalty;
+            RecoveryRate = MortarRecoveryRate;
             if (turret != null)
             {
                 
                 GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
                 Rigidbody body = m.GetComponent<Rigidbody>();
-                IList<GameObject> targets = new List<GameObject>();
-                targets.Add(target);
+                IList<GameObject> targets = new List<GameObject>() {target};            
                 m.GetComponent<MortarImpact>().SetTargets(targets, this);
-                var direction = (turret.forward + turret.up * 1f) * distance;
+                var direction = (turret.forward + turret.up * 1f) * force * MaxMortarForce;
                 body.AddForce(direction);
             }
         }
@@ -95,11 +111,14 @@ public class RobotController : BaseController
     {
         if (attackTimer > AttackCoolDown)
         {
+            attackTimer = 0;
+            Speed -= MeleeSpeedPenalty;
+            RecoveryRate = MeleeRecoveryRate;
             if (distance < MeleeRange && angle > -15 && angle < 15)
             {
                 // Do attack
 
-                attackTimer = 0;
+               
                 Hits++;
                 if (RunBestOnly)
                 {
@@ -142,7 +161,7 @@ public class RobotController : BaseController
         fit += rifleAttacks;
 
         // Markmanship = precision
-        float precision = RifleAttacks > 0 ? (RifleHits / RifleAttacks) * OptimizerParameters.WRiflePrecision : 0;
+        float precision = RifleAttacks > 0 ? ((float)RifleHits / (float)RifleAttacks) * OptimizerParameters.WRiflePrecision : 0;
         fit += precision;
 
         // Angle fitness
@@ -150,6 +169,29 @@ public class RobotController : BaseController
         float angle = Utility.Clamp(totalAngle / ticks);
         angle *= OptimizerParameters.WAngleTowards;
         fit += angle;
+
+        // Turret angle fitness
+        float tAngle = Utility.Clamp(totalTurretAngle / ticks);
+        tAngle *= OptimizerParameters.WTurretAngleTowards;
+        fit += tAngle;
+
+      //  print("tAngle: " + tAngle);
+
+        // Mortar attacks fitness
+        float mAttacks = MortarAttacks * OptimizerParameters.WMortarAttack;
+        fit += mAttacks;
+
+        float mHits = MortarHits * OptimizerParameters.WMortarHits;
+        fit += mHits;
+
+        float mPrecision = MortarAttacks > 0 ? ((float)MortarHits / (float)MortarAttacks) * OptimizerParameters.WMortarPrecision : 0;
+        fit += mPrecision;
+
+        float mDamage = MortarHits > 0 ? (1 - (AccMortarDamage / (float)MortarAttacks)) * OptimizerParameters.WMortarDamage : 0;
+        fit += mDamage;
+
+        float mDamagePerHit = MortarAttacks > 0 ? ((MortarHitDamage / (float)MortarAttacks)) * OptimizerParameters.WMortarDamagePerHit : 0;
+        fit += mDamagePerHit;
 
         return fit;
     }
@@ -172,7 +214,7 @@ public class RobotController : BaseController
         this.brain.ResetState();
         this.target = target;
         this.startPos = transform.position;
-        this.health = this.GetComponent<HealthScript>();
+     //   this.health = this.GetComponent<HealthScript>();
     //    this.opponent = target.GetComponent<RobotController>();
     }
 
@@ -183,9 +225,20 @@ public class RobotController : BaseController
 
 
 
-    public override void ReceiveMortarInfo(float hitRate)
+    public override void ReceiveMortarInfo(float hitRate, float distFromCenterSquared)
     {
         // Do something
-        print("Receiving info");
+      //  print("Receiving info");
+        if (hitRate > -1)
+        {
+            MortarHits++;
+            MortarHitDamage += hitRate;
+        }
+        AccMortarDamage += distFromCenterSquared / (50 * 50);
+
+        if (RunBestOnly)
+        {
+            print("BOOM, hitrate: " + hitRate + ", dist: " + (distFromCenterSquared / (50 * 50)));
+        }
     }
 }

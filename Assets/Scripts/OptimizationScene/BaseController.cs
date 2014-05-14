@@ -12,8 +12,29 @@ public abstract class BaseController : MonoBehaviour {
     public float AttackCoolDown = 0.7f;
     public float RifleCoolDown = 0.2f;
     public float MortarCoolDown = 1.5f;
-    public float Speed = 5;
+    /// <summary>
+    /// Current speed
+    /// </summary>
+    protected float Speed = 5;
+    /// <summary>
+    /// Maximum top speed
+    /// </summary>
+    public float TopSpeed = 5;
+    /// <summary>
+    /// How fast the speed recovers to top speed in value/second
+    /// </summary>
+    protected float RecoveryRate = 1f;
+
+    public float MeleeSpeedPenalty = 2f;
+    public float MeleeRecoveryRate = 2f;
+    public float RifleSpeedPenalty = 0.5f;
+    public float RifleRecoveryRate = 2f;
+    public float MortarSpeedPenalty = 5f;
+    public float MortarRecoveryRate = 2f;
+    public float MaxMortarForce = 500f;
+
     public float TurnSpeed = 180;
+    public float TurretTurnSpeed = 180;
     protected float attackTimer = 0;
     protected float rifleTimer = 0;
     protected float mortarTimer = 0;
@@ -21,9 +42,10 @@ public abstract class BaseController : MonoBehaviour {
     protected float shortestDistance;
     protected float totalDistance;
     protected float totalAngle;
+    protected float totalTurretAngle;
     protected long ticks;
     public bool RunBestOnly = false;
-    public HealthScript health;
+  //  public HealthScript health;
    // protected RobotController opponent;
 
     public LayerMask HitLayers;
@@ -35,8 +57,8 @@ public abstract class BaseController : MonoBehaviour {
 
     protected abstract void Attack(float dist, float angle);
     protected abstract void RifleAttack();
-    protected abstract void MortarAttack(float distance);
-    public abstract void ReceiveMortarInfo(float hitRate);
+    protected abstract void MortarAttack(float force);
+    public abstract void ReceiveMortarInfo(float hitRate, float distFromCenterSquared);
     public abstract void Activate(IBlackBox box, GameObject target);
     public abstract void Stop();
 
@@ -74,12 +96,13 @@ public abstract class BaseController : MonoBehaviour {
         }
         if (Input.GetButton("Jump"))
         {
-            turret.Rotate(new Vector3(0, 2, 0));
+            var turretTurnAngle = 1 * TurretTurnSpeed * Time.deltaTime;
+            turret.Rotate(new Vector3(0, turretTurnAngle, 0));
         }
         if (Input.GetKeyDown(KeyCode.M))
         {
             
-            MortarAttack(500);
+            MortarAttack(0.9f);
         }
         rifleTimer += Time.deltaTime;
         mortarTimer += Time.deltaTime;
@@ -115,17 +138,31 @@ public abstract class BaseController : MonoBehaviour {
             direction.y = 0;
 
             float angle = Utility.AngleSigned(direction, transform.forward, transform.up);
+            var turretDirection = target.transform.position - turret.position;
+            turretDirection.y = 0;
+            turretDirection.Normalize();
+            float turretAngle = Utility.AngleSigned(turretDirection, turret.forward, turret.up);
+          //  print(turretAngle);
+          //  turretAngle = turretAngle /180f;
+         //   print(turretAngle);
+        //    totalTurretAngle += Mathf.Abs(turretAngle);
 
             float pie1 = 0;
             float pie2 = 0;
             float pie3 = 0;
             float melee = 0;
             float lof = 0; // Line of Fire
+            float turret_lof = 0;
 
             if (angle < 5f && angle > -5f)
             {
                 lof = 1 - Mathf.Abs(angle) / 5f;
                 totalAngle++;
+            }
+            if (turretAngle > -5f && turretAngle < 5f)
+            {
+                turret_lof = 1 - Mathf.Abs(turretAngle) / 5f;
+                totalTurretAngle++;
             }
 
             if (distance < 1)
@@ -178,6 +215,8 @@ public abstract class BaseController : MonoBehaviour {
             inputArr[4] = leftSensor;
             inputArr[5] = melee;
             inputArr[6] = lof;
+            inputArr[7] = turret_lof;
+            inputArr[8] = distance;
 
             brain.Activate();
 
@@ -186,9 +225,12 @@ public abstract class BaseController : MonoBehaviour {
             var gas = (float)outputArr[1] * 2 - 1;
             var meleeAttack = (float)outputArr[2];
             float rifleAttack = (float)outputArr[3];
+            float turretTurn = (float)outputArr[4] * 2 - 1;
+            float mortarForce = (float)outputArr[5];
 
             var moveDist = gas * Speed * Time.deltaTime;
             var turnAngle = steer * TurnSpeed * Time.deltaTime; // * gas;
+            var turretTurnAngle = turretTurn * TurretTurnSpeed * Time.deltaTime;
 
             if (meleeAttack > 0.5f)
             {
@@ -200,10 +242,15 @@ public abstract class BaseController : MonoBehaviour {
             {
                 RifleAttack();
             }
+            if (mortarForce > 0.1f)
+            {
+                MortarAttack(mortarForce);
+            }
             rifleTimer += Time.deltaTime;
             mortarTimer += Time.deltaTime;
             transform.Rotate(new Vector3(0, turnAngle, 0));
             transform.Translate(Vector3.forward * moveDist);
+            turret.Rotate(new Vector3(0, turretTurnAngle, 0));
 
             totalDistance += Mathf.Abs(GetDistance() - OptimizerParameters.DistanceToKeep);
             //    totalAngle += Mathf.Abs(angle);
@@ -225,6 +272,18 @@ public abstract class BaseController : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (Speed < TopSpeed)
+        {
+            if (Speed < 0)
+            {
+                Speed = 0;
+            }
+            Speed += RecoveryRate * Time.deltaTime;
+            if (Speed > TopSpeed)
+            {
+                Speed = TopSpeed;
+            }
+        }
         if (HumanControlled)
         {
             HumanController();
@@ -233,5 +292,6 @@ public abstract class BaseController : MonoBehaviour {
         {
             NetworkController();
         }
+        
     }
 }

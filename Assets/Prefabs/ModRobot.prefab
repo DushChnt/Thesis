@@ -326,13 +326,20 @@ MonoBehaviour:
   MeleeRange: 7
   AttackCoolDown: .699999988
   RifleCoolDown: .200000003
-  Speed: 5
+  MortarCoolDown: 1.5
+  TopSpeed: 5
+  MeleeSpeedPenalty: 2
+  MeleeRecoveryRate: 2
+  RifleSpeedPenalty: .5
+  RifleRecoveryRate: 2
+  MortarSpeedPenalty: 5
+  MortarRecoveryRate: 2
   TurnSpeed: 180
   RunBestOnly: 0
-  health: {fileID: 0}
   HitLayers:
     serializedVersion: 2
     m_Bits: 256
+  Mortar: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
   HumanControlled: 0
 --- !u!136 &13600000
 CapsuleCollider:
