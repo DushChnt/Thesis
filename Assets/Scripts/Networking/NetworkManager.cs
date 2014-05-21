@@ -75,7 +75,14 @@ public class NetworkManager : MonoBehaviour {
         if (other != null)
         {
             RobotController rc = mine.GetComponent<RobotController>();
-            rc.HumanActivate(other);
+            Destroy(rc);
+           // rc.HumanActivate(other);
+            mine.AddComponent<BattleController>();
+            var brain1 = Utility.LoadBrain(Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", "Mortar Precision"));
+            var controller1 = mine.GetComponent<BattleController>();
+            controller1.HitLayers = 1 << LayerMask.NameToLayer("Robot");
+
+            controller1.Activate(brain1, other);
         }
     }
 

@@ -25,8 +25,12 @@ public class OptimizerParameters {
     public static bool MultipleTargets = false;
 
     public static string Name = "SimpleTest";
+    public static string Description = "Description...";
     public static string ConfigFile = @"Assets\Scripts\phototaxis.config.xml";
     public static float WTurretAngleTowards = 0f;
+
+    public string TestString;
+    public int TestInt;
 
     public static void Reset()
     {
@@ -47,6 +51,18 @@ public class OptimizerParameters {
 
         TargetMoveStrategy = TargetMove.Stationary;
         Name = "Test";
+    }
+
+    public static void WriteXML()
+    {
+        OptimizerParameters param = new OptimizerParameters();
+        param.TestInt = 42;
+        param.TestString = "Joe joeson";
+        System.Xml.Serialization.XmlSerializer writer =
+            new System.Xml.Serialization.XmlSerializer(typeof(OptimizerParameters));
+        System.IO.StreamWriter file = new System.IO.StreamWriter("test.xml");
+        writer.Serialize(file, param);
+        file.Close();
     }
 }
 

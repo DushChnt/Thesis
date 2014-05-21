@@ -512,7 +512,7 @@ namespace SharpNeat.Network
                 case "hid":
                     return NodeType.Hidden;
             }
-            throw new InvalidDataException(string.Format("Unknown node type [{0}]", type)); 
+            throw new InvalidDataException(string.Format("Unknown node type [{0}]", type));  
            
         }
 

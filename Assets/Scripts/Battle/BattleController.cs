@@ -9,6 +9,7 @@ public class BattleController : BaseController {
 
 	// Use this for initialization
 	void Start () {
+        turret = gameObject.transform.FindChild("Turret");
         this.Health = gameObject.AddComponent<HealthScript>();
         HitLayers = 1 << LayerMask.NameToLayer("Robot");
 	}
@@ -99,11 +100,11 @@ public class BattleController : BaseController {
 
     protected override void MortarAttack(float distance)
     {
-        throw new System.NotImplementedException();
+      //  throw new System.NotImplementedException();
     }
 
     public override void ReceiveMortarInfo(float hitRate, float distFromCenterSquared)
     {
-        throw new System.NotImplementedException();
+     //   throw new System.NotImplementedException();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Parse;
 
 public class OptimizerMenuGUI : MonoBehaviour {
 
@@ -159,7 +160,19 @@ public class OptimizerMenuGUI : MonoBehaviour {
             Application.LoadLevel("Network Test");
         }
 
-      
+        if (GUI.Button(new Rect(500, 80, 200, 60), "NETWORK!"))
+        {
+            print("Checking connection");
+            ParseQuery<ParseObject> query = ParseObject.GetQuery("TestObject");
+            query.GetAsync("BAi0Ok6Ipi").ContinueWith(t =>
+            {
+                if (t != null)
+                {
+                    print("Connected!");
+                    print(t.Result.Get<string>("foo"));
+                }
+            });
+        }
 
         
 
