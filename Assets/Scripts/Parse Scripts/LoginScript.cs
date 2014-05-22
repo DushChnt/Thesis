@@ -172,7 +172,7 @@ public class LoginScript : MonoBehaviour {
         loadTimer += Time.deltaTime;
         if (loadTimer > loadtime)
         {
-            Application.LoadLevel("Optimizer Menu scene");
+            Application.LoadLevel("Start Menu");
             Destroy(this);
         }
     }

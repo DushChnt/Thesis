@@ -21,5 +21,6 @@ public class DynamicAdd : MonoBehaviour {
         label.BackgroundSprite = "frame-basic";
         label.TextAlignment = TextAlignment.Center;
         label.RelativePosition = new Vector3(0, count * 24);
+      
     }
 }

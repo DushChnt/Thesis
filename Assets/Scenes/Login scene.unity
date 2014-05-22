@@ -164,6 +164,7 @@ GameObject:
   - 4: {fileID: 1895923240}
   - 114: {fileID: 1895923239}
   - 114: {fileID: 1895923241}
+  - 114: {fileID: 1895923242}
   m_Layer: 0
   m_Name: Parse.com
   m_TagString: Untagged
@@ -204,5 +205,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4758ab0d2803b544e925a60bc37d4cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1895923242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1895923238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f235b1b132f194bb63b75a9801123e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -1,5 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<OptimizerParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <TestString>Joe joeson</TestString>
-  <TestInt>42</TestInt>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<OptimizerParameters>
+  <NumInputs>9</NumInputs>
+  <NumOutputs>6</NumOutputs>
+  <WMeleeAttack>0</WMeleeAttack>
+  <WMortarAttack>0</WMortarAttack>
+  <WMortarHits>0</WMortarHits>
+  <WMortarPrecision>0</WMortarPrecision>
+  <WMortarDamage>0</WMortarDamage>
+  <WMortarDamagePerHit>0</WMortarDamagePerHit>
+  <WApproach>10</WApproach>
+  <WRifleAttack>0</WRifleAttack>
+  <WRifleHits>0</WRifleHits>
+  <WAngleTowards>0</WAngleTowards>
+  <WRiflePrecision>0</WRiflePrecision>
+  <TargetMoveStrategy>Stationary</TargetMoveStrategy>
+  <DistanceToKeep>0</DistanceToKeep>
+  <MultipleTargets>False</MultipleTargets>
+  <Name>Bad ass</Name>
+  <Description>Enter a description...</Description>
+  <WTurretAngleTowards>0</WTurretAngleTowards>
 </OptimizerParameters>

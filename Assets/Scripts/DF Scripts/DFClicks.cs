@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Parse;
+using System.Threading.Tasks;
 
 public class DFClicks : MonoBehaviour
 {
@@ -16,16 +18,10 @@ public class DFClicks : MonoBehaviour
 
     public void TrainButton()
     {
-        dfSlider keepDistance = GameObject.Find("s_KeepDistance").GetComponent<dfSlider>();
-        if (keepDistance != null)
-        {
-            print("Value: " + keepDistance.Value);
-        }
-        dfSlider distanceToKeep = GameObject.Find("s_DistanceToKeep").GetComponent<dfSlider>();
-        if (keepDistance != null)
-        {
-            print("Value: " + distanceToKeep.Value);
-        }
+        GetOptimizerSettings();
+
+        OptimizerParameters.WriteXML();
+        Application.LoadLevel("Optimization scene");
     }
 
     public void ResetClicked()
@@ -41,11 +37,30 @@ public class DFClicks : MonoBehaviour
 
     }
 
+    public void BackClicked()
+    {
+        Application.LoadLevel("Start Menu");
+    }
+
     public void SaveClicked()
     {
         GetOptimizerSettings();
 
         OptimizerParameters.WriteXML();
+
+        SaveBrainToServer();
+    }
+
+    private void SaveBrainToServer()
+    {
+        Settings.Brain.Name = OptimizerParameters.Name;
+        Settings.Brain.Description = OptimizerParameters.Description;
+
+    
+        if (ParseUser.CurrentUser != null)
+        {         
+            Task saveTask = Settings.Brain.SaveAsync();
+        }
     }
 
     private void GetOptimizerSettings()
