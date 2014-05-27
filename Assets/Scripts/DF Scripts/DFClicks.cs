@@ -20,7 +20,9 @@ public class DFClicks : MonoBehaviour
     {
         GetOptimizerSettings();
 
-        OptimizerParameters.WriteXML();
+    //    OptimizerParameters.WriteXML();
+        SaveBrainToServer();
+
         Application.LoadLevel("Optimization scene");
     }
 
@@ -117,7 +119,7 @@ public class DFClicks : MonoBehaviour
     {
         GetOptimizerSettings();
 
-        OptimizerParameters.WriteXML();
+      //  OptimizerParameters.WriteXML();
 
         SaveBrainToServer();
     }
@@ -144,6 +146,13 @@ public class DFClicks : MonoBehaviour
         Settings.Brain.MortarDamagePerHit = OptimizerParameters.WMortarDamagePerHit;
         Settings.Brain.TargetBehaviorMovement = System.Enum.GetName(typeof(TargetMove), OptimizerParameters.TargetMoveStrategy);
 
+
+        //string popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", "MyPopulation8");
+        //System.IO.StreamReader stream = new System.IO.StreamReader (popFilePath);
+        //ParseFile file = new ParseFile("joe.xml", stream.BaseStream);
+        //Task sTask = file.SaveAsync();
+
+        //Settings.Brain.Population = file;
 
         if (ParseUser.CurrentUser != null)
         {         
@@ -172,13 +181,15 @@ public class DFClicks : MonoBehaviour
         OptimizerParameters.WMortarPrecision = GameObject.Find("s_MortarPrecision").GetComponent<dfSlider>().Value;
         OptimizerParameters.WMortarDamagePerHit = GameObject.Find("s_MortarDamagePerHit").GetComponent<dfSlider>().Value;
 
-        OptimizerParameters.TargetMoveStrategy = GetTargetMovePattern();
+
+        string value = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>().SelectedValue;
+        OptimizerParameters.TargetMoveStrategy = GetTargetMovePattern(value);
 
     }
 
-    private TargetMove GetTargetMovePattern()
+    public static TargetMove GetTargetMovePattern(string value)
     {
-        string value = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>().SelectedValue;
+       
 
         switch (value)
         {

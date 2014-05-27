@@ -3,6 +3,11 @@ using System.Collections;
 
 public class OptimizerGUI : MonoBehaviour {
 
+    public static uint CurrentGeneration;
+    public static int CurrentIteration, MaxIterations;
+    public static double BestFitness;
+    bool StopPressed = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -22,12 +27,17 @@ public class OptimizerGUI : MonoBehaviour {
 
         if (GUI.Button(new Rect(10, 90, 100, 30), "Stop EA"))
         {
+            StopPressed = true;
             GameObject.Find("Evaluator").GetComponent<Optimizer>().StopEA();
         }
 
         if (GUI.Button(new Rect(10, 150, 100, 30), "Back"))
         {
-            Application.LoadLevel("Optimizer Menu scene");
+            Application.LoadLevel("Training Overview");
         }
+        int height = 70;
+        int top = Screen.height - height - 10;
+        GUI.Box(new Rect(10, top, 300, height), string.Format("Current generation: {0}\nCurrent iteration: {1} / {2}\nBest fitness: {3:0.00}{4}",
+            CurrentGeneration, CurrentIteration, MaxIterations, BestFitness, StopPressed ? "\nStop pressed" : ""));
 	}
 }

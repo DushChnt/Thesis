@@ -6,12 +6,19 @@ public class StartOverview : MonoBehaviour {
 
     public dfLabel WelcomeLabel;
     public dfButton LogoutButton;
+    public dfButton BattleButton;
 
 	// Use this for initialization
 	void Start () {
         WelcomeLabel.Text = "Welcome, " + ParseUser.CurrentUser.Username;
         LogoutButton.Click += LogoutButton_Click;
+        BattleButton.Click += BattleButton_Click;
 	}
+
+    void BattleButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        Application.LoadLevel("Network Test");
+    }
 
     void LogoutButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {

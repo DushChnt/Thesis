@@ -8,5 +8,6 @@ public class ExtraParseInitialization : MonoBehaviour
     void Awake()
     {
         ParseObject.RegisterSubclass<Brain>();
+        ParseAnalytics.TrackAppOpenedAsync();
     }
 }

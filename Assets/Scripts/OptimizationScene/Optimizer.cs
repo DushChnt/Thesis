@@ -8,6 +8,8 @@ using System;
 using SharpNeat.Phenomes;
 using System.Collections.Generic;
 using System.IO;
+using Parse;
+using System.Threading.Tasks;
 
 public class Optimizer : MonoBehaviour {
 
@@ -21,8 +23,10 @@ public class Optimizer : MonoBehaviour {
     public GameObject Robot;
     public GameObject Target;
     
-    string filePath = @"Assets\Scripts\Populations\optimizerChamp.gnm.xml";
-    string popFilePath;
+    string champFileLoadPath = @"Assets\Scripts\Populations\optimizerChamp.gnm.xml";
+    string popFileLoadPath;
+
+    string popFileSavePath, champFileSavePath;
 
     Dictionary<IBlackBox, RobotController> dict = new Dictionary<IBlackBox, RobotController>();
     Dictionary<IBlackBox, TargetController> targetDict = new Dictionary<IBlackBox, TargetController>();
@@ -30,20 +34,36 @@ public class Optimizer : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
+        
         experiment = new OptimizationExperiment();
         XmlDocument xmlConfig = new XmlDocument();
         TextAsset textAsset = (TextAsset)Resources.Load("phototaxis.config");
         //      xmlConfig.Load(OptimizerParameters.ConfigFile);
         xmlConfig.LoadXml(textAsset.text);
         experiment.SetOptimizer(this);
-        experiment.Initialize(OptimizerParameters.Name, xmlConfig.DocumentElement, OptimizerParameters.NumInputs, OptimizerParameters.NumOutputs);
+        //experiment.Initialize(OptimizerParameters.Name, xmlConfig.DocumentElement, OptimizerParameters.NumInputs, OptimizerParameters.NumOutputs);
+        experiment.Initialize(Settings.Brain.Name, xmlConfig.DocumentElement, Settings.Brain.NumInputs, Settings.Brain.NumOutputs);
         //filePath = string.Format(@"Assets\Scripts\Populations\{0}Champ.gnm.xml", OptimizerParameters.Name);
         //popFilePath = string.Format(@"Assets\Scripts\Populations\{0}.pop.xml", OptimizerParameters.Name);
+        OptimizerParameters.MultipleTargets = false;
 
+        //filePath = Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", OptimizerParameters.Name);
+        //popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", OptimizerParameters.Name);
+        //popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", "MyPopulation8");
 
-        filePath = Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", OptimizerParameters.Name);
-        popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", OptimizerParameters.Name);
-        popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", "MyPopulation8");
+        if (Settings.Brain.IsNewBrain && Settings.Brain.ParentId != null && !Settings.Brain.ParentId.Equals(""))
+        {
+            champFileLoadPath = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", Parse.ParseUser.CurrentUser.Username, Settings.Brain.ParentId);
+            popFileLoadPath = Application.persistentDataPath + string.Format("/{0}/{1}.pop.xml", Parse.ParseUser.CurrentUser.Username, Settings.Brain.ParentId);
+        }
+        else
+        {
+            champFileLoadPath = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", Parse.ParseUser.CurrentUser.Username, Settings.Brain.ObjectId);
+            popFileLoadPath = Application.persistentDataPath + string.Format("/{0}/{1}.pop.xml", Parse.ParseUser.CurrentUser.Username, Settings.Brain.ObjectId);
+        }
+        champFileSavePath = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", Parse.ParseUser.CurrentUser.Username, Settings.Brain.ObjectId);
+        popFileSavePath = Application.persistentDataPath + string.Format("/{0}/{1}.pop.xml", Parse.ParseUser.CurrentUser.Username, Settings.Brain.ObjectId);
+        OptimizerGUI.MaxIterations = Trials;
     }
 
     public void Evaluate(IBlackBox box)
@@ -80,13 +100,13 @@ public class Optimizer : MonoBehaviour {
         // Try to load the genome from the XML document.
         try
         {
-            using (XmlReader xr = XmlReader.Create(filePath))
+            using (XmlReader xr = XmlReader.Create(champFileLoadPath))
                 genome = NeatGenomeXmlIO.ReadCompleteGenomeList(xr, false, (NeatGenomeFactory)experiment.CreateGenomeFactory())[0];
         }
         catch (Exception e1)
         {
-            print(filePath + " Error loading genome from file!\nLoading aborted.\n"
-                                      + e1.Message + "\nJoe: " + filePath);
+            print(champFileLoadPath + " Error loading genome from file!\nLoading aborted.\n"
+                                      + e1.Message + "\nJoe: " + champFileLoadPath);
             return;
         }
 
@@ -150,7 +170,7 @@ public class Optimizer : MonoBehaviour {
         Utility.DebugLog = true;
         Utility.Log("Starting PhotoTaxis experiment");        
 
-        _ea = experiment.CreateEvolutionAlgorithm(popFilePath);
+        _ea = experiment.CreateEvolutionAlgorithm(popFileLoadPath);
 
         _ea.UpdateEvent += new EventHandler(ea_UpdateEvent);
         _ea.PausedEvent += new EventHandler(ea_PauseEvent);
@@ -174,6 +194,8 @@ public class Optimizer : MonoBehaviour {
     {       
         Utility.Log(string.Format("gen={0:N0} bestFitness={1:N6}",
             _ea.CurrentGeneration, _ea.Statistics._maxFitness));
+        OptimizerGUI.CurrentGeneration = _ea.CurrentGeneration;
+        OptimizerGUI.BestFitness = _ea.Statistics._maxFitness;
     }
 
     void ea_PauseEvent(object sender, EventArgs e)
@@ -183,24 +205,38 @@ public class Optimizer : MonoBehaviour {
         XmlWriterSettings _xwSettings = new XmlWriterSettings();
         _xwSettings.Indent = true;
         // Save genomes to xml file.        
-        DirectoryInfo dirInf = new DirectoryInfo(Application.persistentDataPath + "/" + "Populations");
+        DirectoryInfo dirInf = new DirectoryInfo(Application.persistentDataPath + "/" + Parse.ParseUser.CurrentUser.Username);
         if (!dirInf.Exists)
         {
             Debug.Log("Creating subdirectory"); 
             dirInf.Create();
         }
-        using (XmlWriter xw = XmlWriter.Create(popFilePath, _xwSettings))
+        using (XmlWriter xw = XmlWriter.Create(popFileSavePath, _xwSettings))
         {
             experiment.SavePopulation(xw, _ea.GenomeList);
         }
         // Also save the best genome
 
-        using (XmlWriter xw = XmlWriter.Create(filePath, _xwSettings))
+        using (XmlWriter xw = XmlWriter.Create(champFileSavePath, _xwSettings))
         {
             experiment.SavePopulation(xw, new NeatGenome[] { _ea.CurrentChampGenome });
         }
         DateTime endTime = DateTime.Now;
         Utility.Log("Total time elapsed: " + (endTime - startTime));
+
+        System.IO.StreamReader stream = new System.IO.StreamReader(popFileSavePath);
+        ParseFile file = new ParseFile(string.Format("{0}.pop.xml", Settings.Brain.ObjectId), stream.BaseStream);
+        Task sTask = file.SaveAsync();
+
+        Settings.Brain.Population = file;
+
+        stream = new System.IO.StreamReader(champFileSavePath);
+        ParseFile pfile = new ParseFile(string.Format("{0}.champ.xml", Settings.Brain.ObjectId), stream.BaseStream);
+        Task task = pfile.SaveAsync();
+
+        Settings.Brain.ChampionGene = pfile;
+        Settings.Brain.IsNewBrain = false;
+        Settings.Brain.SaveAsync();
     }
 	
 	// Update is called once per frame

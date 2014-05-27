@@ -252,7 +252,8 @@ public abstract class BaseController : MonoBehaviour {
             transform.Translate(Vector3.forward * moveDist);
             turret.Rotate(new Vector3(0, turretTurnAngle, 0));
 
-            totalDistance += Mathf.Abs(GetDistance() - OptimizerParameters.DistanceToKeep);
+          //  totalDistance += Mathf.Abs(GetDistance() - OptimizerParameters.DistanceToKeep);
+            totalDistance += Mathf.Abs(GetDistance() - Settings.Brain.DistanceToKeep);
             //    totalAngle += Mathf.Abs(angle);
             ticks++;
         }

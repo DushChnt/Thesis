@@ -1,10 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
+using Parse;
 
 public class LoadBrainParameters : MonoBehaviour {
 
     public dfTextbox NameTextbox;
     public dfTextbox DescriptionTextBox;
+    public dfButton TrainButton;
+
+    IEnumerator WaitForRequest(Brain brain, bool pop)
+    {
+        WWW www = new WWW(pop ? brain.Population.Url.AbsoluteUri : brain.ChampionGene.Url.AbsoluteUri); 
+        print("Downloading");
+        yield return www;
+        print("Done downloading");
+
+        string folderPath = Application.persistentDataPath + string.Format("/{0}", ParseUser.CurrentUser.Username);
+        DirectoryInfo dirInf = new DirectoryInfo(folderPath);
+        if (!dirInf.Exists)
+        {
+            Debug.Log("Creating subdirectory");
+            dirInf.Create();
+        }
+        string popFilePath = Application.persistentDataPath + string.Format("/{0}/{1}.pop.xml", ParseUser.CurrentUser.Username, brain.ObjectId);
+        if (!pop) {
+            popFilePath = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", ParseUser.CurrentUser.Username, brain.ObjectId);
+        }
+        
+        File.WriteAllText(popFilePath, www.text);
+        TrainButton.Enable();
+    }
 
 	// Use this for initialization
     void Start()
@@ -12,6 +38,16 @@ public class LoadBrainParameters : MonoBehaviour {
         if (Settings.Brain == null)
         {
             Settings.Brain = new Brain();
+        }
+        if (Settings.Brain.Population != null)
+        {
+            TrainButton.Disable();
+            StartCoroutine(WaitForRequest(Settings.Brain, true));
+        }
+        if (Settings.Brain.ChampionGene != null)
+        {
+            TrainButton.Disable();
+            StartCoroutine(WaitForRequest(Settings.Brain, false));
         }
         //   if (!Settings.IsNewBrain && Settings.Brain.Name != null && Settings.Brain.Name.Length > 0)
         {
@@ -47,6 +83,7 @@ public class LoadBrainParameters : MonoBehaviour {
                 break;
             }
         }
+
 
         
     }

@@ -5788,6 +5788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameTextbox: {fileID: 726309499}
   DescriptionTextBox: {fileID: 311558692}
+  TrainButton: {fileID: 1949379123}
 --- !u!4 &1115040586
 Transform:
   m_ObjectHideFlags: 0

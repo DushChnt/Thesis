@@ -47,7 +47,8 @@ public class TargetController : MonoBehaviour {
 
     private PerformMovement AssignMovement()
     {
-        switch (OptimizerParameters.TargetMoveStrategy)
+        //switch (OptimizerParameters.TargetMoveStrategy)
+        switch (DFClicks.GetTargetMovePattern(Settings.Brain.TargetBehaviorMovement))
         {
             case TargetMove.Stationary:
                 return new PerformMovement(StationaryMovement);                

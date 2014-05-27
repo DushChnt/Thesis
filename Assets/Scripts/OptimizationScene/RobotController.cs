@@ -146,6 +146,64 @@ public class RobotController : BaseController
         //}
         float fit = 0;
         // Approach fitness
+        float approach = 1.0f / (totalDistance / ticks) * Settings.Brain.KeepDistance;
+        fit += approach;
+
+        // Melee fitness
+        float melee = Hits * Settings.Brain.MeleeAttacks;
+        fit += melee;
+
+        // Rifle fitness
+        float rifle = RifleHits * Settings.Brain.RifleHits;
+        fit += rifle;
+
+        float rifleAttacks = RifleAttacks * Settings.Brain.RifleAttacks;
+        fit += rifleAttacks;
+
+        // Markmanship = precision
+        float precision = RifleAttacks > 0 ? ((float)RifleHits / (float)RifleAttacks) * Settings.Brain.RiflePrecision : 0;
+        fit += precision;
+
+        // Angle fitness
+
+        float angle = Utility.Clamp(totalAngle / ticks);
+        angle *= Settings.Brain.FaceTarget;
+        fit += angle;
+
+        // Turret angle fitness
+        float tAngle = Utility.Clamp(totalTurretAngle / ticks);
+        tAngle *= Settings.Brain.TurretFaceTarget;
+        fit += tAngle;
+
+      //  print("tAngle: " + tAngle);
+
+        // Mortar attacks fitness
+        float mAttacks = MortarAttacks * Settings.Brain.MortarAttacks;
+        fit += mAttacks;
+
+        float mHits = MortarHits * Settings.Brain.MortarHits;
+        fit += mHits;
+
+        float mPrecision = MortarAttacks > 0 ? ((float)MortarHits / (float)MortarAttacks) * Settings.Brain.MortarPrecision : 0;
+        fit += mPrecision;
+
+        //float mDamage = MortarHits > 0 ? (1 - (AccMortarDamage / (float)MortarAttacks)) * Settings.Brain.mor.WMortarDamage : 0;
+        //fit += mDamage;
+
+        float mDamagePerHit = MortarAttacks > 0 ? ((MortarHitDamage / (float)MortarAttacks)) * Settings.Brain.MortarDamagePerHit : 0;
+        fit += mDamagePerHit;
+
+        return fit;
+    }
+
+    public float GetFitness2()
+    {
+        //if (Vector3.Distance(transform.position, startPos) < 1)
+        //{
+        //    return 0;
+        //}
+        float fit = 0;
+        // Approach fitness
         float approach = 1.0f / (totalDistance / ticks) * OptimizerParameters.WApproach;
         fit += approach;
 
@@ -175,7 +233,7 @@ public class RobotController : BaseController
         tAngle *= OptimizerParameters.WTurretAngleTowards;
         fit += tAngle;
 
-      //  print("tAngle: " + tAngle);
+        //  print("tAngle: " + tAngle);
 
         // Mortar attacks fitness
         float mAttacks = MortarAttacks * OptimizerParameters.WMortarAttack;

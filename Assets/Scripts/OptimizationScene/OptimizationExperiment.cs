@@ -123,6 +123,7 @@ public class OptimizationExperiment : INeatExperiment
         IGenomeFactory<NeatGenome> genomeFactory = CreateGenomeFactory();
         try
         {
+           
             using (XmlReader xr = XmlReader.Create(fileName))
             {
                 genomeList = LoadPopulation(xr);

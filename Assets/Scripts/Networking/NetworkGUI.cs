@@ -10,7 +10,12 @@ public class NetworkGUI : MonoBehaviour {
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 10, 100, 40), "Stats"))
+        if (GUI.Button(new Rect(10, 10, 100, 40), "Back"))
+        {
+            Application.LoadLevel("Start Menu");
+        }
+
+        if (GUI.Button(new Rect(10, 60, 100, 40), "Stats"))
         {
             NetworkManager.Stats();
         }

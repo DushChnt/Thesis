@@ -153,6 +153,20 @@ public class Brain : ParseObject {
         set { SetProperty<string>(value, "TargetBehaviorMovement"); }
     }
 
+    [ParseFieldName("population")]
+    public ParseFile Population
+    {
+        get { return GetProperty<ParseFile>("Population"); }
+        set { SetProperty<ParseFile>(value, "Population"); }
+    }
+
+    [ParseFieldName("championGene")]
+    public ParseFile ChampionGene
+    {
+        get { return GetProperty<ParseFile>("ChampionGene"); }
+        set { SetProperty<ParseFile>(value, "ChampionGene"); }
+    }
+
     public List<Brain> Children = new List<Brain>();
     
     public bool IsNewBrain;
@@ -180,8 +194,10 @@ public class Brain : ParseObject {
         brain.MortarPrecision = this.MortarPrecision;
         brain.MortarDamagePerHit = this.MortarDamagePerHit;
         brain.TargetBehaviorMovement = this.TargetBehaviorMovement;
+        
 
         brain.IsNewBrain = true;
+
 
         return brain;
     }
