@@ -37,6 +37,77 @@ public class DFClicks : MonoBehaviour
 
     }
 
+    private void RecurseDelete(Brain brain)
+    {
+        foreach (Brain b in brain.Children)
+        {
+            RecurseDelete(b);
+        }
+        brain.DeleteAsync();
+    }
+
+    public IEnumerator YesDeleteClicked()
+    {
+        // Delete stuff
+        GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Disable();
+
+        foreach (Brain brain in Settings.Brain.Children)
+        {
+            RecurseDelete(brain);
+        }
+
+        var task = Settings.Brain.DeleteAsync();
+
+        while (!task.IsCompleted)
+        {
+            yield return null;
+        }
+
+        GameObject.Find("Main Panel").GetComponent<dfPanel>().Enable();
+        GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Hide();
+        Application.LoadLevel("Start Menu");
+
+    }
+
+    public IEnumerator OnlyThisDeleteClicked()
+    {
+        // Delete stuff
+        GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Disable();
+
+        // Reassign children
+        var parent_id = Settings.Brain.ParentId;
+        foreach (Brain brain in Settings.Brain.Children)
+        {
+            brain.ParentId = parent_id;
+            brain.SaveAsync();
+        }
+
+        var task = Settings.Brain.DeleteAsync();
+
+        while (!task.IsCompleted)
+        {
+            yield return null;
+        }
+
+        GameObject.Find("Main Panel").GetComponent<dfPanel>().Enable();
+        GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Hide();
+        Application.LoadLevel("Start Menu");
+
+    }
+
+    public void NoDeleteClicked()
+    {        
+        GameObject.Find("Main Panel").GetComponent<dfPanel>().Enable();
+        GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Hide();
+    }
+
+    public void DeleteClicked()
+    {
+        
+        GameObject.Find("Main Panel").GetComponent<dfPanel>().Disable();
+        GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Show();
+    }
+
     public void BackClicked()
     {
         Application.LoadLevel("Start Menu");
@@ -55,8 +126,25 @@ public class DFClicks : MonoBehaviour
     {
         Settings.Brain.Name = OptimizerParameters.Name;
         Settings.Brain.Description = OptimizerParameters.Description;
+        Settings.Brain.NumInputs = OptimizerParameters.NumInputs;
+        Settings.Brain.NumOutputs = OptimizerParameters.NumOutputs;
+        Settings.Brain.KeepDistance = OptimizerParameters.WApproach;
+        Settings.Brain.DistanceToKeep = OptimizerParameters.DistanceToKeep;
+        Settings.Brain.FaceTarget = OptimizerParameters.WAngleTowards;
+        Settings.Brain.TurretFaceTarget = OptimizerParameters.WTurretAngleTowards;
+        Settings.Brain.MeleeAttacks = OptimizerParameters.WMeleeAttack;
 
-    
+
+        Settings.Brain.RifleAttacks = OptimizerParameters.WRifleAttack;
+        Settings.Brain.RifleHits = OptimizerParameters.WRifleHits;
+        Settings.Brain.RiflePrecision = OptimizerParameters.WRiflePrecision;
+        Settings.Brain.MortarAttacks = OptimizerParameters.WMortarAttack;
+        Settings.Brain.MortarHits = OptimizerParameters.WMortarHits;
+        Settings.Brain.MortarPrecision = OptimizerParameters.WMortarPrecision;
+        Settings.Brain.MortarDamagePerHit = OptimizerParameters.WMortarDamagePerHit;
+        Settings.Brain.TargetBehaviorMovement = System.Enum.GetName(typeof(TargetMove), OptimizerParameters.TargetMoveStrategy);
+
+
         if (ParseUser.CurrentUser != null)
         {         
             Task saveTask = Settings.Brain.SaveAsync();
@@ -72,6 +160,17 @@ public class DFClicks : MonoBehaviour
 
         OptimizerParameters.DistanceToKeep = GameObject.Find("s_DistanceToKeep").GetComponent<dfSlider>().Value;
         OptimizerParameters.WApproach = GameObject.Find("s_KeepDistance").GetComponent<dfSlider>().Value;
+
+        OptimizerParameters.WAngleTowards = GameObject.Find("s_FaceTarget").GetComponent<dfSlider>().Value;
+        OptimizerParameters.WTurretAngleTowards = GameObject.Find("s_TurretFaceTarget").GetComponent<dfSlider>().Value;
+        OptimizerParameters.WMeleeAttack = GameObject.Find("s_MeleeAttacks").GetComponent<dfSlider>().Value;
+        OptimizerParameters.WRifleAttack = GameObject.Find("s_RifleAttacks").GetComponent<dfSlider>().Value;
+        OptimizerParameters.WRifleHits = GameObject.Find("s_RifleHits").GetComponent<dfSlider>().Value;
+        OptimizerParameters.WRiflePrecision = GameObject.Find("s_RiflePrecision").GetComponent<dfSlider>().Value;
+        OptimizerParameters.WMortarAttack = GameObject.Find("s_MortarAttacks").GetComponent<dfSlider>().Value;
+        OptimizerParameters.WMortarHits = GameObject.Find("s_MortarHits").GetComponent<dfSlider>().Value;
+        OptimizerParameters.WMortarPrecision = GameObject.Find("s_MortarPrecision").GetComponent<dfSlider>().Value;
+        OptimizerParameters.WMortarDamagePerHit = GameObject.Find("s_MortarDamagePerHit").GetComponent<dfSlider>().Value;
 
         OptimizerParameters.TargetMoveStrategy = GetTargetMovePattern();
 
