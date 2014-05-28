@@ -299,4 +299,21 @@ public class RobotController : BaseController
             print("BOOM, hitrate: " + hitRate + ", dist: " + (distFromCenterSquared / (50 * 50)));
         }
     }
+
+    #region Photon Methods
+
+    private void SendInt()
+    {
+        if(PhotonNetwork.isMasterClient)
+        
+        photonView.RPC("GetCoolInt", PhotonTargets.Others, 5, transform.position);
+    }
+
+    [RPC]
+    private void GetCoolInt(int i, Vector3 position)
+    {
+        Debug.Log("I got an int over network: " + i);
+    }
+
+    #endregion
 }

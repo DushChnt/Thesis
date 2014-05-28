@@ -18,6 +18,7 @@ public class DFClicks : MonoBehaviour
 
     public void TrainButton()
     {
+        PhotonNetwork.offlineMode = true;
         GetOptimizerSettings();
 
     //    OptimizerParameters.WriteXML();

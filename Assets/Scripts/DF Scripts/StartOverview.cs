@@ -17,6 +17,7 @@ public class StartOverview : MonoBehaviour {
 
     void BattleButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
+        PhotonNetwork.offlineMode = false;
         Application.LoadLevel("Network Test");
     }
 

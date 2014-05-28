@@ -21,4 +21,8 @@ MonoBehaviour:
   - InstantiateRpc
   - OnAwakeRPC
   - DestroyRpc
+  - GetCoolInt
+  - GetOutput
+  - SetHealth
+  - StartGame
   DisableAutoOpenWizard: 0

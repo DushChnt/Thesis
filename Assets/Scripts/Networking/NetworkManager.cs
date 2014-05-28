@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Parse;
 
-public class NetworkManager : MonoBehaviour {
+public class NetworkManager : Photon.MonoBehaviour {
+
+    bool ReadyToStart;
+    public float StartTimer = 2f;
+    private float _startTimer = 0;
 
     // Use this for initialization
     void Start()
@@ -13,6 +18,20 @@ public class NetworkManager : MonoBehaviour {
     {
         PhotonNetwork.ConnectUsingSettings("TEST 0.1");
 
+    }
+
+    void Update()
+    {
+        //if (ReadyToStart)
+        //{
+        //    _startTimer += Time.deltaTime;
+        //    if (_startTimer > StartTimer)
+        //    {
+        //        print("Go!");
+        //        ReadyToStart = false;
+        //        photonView.RPC("StartGame", PhotonTargets.AllBuffered);
+        //    }
+        //}
     }
 
     void OnGUI()
@@ -52,8 +71,19 @@ public class NetworkManager : MonoBehaviour {
         GameObject player = PhotonNetwork.Instantiate("ModRobot", new Vector3(x, 1, z), Quaternion.identity, 0);
     }
 
+    [RPC]
+    protected void StartGame()
+    {
+        print("Starting game");
+        if (photonView.isMine)
+        {
+            Stats();
+        }
+    }
+
     public static void Stats()
     {
+        
         PhotonView[] players = GameObject.FindObjectsOfType<PhotonView>();
         GameObject other = null;
         GameObject mine = null;
@@ -74,15 +104,30 @@ public class NetworkManager : MonoBehaviour {
         }
         if (other != null)
         {
-            RobotController rc = mine.GetComponent<RobotController>();
-            Destroy(rc);
+            //RobotController rc = mine.GetComponent<RobotController>();
+            
+            //Destroy(rc);
            // rc.HumanActivate(other);
-            mine.AddComponent<BattleController>();
-            var brain1 = Utility.LoadBrain(Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", "Mortar Precision"));
+            //mine.AddComponent<BattleController>();
+          //  var brain1 = Utility.LoadBrain(Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", "Mortar Precision"));
+            string path = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", ParseUser.CurrentUser.Username, ParseUser.CurrentUser.Get<string>("slot1"));
+            print("Path: " + path);
+            var brain1 = Utility.LoadBrain(path);
+
+            path = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", ParseUser.CurrentUser.Username, ParseUser.CurrentUser.Get<string>("slot2"));
+            var brain2 = Utility.LoadBrain(path);
+
+            path = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", ParseUser.CurrentUser.Username, ParseUser.CurrentUser.Get<string>("slot3"));
+            var brain3 = Utility.LoadBrain(path);
+
+            path = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", ParseUser.CurrentUser.Username, ParseUser.CurrentUser.Get<string>("slot4"));
+            var brain4 = Utility.LoadBrain(path);
+
             var controller1 = mine.GetComponent<BattleController>();
             controller1.HitLayers = 1 << LayerMask.NameToLayer("Robot");
 
             controller1.Activate(brain1, other);
+            controller1.SetBrains(brain1, brain2, brain3, brain4);
         }
     }
 
@@ -92,6 +137,9 @@ public class NetworkManager : MonoBehaviour {
         
         GameObject other = null;
         PhotonView[] players = GameObject.FindObjectsOfType<PhotonView>();
+        
+            ReadyToStart = true;
+        
         print("Number of PhotonViews: " + players.Length);
         foreach (PhotonView ph in players)
         {

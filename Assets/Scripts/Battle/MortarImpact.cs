@@ -30,23 +30,26 @@ public class MortarImpact : MonoBehaviour {
         {
             foreach (GameObject go in targets)
             {
-                // Check if inside area of damage
-                float x = transform.position.x;
-                float z = transform.position.z;
-
-                float gx = go.transform.position.x;
-                float gz = go.transform.position.z;
-
-                float distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
-                float dmgRadiusSquared = DamageRadius * DamageRadius;
-                float dmg = -1;
-                if (distFromCenterSquared < dmgRadiusSquared)
+                if (go != null)
                 {
-                    dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
-                //    print("Hit target, percentage: " + dmg * 100 + "%");
-                    
+                    // Check if inside area of damage
+                    float x = transform.position.x;
+                    float z = transform.position.z;
+
+                    float gx = go.transform.position.x;
+                    float gz = go.transform.position.z;
+
+                    float distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
+                    float dmgRadiusSquared = DamageRadius * DamageRadius;
+                    float dmg = -1;
+                    if (distFromCenterSquared < dmgRadiusSquared)
+                    {
+                        dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+                        //    print("Hit target, percentage: " + dmg * 100 + "%");
+
+                    }
+                    owner.ReceiveMortarInfo(dmg, distFromCenterSquared);
                 }
-                owner.ReceiveMortarInfo(dmg, distFromCenterSquared);
             }
         }
 

@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using SharpNeat.Phenomes;
 
 public class BattleController : BaseController {
 
     public BattleController Opponent;
     public HealthScript Health;
     public float MeleeDamage = 10f;
+
+    IBlackBox brain1, brain2, brain3, brain4;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +22,59 @@ public class BattleController : BaseController {
 	void Update () {
 	    
 	}
+
+    public void SetBrains(IBlackBox _brain1, IBlackBox _brain2, IBlackBox _brain3, IBlackBox _brain4)        
+    {
+        this.brain1 = _brain1;
+        this.brain2 = _brain2;
+        this.brain3 = _brain3;
+        this.brain4 = _brain4;
+    }
+
+    public void SwitchBrain(int number)
+    {
+        switch (number)
+        {
+            case 1:
+                this.brain = brain1;
+                break;
+            case 2:
+                if (brain2 != null)
+                {
+                    this.brain = brain2;
+                }
+                else
+                {
+                    this.brain = brain1;
+                }
+                break;
+            case 3:
+                if (brain3 != null)
+                {
+                    this.brain = brain3;
+                }
+                else
+                {
+                    this.brain = brain1;
+                }
+                break;
+            case 4:
+                if (brain4 != null)
+                {
+                    this.brain = brain4;
+                }
+                else
+                {
+                    this.brain = brain1;
+                }
+                break;
+            default:
+                this.brain = brain1;
+                break;
+        }
+
+        this.brain.ResetState();
+    }
 
     protected override void Attack(float distance, float angle)
     {
@@ -83,7 +140,7 @@ public class BattleController : BaseController {
 
     }
 
-    public override void Activate(SharpNeat.Phenomes.IBlackBox box, GameObject target)
+    public override void Activate(IBlackBox box, GameObject target)
     {
         this.isRunning = true;
         this.brain = box;
@@ -98,9 +155,27 @@ public class BattleController : BaseController {
         this.isRunning = false;
     }
 
-    protected override void MortarAttack(float distance)
+    protected override void MortarAttack(float force)
     {
-      //  throw new System.NotImplementedException();
+        if (mortarTimer > MortarCoolDown)
+        {
+
+            //    print("Force: " + force);
+          //  MortarAttacks++;
+            mortarTimer = 0;
+            Speed -= MortarSpeedPenalty;
+            RecoveryRate = MortarRecoveryRate;
+            if (turret != null)
+            {
+
+                GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
+                Rigidbody body = m.GetComponent<Rigidbody>();
+                IList<GameObject> targets = new List<GameObject>() { target };
+                m.GetComponent<MortarImpact>().SetTargets(targets, this);
+                var direction = (turret.forward + turret.up * 1f) * force * MaxMortarForce;
+                body.AddForce(direction);
+            }
+        }
     }
 
     public override void ReceiveMortarInfo(float hitRate, float distFromCenterSquared)

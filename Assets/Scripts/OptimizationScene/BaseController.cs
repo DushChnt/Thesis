@@ -2,7 +2,7 @@
 using System.Collections;
 using SharpNeat.Phenomes;
 
-public abstract class BaseController : MonoBehaviour {
+public abstract class BaseController : Photon.MonoBehaviour {
 
     protected bool isRunning;
     protected GameObject target;
@@ -128,6 +128,8 @@ public abstract class BaseController : MonoBehaviour {
     /// </summary>
     void NetworkController()
     {
+        if (!photonView.isMine) return;
+
         if (isRunning && target != null)
         {
             var direction = target.transform.position - transform.position;
@@ -228,6 +230,9 @@ public abstract class BaseController : MonoBehaviour {
             float turretTurn = (float)outputArr[4] * 2 - 1;
             float mortarForce = (float)outputArr[5];
 
+            photonView.RPC("GetOutput", PhotonTargets.Others, properDistance, angle, steer, gas, meleeAttack, rifleAttack, 
+                turretTurn, mortarForce, transform.position, transform.rotation, turret.rotation, PhotonNetwork.time);
+
             var moveDist = gas * Speed * Time.deltaTime;
             var turnAngle = steer * TurnSpeed * Time.deltaTime; // * gas;
             var turretTurnAngle = turretTurn * TurretTurnSpeed * Time.deltaTime;
@@ -252,11 +257,55 @@ public abstract class BaseController : MonoBehaviour {
             transform.Translate(Vector3.forward * moveDist);
             turret.Rotate(new Vector3(0, turretTurnAngle, 0));
 
-          //  totalDistance += Mathf.Abs(GetDistance() - OptimizerParameters.DistanceToKeep);
-            totalDistance += Mathf.Abs(GetDistance() - Settings.Brain.DistanceToKeep);
-            //    totalAngle += Mathf.Abs(angle);
-            ticks++;
+            if (PhotonNetwork.offlineMode)
+            {
+                //  totalDistance += Mathf.Abs(GetDistance() - OptimizerParameters.DistanceToKeep);
+                totalDistance += Mathf.Abs(GetDistance() - Settings.Brain.DistanceToKeep);
+                //    totalAngle += Mathf.Abs(angle);
+                ticks++;
+            }
         }
+    }
+
+    [RPC]
+    protected void GetOutput(float properDistance, float angle, float steer, float gas, float meleeAttack, float rifleAttack, float turretTurn, 
+        float mortarForce, Vector3 realPosition, Quaternion realRotation, Quaternion turretRotation, double time) 
+    {
+    //    print("GetOutput");
+        double timeDifference = PhotonNetwork.time - time;
+
+        var moveDist = gas * Speed * Time.deltaTime;
+        var turnAngle = steer * TurnSpeed * Time.deltaTime; // * gas;
+        var turretTurnAngle = turretTurn * TurretTurnSpeed * Time.deltaTime;
+
+        if (meleeAttack > 0.5f)
+        {
+            Attack(properDistance, angle);
+        }
+        attackTimer += Time.deltaTime;
+
+        if (rifleAttack > 0.5f)
+        {
+            RifleAttack();
+        }
+        if (mortarForce > 0.1f)
+        {
+            MortarAttack(mortarForce);
+        }
+
+        transform.position = realPosition; // Vector3.Lerp(transform.position, realPosition, 0.2f);
+        //  transform.position = realPosition;
+        transform.rotation = realRotation; // Quaternion.Lerp(transform.rotation, realRotation, 0.2f);
+        if (turret != null)
+        {
+            turret.rotation = turretRotation; // Quaternion.Lerp(turret.rotation, turretRotation, 0.2f);
+        }
+
+        rifleTimer += Time.deltaTime;
+        mortarTimer += Time.deltaTime;
+        //transform.Rotate(new Vector3(0, turnAngle, 0));
+        //transform.Translate(Vector3.forward * moveDist);
+        //turret.Rotate(new Vector3(0, turretTurnAngle, 0));
     }
 
     public float GetDistance()

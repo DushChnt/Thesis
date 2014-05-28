@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealthScript : MonoBehaviour {
+public class HealthScript : Photon.MonoBehaviour {
 
     private float _health;
 
@@ -37,6 +37,7 @@ public class HealthScript : MonoBehaviour {
     public void TakeDamage(float damage)
     {
         _health -= damage;
+        photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health);
         if (isOne)
         {
             BattleGUI.Robot1Health = Health;
@@ -49,5 +50,11 @@ public class HealthScript : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+    }
+
+    [RPC]
+    void SetHealth(float health)
+    {
+        _health = health;
     }
 }
