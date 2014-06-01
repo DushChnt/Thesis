@@ -27,11 +27,23 @@ public class AddBrainButtons : MonoBehaviour {
     public dfButton BattleButton;
 
     public Texture2D mouseCursor;
+    private DialogShow _dialog;
+
+    Player Player
+    {
+        get
+        {
+            return ParseUser.CurrentUser as Player;
+        }
+    }
 
 	// Use this for initialization
     void Start()
     {
+        
+
         this._panel = GetComponent<dfPanel>();
+        _dialog = GameObject.Find("Dialog").GetComponent<DialogShow>();
         BattleButton.Disable();
         //   _panel.transform.Find("NewBrainButton").GetComponent<dfButton>().Click += button_Click;
         
@@ -91,7 +103,7 @@ public class AddBrainButtons : MonoBehaviour {
         slot4.DragEnter += slot1_DragEnter;
         slot4.DragLeave += slot1_DragLeave;
 
-       
+        
     }
 
     private string GetNameFromBrain(string objectId)
@@ -109,21 +121,22 @@ public class AddBrainButtons : MonoBehaviour {
     void slot1_DragLeave(dfControl control, dfDragEventArgs dragEvent)
     {
         dfPanel panel = control as dfPanel;
-        switch (control.gameObject.name)
-        {
-            case "Slot 1":
-                panel.BackgroundColor = slot1Color;
-                break;
-            case "Slot 2":
-                panel.BackgroundColor = slot2Color;
-                break;
-            case "Slot 3":
-                panel.BackgroundColor = slot3Color;
-                break;
-            case "Slot 4":
-                panel.BackgroundColor = slot4Color;
-                break;
-        }
+        panel.GetComponent<BrainPanelState>().Refresh();
+        //switch (control.gameObject.name)
+        //{
+        //    case "Slot 1":
+        //        panel.BackgroundColor = slot1Color;
+        //        break;
+        //    case "Slot 2":
+        //        panel.BackgroundColor = slot2Color;
+        //        break;
+        //    case "Slot 3":
+        //        panel.BackgroundColor = slot3Color;
+        //        break;
+        //    case "Slot 4":
+        //        panel.BackgroundColor = slot4Color;
+        //        break;
+        //}
     }
 
     void slot1_DragEnter(dfControl control, dfDragEventArgs dragEvent)
@@ -140,36 +153,21 @@ public class AddBrainButtons : MonoBehaviour {
     void slot1_DragDrop(dfControl control, dfDragEventArgs dragEvent)
     {
         dfPanel panel = control as dfPanel;
-        string column = "slot1";
-        switch (control.gameObject.name)
-        {
-            case "Slot 1":
-                panel.BackgroundColor = slot1Color;
-                column = "slot1";
-                break;
-            case "Slot 2":
-                panel.BackgroundColor = slot2Color;;
-                column = "slot2";
-                break;
-            case "Slot 3":
-                panel.BackgroundColor = slot3Color;;
-                column = "slot3";
-                break;
-            case "Slot 4":
-                panel.BackgroundColor = slot4Color;;
-                column = "slot4";
-                break;
-        }
-        print("Drag ended");
+
+        BrainPanelState brainPanel = panel.GetComponent<BrainPanelState>();
+
         if (draggedBrain != null)
         {
-            panel.transform.Find("Label").GetComponent<dfLabel>().Text = draggedBrain.Name;
-          //  PlayerPrefs.SetString(control.gameObject.name, draggedBrain.ObjectId);
-            ParseUser.CurrentUser[column] = draggedBrain.ObjectId;
-            ParseUser.CurrentUser.SaveAsync();
-            draggedBrain = null;
+            if (draggedBrain.ChampionGene == null)
+            {
+                _dialog.ShowDialog("This brain has not been trained yet and cannot be used in battle mode.");
+                brainPanel.Refresh();
+                return;
+            }
+           
+            brainPanel.AddBrain(draggedBrain);
             BattleButton.Enable();
-        }
+        }       
     }
 
     void OnDragEnd()
@@ -191,11 +189,11 @@ public class AddBrainButtons : MonoBehaviour {
 
     IEnumerator WaitForRequest(Brain brain)
     {
-        WWW www = new WWW(brain.Population.Url.AbsoluteUri);
+        WWW www = new WWW(brain.ChampionGene.Url.AbsoluteUri);
         print("Downloading");
         yield return www;
         print("Done downloading");
-        
+
         string folderPath = Application.persistentDataPath + string.Format("/{0}", ParseUser.CurrentUser.Username);
         DirectoryInfo dirInf = new DirectoryInfo(folderPath);
         if (!dirInf.Exists)
@@ -203,16 +201,8 @@ public class AddBrainButtons : MonoBehaviour {
             Debug.Log("Creating subdirectory");
             dirInf.Create();
         }
-        string popFilePath = Application.persistentDataPath + string.Format("/{0}/{1}.pop.xml", ParseUser.CurrentUser.Username, brain.ObjectId);
+        string popFilePath = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", ParseUser.CurrentUser.Username, brain.ObjectId);
         File.WriteAllText(popFilePath, www.text);
-
-        //WebRequest request = WebRequest.Create(brain.Population.Url.AbsoluteUri);
-        //request.Method = "DELETE";
-        //request.Headers.Add("X-Parse-Application-Id: EKqAh63rbFOllLH7q9GHh8BnBp5c3vJ1Q6kM2Kvs");
-        //request.Headers.Add("X-Parse-Master-Key: ab6KHog4AaFPgBFis8yXHwGvHAUnywAtwxMp4xjC");
-
-        //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-        //print("Response: " + response.StatusCode + "; " + response.StatusDescription);
     }
 
     void AddBrainButtons_Click(dfControl control, dfMouseEventArgs mouseEvent)
@@ -369,11 +359,11 @@ public class AddBrainButtons : MonoBehaviour {
         {
             foreach (Brain brain in allBrains)
             {
-                if (brain.Population != null)
+                if (brain.ChampionGene != null)
                 {
                     print("FILE: " + brain.Population.Name + ", URL: " + brain.Population.Url);
 
-                    //    StartCoroutine(WaitForRequest(brain));
+                    StartCoroutine(WaitForRequest(brain));
                 }
             }
             if (rootBrains.Count == 0)
@@ -385,76 +375,24 @@ public class AddBrainButtons : MonoBehaviour {
                 rootBrains.Add(b);
             }
             AddBrains(rootBrains);
-
-            if (ParseUser.CurrentUser.Keys.Contains("slot1"))
-            {
-                string s1 = ParseUser.CurrentUser.Get<string>("slot1");
-
-                if (s1 != null && !s1.Equals(""))
-                {
-                    slot1.transform.Find("Label").GetComponent<dfLabel>().Text = GetNameFromBrain(s1);
-                    BattleButton.Enable();
-                }
-                else
-                {
-                    slot1.BackgroundColor = grey;
-                }
-            }
-            else
-            {
-                slot1.BackgroundColor = grey;
-            }
-            if (ParseUser.CurrentUser.Keys.Contains("slot2"))
-            {
-                string s2 = ParseUser.CurrentUser.Get<string>("slot2");
-                if (s2 != null && !s2.Equals(""))
-                {
-                    slot2.transform.Find("Label").GetComponent<dfLabel>().Text = GetNameFromBrain(s2);
-                    BattleButton.Enable();
-                }
-                else
-                {
-                    slot2.BackgroundColor = grey;
-                }
-            }
-            else
-            {
-                slot2.BackgroundColor = grey;
-            }
-            if (ParseUser.CurrentUser.Keys.Contains("slot3"))
-            {
-                string s3 = ParseUser.CurrentUser.Get<string>("slot3");
-                if (s3 != null && !s3.Equals(""))
-                {
-                    slot3.transform.Find("Label").GetComponent<dfLabel>().Text = GetNameFromBrain(s3);
-                    BattleButton.Enable();
-                }
-                else
-                {
-                    slot3.BackgroundColor = grey;
-                }
-            }
-            else
-            {
-                slot3.BackgroundColor = grey;
-            }
-            if (ParseUser.CurrentUser.Keys.Contains("slot4"))
-            {
-                string s4 = ParseUser.CurrentUser.Get<string>("slot4");
-                if (s4 != null && !s4.Equals(""))
-                {
-                    slot4.transform.Find("Label").GetComponent<dfLabel>().Text = GetNameFromBrain(s4);
-                    BattleButton.Enable();
-                }
-                else
-                {
-                    slot4.BackgroundColor = grey;
-                }
-            }
-            else
-            {
-                slot4.BackgroundColor = grey;
-            }
+            slot1.GetComponent<BrainPanelState>().Initialize();
+            //Player player = ParseUser.CurrentUser as Player;
+            //if (player.Slot1 != null)
+            //{
+            //    slot1.GetComponent<BrainPanelState>().AddBrain(allBrains.Where(t => t.ObjectId.Equals(player.Slot1)).First());
+            //}
+            //if (player.Slot2 != null)
+            //{
+            //    slot2.GetComponent<BrainPanelState>().AddBrain(allBrains.Where(t => t.ObjectId.Equals(player.Slot2)).First());
+            //}
+            //if (player.Slot3 != null)
+            //{
+            //    slot3.GetComponent<BrainPanelState>().AddBrain(allBrains.Where(t => t.ObjectId.Equals(player.Slot3)).First());
+            //}
+            //if (player.Slot4 != null)
+            //{
+            //    slot4.GetComponent<BrainPanelState>().AddBrain(allBrains.Where(t => t.ObjectId.Equals(player.Slot4)).First());
+            //}            
         }
 	}
 

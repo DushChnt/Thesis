@@ -1,12 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Parse;
+using System.IO;
 
 public class StartOverview : MonoBehaviour {
 
     public dfLabel WelcomeLabel;
     public dfButton LogoutButton;
     public dfButton BattleButton;
+
+    public dfPanel Slot1, Slot2, Slot3, Slot4;
+
+    Player Player
+    {
+        get
+        {
+            return ParseUser.CurrentUser as Player;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {

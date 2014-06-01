@@ -7,21 +7,22 @@ public class BattleController : BaseController {
 
     public BattleController Opponent;
     public HealthScript Health;
+    public float MortarDamage = 20f;
     public float MeleeDamage = 10f;
 
-    IBlackBox brain1, brain2, brain3, brain4;
+    IBlackBox brain1, brain2, brain3, brain4, defaultBrain;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         turret = gameObject.transform.FindChild("Turret");
-        this.Health = gameObject.AddComponent<HealthScript>();
+        this.Health = GetComponent<HealthScript>();
         HitLayers = 1 << LayerMask.NameToLayer("Robot");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	    
-	}
+    }
+    
+    // Update is called once per frame
+    void Update () {
+        
+    }
 
     public void SetBrains(IBlackBox _brain1, IBlackBox _brain2, IBlackBox _brain3, IBlackBox _brain4)        
     {
@@ -36,7 +37,14 @@ public class BattleController : BaseController {
         switch (number)
         {
             case 1:
-                this.brain = brain1;
+                if (brain1 != null)
+                {
+                    this.brain = brain1;
+                }
+                else
+                {
+                    this.brain = defaultBrain;
+                }
                 break;
             case 2:
                 if (brain2 != null)
@@ -45,7 +53,7 @@ public class BattleController : BaseController {
                 }
                 else
                 {
-                    this.brain = brain1;
+                    this.brain = defaultBrain;
                 }
                 break;
             case 3:
@@ -55,7 +63,7 @@ public class BattleController : BaseController {
                 }
                 else
                 {
-                    this.brain = brain1;
+                    this.brain = defaultBrain;
                 }
                 break;
             case 4:
@@ -65,11 +73,11 @@ public class BattleController : BaseController {
                 }
                 else
                 {
-                    this.brain = brain1;
+                    this.brain = defaultBrain;
                 }
                 break;
             default:
-                this.brain = brain1;
+                this.brain = defaultBrain;
                 break;
         }
 
@@ -142,12 +150,13 @@ public class BattleController : BaseController {
 
     public override void Activate(IBlackBox box, GameObject target)
     {
+        this.defaultBrain = box;
         this.isRunning = true;
         this.brain = box;
         this.brain.ResetState();
         this.target = target;
         this.Opponent = target.GetComponent<BattleController>();
-        this.Health = gameObject.AddComponent<HealthScript>();
+        this.Health = GetComponent<HealthScript>();
     }
 
     public override void Stop()
@@ -180,6 +189,11 @@ public class BattleController : BaseController {
 
     public override void ReceiveMortarInfo(float hitRate, float distFromCenterSquared)
     {
-     //   throw new System.NotImplementedException();
+        if (hitRate > -1)
+        {
+            float dmg = hitRate * MortarDamage;
+            Opponent.Health.TakeDamage(dmg);
+        }
+       
     }
 }

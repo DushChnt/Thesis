@@ -254,17 +254,6 @@ public class RobotController : BaseController
         return fit;
     }
 
-    public float GetDistance()
-    {
-        if (target != null)
-        {
-            Vector2 a = new Vector2(target.transform.position.x, target.transform.position.z);
-            Vector2 b = new Vector2(transform.position.x, transform.position.z);
-            return Vector2.Distance(a, b);
-        }
-        return 0.0f;
-    }
-
     public override void Activate(IBlackBox box, GameObject target)
     {
         isRunning = true;

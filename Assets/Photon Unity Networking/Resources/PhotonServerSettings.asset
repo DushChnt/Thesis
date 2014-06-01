@@ -25,4 +25,5 @@ MonoBehaviour:
   - GetOutput
   - SetHealth
   - StartGame
+  - ShowCountdown
   DisableAutoOpenWizard: 0

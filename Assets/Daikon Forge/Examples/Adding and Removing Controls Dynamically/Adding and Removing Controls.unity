@@ -4,13 +4,12 @@
 SceneSettings:
   m_ObjectHideFlags: 0
   m_PVSData: 
-  m_QueryMode: 1
   m_PVSObjectsArray: []
   m_PVSPortalsArray: []
   m_OcclusionBakeSettings:
-    viewCellSize: 1
-    bakeMode: 2
-    memoryUsage: 10485760
+    smallestOccluder: 5
+    smallestHole: .25
+    backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
   m_Fog: 0
@@ -23,6 +22,7 @@ RenderSettings:
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: .5
   m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 0}
   m_ObjectHideFlags: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: frame-style6
   backgroundColor:
@@ -184,6 +185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1258020241}
+  m_RootOrder: 5
 --- !u!1 &1033541543
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +215,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1258020241}
+  m_RootOrder: 2
 --- !u!114 &1033541545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +258,7 @@ MonoBehaviour:
   renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: button-hilite
   hoverSprite: 
@@ -400,7 +404,11 @@ Camera:
     m_Bits: 4294967039
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!4 &1218685665
 Transform:
   m_ObjectHideFlags: 0
@@ -412,6 +420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!1 &1258020240
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +460,7 @@ Transform:
   - {fileID: 1647128116}
   - {fileID: 1297152227}
   m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!114 &1258020242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,6 +548,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1 &1275677121
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +578,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1258020241}
+  m_RootOrder: 0
 --- !u!114 &1275677123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,6 +621,7 @@ MonoBehaviour:
   renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
   text: '<h1 color=orange margin=0>Add Controls Dynamically</h1>
@@ -698,7 +712,11 @@ Camera:
     m_Bits: 256
   m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
+  m_OcclusionCulling: 0
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!4 &1297152227
 Transform:
   m_ObjectHideFlags: 0
@@ -710,6 +728,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1258020241}
+  m_RootOrder: 7
 --- !u!1 &1311435061
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,6 +789,7 @@ MonoBehaviour:
   renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: button-hilite
   hoverSprite: 
@@ -847,6 +867,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1258020241}
+  m_RootOrder: 1
 --- !u!114 &1311435065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,6 +939,7 @@ MonoBehaviour:
   renderOrder: 1
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: frame-style6
   backgroundColor:
@@ -969,6 +991,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1258020241}
+  m_RootOrder: 3
 --- !u!1 &1647128115
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,6 +1021,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1258020241}
+  m_RootOrder: 6
 --- !u!114 &1647128117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,6 +1064,7 @@ MonoBehaviour:
   renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: left-arrow
   flip: 0
@@ -1100,6 +1125,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1258020241}
+  m_RootOrder: 4
 --- !u!114 &2009597535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,6 +1168,7 @@ MonoBehaviour:
   renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: left-arrow
   flip: 1

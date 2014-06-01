@@ -230,9 +230,11 @@ public abstract class BaseController : Photon.MonoBehaviour {
             float turretTurn = (float)outputArr[4] * 2 - 1;
             float mortarForce = (float)outputArr[5];
 
-            photonView.RPC("GetOutput", PhotonTargets.Others, properDistance, angle, steer, gas, meleeAttack, rifleAttack, 
-                turretTurn, mortarForce, transform.position, transform.rotation, turret.rotation, PhotonNetwork.time);
-
+            if (!PhotonNetwork.offlineMode)
+            {
+                photonView.RPC("GetOutput", PhotonTargets.Others, properDistance, angle, steer, gas, meleeAttack, rifleAttack,
+                    turretTurn, mortarForce, transform.position, transform.rotation, turret.rotation, PhotonNetwork.time);
+            }
             var moveDist = gas * Speed * Time.deltaTime;
             var turnAngle = steer * TurnSpeed * Time.deltaTime; // * gas;
             var turretTurnAngle = turretTurn * TurretTurnSpeed * Time.deltaTime;
