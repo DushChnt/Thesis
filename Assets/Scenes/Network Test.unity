@@ -320,7 +320,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 223950505}
-  renderOrder: 24
+  renderOrder: 23
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -424,131 +424,6 @@ MonoBehaviour:
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   instantiationId: 0
---- !u!1 &342613703
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 342613704}
-  - 114: {fileID: 342613707}
-  - 65: {fileID: 342613706}
-  - 114: {fileID: 342613705}
-  m_Layer: 0
-  m_Name: Slider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &342613704
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 342613703}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0338516235, y: -.0325546265, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 888418409}
-  m_Father: {fileID: 1647047083}
-  m_RootOrder: 0
---- !u!114 &342613705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 342613703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63ef4a1e2b81b534890a74ccb941acb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DataSource:
-    Component: {fileID: 661926769}
-    MemberName: ownHealth
-  DataTarget:
-    Component: {fileID: 342613707}
-    MemberName: Value
-  FormatString: 
-  TwoWay: 0
-  AutoBind: 1
-  AutoUnbind: 1
---- !u!65 &342613706
-BoxCollider:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 342613703}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .765625, y: .0729166716, z: .00100000005}
-  m_Center: {x: .3828125, y: -.0364583358, z: 0}
---- !u!114 &342613707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 342613703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6711383fd292c64448b02a84c24572c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 0
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 294, y: 28}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  autoFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 13
-      top: 12.5039062
-      right: 13
-      bottom: 12.4960938
-    owner: {fileID: 342613707}
-  renderOrder: 7
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  allowSignalEvents: 1
-  atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
-  backgroundSprite: horz-scroll-track
-  orientation: 0
-  rawValue: 51
-  minValue: 0
-  maxValue: 100
-  stepSize: 1
-  scrollSize: 1
-  thumb: {fileID: 0}
-  fillIndicator: {fileID: 888418411}
-  fillMode: 1
-  fillPadding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  thumbOffset: {x: 0, y: 0}
-  rightToLeft: 0
 --- !u!1 &363689898
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +699,7 @@ MonoBehaviour:
       right: 0
       bottom: 701
     owner: {fileID: 380574218}
-  renderOrder: 9
+  renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -918,7 +793,7 @@ MonoBehaviour:
       right: 4.80859375
       bottom: 2.93359375
     owner: {fileID: 388485277}
-  renderOrder: 26
+  renderOrder: 25
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1077,7 +952,7 @@ MonoBehaviour:
       right: 4.83203125
       bottom: 2.93359375
     owner: {fileID: 489586223}
-  renderOrder: 22
+  renderOrder: 21
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1181,6 +1056,7 @@ GameObject:
   - 4: {fileID: 616964698}
   - 114: {fileID: 616964700}
   - 65: {fileID: 616964699}
+  - 114: {fileID: 616964701}
   m_Layer: 0
   m_Name: Opponent Health
   m_TagString: Untagged
@@ -1251,7 +1127,7 @@ MonoBehaviour:
       right: 47.0039062
       bottom: 13.0625
     owner: {fileID: 616964700}
-  renderOrder: 10
+  renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1293,6 +1169,27 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
+--- !u!114 &616964701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 616964697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ef4a1e2b81b534890a74ccb941acb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DataSource:
+    Component: {fileID: 661926769}
+    MemberName: opponentHealth
+  DataTarget:
+    Component: {fileID: 616964700}
+    MemberName: Text
+  FormatString: 
+  TwoWay: 0
+  AutoBind: 1
+  AutoUnbind: 1
 --- !u!1 &661926768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,8 +1227,6 @@ MonoBehaviour:
   OpponentRobot: {fileID: 0}
   OwnHealth: {fileID: 911039812}
   OpponentHealth: {fileID: 616964700}
-  ownHealth: 55.3941994
-  opponentHealth: .430000007
 --- !u!4 &661926770
 Transform:
   m_ObjectHideFlags: 0
@@ -1493,7 +1388,7 @@ MonoBehaviour:
       right: 79.25
       bottom: 11.921875
     owner: {fileID: 683242396}
-  renderOrder: 11
+  renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1615,7 +1510,7 @@ MonoBehaviour:
       right: 82.6757812
       bottom: -2.02734375
     owner: {fileID: 694105333}
-  renderOrder: 21
+  renderOrder: 20
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1737,7 +1632,7 @@ MonoBehaviour:
       right: 5.37109375
       bottom: 2.93359375
     owner: {fileID: 727023151}
-  renderOrder: 18
+  renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1827,7 +1722,7 @@ MonoBehaviour:
       right: 82.9960938
       bottom: -2.02734375
     owner: {fileID: 771930784}
-  renderOrder: 17
+  renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1953,7 +1848,7 @@ MonoBehaviour:
       right: 156.996094
       bottom: 13.5390625
     owner: {fileID: 779513482}
-  renderOrder: 15
+  renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2064,7 +1959,7 @@ MonoBehaviour:
       right: 294.996094
       bottom: 13.5390625
     owner: {fileID: 840937074}
-  renderOrder: 23
+  renderOrder: 22
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2160,96 +2055,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
---- !u!1 &888418408
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 888418409}
-  - 114: {fileID: 888418411}
-  - 65: {fileID: 888418410}
-  m_Layer: 0
-  m_Name: Sliced Sprite
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &888418409
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 888418408}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 342613704}
-  m_RootOrder: 0
---- !u!65 &888418410
-BoxCollider:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 888418408}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .765625, y: .0729166716, z: .00100000005}
-  m_Center: {x: .3828125, y: -.0364583358, z: 0}
---- !u!114 &888418411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 888418408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a89bcc79f0282bd408fde445bb1b05a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 0
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 294, y: 28}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  autoFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 0
-      top: 0
-      right: 506
-      bottom: 740
-    owner: {fileID: 888418411}
-  renderOrder: 8
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  allowSignalEvents: 1
-  atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
-  spriteName: horz-slider-track-normal
-  flip: 0
-  fillDirection: 0
-  fillAmount: .50999999
-  invertFill: 0
 --- !u!1 &911039809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,6 +2065,7 @@ GameObject:
   - 4: {fileID: 911039810}
   - 114: {fileID: 911039812}
   - 65: {fileID: 911039811}
+  - 114: {fileID: 911039813}
   m_Layer: 0
   m_Name: Own Health
   m_TagString: Untagged
@@ -2330,7 +2136,7 @@ MonoBehaviour:
       right: 48.1445312
       bottom: 37.0195312
     owner: {fileID: 911039812}
-  renderOrder: 12
+  renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2372,6 +2178,27 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
+--- !u!114 &911039813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 911039809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ef4a1e2b81b534890a74ccb941acb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DataSource:
+    Component: {fileID: 661926769}
+    MemberName: ownHealth
+  DataTarget:
+    Component: {fileID: 911039812}
+    MemberName: Text
+  FormatString: 
+  TwoWay: 0
+  AutoBind: 1
+  AutoUnbind: 1
 --- !u!1 &948813979
 GameObject:
   m_ObjectHideFlags: 0
@@ -2654,7 +2481,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 1075303786}
-  renderOrder: 16
+  renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2776,7 +2603,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 1115327927}
-  renderOrder: 20
+  renderOrder: 19
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2898,7 +2725,7 @@ MonoBehaviour:
       right: 119.25
       bottom: 37.0195312
     owner: {fileID: 1255467721}
-  renderOrder: 13
+  renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3024,7 +2851,7 @@ MonoBehaviour:
       right: 432.996094
       bottom: 13.5390625
     owner: {fileID: 1346432730}
-  renderOrder: 27
+  renderOrder: 26
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3131,7 +2958,7 @@ MonoBehaviour:
       right: 84.1367188
       bottom: -2.02734375
     owner: {fileID: 1545081653}
-  renderOrder: 25
+  renderOrder: 24
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3237,9 +3064,9 @@ MonoBehaviour:
     anchorStyle: 65
     margins:
       left: 240
-      top: 4
+      top: 5
       right: 240
-      bottom: 711
+      bottom: 710
     owner: {fileID: 1647047082}
   renderOrder: 6
   isLocalized: 0
@@ -3262,10 +3089,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1647047080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.416488647, y: .989959717, z: 0}
+  m_LocalPosition: {x: -.416664124, y: .986976624, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 342613704}
+  - {fileID: 1845212670}
   m_Father: {fileID: 993009865}
   m_RootOrder: 4
 --- !u!1 &1647836799
@@ -3348,7 +3175,7 @@ MonoBehaviour:
       right: 228.429688
       bottom: 99.59375
     owner: {fileID: 1647836802}
-  renderOrder: 31
+  renderOrder: 30
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3662,7 +3489,7 @@ MonoBehaviour:
       right: 83.640625
       bottom: -2.03125
     owner: {fileID: 1784582636}
-  renderOrder: 29
+  renderOrder: 28
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3826,6 +3653,128 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
+--- !u!1 &1845212669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1845212670}
+  - 114: {fileID: 1845212673}
+  - 65: {fileID: 1845212672}
+  - 114: {fileID: 1845212671}
+  m_Layer: 0
+  m_Name: Progress Bar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1845212670
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1845212669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0260391235, y: -.0169296265, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1647047083}
+  m_RootOrder: 0
+--- !u!114 &1845212671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1845212669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63ef4a1e2b81b534890a74ccb941acb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DataSource:
+    Component: {fileID: 661926769}
+    MemberName: ownHealth
+  DataTarget:
+    Component: {fileID: 1845212673}
+    MemberName: Value
+  FormatString: 
+  TwoWay: 0
+  AutoBind: 1
+  AutoUnbind: 1
+--- !u!65 &1845212672
+BoxCollider:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1845212669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .78125, y: .104166672, z: .00100000005}
+  m_Center: {x: .390625, y: -.0520833358, z: 0}
+--- !u!114 &1845212673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1845212669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f8e693563cc8f4c9b8092b938e4dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 5
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 0
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 300, y: 40}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  autoFocus: 0
+  layout:
+    anchorStyle: 5
+    margins:
+      left: 9.99609375
+      top: 6.5
+      right: 10.0039062
+      bottom: 6.5
+    owner: {fileID: 1845212673}
+  renderOrder: 7
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
+  atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
+  backgroundSprite: horz-scroll-track
+  progressSprite: horz-scroll-thumb
+  progressColor:
+    serializedVersion: 2
+    rgba: 4278190335
+  rawValue: 8.80000019
+  minValue: 0
+  maxValue: 100
+  fillMode: 1
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  actAsSlider: 0
 --- !u!1 &1906512598
 GameObject:
   m_ObjectHideFlags: 0
@@ -4049,7 +3998,7 @@ MonoBehaviour:
       right: 111
       bottom: 1
     owner: {fileID: 2039939383}
-  renderOrder: 14
+  renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4143,7 +4092,7 @@ MonoBehaviour:
       right: 5.34375
       bottom: 2.93359375
     owner: {fileID: 2052176291}
-  renderOrder: 30
+  renderOrder: 29
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4305,7 +4254,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 2095031870}
-  renderOrder: 28
+  renderOrder: 27
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4416,7 +4365,7 @@ MonoBehaviour:
       right: 18.9960938
       bottom: 13.5390625
     owner: {fileID: 2110519613}
-  renderOrder: 19
+  renderOrder: 18
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1

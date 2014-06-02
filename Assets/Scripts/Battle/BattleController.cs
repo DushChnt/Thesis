@@ -196,4 +196,9 @@ public class BattleController : BaseController {
         }
        
     }
+
+    void OnDestroy()
+    {
+        Destroy(Health.FollowScript.gameObject);
+    }
 }

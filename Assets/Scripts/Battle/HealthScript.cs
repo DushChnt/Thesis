@@ -39,7 +39,7 @@ public class HealthScript : Photon.MonoBehaviour {
 	public void TakeDamage(float damage)
 	{
 		_health -= damage;
-		photonView.RPC("SetHealth", PhotonTargets.AllBuffered, _health);
+		photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health);
         if (photonView.isMine)
         {
 
@@ -56,8 +56,10 @@ public class HealthScript : Photon.MonoBehaviour {
 		{
 		//	Destroy(gameObject);
           //  PhotonNetwork.Destroy(photonView);
+
             Destroy(FollowScript.gameObject);
             Destroy(FollowScript);
+            PhotonNetwork.Destroy(gameObject);
 		}
 	}
 

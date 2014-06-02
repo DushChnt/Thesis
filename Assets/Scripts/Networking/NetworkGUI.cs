@@ -12,8 +12,31 @@ public class NetworkGUI : MonoBehaviour {
 	BrainPanelState activePanel;
     dfLabel countdownLabel, countdownTitle, countdownFraction;
 
-    public float ownHealth = 1.456f;
-    public float opponentHealth = 0.43f;
+
+
+    public float ownHealth
+    {
+        get
+        {
+            if (MyRobot != null)
+            {
+                return MyRobot.Health.Health;
+            }
+            return -1;
+        }       
+    }
+
+    public float opponentHealth
+    {
+        get
+        {
+            if (OpponentRobot != null)
+            {
+                return OpponentRobot.Health.Health;
+            }
+            return -1;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -133,21 +156,21 @@ public class NetworkGUI : MonoBehaviour {
 
         }
 
-        if (MyRobot != null)
-        {
-            if (MyRobot.Health.Health != ownHealth)
-            {
-                ownHealth = MyRobot.Health.Health;
-                OwnHealth.Text = string.Format("{0:0.00}", ownHealth);
-            }
-        }
-        if (OpponentRobot != null)
-        {
-            if (OpponentRobot.Health.Health != opponentHealth)
-            {
-                opponentHealth = OpponentRobot.Health.Health;
-                OpponentHealth.Text = string.Format("{0:0.00}", opponentHealth);
-            }
-        }
+        //if (MyRobot != null)
+        //{
+        //    if (MyRobot.Health.Health != ownHealth)
+        //    {
+        //        ownHealth = MyRobot.Health.Health;
+        //     //   OwnHealth.Text = string.Format("{0:0.00}", ownHealth);
+        //    }
+        //}
+        //if (OpponentRobot != null)
+        //{
+        //    if (OpponentRobot.Health.Health != opponentHealth)
+        //    {
+        //        opponentHealth = OpponentRobot.Health.Health;
+        //    //    OpponentHealth.Text = string.Format("{0:0.00}", opponentHealth);
+        //    }
+        //}
     }
 }
