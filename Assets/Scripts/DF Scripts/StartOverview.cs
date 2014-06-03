@@ -35,7 +35,7 @@ public class StartOverview : MonoBehaviour {
     void LogoutButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
         ParseUser.LogOut();
-        Application.LoadLevel("Login scene");
+        Application.LoadLevel("DFGUI Login");
     }
 	
 	// Update is called once per frame
