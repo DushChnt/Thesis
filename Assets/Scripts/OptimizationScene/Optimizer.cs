@@ -22,6 +22,37 @@ public class Optimizer : MonoBehaviour {
     private DateTime startTime;
     public GameObject Robot;
     public GameObject Target;
+
+    public uint Generation;
+    public string Iteration
+    {
+        get
+        {
+            return string.Format("{0} / {1}", OptimizerGUI.CurrentIteration, Trials);
+        }
+    }
+    public string Evolution
+    {
+        get
+        {
+            if (FirstFitness > -1)
+            {
+                double diff = LastFitness - FirstFitness;
+
+                if (diff < 0)
+                {                    
+                    return string.Format("- {0:0.00}", -diff);
+                }
+                else
+                {
+                    return string.Format("+ {0:0.00}", diff);
+                }
+            }
+            return " - ";
+        }
+    }
+
+    public double LastFitness, FirstFitness = -1;
     
     string champFileLoadPath = @"Assets\Scripts\Populations\optimizerChamp.gnm.xml";
     string popFileLoadPath;
@@ -176,7 +207,7 @@ public class Optimizer : MonoBehaviour {
         _ea.PausedEvent += new EventHandler(ea_PauseEvent);
 
         startTime = DateTime.Now;
-        Time.timeScale = 15;
+        Time.timeScale = 5;
         Target.GetComponent<TargetController>().Activate();
         _ea.StartContinue();
     }
@@ -190,12 +221,20 @@ public class Optimizer : MonoBehaviour {
         }
     }
 
-    static void ea_UpdateEvent(object sender, EventArgs e)
+    void ea_UpdateEvent(object sender, EventArgs e)
     {       
         Utility.Log(string.Format("gen={0:N0} bestFitness={1:N6}",
             _ea.CurrentGeneration, _ea.Statistics._maxFitness));
         OptimizerGUI.CurrentGeneration = _ea.CurrentGeneration;
         OptimizerGUI.BestFitness = _ea.Statistics._maxFitness;
+
+        Generation = _ea.CurrentGeneration;
+        LastFitness = _ea.Statistics._maxFitness;
+
+        if (Generation == 1)
+        {
+            FirstFitness = LastFitness;
+        }
     }
 
     void ea_PauseEvent(object sender, EventArgs e)
@@ -237,7 +276,12 @@ public class Optimizer : MonoBehaviour {
         Settings.Brain.ChampionGene = pfile;
         Settings.Brain.IsNewBrain = false;
         Settings.Brain.SaveAsync();
+        EAStopped(this, EventArgs.Empty);
     }
+
+    public delegate void EAStoppedEventHandler(object sender, EventArgs e);
+
+    public event EAStoppedEventHandler EAStopped;
 	
 	// Update is called once per frame
 	void Update () {

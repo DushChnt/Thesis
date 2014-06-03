@@ -67,7 +67,7 @@ public class RegisterPanel : MonoBehaviour {
 		}
 	}
 
-    void DialogPanel_Dismissed(object sender, EventArgs e)
+    void DialogPanel_Dismissed(object sender, EventArgs e, ButtonState s)
     {
         registerPanel.Enable();
     }

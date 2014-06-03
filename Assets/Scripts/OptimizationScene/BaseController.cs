@@ -249,7 +249,7 @@ public abstract class BaseController : Photon.MonoBehaviour {
             {
                 RifleAttack();
             }
-            if (mortarForce > 0.1f)
+            if (mortarForce > 0.5f)
             {
                 MortarAttack(mortarForce);
             }

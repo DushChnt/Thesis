@@ -180,7 +180,7 @@ public class BattleController : BaseController {
                 GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
                 Rigidbody body = m.GetComponent<Rigidbody>();
                 IList<GameObject> targets = new List<GameObject>() { target };
-                m.GetComponent<MortarImpact>().SetTargets(targets, this);
+                m.GetComponent<MortarImpact>().SetTargets(targets, this, true);
                 var direction = (turret.forward + turret.up * 1f) * force * MaxMortarForce;
                 body.AddForce(direction);
             }

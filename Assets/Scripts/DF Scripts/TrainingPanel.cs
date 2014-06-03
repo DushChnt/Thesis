@@ -1,0 +1,139 @@
+﻿using UnityEngine;
+using System.Collections;
+using System;
+
+public class TrainingPanel : MonoBehaviour {
+
+    public dfLabel GenerationLabel, IterationLabel, FitnessLabel, EvolutionLabel, TimeLabel, TotalTimeLabel;
+    public dfButton TrainButton, BackButton;
+    public Optimizer Optimizer;
+    public DialogPanel DialogPanel;
+    bool EARunning;
+    long startTime;
+    public long Time;
+    string buttonText = "Train";
+
+	// Use this for initialization
+	void Start () {
+        TrainButton.Click += new MouseEventHandler(TrainButton_Click);
+        TrainButton.TextColor = new Color32(0, 205, 0, 255);
+        TrainButton.FocusTextColor = new Color32(0, 205, 0, 255);
+        TrainButton.HoverTextColor = new Color32(0, 255, 0, 255);
+        TrainButton.PressedTextColor = new Color32(0, 255, 0, 255);
+
+        BackButton.Click += new MouseEventHandler(BackButton_Click);
+     //   DialogPanel.Dismissed += new global::DialogPanel.DismissedEventHandler(BackButton_Dismissed);
+
+        Optimizer.EAStopped += new global::Optimizer.EAStoppedEventHandler(Optimizer_EAStopped);
+	}
+
+    void Optimizer_EAStopped(object sender, EventArgs e)
+    {
+        buttonText = "Train";
+        TrainButton.Text = "Train";
+        TrainButton.TextColor = new Color32(0, 205, 0, 255);
+        TrainButton.FocusTextColor = new Color32(0, 205, 0, 255);
+        TrainButton.HoverTextColor = new Color32(0, 255, 0, 255);
+        TrainButton.PressedTextColor = new Color32(0, 255, 0, 255);
+        EARunning = false;
+    }
+
+    void BackButton_Dismissed(object sender, EventArgs e, ButtonState s)
+    {
+        switch (s)
+        {
+            case ButtonState.OK:
+                Application.LoadLevel("Training Overview");
+                break;
+            case ButtonState.Cancel:
+
+                break;
+        }
+    }
+
+    void BackButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        if (EARunning)
+        {
+            DialogPanel.ShowCancel("Just a second", "Your robots are training! If you go back now you loose all their progress. Press the Stop button to save their progress. Press OK to accept loosing all progress.");
+            DialogPanel.Dismissed += new global::DialogPanel.DismissedEventHandler(BackButton_Dismissed);
+        }
+        else
+        {
+            Application.LoadLevel("Training Overview");
+        }
+    }
+
+    void TrainButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        dfButton but = control as dfButton;
+        if (EARunning)
+        {
+            Optimizer.StopEA();
+            but.Text = "Stopping";
+            but.TextColor = new Color32(245, 171, 0, 255);
+            but.FocusTextColor = new Color32(245, 171, 0, 255);
+            but.HoverTextColor = new Color32(245, 171, 0, 255);
+            but.PressedTextColor = new Color32(245, 171, 0, 255);
+        }
+        else
+        {
+            Optimizer.StartEA();
+            but.Text = "Stop";
+            but.TextColor = new Color32(205, 0, 0, 255);
+            but.FocusTextColor = new Color32(205, 0, 0, 255);
+            but.HoverTextColor = new Color32(255, 0, 0, 255);
+            but.PressedTextColor = new Color32(255, 0, 0, 255);
+            EARunning = true;
+
+            startTime = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond * 1000);
+        }
+    }
+
+    //void OnGUI()
+    //{
+    //    if (GUI.Button(new Rect(59, 126, 124, 42), buttonText)) {
+    //        if (EARunning)
+    //        {
+    //            Optimizer.StopEA();
+    //            TrainButton.Text = "Stopping";
+    //            buttonText = "Stopping";
+    //            TrainButton.TextColor = new Color32(245, 171, 0, 255);
+    //            TrainButton.FocusTextColor = new Color32(245, 171, 0, 255);
+    //            TrainButton.HoverTextColor = new Color32(245, 171, 0, 255);
+    //            TrainButton.PressedTextColor = new Color32(245, 171, 0, 255);
+    //        }
+    //        else
+    //        {
+    //            Optimizer.StartEA();
+    //            buttonText = "Stop";
+    //            TrainButton.Text = "Stop";
+    //            TrainButton.TextColor = new Color32(205, 0, 0, 255);
+    //            TrainButton.FocusTextColor = new Color32(205, 0, 0, 255);
+    //            TrainButton.HoverTextColor = new Color32(255, 0, 0, 255);
+    //            TrainButton.PressedTextColor = new Color32(255, 0, 0, 255);
+    //            EARunning = true;
+
+    //            startTime = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond * 1000);
+    //        }
+    //    }
+    //}
+	
+	// Update is called once per frame
+	void Update () {
+
+        long time = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond * 1000);
+        long diff = time - startTime;
+        if (diff > Time && EARunning)
+        {
+            Time = diff;
+
+            int minutes = Mathf.FloorToInt(Time / 60F);
+            int seconds = Mathf.FloorToInt(Time - minutes * 60);
+
+            string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+
+            TimeLabel.Text = niceTime;
+        }
+	}
+}

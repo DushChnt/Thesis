@@ -4,7 +4,7 @@ using System;
 
 public class DialogPanel : MonoBehaviour {
 
-    public dfButton DismissButton;
+    public dfButton DismissButton, CancelButton;
     public dfLabel TitleLabel, MessageLabel;
     public dfTextbox EmailTextbox;
     dfPanel dialogPanel;
@@ -17,8 +17,23 @@ public class DialogPanel : MonoBehaviour {
 
         DismissButton.Click += new MouseEventHandler(DismissButton_Click);
 
+        if (CancelButton != null)
+        {
+            print("Not null");
+            CancelButton.Click += new MouseEventHandler(CancelButton_Click);
+        }
+
         dialogPanel.KeyDown += new KeyPressHandler(dialogPanel_KeyDown);
 	}
+
+    void CancelButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        print("Cancel");
+        this.dialogPanel.Hide();
+        EventArgs args = new EventArgs();
+        
+        Dismissed(this, EventArgs.Empty, ButtonState.Cancel);
+    }
 
     void dialogPanel_KeyDown(dfControl control, dfKeyEventArgs keyEvent)
     {
@@ -37,13 +52,22 @@ public class DialogPanel : MonoBehaviour {
         }
 
         this.dialogPanel.Hide();
-        Dismissed(this, EventArgs.Empty);
+        Dismissed(this, EventArgs.Empty, ButtonState.OK);
     }
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    public void ShowCancel(string title, string message)
+    {
+        TitleLabel.Text = title;
+        MessageLabel.Text = message;
+        this.dialogPanel.Show();
+        EmailTextbox.Hide();
+        EmailReset = false;
+    }
 
     public void Show(string title, string message) 
     {
@@ -64,7 +88,11 @@ public class DialogPanel : MonoBehaviour {
         EmailTextbox.Focus();
     }
 
-    public delegate void DismissedEventHandler(object sender, EventArgs e);
+    public delegate void DismissedEventHandler(object sender, EventArgs e, ButtonState s);
 
     public event DismissedEventHandler Dismissed;
+}
+
+public enum ButtonState {
+    OK, Cancel
 }

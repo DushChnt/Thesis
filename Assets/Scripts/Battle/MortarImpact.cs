@@ -8,6 +8,7 @@ public class MortarImpact : MonoBehaviour {
 	public float DamageRadius = 10f;
 	BaseController owner;
 	public GameObject Bloom;
+    bool RunBestOnly;
 
 	// Use this for initialization
 	void Start () {
@@ -19,15 +20,18 @@ public class MortarImpact : MonoBehaviour {
 	
 	}
 
-	public void SetTargets(IList<GameObject> targets, BaseController owner)
+	public void SetTargets(IList<GameObject> targets, BaseController owner, bool runBestOnly)
 	{
 		this.targets = targets;
 		this.owner = owner;
+        this.RunBestOnly = runBestOnly;
+
+        
 	}
 
 	void OnCollisionEnter(Collision collision)
 	{
-        print("Mortar impact on " + Time.time);
+       // print("Mortar impact on " + Time.time);
 		if (targets != null)
 		{
 			foreach (GameObject go in targets)
@@ -54,7 +58,10 @@ public class MortarImpact : MonoBehaviour {
 				}
 			}
 		}
-		Instantiate(Bloom, transform.position, Quaternion.identity);
+        if (RunBestOnly)
+        {
+            Instantiate(Bloom, transform.position, Quaternion.identity);
+        }
 	//    print("BOOM!");
 		Destroy(gameObject);
 	}

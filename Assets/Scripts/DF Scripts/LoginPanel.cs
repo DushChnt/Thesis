@@ -76,7 +76,7 @@ public class LoginPanel : MonoBehaviour {
         }
     }
 
-    void DialogPanel_Dismissed(object sender, System.EventArgs e)
+    void DialogPanel_Dismissed(object sender, System.EventArgs e, ButtonState s)
     {
         loginPanel.Enable();
     }
