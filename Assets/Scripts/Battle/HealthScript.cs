@@ -38,6 +38,7 @@ public class HealthScript : Photon.MonoBehaviour {
 
 	public void TakeDamage(float damage)
 	{
+        print("Taking damage " + damage);
 		_health -= damage;
 		photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health);
         if (photonView.isMine)

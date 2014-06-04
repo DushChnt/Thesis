@@ -4,7 +4,7 @@ using System;
 
 public class TrainingPanel : MonoBehaviour {
 
-    public dfLabel GenerationLabel, IterationLabel, FitnessLabel, EvolutionLabel, TimeLabel, TotalTimeLabel;
+    public dfLabel GenerationLabel, IterationLabel, FitnessLabel, EvolutionLabel, TimeLabel, TotalTimeLabel, BrainNameLabel;
     public dfButton TrainButton, BackButton;
     public Optimizer Optimizer;
     public DialogPanel DialogPanel;
@@ -12,19 +12,35 @@ public class TrainingPanel : MonoBehaviour {
     long startTime;
     public long Time;
     string buttonText = "Train";
+    string mode;
 
 	// Use this for initialization
 	void Start () {
-        TrainButton.Click += new MouseEventHandler(TrainButton_Click);
-        TrainButton.TextColor = new Color32(0, 205, 0, 255);
-        TrainButton.FocusTextColor = new Color32(0, 205, 0, 255);
-        TrainButton.HoverTextColor = new Color32(0, 255, 0, 255);
-        TrainButton.PressedTextColor = new Color32(0, 255, 0, 255);
+        mode = PlayerPrefs.GetString("Mode");
+        if (mode.Equals("Train"))
+        {
+            TrainButton.Click += new MouseEventHandler(TrainButton_Click);
+            TrainButton.TextColor = new Color32(0, 205, 0, 255);
+            TrainButton.FocusTextColor = new Color32(0, 205, 0, 255);
+            TrainButton.HoverTextColor = new Color32(0, 255, 0, 255);
+            TrainButton.PressedTextColor = new Color32(0, 255, 0, 255);
+        }
+        else
+        {
+            TrainButton.Text = "Run best";
+            TrainButton.TextColor = new Color32(255, 255, 255, 255);
+            TrainButton.FocusTextColor = new Color32(255, 255, 255, 255);
+            TrainButton.HoverTextColor = new Color32(255, 255, 255, 255);
+            TrainButton.PressedTextColor = new Color32(255, 255, 255, 255);
 
+            TrainButton.Click += new MouseEventHandler(RunBestButton_Click);
+        }
         BackButton.Click += new MouseEventHandler(BackButton_Click);
      //   DialogPanel.Dismissed += new global::DialogPanel.DismissedEventHandler(BackButton_Dismissed);
 
         Optimizer.EAStopped += new global::Optimizer.EAStoppedEventHandler(Optimizer_EAStopped);
+
+        BrainNameLabel.Text = Settings.Brain.Name;
 	}
 
     void Optimizer_EAStopped(object sender, EventArgs e)
@@ -62,6 +78,11 @@ public class TrainingPanel : MonoBehaviour {
         {
             Application.LoadLevel("Training Overview");
         }
+    }
+
+    void RunBestButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        Optimizer.RunBest();
     }
 
     void TrainButton_Click(dfControl control, dfMouseEventArgs mouseEvent)

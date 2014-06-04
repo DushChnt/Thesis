@@ -243,6 +243,8 @@ public class NetworkManager : Photon.MonoBehaviour {
             prop.Unbind();
             prop.Bind();
 
+            prop.enabled = true;
+
             HealthScript oppHealth = other.GetComponent<HealthScript>();
 
             GameObject OppHealthBar = Instantiate(Resources.Load("HealthBar")) as GameObject;
@@ -267,6 +269,8 @@ public class NetworkManager : Photon.MonoBehaviour {
 
             oppProp.Unbind();
             oppProp.Bind();
+
+            oppProp.enabled = true;
 
 
             if (PhotonNetwork.isMasterClient)

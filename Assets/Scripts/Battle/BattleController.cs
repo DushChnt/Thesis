@@ -91,10 +91,10 @@ public class BattleController : BaseController {
             if (distance < MeleeRange && angle > -15 && angle < 15)
             {
                 // Do attack
-
+                print("Attack");
                 attackTimer = 0;
                 Opponent.Health.TakeDamage(MeleeDamage);
-                Debug.DrawLine(transform.position, target.transform.position, Color.blue, 0.1f);
+                Debug.DrawLine(transform.position, target.transform.position, Color.yellow, 0.1f);
             }
         }
     }
@@ -176,7 +176,7 @@ public class BattleController : BaseController {
             RecoveryRate = MortarRecoveryRate;
             if (turret != null)
             {
-
+                print("Shooting mortar"); 
                 GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
                 Rigidbody body = m.GetComponent<Rigidbody>();
                 IList<GameObject> targets = new List<GameObject>() { target };
@@ -189,9 +189,11 @@ public class BattleController : BaseController {
 
     public override void ReceiveMortarInfo(float hitRate, float distFromCenterSquared)
     {
+        print("ReceiveMortarInfo");
         if (hitRate > -1)
         {
             float dmg = hitRate * MortarDamage;
+            print("dmg: " + dmg);
             Opponent.Health.TakeDamage(dmg);
         }
        

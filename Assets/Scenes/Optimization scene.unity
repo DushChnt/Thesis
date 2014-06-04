@@ -656,6 +656,7 @@ MonoBehaviour:
   EvolutionLabel: {fileID: 917274260}
   TimeLabel: {fileID: 1880826980}
   TotalTimeLabel: {fileID: 1798206506}
+  BrainNameLabel: {fileID: 1851727049}
   TrainButton: {fileID: 1115610263}
   BackButton: {fileID: 1035638501}
   Optimizer: {fileID: 1926103985}
@@ -1167,7 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e0e5854c8aa374597bb28d9adf228a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 7
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -1188,7 +1189,7 @@ MonoBehaviour:
   canFocus: 0
   autoFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 7
     margins:
       left: 13.7734375
       top: 159.851562
@@ -2085,7 +2086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 6
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -2106,7 +2107,7 @@ MonoBehaviour:
   canFocus: 0
   autoFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 6
     margins:
       left: 34.0976562
       top: 654.277344
@@ -3301,7 +3302,7 @@ GameObject:
   - 114: {fileID: 1851727049}
   - 65: {fileID: 1851727048}
   m_Layer: 10
-  m_Name: Label
+  m_Name: Brain Name Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3314,7 +3315,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1851727046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0821685791, y: -.134231567, z: 0}
+  m_LocalPosition: {x: .0185241699, y: -.0916976929, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 188776773}
@@ -3329,8 +3330,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .325520843, y: .0677083358, z: .00100000005}
-  m_Center: {x: .162760422, y: -.0338541679, z: 0}
+  m_Size: {x: .453125, y: .0677083358, z: .00100000005}
+  m_Center: {x: .2265625, y: -.0338541679, z: 0}
 --- !u!114 &1851727049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3355,7 +3356,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 125, y: 26}
+  size: {x: 174, y: 26}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -3365,10 +3366,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 5
     margins:
-      left: 31.5546875
-      top: 51.546875
-      right: 33.4453125
-      bottom: 640.453125
+      left: 7.11328125
+      top: 35.2109375
+      right: 8.88671875
+      bottom: 656.789062
     owner: {fileID: 1851727049}
   renderOrder: 4
   isLocalized: 0
@@ -3380,14 +3381,14 @@ MonoBehaviour:
   backgroundColor:
     serializedVersion: 2
     rgba: 4294967295
-  autoSize: 1
-  autoHeight: 0
-  wordWrap: 0
+  autoSize: 0
+  autoHeight: 1
+  wordWrap: 1
   text: Brain name
   bottomColor:
     serializedVersion: 2
     rgba: 4294967295
-  align: 0
+  align: 1
   vertAlign: 0
   textScale: 1
   textScaleMode: 0

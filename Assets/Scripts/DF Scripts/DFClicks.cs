@@ -23,6 +23,16 @@ public class DFClicks : MonoBehaviour
 
     //    OptimizerParameters.WriteXML();
         SaveBrainToServer();
+        PlayerPrefs.SetString("Mode", "Train");
+
+        Application.LoadLevel("Optimization scene");
+    }
+
+    public void RunBestButton()
+    {
+        PhotonNetwork.offlineMode = true;
+        PlayerPrefs.SetString("Mode", "RunBest");
+        GetOptimizerSettings();
 
         Application.LoadLevel("Optimization scene");
     }
