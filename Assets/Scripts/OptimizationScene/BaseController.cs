@@ -5,7 +5,7 @@ using SharpNeat.Phenomes;
 public abstract class BaseController : Photon.MonoBehaviour {
 
     protected bool isRunning;
-    protected GameObject target;
+    public GameObject target;
     protected IBlackBox brain;
     public float SensorRange = 50f;
     public float MeleeRange = 7f;

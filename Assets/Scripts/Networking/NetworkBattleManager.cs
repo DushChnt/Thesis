@@ -72,6 +72,12 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         }
     }
 
+    void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
+    {
+        PhotonNetwork.room.open = false;
+        PhotonNetwork.room.visible = false;
+    }   
+
     //void OnGUI()
     //{
     //    GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
@@ -218,6 +224,8 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
             gui.MyRobot = controller1;
             gui.OpponentRobot = controller1.Opponent;
+            controller1.Opponent.Opponent = controller1;
+            controller1.Opponent.target = controller1.gameObject;
 
             GameObject UIRoot = GameObject.Find("UI Root");
 

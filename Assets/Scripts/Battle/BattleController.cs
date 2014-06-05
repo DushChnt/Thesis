@@ -201,6 +201,9 @@ public class BattleController : BaseController {
 
     void OnDestroy()
     {
-        Destroy(Health.FollowScript.gameObject);
+        if (Health.FollowScript != null && Health.FollowScript.gameObject != null)
+        {
+            Destroy(Health.FollowScript.gameObject);
+        }
     }
 }

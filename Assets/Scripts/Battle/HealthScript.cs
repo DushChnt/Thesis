@@ -60,7 +60,7 @@ public class HealthScript : Photon.MonoBehaviour {
 
             Destroy(FollowScript.gameObject);
             Destroy(FollowScript);
-            PhotonNetwork.Destroy(gameObject);
+       //     PhotonNetwork.Destroy(gameObject);
 		}
 	}
 
