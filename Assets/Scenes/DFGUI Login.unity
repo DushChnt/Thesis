@@ -1589,7 +1589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DismissButton: {fileID: 888634305}
-  CancelButton: {fileID: 0}
+  CancelButton: {fileID: 888634305}
   TitleLabel: {fileID: 1697199908}
   MessageLabel: {fileID: 1991571322}
   EmailTextbox: {fileID: 2032079635}

@@ -145,7 +145,7 @@ MonoBehaviour:
       right: 240
       bottom: 312
     owner: {fileID: 178391183}
-  renderOrder: 1
+  renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -320,7 +320,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 223950505}
-  renderOrder: 23
+  renderOrder: 24
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -504,7 +504,7 @@ MonoBehaviour:
       right: 108.460938
       bottom: 29.2382812
     owner: {fileID: 363689901}
-  renderOrder: 4
+  renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -699,7 +699,7 @@ MonoBehaviour:
       right: 0
       bottom: 701
     owner: {fileID: 380574218}
-  renderOrder: 8
+  renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -793,7 +793,7 @@ MonoBehaviour:
       right: 4.80859375
       bottom: 2.93359375
     owner: {fileID: 388485277}
-  renderOrder: 25
+  renderOrder: 26
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -952,7 +952,7 @@ MonoBehaviour:
       right: 4.83203125
       bottom: 2.93359375
     owner: {fileID: 489586223}
-  renderOrder: 21
+  renderOrder: 22
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1127,7 +1127,7 @@ MonoBehaviour:
       right: 47.0039062
       bottom: 13.0625
     owner: {fileID: 616964700}
-  renderOrder: 9
+  renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1388,7 +1388,7 @@ MonoBehaviour:
       right: 79.25
       bottom: 11.921875
     owner: {fileID: 683242396}
-  renderOrder: 10
+  renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1510,7 +1510,7 @@ MonoBehaviour:
       right: 82.6757812
       bottom: -2.02734375
     owner: {fileID: 694105333}
-  renderOrder: 20
+  renderOrder: 21
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1632,7 +1632,7 @@ MonoBehaviour:
       right: 5.37109375
       bottom: 2.93359375
     owner: {fileID: 727023151}
-  renderOrder: 17
+  renderOrder: 18
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1722,7 +1722,7 @@ MonoBehaviour:
       right: 82.9960938
       bottom: -2.02734375
     owner: {fileID: 771930784}
-  renderOrder: 16
+  renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1848,7 +1848,7 @@ MonoBehaviour:
       right: 156.996094
       bottom: 13.5390625
     owner: {fileID: 779513482}
-  renderOrder: 14
+  renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1959,7 +1959,7 @@ MonoBehaviour:
       right: 294.996094
       bottom: 13.5390625
     owner: {fileID: 840937074}
-  renderOrder: 22
+  renderOrder: 23
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2136,7 +2136,7 @@ MonoBehaviour:
       right: 48.1445312
       bottom: 37.0195312
     owner: {fileID: 911039812}
-  renderOrder: 11
+  renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2298,6 +2298,7 @@ Transform:
   - {fileID: 380574216}
   - {fileID: 1647047083}
   - {fileID: 178391182}
+  - {fileID: 1881198066}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!33 &993009866
@@ -2319,6 +2320,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -2483,7 +2485,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 1075303786}
-  renderOrder: 15
+  renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2605,7 +2607,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 1115327927}
-  renderOrder: 19
+  renderOrder: 20
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2727,7 +2729,7 @@ MonoBehaviour:
       right: 119.25
       bottom: 37.0195312
     owner: {fileID: 1255467721}
-  renderOrder: 12
+  renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2853,7 +2855,7 @@ MonoBehaviour:
       right: 432.996094
       bottom: 13.5390625
     owner: {fileID: 1346432730}
-  renderOrder: 26
+  renderOrder: 27
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2960,7 +2962,7 @@ MonoBehaviour:
       right: 84.1367188
       bottom: -2.02734375
     owner: {fileID: 1545081653}
-  renderOrder: 24
+  renderOrder: 25
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3070,7 +3072,7 @@ MonoBehaviour:
       right: 240
       bottom: 710
     owner: {fileID: 1647047082}
-  renderOrder: 6
+  renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3177,7 +3179,7 @@ MonoBehaviour:
       right: 228.429688
       bottom: 99.59375
     owner: {fileID: 1647836802}
-  renderOrder: 30
+  renderOrder: 31
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3369,7 +3371,7 @@ MonoBehaviour:
       right: 162.789062
       bottom: 17.8203125
     owner: {fileID: 1781987296}
-  renderOrder: 2
+  renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3491,7 +3493,7 @@ MonoBehaviour:
       right: 83.640625
       bottom: -2.03125
     owner: {fileID: 1784582636}
-  renderOrder: 28
+  renderOrder: 29
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3613,7 +3615,7 @@ MonoBehaviour:
       right: 43.0039062
       bottom: 92.6992188
     owner: {fileID: 1838782395}
-  renderOrder: 3
+  renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3757,7 +3759,7 @@ MonoBehaviour:
       right: 10.0039062
       bottom: 6.5
     owner: {fileID: 1845212673}
-  renderOrder: 7
+  renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3777,6 +3779,128 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   actAsSlider: 0
+--- !u!1 &1881198065
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1881198066}
+  - 114: {fileID: 1881198068}
+  - 65: {fileID: 1881198067}
+  m_Layer: 0
+  m_Name: Label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1881198066
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1881198065}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.979400635, y: .557846069, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 993009865}
+  m_RootOrder: 6
+--- !u!65 &1881198067
+BoxCollider:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1881198065}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.95052087, y: .2265625, z: .00100000005}
+  m_Center: {x: .975260437, y: -.11328125, z: 0}
+--- !u!114 &1881198068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1881198065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 5
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 0
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 749, y: 87}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  autoFocus: 0
+  layout:
+    anchorStyle: 5
+    margins:
+      left: 24
+      top: 170
+      right: 27
+      bottom: 511
+    owner: {fileID: 1881198068}
+  renderOrder: 1
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
+  atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
+  font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
+  backgroundSprite: 
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  autoSize: 1
+  autoHeight: 0
+  wordWrap: 0
+  text: TEST VERSION ONLY!
+  bottomColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  align: 0
+  vertAlign: 0
+  textScale: 3.33333325
+  textScaleMode: 0
+  charSpacing: 0
+  colorizeSymbols: 0
+  processMarkup: 0
+  outline: 0
+  outlineWidth: 1
+  enableGradient: 0
+  outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  tabSize: 48
+  tabStops: 
 --- !u!1 &1906512598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3845,7 +3969,7 @@ MonoBehaviour:
       right: 699
       bottom: 723
     owner: {fileID: 1906512600}
-  renderOrder: 5
+  renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4000,7 +4124,7 @@ MonoBehaviour:
       right: 111
       bottom: 1
     owner: {fileID: 2039939383}
-  renderOrder: 13
+  renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4094,7 +4218,7 @@ MonoBehaviour:
       right: 5.34375
       bottom: 2.93359375
     owner: {fileID: 2052176291}
-  renderOrder: 29
+  renderOrder: 30
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4256,7 +4380,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 2095031870}
-  renderOrder: 27
+  renderOrder: 28
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4367,7 +4491,7 @@ MonoBehaviour:
       right: 18.9960938
       bottom: 13.5390625
     owner: {fileID: 2110519613}
-  renderOrder: 18
+  renderOrder: 19
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1

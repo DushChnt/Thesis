@@ -7,7 +7,7 @@ public class StartOverview : MonoBehaviour {
 
     public dfLabel WelcomeLabel;
     public dfButton LogoutButton, FriendsButton;
-    public dfButton BattleButton;
+    public dfButton BattleButton, LobbyButton;
 
     public dfPanel Slot1, Slot2, Slot3, Slot4;
 
@@ -25,7 +25,13 @@ public class StartOverview : MonoBehaviour {
         LogoutButton.Click += LogoutButton_Click;
         BattleButton.Click += BattleButton_Click;
         FriendsButton.Click += new MouseEventHandler(FriendsButton_Click);
+        LobbyButton.Click += new MouseEventHandler(LobbyButton_Click);
 	}
+
+    void LobbyButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        Application.LoadLevel("Lobby scene");
+    }
 
     void FriendsButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {

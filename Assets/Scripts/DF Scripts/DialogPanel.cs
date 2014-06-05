@@ -14,7 +14,10 @@ public class DialogPanel : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         dialogPanel = GetComponent<dfPanel>();
-
+        if (DismissButton == null)
+        {
+            print("Null");
+        }
         DismissButton.Click += new MouseEventHandler(DismissButton_Click);
 
         if (CancelButton != null)
