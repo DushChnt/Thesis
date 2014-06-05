@@ -4,7 +4,12 @@ using Parse;
 
 public class Player : ParseUser {
 
-    
+    [ParseFieldName("isOnline")]
+    public bool IsOnline
+    {
+        get { return GetProperty<bool>("IsOnline"); }
+        set { SetProperty<bool>(value, "IsOnline"); }
+    }
 
     [ParseFieldName("brain1")]
     public Brain Brain1

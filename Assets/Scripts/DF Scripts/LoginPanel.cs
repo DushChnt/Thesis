@@ -11,6 +11,14 @@ public class LoginPanel : MonoBehaviour {
     dfPanel loginPanel;
     public DialogPanel DialogPanel;
 
+    Player Player
+    {
+        get
+        {
+            return ParseUser.CurrentUser as Player;
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
         loginPanel = GetComponent<dfPanel>();
@@ -94,6 +102,21 @@ public class LoginPanel : MonoBehaviour {
 
     void DoLogin()
     {
+        if (ParseUser.CurrentUser == null)
+        {
+            print("ParseUser is null");
+        }
+        Player player = (Player)ParseUser.CurrentUser;
+        if (player == null)
+        {
+            print("player is null");
+        }
+        if (Player == null)
+        {
+            print("Player is null");
+        }
+        Player.IsOnline = true;
+        Player.SaveAsync();
         Application.LoadLevel("Start Menu");
         Destroy(this);
     }

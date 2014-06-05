@@ -2065,8 +2065,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .971354187, y: .348958343, z: .00100000005}
-  m_Center: {x: .485677093, y: -.174479172, z: 0}
+  m_Size: {x: 1.0625, y: .348958343, z: .00100000005}
+  m_Center: {x: .53125, y: -.174479172, z: 0}
 --- !u!114 &1005165688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2091,7 +2091,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 373, y: 134}
+  size: {x: 408, y: 134}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -2101,9 +2101,9 @@ MonoBehaviour:
   layout:
     anchorStyle: 65
     margins:
-      left: 213.996094
+      left: 195.996094
       top: 58.9804688
-      right: 213.003906
+      right: 196.003906
       bottom: 575.019531
     owner: {fileID: 1005165688}
   renderOrder: 2
@@ -2119,7 +2119,7 @@ MonoBehaviour:
   autoSize: 1
   autoHeight: 0
   wordWrap: 0
-  text: volutio
+  text: evo| ve
   bottomColor:
     serializedVersion: 2
     rgba: 4294967295
@@ -2155,7 +2155,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1005165686}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .557291687, y: -.153594971, z: 0}
+  m_LocalPosition: {x: .510416687, y: -.153594971, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 795588238}
@@ -2540,6 +2540,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1338878717}
   - 114: {fileID: 1338878715}
+  - 114: {fileID: 1338878716}
   m_Layer: 0
   m_Name: Parse.com
   m_TagString: Untagged
@@ -2560,6 +2561,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   applicationID: EKqAh63rbFOllLH7q9GHh8BnBp5c3vJ1Q6kM2Kvs
   dotnetKey: MFVgx6pUbI7MJpHZUvvVXIMbNSfLsqueMCotX8D6
+--- !u!114 &1338878716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1338878714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f235b1b132f194bb63b75a9801123e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1338878717
 Transform:
   m_ObjectHideFlags: 0

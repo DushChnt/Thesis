@@ -21,3 +21,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Start Menu.unity
   - enabled: 1
     path: Assets/Scenes/Training Overview.unity
+  - enabled: 1
+    path: Assets/Scenes/Friends scene.unity
