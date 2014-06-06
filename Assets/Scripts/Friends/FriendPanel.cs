@@ -4,6 +4,7 @@ using Parse;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class FriendPanel : MonoBehaviour {
 
@@ -94,8 +95,84 @@ public class FriendPanel : MonoBehaviour {
         }
     }
 
+    IList<Player> GetPinnedPlayers()
+    {
+        Player current = Player.CurrentUser as Player;
+
+        current.Get<string>("email");
+
+        IList<Player> players = null;
+
+        try
+        {
+            players = current.Get<IList<Player>>("pinnedPlayers");
+        }
+        catch (Exception e)
+        {
+
+        }
+        if (players == null)
+        {
+            print("players is null");
+            players = new List<Player>();
+        }     
+        current["pinnedPlayers"] = players;
+        current.SaveAsync();
+
+        return players;
+    }
+
+    void SavePinnedPlayers(IList<Player> players)
+    {
+        Player current = Player.CurrentUser as Player;
+        current["pinnedPlayers"] = players;
+        current.SaveAsync();
+    }
+
     void GenerateList(string filter)
     {
+        //Player current = Player.CurrentUser as Player;
+
+        //current.Get<string>("email");
+
+        //IList<Player> players = null;
+
+        //try
+        //{
+        //    players = current.Get<IList<Player>>("pinnedPlayers");
+        //}
+        //catch (Exception e)
+        //{
+            
+        //}
+        //if (players == null)
+        //{
+        //    print("players is null");
+        //    players = new List<Player>() { users.LastOrDefault() };
+        //}
+        //print("count " + players.Count);
+        //players.Add(users.FirstOrDefault());
+        //current["pinnedPlayers"] = players;
+        //current.SaveAsync();
+
+        //current.PinnedPlayers.FetchAllAsync().ContinueWith(t =>
+        //{
+        //    if (current.PinnedPlayers != null)
+        //    {
+        //        foreach (Player p in current.PinnedPlayers)
+        //        {
+        //            print("Player: " + p.Username);
+        //        }
+        //    }
+
+
+
+        //    current.PinnedPlayers.Add(users.LastOrDefault());
+        //    current.SaveAsync();
+        //    print("Saving pinnedPlayers");
+        //});
+        
+
         var children = new List<GameObject>();
 
         foreach (Transform child in UserPanel.transform)

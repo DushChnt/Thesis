@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Parse;
+using System.Collections.Generic;
 
 public class Player : ParseUser {
 
@@ -9,6 +10,13 @@ public class Player : ParseUser {
     {
         get { return GetProperty<bool>("IsOnline"); }
         set { SetProperty<bool>(value, "IsOnline"); }
+    }
+
+    [ParseFieldName("pinnedPlayers")]
+    public IList<Player> PinnedPlayers
+    {
+        get { return GetProperty<IList<Player>>("PinnedPlayers"); }
+        set { SetProperty<IList<Player>>(value, "PinnedPlayers"); }
     }
 
     [ParseFieldName("brain1")]

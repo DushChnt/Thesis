@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class LobbyScript : Photon.MonoBehaviour {
 
-    public dfButton CreateButton, JoinRandomButton, JoinButton, InviteButton;
+    public dfButton CreateButton, JoinRandomButton, JoinButton, InviteButton, BackButton;
     public dfScrollPanel ActiveRoomsPanel;
     public GameObject ListItem;
     dfPanel currentlySelected;
@@ -17,6 +17,12 @@ public class LobbyScript : Photon.MonoBehaviour {
     {
         Connect();
         RoomInfoPanel.Disable();
+        BackButton.Click += new MouseEventHandler(BackButton_Click);
+    }
+
+    void BackButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        Application.LoadLevel("Start Menu");
     }
 
     void Connect()
