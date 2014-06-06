@@ -11,8 +11,7 @@ public class UserPanel : MonoBehaviour {
     public dfTextbox FilterTextbox;
     public dfScrollPanel PlayerPanel;
     IEnumerable<Player> users = null;
-    IList<Player> friends = null;
-    List<string> friendList = null;
+    IList<Player> pinnedPlayers = null;   
     bool FilterText = true;
 
     public GameObject ListItem;
@@ -27,10 +26,10 @@ public class UserPanel : MonoBehaviour {
         FilterTextbox.TextChanged += new PropertyChangedEventHandler<string>(FilterTextbox_TextChanged);
         FilterTextbox.LeaveFocus += new FocusEventHandler(FilterTextbox_LeaveFocus);
 
-        friends = GetPinnedPlayers();
-        print("Friends: " + friends.Count);
+        pinnedPlayers = GetPinnedPlayers();
+        print("Friends: " + pinnedPlayers.Count);
 
-        foreach (Player p in friends)
+        foreach (Player p in pinnedPlayers)
         {
             print("Name: " + p.ObjectId);
         }
@@ -99,7 +98,7 @@ public class UserPanel : MonoBehaviour {
         PlayerPanel.Enable();
 
         IEnumerable<Player> filtered = users.Where(t => t.Username.ToLower().Contains(filter.ToLower()))
-            .OrderByDescending(t => friends.Any(u => u.ObjectId.Equals(t.ObjectId))).ThenBy(t => t.Username);
+            .OrderByDescending(t => pinnedPlayers.Any(u => u.ObjectId.Equals(t.ObjectId))).ThenBy(t => t.Username);
         foreach (Player player in filtered)
         {
             
@@ -128,7 +127,7 @@ public class UserPanel : MonoBehaviour {
 
             dfButton actionButton = listItem.Find("Action Button").GetComponent<dfButton>();
 
-            bool f = friends.Any(t => t.ObjectId.Equals(player.ObjectId));
+            bool f = pinnedPlayers.Any(t => t.ObjectId.Equals(player.ObjectId));
 
             if (f)
             {
@@ -150,8 +149,8 @@ public class UserPanel : MonoBehaviour {
     void actionButtonPin_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
         ListItemExtras parent = control.transform.parent.gameObject.GetComponent<ListItemExtras>();
-        friends.Add(parent.Player);
-        SavePinnedPlayers(friends);
+        pinnedPlayers.Add(parent.Player);
+        SavePinnedPlayers(pinnedPlayers);
 
         FilterText = false;
         FilterTextbox.Text = "Filter users...";
@@ -163,16 +162,16 @@ public class UserPanel : MonoBehaviour {
     void actionButtonUnpin_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
         ListItemExtras parent = control.transform.parent.gameObject.GetComponent<ListItemExtras>();
-        var p = friends.Where(t => t.ObjectId.Equals(parent.Player.ObjectId)).FirstOrDefault();
+        var p = pinnedPlayers.Where(t => t.ObjectId.Equals(parent.Player.ObjectId)).FirstOrDefault();
         if (p != null)
         {
-            friends.Remove(p);
+            pinnedPlayers.Remove(p);
         }
         else
         {
             print("p is null");
         }
-        SavePinnedPlayers(friends);
+        SavePinnedPlayers(pinnedPlayers);
 
         FilterText = false;
         FilterTextbox.Text = "Filter users...";
