@@ -6,8 +6,8 @@ using System.IO;
 public class StartOverview : MonoBehaviour {
 
     public dfLabel WelcomeLabel;
-    public dfButton LogoutButton, FriendsButton;
-    public dfButton BattleButton, LobbyButton;
+    public dfButton LogoutButton;
+    public dfButton LobbyButton;
 
     public dfPanel Slot1, Slot2, Slot3, Slot4;
 
@@ -22,26 +22,13 @@ public class StartOverview : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         WelcomeLabel.Text = "Welcome, " + ParseUser.CurrentUser.Username;
-        LogoutButton.Click += LogoutButton_Click;
-        BattleButton.Click += BattleButton_Click;
-        FriendsButton.Click += new MouseEventHandler(FriendsButton_Click);
+        LogoutButton.Click += LogoutButton_Click;        
         LobbyButton.Click += new MouseEventHandler(LobbyButton_Click);
 	}
 
     void LobbyButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
         Application.LoadLevel("Lobby scene");
-    }
-
-    void FriendsButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
-    {
-        Application.LoadLevel("Friends scene");
-    }
-
-    void BattleButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
-    {
-        PhotonNetwork.offlineMode = false;
-        Application.LoadLevel("Network Test");
     }
 
     void LogoutButton_Click(dfControl control, dfMouseEventArgs mouseEvent)

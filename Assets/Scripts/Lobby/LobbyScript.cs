@@ -2,6 +2,7 @@
 using System.Collections;
 using Parse;
 using System.Collections.Generic;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class LobbyScript : Photon.MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class LobbyScript : Photon.MonoBehaviour {
     dfPanel currentlySelected;
     public dfPanel RoomInfoPanel;
     public dfLabel UsernameLabel, MapTypeLabel, GameModeLabel, OpenLabel;
+    public dfDropdown ArenaDropdown, GameModeDropdown;
 
     // Use this for i14itialization
     void Start()
@@ -18,6 +20,7 @@ public class LobbyScript : Photon.MonoBehaviour {
         Connect();
         RoomInfoPanel.Disable();
         BackButton.Click += new MouseEventHandler(BackButton_Click);
+        Time.timeScale = 1;
     }
 
     void BackButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
@@ -72,6 +75,12 @@ public class LobbyScript : Photon.MonoBehaviour {
 
                     dfLabel roomName = listItem.Find("Room Name").GetComponent<dfLabel>();
                     roomName.Text = game.name;
+
+                    dfLabel mapName = listItem.Find("Map Type").GetComponent<dfLabel>();
+                    mapName.Text = "Map: " + game.customProperties["map"].ToString();
+
+                    dfLabel modeName = listItem.Find("Game Mode").GetComponent<dfLabel>();
+                    modeName.Text = game.customProperties["mode"].ToString();
 
                     dfLabel numberPlayers = listItem.Find("Number Players").GetComponent<dfLabel>();
                     numberPlayers.Text = string.Format("{0}/{1}", game.playerCount, game.maxPlayers);
@@ -156,7 +165,33 @@ public class LobbyScript : Photon.MonoBehaviour {
 
     void OnJoinedRoom()
     {
-        Application.LoadLevel("Network Battle");
+     //   Application.LoadLevel("Network Battle");
+     //   Application.LoadLevel("Arena1");
+
+        //string arena = "Arena1";
+        //switch (ArenaDropdown.SelectedValue)
+        //{
+        //    case "Arena 1":
+        //        arena = "Arena1";
+        //        break;
+        //    case "Arena 2":
+        //        arena = "Arena2";
+        //        print("Arena2");
+        //        break;
+        //    case "Random":
+        //        if (Random.Range(0, 1) == 0)
+        //        {
+        //            arena = "Arena2";
+        //        }
+        //        break;
+        //    default:
+        //        arena = "Arena1";
+        //        break;
+        //}
+        //
+        string arena = PhotonNetwork.room.customProperties["map"].ToString();
+        print("Value of arena: " + arena);
+        Application.LoadLevel(arena);
     }
 
     void OnReceivedRoomListUpdate()
@@ -174,18 +209,52 @@ public class LobbyScript : Photon.MonoBehaviour {
     void OnCreatedRoom()
     {
         print("Joe?");
-        Application.LoadLevel("Network Battle");
+      //  Application.LoadLevel("Network Battle");
+       
+    //    Application.LoadLevel("Arena2");
     }
 
     void CreateButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        RoomOptions rOpt = new RoomOptions();
-        rOpt.isOpen = true;
-        rOpt.isVisible = true;
-        rOpt.maxPlayers = 2;
-        TypedLobby tl = new TypedLobby();
+        string arena = ArenaDropdown.SelectedValue;
+        if (arena.Equals("Random"))
+        {
+            switch (Random.Range(0, 2))
+            {
+                case 0:
+                    arena = "Arena 1";
+                    break;
+                case 1:
+                    arena = "Arena 2";
+                    break;
+            }
+        }
+        //switch (ArenaDropdown.SelectedValue)
+        //{
+        //    case "Arena 1":
+        //        arena = "Arena1";
+        //        break;
+        //    case "Arena 2":
+        //        arena = "Arena2";
+        //        print("Arena2");
+        //        break;
+        //    case "Random":
+        //        if (Random.Range(0, 1) == 0)
+        //        {
+        //            arena = "Arena2";
+        //        }
+        //        break;
+        //    default:
+        //        arena = "Arena1";
+        //        break;
+        //}
 
-        PhotonNetwork.CreateRoom(Player.CurrentUser.Username, rOpt, tl);
+        string mode = GameModeDropdown.SelectedValue;       
+
+        string[] roomPropsInLobby = { "map", "mode" };
+        Hashtable customRoomProperties = new Hashtable() { { "map", arena }, { "mode", mode } };
+
+        PhotonNetwork.CreateRoom(Player.CurrentUser.Username, true, true, 2, customRoomProperties, roomPropsInLobby);    
     }
 	
 	// Update is called once per frame

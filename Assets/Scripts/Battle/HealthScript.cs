@@ -4,6 +4,7 @@ using System.Collections;
 public class HealthScript : Photon.MonoBehaviour {
 
 	private float _health;
+    public ParticleSystem Explosion;
 
 	public float Health
 	{
@@ -39,6 +40,7 @@ public class HealthScript : Photon.MonoBehaviour {
 	public void TakeDamage(float damage)
 	{
         print("Taking damage " + damage);
+        
 		_health -= damage;
 		photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health);
         if (photonView.isMine)
@@ -57,12 +59,24 @@ public class HealthScript : Photon.MonoBehaviour {
 		{
 		//	Destroy(gameObject);
           //  PhotonNetwork.Destroy(photonView);
-
-            Destroy(FollowScript.gameObject);
-            Destroy(FollowScript);
+         //   Explosion.Play();
+            print("Play explosion");
+            DeathExplosion();
+            if (FollowScript != null)
+            {
+                Destroy(FollowScript.gameObject);
+                Destroy(FollowScript);
+            }
        //     PhotonNetwork.Destroy(gameObject);
 		}
 	}
+
+    void DeathExplosion()
+    {
+        ParticleSystem ps = Instantiate(Explosion, transform.position + new Vector3(0, 2, 0), Quaternion.identity) as ParticleSystem;
+        ps.Play();
+        Destroy(ps, ps.duration + ps.startLifetime);
+    }
 
 	[RPC]
 	void SetHealth(float health)
@@ -72,10 +86,14 @@ public class HealthScript : Photon.MonoBehaviour {
         {
             if (Health <= 0)
             {
+             //   Explosion.Play();
+                DeathExplosion();
+                print("RPC: Play explosion");
                 Destroy(FollowScript.gameObject);
                 Destroy(FollowScript);
                 PhotonNetwork.Destroy(gameObject);
                 print("Death on " + Time.time);
+                
             }
         }
 	}

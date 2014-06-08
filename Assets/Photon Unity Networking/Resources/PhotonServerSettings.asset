@@ -26,4 +26,5 @@ MonoBehaviour:
   - SetHealth
   - StartGame
   - ShowCountdown
+  - SendInfo
   DisableAutoOpenWizard: 0

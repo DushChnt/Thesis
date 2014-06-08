@@ -13,6 +13,7 @@ public class UserPanel : MonoBehaviour {
     IEnumerable<Player> users = null;
     IList<Player> pinnedPlayers = null;   
     bool FilterText = true;
+    public InviteScript InvitePanel;
 
     public GameObject ListItem;
 
@@ -107,6 +108,8 @@ public class UserPanel : MonoBehaviour {
             dfPanel listItem = PlayerPanel.AddPrefab(ListItem) as dfPanel; // as UserListItem;
             listItem.Width = PlayerPanel.Width - PlayerPanel.FlowPadding.left - PlayerPanel.FlowPadding.right;
 
+            listItem.Click += new MouseEventHandler(listItem_Click);
+
             ListItemExtras extras = listItem.GetComponent<ListItemExtras>();
             extras.Player = player;
          
@@ -146,8 +149,17 @@ public class UserPanel : MonoBehaviour {
         }
     }
 
+    void listItem_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        ListItemExtras parent = control.GetComponent<ListItemExtras>();
+        print("Name: " + parent.Player.Username);
+        InvitePanel.InvitePlayer(parent.Player);
+        
+    }
+
     void actionButtonPin_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
+        mouseEvent.Use();
         ListItemExtras parent = control.transform.parent.gameObject.GetComponent<ListItemExtras>();
         pinnedPlayers.Add(parent.Player);
         SavePinnedPlayers(pinnedPlayers);
@@ -161,6 +173,7 @@ public class UserPanel : MonoBehaviour {
 
     void actionButtonUnpin_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
+        mouseEvent.Use();
         ListItemExtras parent = control.transform.parent.gameObject.GetComponent<ListItemExtras>();
         var p = pinnedPlayers.Where(t => t.ObjectId.Equals(parent.Player.ObjectId)).FirstOrDefault();
         if (p != null)

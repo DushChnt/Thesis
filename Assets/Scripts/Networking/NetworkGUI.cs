@@ -7,12 +7,27 @@ public class NetworkGUI : MonoBehaviour {
    
 	public dfPanel Slot1, Slot2, Slot3, Slot4, CountdownPanel;
 	public BattleController MyRobot, OpponentRobot;
-	public dfLabel OwnHealth, OpponentHealth;
+    public dfLabel OwnWinsLabel, OpponentWinsLabel, TimeLabel, OwnNameLabel, OpponentNameLabel;
 
 	BrainPanelState activePanel;
     dfLabel countdownLabel, countdownTitle, countdownFraction;
 
+    string OwnName, OpponentName;
 
+    public bool GameStarted;
+
+    private float timer = 99.99f;
+    public int Timer
+    {
+        get
+        {
+            if (timer < 0)
+            {
+                return 0;
+            }
+            return (int)timer;
+        }
+    }
 
     public float ownHealth
     {
@@ -32,9 +47,9 @@ public class NetworkGUI : MonoBehaviour {
         {
             if (OpponentRobot != null)
             {
-                return OpponentRobot.Health.Health;
+                return 100 - OpponentRobot.Health.Health;
             }
-            return -1;
+            return 101;
         }
     }
 
@@ -66,6 +81,18 @@ public class NetworkGUI : MonoBehaviour {
         countdownFraction.Text = string.Format("{0:.000}", frac);
     }
 
+    public void SetOwnName(string name)
+    {
+        this.OwnName = name;
+        OwnNameLabel.Text = name;
+    }
+
+    public void SetOpponentName(string name)
+    {
+        this.OpponentName = name;
+        OpponentNameLabel.Text = name;
+    }
+
     public void SetCountdownVisibility(bool visible)
     {
         if (visible)
@@ -76,6 +103,7 @@ public class NetworkGUI : MonoBehaviour {
         else
         {
             CountdownPanel.Hide();
+            GameStarted = true;
         }
     }
 
@@ -150,27 +178,10 @@ public class NetworkGUI : MonoBehaviour {
         {
             PerformSlotClick(4, Slot4);
         }
-        else if (Input.GetKeyDown(KeyCode.B))
+
+        if (GameStarted)
         {
-            // Bloom
-
+            timer -= Time.deltaTime;
         }
-
-        //if (MyRobot != null)
-        //{
-        //    if (MyRobot.Health.Health != ownHealth)
-        //    {
-        //        ownHealth = MyRobot.Health.Health;
-        //     //   OwnHealth.Text = string.Format("{0:0.00}", ownHealth);
-        //    }
-        //}
-        //if (OpponentRobot != null)
-        //{
-        //    if (OpponentRobot.Health.Health != opponentHealth)
-        //    {
-        //        opponentHealth = OpponentRobot.Health.Health;
-        //    //    OpponentHealth.Text = string.Format("{0:0.00}", opponentHealth);
-        //    }
-        //}
     }
 }

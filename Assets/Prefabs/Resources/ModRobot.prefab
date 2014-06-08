@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7abc6116ccf4984fabadbb1ccdc0504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
   SensorRange: 50
   MeleeRange: 7
   AttackCoolDown: .699999988
@@ -349,6 +350,7 @@ MonoBehaviour:
   HumanControlled: 0
   Opponent: {fileID: 0}
   Health: {fileID: 0}
+  MortarDamage: 20
   MeleeDamage: 10
 --- !u!114 &11400002
 MonoBehaviour:
@@ -392,6 +394,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab29464a6e794804f9255644d50797cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 19800000, guid: 137f7081769254d41ba394328a63c704, type: 2}
+  FollowScript: {fileID: 0}
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

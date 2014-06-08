@@ -11,6 +11,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     private float _startTimer = 0;
     public Material ownColor;
     NetworkGUI gui;
+    public Transform MasterClientSpawn, OtherClientSpawn;
 
 
     Player Player
@@ -25,7 +26,8 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     void Start()
     {
      //   Connect();
-        gui = GameObject.Find("_GUI").GetComponent<NetworkGUI>();
+        gui = GameObject.Find("Battle GUI").GetComponent<NetworkGUI>();
+        gui.SetOwnName(Player.Username);
     }
 
     void Connect()
@@ -62,6 +64,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
                     print("RPC call start game");
                     photonView.RPC("StartGame", PhotonTargets.All);
                     GameStarted = true;
+                    Camera.main.GetComponent<MousePan>().Activated = true;
                 }
             }
         }
@@ -112,7 +115,15 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     {
         float x = Random.Range(-10, 10);
         float z = Random.Range(-10, 10);
-        GameObject player = PhotonNetwork.Instantiate("ModRobot", new Vector3(x, 1, z), Quaternion.identity, 0);
+        if (PhotonNetwork.isMasterClient)
+        {
+            GameObject player = PhotonNetwork.Instantiate("ModRobot", MasterClientSpawn.position, MasterClientSpawn.rotation, 0);
+            
+        }
+        else
+        {
+            GameObject player = PhotonNetwork.Instantiate("ModRobot", OtherClientSpawn.position, OtherClientSpawn.rotation, 0);
+        }
         // NetworkGUI.MyRobot = player.GetComponent<BattleController>();
 
 
@@ -126,8 +137,16 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     protected void ShowCountdown()
     {
         ShowingCountdown = true;
+        photonView.RPC("SendInfo", PhotonTargets.OthersBuffered, Player.Username);
         gui.SetCountdownVisibility(true);
+        
         SpawnMyPlayer();
+    }
+
+    [RPC]
+    protected void SendInfo(string oppName)
+    {
+        gui.SetOpponentName(oppName);
     }
 
     [RPC]
@@ -141,6 +160,8 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             Stats();
         }
     }
+
+
 
     public void Stats()
     {
@@ -227,7 +248,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             controller1.Opponent.Opponent = controller1;
             controller1.Opponent.target = controller1.gameObject;
 
-            GameObject UIRoot = GameObject.Find("UI Root");
+            GameObject UIRoot = GameObject.Find("Battle GUI");
 
             HealthScript health = mine.GetComponent<HealthScript>();
 
