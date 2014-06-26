@@ -9,6 +9,10 @@ public class BattleController : BaseController {
     public HealthScript Health;
     public float MortarDamage = 20f;
     public float MeleeDamage = 10f;
+    LineRenderer lineRenderer;
+
+    float laserTimer;
+    public float LaserExposure = 0.5f;
 
     IBlackBox brain1, brain2, brain3, brain4, defaultBrain;
 
@@ -17,11 +21,19 @@ public class BattleController : BaseController {
         turret = gameObject.transform.FindChild("Turret");
         this.Health = GetComponent<HealthScript>();
         HitLayers = 1 << LayerMask.NameToLayer("Robot");
+        this.lineRenderer = GetComponent<LineRenderer>();
     }
     
     // Update is called once per frame
     void Update () {
-        
+        if (lineRenderer.enabled)
+        {
+            laserTimer += Time.deltaTime;
+            if (laserTimer > LaserExposure)
+            {
+                lineRenderer.enabled = false;
+            }
+        }
     }
 
     public void SetBrains(IBlackBox _brain1, IBlackBox _brain2, IBlackBox _brain3, IBlackBox _brain4)        
@@ -94,9 +106,19 @@ public class BattleController : BaseController {
                 print("Attack");
                 attackTimer = 0;
                 Opponent.Health.TakeDamage(MeleeDamage);
-                Debug.DrawLine(transform.position, target.transform.position, Color.yellow, 0.1f);
+          //      Debug.DrawLine(transform.position, target.transform.position, Color.yellow, 0.1f);
+                ShootLaser();
+             //   lineRenderer.material.color = Color.yellow;
             }
         }
+    }
+
+    protected void ShootLaser()
+    {
+        laserTimer = 0;
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, target.transform.position);     
     }
 
     protected override void RifleAttack()

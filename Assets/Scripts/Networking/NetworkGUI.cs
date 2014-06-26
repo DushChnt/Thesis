@@ -7,7 +7,7 @@ public class NetworkGUI : MonoBehaviour {
    
 	public dfPanel Slot1, Slot2, Slot3, Slot4, CountdownPanel;
 	public BattleController MyRobot, OpponentRobot;
-    public dfLabel OwnWinsLabel, OpponentWinsLabel, TimeLabel, OwnNameLabel, OpponentNameLabel;
+    public dfLabel OwnWinsLabel, OpponentWinsLabel, TimeLabel, OwnNameLabel, OpponentNameLabel, StatusLabel;
 
 	BrainPanelState activePanel;
     dfLabel countdownLabel, countdownTitle, countdownFraction;
@@ -67,6 +67,8 @@ public class NetworkGUI : MonoBehaviour {
         countdownLabel = CountdownPanel.transform.Find("Countdown Label").GetComponent<dfLabel>();
         countdownTitle = CountdownPanel.transform.Find("Title Part").GetComponent<dfLabel>();
         countdownFraction = CountdownPanel.transform.Find("Fraction Part").GetComponent<dfLabel>();
+
+        StatusLabel.Text = "";
 	}
 
     public void UpdateCountdownPanel(float time)
@@ -99,12 +101,24 @@ public class NetworkGUI : MonoBehaviour {
         {
             CountdownPanel.Show();
             countdownTitle.Text = "Match starts in";
+            countdownFraction.Show();
+            countdownLabel.Show();
         }
         else
         {
             CountdownPanel.Hide();
             GameStarted = true;
         }
+    }
+
+    public void ShowMatchStatus(string status, Color color)
+    {
+        CountdownPanel.Show();
+        StatusLabel.Text = status;
+        StatusLabel.Color = color;
+        countdownTitle.Text = "";
+        countdownFraction.Hide();
+        countdownLabel.Hide();
     }
 
 	void Slot4_Click(dfControl control, dfMouseEventArgs mouseEvent)
@@ -159,6 +173,16 @@ public class NetworkGUI : MonoBehaviour {
 	  //  PhotonNetwork.LeaveLobby();
 		Application.LoadLevel("Start Menu");
 	}
+
+    public void StopGame()
+    {
+        GameStarted = false;
+    }
+
+    public void ResetTimer()
+    {
+        timer = 99.99f;
+    }
 
     void Update()
     {

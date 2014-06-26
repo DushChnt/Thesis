@@ -50,6 +50,23 @@ public class DFClicks : MonoBehaviour
 
     }
 
+    public void SimpleResetClicked()
+    {
+        GameObject focusAreas = GameObject.Find("Simple Focus Areas");
+
+        dfSlider[] sliders = focusAreas.GetComponentsInChildren<dfSlider>();
+        dfCheckbox[] checkboxes = focusAreas.GetComponentsInChildren<dfCheckbox>();
+
+        foreach (dfSlider slide in sliders)
+        {
+            slide.Value = 0;
+        }
+        foreach (dfCheckbox box in checkboxes)
+        {
+            box.IsChecked = false;
+        }
+    }
+
     private void RecurseDelete(Brain brain)
     {
         foreach (Brain b in brain.Children)

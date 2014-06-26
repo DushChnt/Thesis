@@ -9,6 +9,8 @@ public class ExtraParseInitialization : MonoBehaviour
     {
         ParseObject.RegisterSubclass<Brain>();
         ParseUser.RegisterSubclass<Player>();
+        ParseObject.RegisterSubclass<Match>();
+        ParseObject.RegisterSubclass<Frame>();
         ParseAnalytics.TrackAppOpenedAsync();
     }
 }

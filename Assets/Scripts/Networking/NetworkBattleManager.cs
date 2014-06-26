@@ -2,6 +2,7 @@
 using System.Collections;
 using Parse;
 using SharpNeat.Phenomes;
+using System.Collections.Generic;
 
 public class NetworkBattleManager : Photon.MonoBehaviour
 {
@@ -12,7 +13,11 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     public Material ownColor;
     NetworkGUI gui;
     public Transform MasterClientSpawn, OtherClientSpawn;
-
+    bool opponentDied, iDied;
+    float waitForEndTimer, WaitForEndTime = 2f;
+    Match match;
+    Frame currentFrame;
+    IList<ParseObject> frames;
 
     Player Player
     {
@@ -28,6 +33,42 @@ public class NetworkBattleManager : Photon.MonoBehaviour
      //   Connect();
         gui = GameObject.Find("Battle GUI").GetComponent<NetworkGUI>();
         gui.SetOwnName(Player.Username);
+
+        frames = new List<ParseObject>();
+
+        match = new Match();
+        currentFrame = new Frame();
+        frames.Add(currentFrame);
+    
+      //  currentFrame["match"] = match;
+        //print("JOE?");
+    
+        match["frames"] = frames;
+        match.SaveAsync().ContinueWith(t =>
+        {
+            currentFrame["match"] = match;
+            currentFrame.SaveAsync();
+        });
+        //currentFrame.SaveAsync().ContinueWith(t =>
+        //{
+        //    if (t.IsCanceled || t.IsFaulted)
+        //    {
+        //        print("What went wrong? " + t.Exception.InnerException.Message);
+        //    }
+        //    else
+        //    {
+        //        print("It's fine apparently");
+        //    }
+        //});
+    //    currentFrame.SaveAsync();
+    }
+
+    void SaveSequentially()
+    {
+        match.SaveAsync().ContinueWith(t =>
+        {            
+            currentFrame.SaveAsync();
+        });
     }
 
     void Connect()
@@ -73,6 +114,54 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             _startTimer += Time.deltaTime;
             gui.UpdateCountdownPanel(StartTimer - _startTimer);
         }
+
+        if (opponentDied || iDied)
+        {
+            waitForEndTimer += Time.deltaTime;
+            if (waitForEndTimer > WaitForEndTime)
+            {
+                // Match is officially over, calculate winner and loser
+                CalculateWinner();
+            }
+        }
+    }
+
+    void CalculateWinner()
+    {
+        currentFrame.Time = gui.Timer;
+        currentFrame.DamageGiven = 100 - gui.opponentHealth;
+        currentFrame.DamageTaken = 100 - gui.ownHealth;
+        string outcome = "draw";
+        if ((iDied && opponentDied) || (!iDied && !opponentDied)) 
+        {
+            // It's a draw!
+            print("It's a draw");
+            gui.ShowMatchStatus("It's a draw!", Color.white);
+            outcome = "draw";
+        }
+        if (iDied && !opponentDied)
+        {
+            // I lost!
+            print("I lost");
+            gui.ShowMatchStatus("You lose...", Color.red);
+            outcome = "lost";
+        }
+        if (!iDied && opponentDied)
+        {
+            // I won!
+            print("I won");
+            gui.ShowMatchStatus("You win!", Color.green);
+            outcome = "won";
+        }
+        currentFrame.Outcome = outcome;
+
+       
+        match.Won = !iDied;
+       
+        iDied = false;
+        opponentDied = false;
+        gui.StopGame();
+        SaveSequentially();        
     }
 
     void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
@@ -137,16 +226,18 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     protected void ShowCountdown()
     {
         ShowingCountdown = true;
-        photonView.RPC("SendInfo", PhotonTargets.OthersBuffered, Player.Username);
+        photonView.RPC("SendInfo", PhotonTargets.OthersBuffered, Player.Username, Player.ObjectId);
         gui.SetCountdownVisibility(true);
         
         SpawnMyPlayer();
     }
 
     [RPC]
-    protected void SendInfo(string oppName)
+    protected void SendInfo(string oppName, string oppId)
     {
         gui.SetOpponentName(oppName);
+        Player opp = Player.CreateWithoutData<Player>(oppId);
+        match.Opponent = opp;
     }
 
     [RPC]
@@ -251,6 +342,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             GameObject UIRoot = GameObject.Find("Battle GUI");
 
             HealthScript health = mine.GetComponent<HealthScript>();
+            health.Died += new HealthScript.DeathEventHandler(health_Died);
 
             GameObject HealthBar = Instantiate(Resources.Load("HealthBar")) as GameObject;
             dfFollowObject Follow = HealthBar.GetComponent<dfFollowObject>();
@@ -277,6 +369,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             prop.enabled = true;
 
             HealthScript oppHealth = other.GetComponent<HealthScript>();
+            oppHealth.Died += new HealthScript.DeathEventHandler(oppHealth_Died);
 
             GameObject OppHealthBar = Instantiate(Resources.Load("HealthBar")) as GameObject;
             dfFollowObject OppFollow = OppHealthBar.GetComponent<dfFollowObject>();
@@ -313,6 +406,18 @@ public class NetworkBattleManager : Photon.MonoBehaviour
                 other.transform.Find("Body").renderer.material = ownColor;
             }
         }
+    }
+
+    void oppHealth_Died(object sender, System.EventArgs e)
+    {
+        // Wait for two seconds to see if our own robot dies as well (from mortars)
+        opponentDied = true;
+    }
+
+    void health_Died(object sender, System.EventArgs e)
+    {
+        // Wait for two seconds to see if the other robot dies as well (from mortars)
+        iDied = true;
     }
 
     //void OnPhotonPlayerConnected(PhotonPlayer newPlayer)

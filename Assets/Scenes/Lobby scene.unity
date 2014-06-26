@@ -102,7 +102,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1955489625}
-  m_RootOrder: 7
+  m_RootOrder: 0
 --- !u!65 &14212467
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -440,7 +440,7 @@ Transform:
   m_Children:
   - {fileID: 1111239590}
   m_Father: {fileID: 1955489625}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!65 &225016054
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -569,7 +569,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1955489625}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!65 &292069687
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -1057,7 +1057,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1955489625}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!65 &531201132
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -2812,7 +2812,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1955489625}
-  m_RootOrder: 6
+  m_RootOrder: 4
 --- !u!65 &1158619167
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -2935,7 +2935,7 @@ Transform:
   m_Children:
   - {fileID: 1268520868}
   m_Father: {fileID: 1955489625}
-  m_RootOrder: 3
+  m_RootOrder: 5
 --- !u!65 &1159864885
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -4632,7 +4632,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1955489625}
-  m_RootOrder: 4
+  m_RootOrder: 6
 --- !u!65 &1927049144
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -5134,14 +5134,14 @@ Transform:
   m_LocalPosition: {x: .846354187, y: -.520833373, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2080100939}
-  - {fileID: 292069686}
+  - {fileID: 14212466}
   - {fileID: 225016053}
-  - {fileID: 1159864884}
-  - {fileID: 1927049143}
+  - {fileID: 292069686}
   - {fileID: 531201131}
   - {fileID: 1158619166}
-  - {fileID: 14212466}
+  - {fileID: 1159864884}
+  - {fileID: 1927049143}
+  - {fileID: 2080100939}
   m_Father: {fileID: 597344205}
   m_RootOrder: 0
 --- !u!65 &1955489626
@@ -5412,7 +5412,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1955489625}
-  m_RootOrder: 0
+  m_RootOrder: 7
 --- !u!65 &2080100940
 BoxCollider:
   m_ObjectHideFlags: 2

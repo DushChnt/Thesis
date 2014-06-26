@@ -85,6 +85,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400006}
+  - 120: {fileID: 12000000}
   m_Layer: 11
   m_Name: ModRobot
   m_TagString: Untagged
@@ -352,6 +353,7 @@ MonoBehaviour:
   Health: {fileID: 0}
   MortarDamage: 20
   MeleeDamage: 10
+  LaserExposure: .200000003
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -396,6 +398,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Explosion: {fileID: 19800000, guid: 137f7081769254d41ba394328a63c704, type: 2}
   FollowScript: {fileID: 0}
+--- !u!120 &12000000
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 4e76dd0f692583740996e3ff723a47c0, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: .100000001
+    endWidth: .300000012
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4278190335
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4278190335
+  m_UseWorldSpace: 1
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
