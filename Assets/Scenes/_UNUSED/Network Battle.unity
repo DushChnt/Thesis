@@ -404,6 +404,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartTimer: 3
   ownColor: {fileID: 2100000, guid: 78f2330731464954aa1080777ea2bdee, type: 2}
+  MasterClientSpawn: {fileID: 0}
+  OtherClientSpawn: {fileID: 0}
 --- !u!114 &298591353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,8 +1227,13 @@ MonoBehaviour:
   CountdownPanel: {fileID: 178391183}
   MyRobot: {fileID: 0}
   OpponentRobot: {fileID: 0}
-  OwnHealth: {fileID: 911039812}
-  OpponentHealth: {fileID: 616964700}
+  OwnWinsLabel: {fileID: 0}
+  OpponentWinsLabel: {fileID: 0}
+  TimeLabel: {fileID: 0}
+  OwnNameLabel: {fileID: 0}
+  OpponentNameLabel: {fileID: 0}
+  StatusLabel: {fileID: 0}
+  GameStarted: 0
 --- !u!4 &661926770
 Transform:
   m_ObjectHideFlags: 0

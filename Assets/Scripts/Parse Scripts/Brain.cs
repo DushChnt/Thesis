@@ -6,6 +6,9 @@ using Parse;
 [ParseClassName("Brain")]
 public class Brain : ParseObject {
 
+    public const string ADVANCED = "advanced";
+    public const string SIMPLE = "simple";
+
     [ParseFieldName("name")]
     public string Name
     {
@@ -151,6 +154,55 @@ public class Brain : ParseObject {
     {
         get { return GetProperty<string>("TargetBehaviorMovement"); }
         set { SetProperty<string>(value, "TargetBehaviorMovement"); }
+    }
+
+    [ParseFieldName("fitnessMode")]
+    public string FitnessMode
+    {
+        get { return GetProperty<string>("FitnessMode"); }
+        set { SetProperty<string>(value, "FitnessMode"); }
+    }
+
+    [ParseFieldName("sDistance")]
+    public float SDistance
+    {
+        get { return GetProperty<float>("SDistance"); }
+        set { SetProperty<float>(value, "SDistance"); }
+    }
+
+    [ParseFieldName("sMovement")]
+    public bool SMovement
+    {
+        get { return GetProperty<bool>("SMovement"); }
+        set { SetProperty<bool>(value, "SMovement"); }
+    }
+
+    [ParseFieldName("sTurret")]
+    public bool STurret
+    {
+        get { return GetProperty<bool>("STurret"); }
+        set { SetProperty<bool>(value, "STurret"); }
+    }
+
+    [ParseFieldName("sMelee")]
+    public bool SMelee
+    {
+        get { return GetProperty<bool>("SMelee"); }
+        set { SetProperty<bool>(value, "SMelee"); }
+    }
+
+    [ParseFieldName("sRifle")]
+    public bool SRifle
+    {
+        get { return GetProperty<bool>("SRifle"); }
+        set { SetProperty<bool>(value, "SRifle"); }
+    }
+
+    [ParseFieldName("sMortar")]
+    public bool SMortar
+    {
+        get { return GetProperty<bool>("SMortar"); }
+        set { SetProperty<bool>(value, "SMortar"); }
     }
 
     [ParseFieldName("population")]

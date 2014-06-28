@@ -1225,8 +1225,13 @@ MonoBehaviour:
   CountdownPanel: {fileID: 178391183}
   MyRobot: {fileID: 0}
   OpponentRobot: {fileID: 0}
-  OwnHealth: {fileID: 911039812}
-  OpponentHealth: {fileID: 616964700}
+  OwnWinsLabel: {fileID: 0}
+  OpponentWinsLabel: {fileID: 0}
+  TimeLabel: {fileID: 0}
+  OwnNameLabel: {fileID: 0}
+  OpponentNameLabel: {fileID: 0}
+  StatusLabel: {fileID: 0}
+  GameStarted: 0
 --- !u!4 &661926770
 Transform:
   m_ObjectHideFlags: 0

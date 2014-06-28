@@ -40,17 +40,19 @@ public class OptimizationEvaluator : IPhenomeEvaluator<IBlackBox>
            
             FitnessInfo fitness = new FitnessInfo(fit, fit);
             dict.Add(box, fitness);
+           
         }
     }
 
     public void Reset()
     {
         this.fitness = FitnessInfo.Zero;
-
+        dict = new Dictionary<IBlackBox, FitnessInfo>();
     }
 
     public FitnessInfo GetLastFitness()
     {
+        
         return this.fitness;
     }
 
@@ -61,8 +63,10 @@ public class OptimizationEvaluator : IPhenomeEvaluator<IBlackBox>
         {
             FitnessInfo fit = dict[phenome];
             dict.Remove(phenome);
+            
             return fit;
         }
+       
         return FitnessInfo.Zero;
     }
 }

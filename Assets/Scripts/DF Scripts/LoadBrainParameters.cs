@@ -73,6 +73,14 @@ public class LoadBrainParameters : MonoBehaviour {
         GameObject.Find("s_MortarDamagePerHit").GetComponent<dfSlider>().Value = Settings.Brain.MortarDamagePerHit;
         GameObject.Find("s_MortarDamagePerHit").GetComponent<dfSlider>().PerformLayout();
 
+        // Simple fitness values
+        GameObject.Find("SMovement Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.SMovement;
+        GameObject.Find("SDistance Slider").GetComponent<dfSlider>().Value = Settings.Brain.SDistance;
+        GameObject.Find("STurret Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.STurret; 
+        GameObject.Find("SMelee Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.SMelee;
+        GameObject.Find("SRifle Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.SRifle;
+        GameObject.Find("SMortar Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.SMortar;
+
         dfDropdown dropdown = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>();
 
         int index = -1;

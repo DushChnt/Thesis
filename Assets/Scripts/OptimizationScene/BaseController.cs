@@ -44,6 +44,13 @@ public abstract class BaseController : Photon.MonoBehaviour {
     protected float totalAngle;
     protected float totalTurretAngle;
     protected long ticks;
+
+    // For SMovement
+    protected float distanceMoved;
+    protected float closestToTarget = int.MaxValue;
+    protected float longestFromTarget = -1;
+    protected float sumOfDistToTarget;
+
     public bool RunBestOnly = false;
   //  public HealthScript health;
    // protected RobotController opponent;
@@ -264,6 +271,19 @@ public abstract class BaseController : Photon.MonoBehaviour {
                 //  totalDistance += Mathf.Abs(GetDistance() - OptimizerParameters.DistanceToKeep);
                 totalDistance += Mathf.Abs(GetDistance() - Settings.Brain.DistanceToKeep);
                 //    totalAngle += Mathf.Abs(angle);
+
+                float distance_target = GetDistance();
+                if (distance_target < closestToTarget)
+                {
+                    closestToTarget = distance_target;
+                }
+                if (distance_target > longestFromTarget)
+                {
+                    longestFromTarget = distance_target;
+                }
+                distanceMoved += moveDist;
+                sumOfDistToTarget += distance_target;
+
                 ticks++;
             }
         }

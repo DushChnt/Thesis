@@ -154,10 +154,35 @@ public class DFClicks : MonoBehaviour
 
     private void SaveBrainToServer()
     {
+        dfTabstrip tabStrip = GameObject.Find("Tabstrip").GetComponent<dfTabstrip>();
+
+        switch (tabStrip.SelectedIndex)
+        {
+            case 0:
+                Settings.Brain.FitnessMode = Brain.SIMPLE;
+                break;
+            case 1:
+                Settings.Brain.FitnessMode = Brain.ADVANCED;
+                break;
+            default:
+                Settings.Brain.FitnessMode = Brain.ADVANCED;
+                break;
+        }
+
         Settings.Brain.Name = OptimizerParameters.Name;
         Settings.Brain.Description = OptimizerParameters.Description;
         Settings.Brain.NumInputs = OptimizerParameters.NumInputs;
         Settings.Brain.NumOutputs = OptimizerParameters.NumOutputs;
+
+        // Simple parameters
+        Settings.Brain.SMovement = GameObject.Find("SMovement Checkbox").GetComponent<dfCheckbox>().IsChecked;
+        Settings.Brain.SDistance = GameObject.Find("SDistance Slider").GetComponent<dfSlider>().Value;
+        Settings.Brain.STurret = GameObject.Find("STurret Checkbox").GetComponent<dfCheckbox>().IsChecked;
+        Settings.Brain.SMelee = GameObject.Find("SMelee Checkbox").GetComponent<dfCheckbox>().IsChecked;
+        Settings.Brain.SRifle = GameObject.Find("SRifle Checkbox").GetComponent<dfCheckbox>().IsChecked;
+        Settings.Brain.SMortar = GameObject.Find("SMortar Checkbox").GetComponent<dfCheckbox>().IsChecked;
+
+        // Advanced parameters
         Settings.Brain.KeepDistance = OptimizerParameters.WApproach;
         Settings.Brain.DistanceToKeep = OptimizerParameters.DistanceToKeep;
         Settings.Brain.FaceTarget = OptimizerParameters.WAngleTowards;

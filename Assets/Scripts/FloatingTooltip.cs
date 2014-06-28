@@ -3,8 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-[AddComponentMenu( "Daikon Forge/Examples/Tooltip/Floating Tooltip" )]
-public class DemoFloatingTooltip : MonoBehaviour 
+public class FloatingTooltip : MonoBehaviour 
 {
 
 	/// <summary>
@@ -92,7 +91,7 @@ public class DemoFloatingTooltip : MonoBehaviour
 	{
 
 		// The tooltip should appear above the mouse
-		var cursorOffset = new Vector2( 0, _tooltip.Height + 25 );
+		var cursorOffset = new Vector2( 0, _tooltip.Height + 5 );
 
 		// Convert position from "screen coordinates" to "gui coordinates"
 		var manager = _tooltip.GetManager();

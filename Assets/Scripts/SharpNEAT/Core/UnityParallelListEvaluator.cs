@@ -52,13 +52,16 @@ namespace SharpNEAT.Core
         private IEnumerator evaluateList(IList<TGenome> genomeList)
         {
             Dictionary<TGenome, TPhenome> dict = new Dictionary<TGenome, TPhenome>();
-            Dictionary<TPhenome, FitnessInfo[]> fitnessDict = new Dictionary<TPhenome, FitnessInfo[]>();
+            Dictionary<TGenome, FitnessInfo[]> fitnessDict = new Dictionary<TGenome, FitnessInfo[]>();
             for (int i = 0; i < _optimizer.Trials; i++)
             {
                 Utility.Log("Iteration " + (i + 1));
                 OptimizerGUI.CurrentIteration = (i + 1);
+                _phenomeEvaluator.Reset();
+                dict = new Dictionary<TGenome, TPhenome>();
                 foreach (TGenome genome in genomeList)
                 {
+                    
                     TPhenome phenome = _genomeDecoder.Decode(genome);
                     if (null == phenome)
                     {   // Non-viable genome.
@@ -67,11 +70,16 @@ namespace SharpNEAT.Core
                     }
                     else
                     {
-                        if (!dict.ContainsKey(genome))
+                        if (i == 0)
                         {
-                            dict.Add(genome, phenome);
-                            fitnessDict.Add(phenome, new FitnessInfo[_optimizer.Trials]);
+                            fitnessDict.Add(genome, new FitnessInfo[_optimizer.Trials]);
                         }
+                        dict.Add(genome, phenome);
+                        //if (!dict.ContainsKey(genome))
+                        //{
+                        //    dict.Add(genome, phenome);
+                        //    fitnessDict.Add(phenome, new FitnessInfo[_optimizer.Trials]);
+                        //}
                         Coroutiner.StartCoroutine(_phenomeEvaluator.Evaluate(phenome));
 
 
@@ -79,14 +87,16 @@ namespace SharpNEAT.Core
                 }
 
                 yield return new WaitForSeconds(_optimizer.TrialDuration);
+                
                 foreach (TGenome genome in dict.Keys)
                 {
                     TPhenome phenome = dict[genome];
                     if (phenome != null)
                     {
+
                         FitnessInfo fitnessInfo = _phenomeEvaluator.GetLastFitness(phenome);
 
-                        fitnessDict[phenome][i] = fitnessInfo;
+                        fitnessDict[genome][i] = fitnessInfo;
                     }
                 }
             }
@@ -99,7 +109,8 @@ namespace SharpNEAT.Core
 
                     for (int i = 0; i < _optimizer.Trials; i++)
                     {
-                        fitness += fitnessDict[phenome][i]._fitness;
+                     
+                        fitness += fitnessDict[genome][i]._fitness;
                        
                     }
                     var fit = fitness;
@@ -107,11 +118,11 @@ namespace SharpNEAT.Core
                 //    Utility.Log("Total fitness: " + fit + ", averaged fitness: " + fitness);
                     if (fit > _optimizer.StoppingFitness)
                     {
-                        Utility.Log("Fitness is " + fit + ", stopping now because stopping fitness is " + _optimizer.StoppingFitness);
+                      //  Utility.Log("Fitness is " + fit + ", stopping now because stopping fitness is " + _optimizer.StoppingFitness);
                       //  _phenomeEvaluator.StopConditionSatisfied = true;
                     }
                     genome.EvaluationInfo.SetFitness(fitness);
-                    genome.EvaluationInfo.AuxFitnessArr = fitnessDict[phenome][0]._auxFitnessArr;
+                    genome.EvaluationInfo.AuxFitnessArr = fitnessDict[genome][0]._auxFitnessArr;
                 }
             }
         }

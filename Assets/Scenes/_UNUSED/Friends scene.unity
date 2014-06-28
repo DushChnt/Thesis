@@ -1181,6 +1181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FilterTextbox: {fileID: 1126777377}
   PlayerPanel: {fileID: 729206543}
+  InvitePanel: {fileID: 0}
   ListItem: {fileID: 100008, guid: 2a44015a22641d847b5164a968420496, type: 2}
 --- !u!65 &1388909471
 BoxCollider:

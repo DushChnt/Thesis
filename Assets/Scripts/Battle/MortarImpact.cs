@@ -31,7 +31,7 @@ public class MortarImpact : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-        print("Mortar impact on " + Time.time);
+      //  print("Mortar impact on " + Time.time);
 		if (targets != null)
 		{
 			foreach (GameObject go in targets)
@@ -51,7 +51,7 @@ public class MortarImpact : MonoBehaviour {
 					if (distFromCenterSquared < dmgRadiusSquared)
 					{
 						dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
-						    print("Hit target, percentage: " + dmg * 100 + "%");
+				//		    print("Hit target, percentage: " + dmg * 100 + "%");
 
 					}
 					owner.ReceiveMortarInfo(dmg, distFromCenterSquared);
@@ -62,7 +62,7 @@ public class MortarImpact : MonoBehaviour {
         {
             Instantiate(Bloom, transform.position, Quaternion.identity);
         }
-	    print("BOOM!");
+	  //  print("BOOM!");
 		Destroy(gameObject);
 	}
 }

@@ -138,7 +138,7 @@ public class RobotController : BaseController
 
     }
 
-    public float GetFitness()
+    private float GetAdvancedFitness()
     {
         //if (Vector3.Distance(transform.position, startPos) < 1)
         //{
@@ -175,7 +175,7 @@ public class RobotController : BaseController
         tAngle *= Settings.Brain.TurretFaceTarget;
         fit += tAngle;
 
-      //  print("tAngle: " + tAngle);
+        //  print("tAngle: " + tAngle);
 
         // Mortar attacks fitness
         float mAttacks = MortarAttacks * Settings.Brain.MortarAttacks;
@@ -194,6 +194,68 @@ public class RobotController : BaseController
         fit += mDamagePerHit;
 
         return fit;
+    }
+
+    private float GetSimpleFitness()
+    {
+        float fit = 1000;
+
+        if (Settings.Brain.SMovement)
+        {
+    //        protected float distanceMoved;
+    //protected float closestToTarget = int.MaxValue;
+    //protected float longestFromTarget = -1;
+    //protected float sumOfDistToTarget;
+
+            fit += distanceMoved;
+            if (distanceMoved < 2)
+            {
+                fit -= 500;
+            }
+            // SDistance goes from 0 to 4, 5 values.
+            float approach = 1 / closestToTarget * 100;
+            float dist = Settings.Brain.SDistance - 2;
+            fit += approach * -dist;
+
+            float flee = longestFromTarget;
+         //   fit += flee * dist;
+        }
+
+        if (Settings.Brain.STurret)
+        {
+
+        }
+
+        if (Settings.Brain.SMelee) 
+        { 
+        
+        }
+
+        if (Settings.Brain.SRifle)
+        {
+
+        }
+
+        if (Settings.Brain.SMortar)
+        {
+
+        }
+
+       // print("Fitness: " + fit);
+        return fit;
+    }
+
+    public float GetFitness()
+    {
+        switch (Settings.Brain.FitnessMode)
+        {
+            case Brain.SIMPLE:
+                return GetSimpleFitness();
+            case Brain.ADVANCED:
+                return GetAdvancedFitness();
+            default:
+                return GetAdvancedFitness();
+        }
     }
 
     public float GetFitness2()
