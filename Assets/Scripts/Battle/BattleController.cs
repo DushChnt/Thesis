@@ -10,6 +10,7 @@ public class BattleController : BaseController {
     public float MortarDamage = 20f;
     public float MeleeDamage = 10f;
     LineRenderer lineRenderer;
+    bool TotemTargetActive;
 
     float laserTimer;
     public float LaserExposure = 0.5f;
@@ -100,12 +101,19 @@ public class BattleController : BaseController {
     {
         if (attackTimer > AttackCoolDown)
         {
+            attackTimer = 0;
+            Speed -= MeleeSpeedPenalty;
+            RecoveryRate = MeleeRecoveryRate;
             if (distance < MeleeRange && angle > -15 && angle < 15)
             {
                 // Do attack
-                print("Attack");
-                attackTimer = 0;
-                Opponent.Health.TakeDamage(MeleeDamage);
+                print("Joe Attack");
+
+                if (!TotemTargetActive)
+                {
+                    print("Do damage!");
+                    Opponent.Health.TakeDamage(MeleeDamage);
+                }
           //      Debug.DrawLine(transform.position, target.transform.position, Color.yellow, 0.1f);
                 ShootLaser();
              //   lineRenderer.material.color = Color.yellow;
@@ -126,6 +134,8 @@ public class BattleController : BaseController {
         if (rifleTimer > RifleCoolDown)
         {
             rifleTimer = 0;
+            Speed -= RifleSpeedPenalty;
+            RecoveryRate = RifleRecoveryRate;
             RaycastHit hit;
             //  Utility.Log("Raycasting");
             Vector3 point = transform.position + transform.forward * SensorRange;
@@ -139,26 +149,27 @@ public class BattleController : BaseController {
                 hitIt = true;
                 //   }
             }
-
+            
             if (hitIt)
             {
-                Debug.DrawLine(transform.position, point, Color.green, 0.1f);
-                if (Opponent == null)
-                {
-                   print("Opponent is null");    
-                }
-                else
-                {
-                    if (Opponent.Health == null)
-                    {
-                        print("Opponent.Health is null");
-                    }
-                }
+                ShootLaser();
+                //Debug.DrawLine(transform.position, point, Color.green, 0.1f);
+                //if (Opponent == null)
+                //{
+                //   print("Opponent is null");    
+                //}
+                //else
+                //{
+                //    if (Opponent.Health == null)
+                //    {
+                //        print("Opponent.Health is null");
+                //    }
+                //}
                 Opponent.Health.TakeDamage(2f);
             }
             else
             {
-                Debug.DrawLine(transform.position, point, Color.red, 0.1f);
+                //Debug.DrawLine(transform.position, point, Color.red, 0.1f);
             }
 
             //if (turret != null)
@@ -179,6 +190,21 @@ public class BattleController : BaseController {
         this.target = target;
         this.Opponent = target.GetComponent<BattleController>();
         this.Health = GetComponent<HealthScript>();
+    }
+
+    public void SetTotemTarget(GameObject totem)
+    {
+        this.target = totem;
+        TotemTargetActive = true;
+    }
+
+    public void StopTotemTarget()
+    {
+        TotemTargetActive = false;
+        if (this.Opponent != null && this.Opponent.gameObject != null)
+        {
+            this.target = this.Opponent.gameObject;
+        }
     }
 
     public override void Stop()

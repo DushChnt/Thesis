@@ -41,6 +41,13 @@ public class TrainingPanel : MonoBehaviour {
         Optimizer.EAStopped += new global::Optimizer.EAStoppedEventHandler(Optimizer_EAStopped);
 
         BrainNameLabel.Text = Settings.Brain.Name;
+
+        float t_time = Settings.Brain.TotalTime;
+        int t_minutes = Mathf.FloorToInt(t_time / 60F);
+        int t_seconds = Mathf.FloorToInt(t_time - t_minutes * 60);
+
+        string t_niceTime = string.Format("{0:0}:{1:00}", t_minutes, t_seconds);
+        TotalTimeLabel.Text = t_niceTime;
 	}
 
     void Optimizer_EAStopped(object sender, EventArgs e)
@@ -52,6 +59,7 @@ public class TrainingPanel : MonoBehaviour {
         TrainButton.HoverTextColor = new Color32(0, 255, 0, 255);
         TrainButton.PressedTextColor = new Color32(0, 255, 0, 255);
         EARunning = false;
+        Settings.Brain.TotalTime += Time;
     }
 
     void BackButton_Dismissed(object sender, EventArgs e, ButtonState s)
@@ -155,6 +163,13 @@ public class TrainingPanel : MonoBehaviour {
             string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
 
             TimeLabel.Text = niceTime;
+
+            float t_time = Settings.Brain.TotalTime + Time;
+            int t_minutes = Mathf.FloorToInt(t_time / 60F);
+            int t_seconds = Mathf.FloorToInt(t_time - t_minutes * 60);
+
+            string t_niceTime = string.Format("{0:0}:{1:00}", t_minutes, t_seconds);
+            TotalTimeLabel.Text = t_niceTime;
         }
 	}
 }

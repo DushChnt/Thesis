@@ -164,6 +164,9 @@ public class DFClicks : MonoBehaviour
             case 1:
                 Settings.Brain.FitnessMode = Brain.ADVANCED;
                 break;
+            case 2:
+                Settings.Brain.FitnessMode = Brain.BATTLE;
+                break;
             default:
                 Settings.Brain.FitnessMode = Brain.ADVANCED;
                 break;
@@ -176,8 +179,7 @@ public class DFClicks : MonoBehaviour
 
         // Simple parameters
         Settings.Brain.SMovement = GameObject.Find("SMovement Checkbox").GetComponent<dfCheckbox>().IsChecked;
-        Settings.Brain.SDistance = GameObject.Find("SDistance Slider").GetComponent<dfSlider>().Value;
-        Settings.Brain.STurret = GameObject.Find("STurret Checkbox").GetComponent<dfCheckbox>().IsChecked;
+        Settings.Brain.SDistance = GameObject.Find("SDistance Slider").GetComponent<dfSlider>().Value;        
         Settings.Brain.SMelee = GameObject.Find("SMelee Checkbox").GetComponent<dfCheckbox>().IsChecked;
         Settings.Brain.SRifle = GameObject.Find("SRifle Checkbox").GetComponent<dfCheckbox>().IsChecked;
         Settings.Brain.SMortar = GameObject.Find("SMortar Checkbox").GetComponent<dfCheckbox>().IsChecked;

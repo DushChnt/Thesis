@@ -23,7 +23,23 @@ public class Optimizer : MonoBehaviour {
     public GameObject Robot;
     public GameObject Target;
 
-    public uint Generation;
+    bool EARunning;
+
+    private uint _generation;
+    public uint Generation
+    {
+        get
+        {
+            if (EARunning)
+            {
+                return (uint)(Settings.Brain.Generation + _generation);
+            }
+            else
+            {
+                return (uint)Settings.Brain.Generation;
+            }
+        }
+    }
     public string Iteration
     {
         get
@@ -95,6 +111,8 @@ public class Optimizer : MonoBehaviour {
         champFileSavePath = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", Parse.ParseUser.CurrentUser.Username, Settings.Brain.ObjectId);
         popFileSavePath = Application.persistentDataPath + string.Format("/{0}/{1}.pop.xml", Parse.ParseUser.CurrentUser.Username, Settings.Brain.ObjectId);
         OptimizerGUI.MaxIterations = Trials;
+
+        LastFitness = Settings.Brain.BestFitness;        
     }
 
     public void Evaluate(IBlackBox box)
@@ -205,11 +223,12 @@ public class Optimizer : MonoBehaviour {
 
         _ea.UpdateEvent += new EventHandler(ea_UpdateEvent);
         _ea.PausedEvent += new EventHandler(ea_PauseEvent);
-
+        
         startTime = DateTime.Now;
-        Time.timeScale = 5;
+        Time.timeScale = 10;
         Target.GetComponent<TargetController>().Activate();
         _ea.StartContinue();
+        EARunning = true;
     }
 
     public void StopEA()
@@ -228,10 +247,12 @@ public class Optimizer : MonoBehaviour {
         OptimizerGUI.CurrentGeneration = _ea.CurrentGeneration;
         OptimizerGUI.BestFitness = _ea.Statistics._maxFitness;
 
-        Generation = _ea.CurrentGeneration;
+        _generation = _ea.CurrentGeneration;
         LastFitness = _ea.Statistics._maxFitness;
 
-        if (Generation == 1)
+        Utility.Log(string.Format("Moving average: {0}, N: {1}", _ea.Statistics._bestFitnessMA.Mean, _ea.Statistics._bestFitnessMA.Length));
+
+        if (_generation == 1)
         {
             FirstFitness = LastFitness;
         }
@@ -239,6 +260,7 @@ public class Optimizer : MonoBehaviour {
 
     void ea_PauseEvent(object sender, EventArgs e)
     {
+        
         Utility.Log("Done ea'ing (and neat'ing)");
 
         XmlWriterSettings _xwSettings = new XmlWriterSettings();
@@ -273,10 +295,15 @@ public class Optimizer : MonoBehaviour {
         ParseFile pfile = new ParseFile(string.Format("{0}.champ.xml", Settings.Brain.ObjectId), stream.BaseStream);
         Task task = pfile.SaveAsync();
 
+        Settings.Brain.Generation = (int)Generation;
+        Settings.Brain.BestFitness = (float)LastFitness;
+
         Settings.Brain.ChampionGene = pfile;
         Settings.Brain.IsNewBrain = false;
         Settings.Brain.SaveAsync();
         EAStopped(this, EventArgs.Empty);
+        EARunning = false;
+       
     }
 
     public delegate void EAStoppedEventHandler(object sender, EventArgs e);

@@ -8,6 +8,7 @@ public class LoadBrainParameters : MonoBehaviour {
     public dfTextbox NameTextbox;
     public dfTextbox DescriptionTextBox;
     public dfButton TrainButton;
+    public dfTabstrip TabStrip;
 
     IEnumerator WaitForRequest(Brain brain, bool pop)
     {
@@ -75,15 +76,14 @@ public class LoadBrainParameters : MonoBehaviour {
 
         // Simple fitness values
         GameObject.Find("SMovement Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.SMovement;
-        GameObject.Find("SDistance Slider").GetComponent<dfSlider>().Value = Settings.Brain.SDistance;
-        GameObject.Find("STurret Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.STurret; 
+        GameObject.Find("SDistance Slider").GetComponent<dfSlider>().Value = Settings.Brain.SDistance;        
         GameObject.Find("SMelee Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.SMelee;
         GameObject.Find("SRifle Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.SRifle;
         GameObject.Find("SMortar Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.SMortar;
 
         dfDropdown dropdown = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>();
 
-        int index = -1;
+        int index = 0;
         dropdown.SelectedIndex = index;
         for (index = 0; index < dropdown.Items.Length; index++) {
             if (dropdown.Items[index].Equals(Settings.Brain.TargetBehaviorMovement)) {
@@ -92,7 +92,18 @@ public class LoadBrainParameters : MonoBehaviour {
             }
         }
 
-
+        switch (Settings.Brain.FitnessMode)
+        {
+            case Brain.SIMPLE:
+                TabStrip.SelectedIndex = 0;
+                break;
+            case Brain.ADVANCED:
+                TabStrip.SelectedIndex = 1;
+                break;
+            case Brain.BATTLE:
+                TabStrip.SelectedIndex = 2;
+                break;
+        }
         
     }
 	

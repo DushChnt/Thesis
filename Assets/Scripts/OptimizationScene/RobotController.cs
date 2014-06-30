@@ -8,6 +8,7 @@ public class RobotController : BaseController
     private int RifleAttacks;
     private int RifleHits;
     private int Hits;
+    private int MeleeAttacks;
     private int MortarAttacks;
     private int MortarHits;
     private float AccMortarDamage;
@@ -114,10 +115,11 @@ public class RobotController : BaseController
             attackTimer = 0;
             Speed -= MeleeSpeedPenalty;
             RecoveryRate = MeleeRecoveryRate;
+            MeleeAttacks++;
             if (distance < MeleeRange && angle > -15 && angle < 15)
             {
                 // Do attack
-
+                
                
                 Hits++;
                 if (RunBestOnly)
@@ -202,47 +204,118 @@ public class RobotController : BaseController
 
         if (Settings.Brain.SMovement)
         {
-    //        protected float distanceMoved;
-    //protected float closestToTarget = int.MaxValue;
-    //protected float longestFromTarget = -1;
-    //protected float sumOfDistToTarget;
+    //        protected float distanceMoved; maximum is ticks
+    //protected float closestToTarget = int.MaxValue; maximum is diagonal of arena = 141
+            //protected float longestFromTarget = -1; maximum is diagonal of arena = 141
+    //protected float sumOfDistToTarget; maximum is diagonal * ticks = 141 * ticks
 
-            fit += distanceMoved;
+            //fit += distanceMoved;
+            //if (distanceMoved < 2)
+            //{
+            //    fit -= 500;
+            //}
+            //// SDistance goes from 0 to 4, 5 values.
+            //float approach = 1 / closestToTarget * 100;
+            //float dist = Settings.Brain.SDistance - 2;
+            //fit += approach * -dist;
+
+            //float flee = longestFromTarget;
+            //fit += flee * dist;
+
+            //float sumOfApproach = 1.0f / (sumOfDistToTarget / ticks) * -dist * 100;
+
+            //fit += sumOfApproach;
+            const float diagonal = 141;
+            float moved = distanceMoved / ticks; // [0, 1]
+            float closest = closestToTarget / diagonal;
+            float longest = longestFromTarget / diagonal;
+            float sum = sumOfDistToTarget / (diagonal * ticks);
+            float dist = Settings.Brain.SDistance - 2;
+            float towards = totalAngle / ticks;
+
+            fit += towards * 100 * -dist;
+            fit += moved * 10;
+            fit += (1 - closest) * -dist * 200;
+            fit += longest * dist * 200;
+            fit += (1 - sum) * -dist * 100;
+
             if (distanceMoved < 2)
             {
-                fit -= 500;
+                fit = 1;
             }
-            // SDistance goes from 0 to 4, 5 values.
-            float approach = 1 / closestToTarget * 100;
-            float dist = Settings.Brain.SDistance - 2;
-            fit += approach * -dist;
-
-            float flee = longestFromTarget;
-         //   fit += flee * dist;
         }
 
         if (Settings.Brain.STurret)
         {
-
+            float turretFit = totalTurretAngle / ticks;
+            fit += turretFit * 100;
         }
 
         if (Settings.Brain.SMelee) 
-        { 
-        
+        {
+            float towards = totalAngle / ticks;
+
+            fit += towards * 10;
+
+            float attacks = MeleeAttacks;
+            fit += attacks * 10;
+
+            float hits = Hits;
+            fit += hits * 100;
+
+            float precision = MeleeAttacks > 0 ? Hits / MeleeAttacks : 0;
+            fit += precision * 100;
         }
 
         if (Settings.Brain.SRifle)
         {
+            float towards = totalAngle / ticks;
 
+            fit += towards * 10;
+
+            float rifleAttacks = RifleAttacks;
+            fit += rifleAttacks * 10;
+
+            // Rifle fitness
+            float rifle = RifleHits;
+            fit += rifle * 100;
+
+           
+
+            // Markmanship = precision
+            float precision = RifleAttacks > 0 ? ((float)RifleHits / (float)RifleAttacks) : 0;
+            fit += precision * 100;
         }
 
         if (Settings.Brain.SMortar)
         {
+            float turretFit = totalTurretAngle / ticks;
+            fit += turretFit * 10;
 
+            // Mortar attacks fitness
+            float mAttacks = MortarAttacks;
+            fit += mAttacks * 10;
+
+            float mHits = MortarHits;
+            fit += mHits * 100;
+
+            float mPrecision = MortarAttacks > 0 ? ((float)MortarHits / (float)MortarAttacks) : 0;
+            fit += mPrecision * 1000;
+
+            //float mDamage = MortarHits > 0 ? (1 - (AccMortarDamage / (float)MortarAttacks)) * Settings.Brain.mor.WMortarDamage : 0;
+            //fit += mDamage;
+
+            float mDamagePerHit = MortarAttacks > 0 ? ((MortarHitDamage / (float)MortarAttacks)) : 0;
+            fit += mDamagePerHit * 100;
         }
 
        // print("Fitness: " + fit);
         return fit;
+    }
+
+    public float GetBattleFitness()
+    {
+        return 0;
     }
 
     public float GetFitness()
@@ -253,6 +326,8 @@ public class RobotController : BaseController
                 return GetSimpleFitness();
             case Brain.ADVANCED:
                 return GetAdvancedFitness();
+            case Brain.BATTLE:
+                return GetBattleFitness();                
             default:
                 return GetAdvancedFitness();
         }

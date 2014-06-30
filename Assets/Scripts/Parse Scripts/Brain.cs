@@ -8,6 +8,7 @@ public class Brain : ParseObject {
 
     public const string ADVANCED = "advanced";
     public const string SIMPLE = "simple";
+    public const string BATTLE = "battle";
 
     [ParseFieldName("name")]
     public string Name
@@ -203,6 +204,27 @@ public class Brain : ParseObject {
     {
         get { return GetProperty<bool>("SMortar"); }
         set { SetProperty<bool>(value, "SMortar"); }
+    }
+
+    [ParseFieldName("bestFitness")]
+    public float BestFitness
+    {
+        get { return GetProperty<float>("BestFitness"); }
+        set { SetProperty<float>(value, "BestFitness"); }
+    }
+
+    [ParseFieldName("totalTime")]
+    public float TotalTime
+    {
+        get { return GetProperty<float>("TotalTime"); }
+        set { SetProperty<float>(value, "TotalTime"); }
+    }
+
+    [ParseFieldName("generation")]
+    public int Generation
+    {
+        get { return GetProperty<int>("Generation"); }
+        set { SetProperty<int>(value, "Generation"); }
     }
 
     [ParseFieldName("population")]

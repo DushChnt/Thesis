@@ -158,7 +158,8 @@ namespace SharpNeat.EvolutionAlgorithms
         /// </summary>
         public NeatAlgorithmStats(NeatEvolutionAlgorithmParameters eaParams)
         {
-            _bestFitnessMA = new DoubleCircularBufferWithStats(eaParams.BestFitnessMovingAverageHistoryLength);
+          //  _bestFitnessMA = new DoubleCircularBufferWithStats(eaParams.BestFitnessMovingAverageHistoryLength);
+            _bestFitnessMA = new DoubleCircularBufferWithStats(5);
             _meanSpecieChampFitnessMA = new DoubleCircularBufferWithStats(eaParams.MeanSpecieChampFitnessMovingAverageHistoryLength);
             _complexityMA = new DoubleCircularBufferWithStats(eaParams.ComplexityMovingAverageHistoryLength);
         }

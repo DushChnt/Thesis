@@ -65,10 +65,10 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
     void SaveSequentially()
     {
-        match.SaveAsync().ContinueWith(t =>
-        {            
-            currentFrame.SaveAsync();
-        });
+        //match.SaveAsync().ContinueWith(t =>
+        //{            
+        //    currentFrame.SaveAsync();
+        //});
     }
 
     void Connect()
@@ -339,7 +339,11 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             controller1.Opponent.Opponent = controller1;
             controller1.Opponent.target = controller1.gameObject;
 
+            
+
             GameObject UIRoot = GameObject.Find("Battle GUI");
+
+            UIRoot.GetComponent<MouseTotem>().SetController(controller1);
 
             HealthScript health = mine.GetComponent<HealthScript>();
             health.Died += new HealthScript.DeathEventHandler(health_Died);

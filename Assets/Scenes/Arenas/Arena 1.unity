@@ -778,7 +778,7 @@ Transform:
   m_Children:
   - {fileID: 134584798}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
 --- !u!1 &363689898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,33 +1507,6 @@ MonoBehaviour:
   ZoomSpeed: 20
   ZoomMin: 10
   ZoomMax: 50
---- !u!1 &661926768
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 661926770}
-  m_Layer: 0
-  m_Name: _GUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &661926770
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 661926768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 100, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
 --- !u!1 &677508187
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,6 +2607,7 @@ GameObject:
   - 23: {fileID: 993009867}
   - 33: {fileID: 993009866}
   - 114: {fileID: 993009871}
+  - 114: {fileID: 993009872}
   m_Layer: 0
   m_Name: Battle GUI
   m_TagString: Untagged
@@ -2800,6 +2774,18 @@ MonoBehaviour:
   OpponentNameLabel: {fileID: 813254952}
   StatusLabel: {fileID: 1714625954}
   GameStarted: 0
+--- !u!114 &993009872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 993009864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd9f9631ff0ae04ab3c77d83ff0ad08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Totem: {fileID: 100000, guid: 4debb5d0763e87c48bbb091702c313e3, type: 2}
 --- !u!1 &1020183170
 GameObject:
   m_ObjectHideFlags: 0
@@ -3199,7 +3185,7 @@ Transform:
   m_Children:
   - {fileID: 801580800}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
 --- !u!1 &1346432727
 GameObject:
   m_ObjectHideFlags: 0
@@ -3674,7 +3660,7 @@ GameObject:
   - 23: {fileID: 1684119744}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
