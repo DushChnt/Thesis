@@ -27,4 +27,6 @@ MonoBehaviour:
   - StartGame
   - ShowCountdown
   - SendInfo
+  - ChooseSpawn
+  - ReceiveSpawnPosition
   DisableAutoOpenWizard: 0

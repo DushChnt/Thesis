@@ -12,12 +12,16 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     private float _startTimer = 0;
     public Material ownColor;
     NetworkGUI gui;
-    public Transform MasterClientSpawn, OtherClientSpawn;
+    public Transform Spawn1, Spawn2, Spawn3, Spawn4;
     bool opponentDied, iDied;
     float waitForEndTimer, WaitForEndTime = 2f;
     Match match;
     Frame currentFrame;
     IList<ParseObject> frames;
+
+    List<int> occupiedSpawnPositions;
+
+    Transform chosenSpawnPosition;
 
     Player Player
     {
@@ -30,13 +34,15 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        occupiedSpawnPositions = new List<int>();
      //   Connect();
         gui = GameObject.Find("Battle GUI").GetComponent<NetworkGUI>();
         gui.SetOwnName(Player.Username);
 
         frames = new List<ParseObject>();
-
+        print("Start");
         match = new Match();
+        print("Match id: " + match.ObjectId);
         currentFrame = new Frame();
         frames.Add(currentFrame);
     
@@ -49,6 +55,13 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             currentFrame["match"] = match;
             currentFrame.SaveAsync();
         });
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            ChooseSpawn();
+        }
+        //currentFrame["match"] = match;
+        //currentFrame.SaveAsync();
         //currentFrame.SaveAsync().ContinueWith(t =>
         //{
         //    if (t.IsCanceled || t.IsFaulted)
@@ -69,6 +82,9 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         //{            
         //    currentFrame.SaveAsync();
         //});
+        currentFrame.SaveAsync().ContinueWith( t => {
+            print("Done saving current frame");  
+        });
     }
 
     void Connect()
@@ -202,17 +218,18 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
     void SpawnMyPlayer()
     {
-        float x = Random.Range(-10, 10);
-        float z = Random.Range(-10, 10);
-        if (PhotonNetwork.isMasterClient)
-        {
-            GameObject player = PhotonNetwork.Instantiate("ModRobot", MasterClientSpawn.position, MasterClientSpawn.rotation, 0);
+        GameObject player = PhotonNetwork.Instantiate("ModRobot", chosenSpawnPosition.position, chosenSpawnPosition.rotation, 0);
+        //float x = Random.Range(-10, 10);
+        //float z = Random.Range(-10, 10);
+        //if (PhotonNetwork.isMasterClient)
+        //{
+        //    GameObject player = PhotonNetwork.Instantiate("ModRobot", Spawn3.position, Spawn3.rotation, 0);
             
-        }
-        else
-        {
-            GameObject player = PhotonNetwork.Instantiate("ModRobot", OtherClientSpawn.position, OtherClientSpawn.rotation, 0);
-        }
+        //}
+        //else
+        //{
+        //    GameObject player = PhotonNetwork.Instantiate("ModRobot", Spawn4.position, Spawn4.rotation, 0);
+        //}
         // NetworkGUI.MyRobot = player.GetComponent<BattleController>();
 
 
@@ -220,6 +237,90 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         // Make MyRobot red or something
         //  player.transform.Find("Body").renderer.material = ownColor;
 
+    }
+
+    //[RPC]
+    //protected void ChooseSpawn(int[] occupied)
+    //{
+    //    if (chosenSpawnPosition == null)
+    //    {
+    //        int chosen = Random.Range(0, 3);
+    //        while (occupied.Contains(chosen))
+    //        {
+    //            chosen = Random.Range(0, 3);
+    //        }
+
+    //        int[] nocc = new int[occupied.Length + 1];
+    //        for (int i = 0; i < occupied.Length; i++)
+    //        {
+    //            nocc[i] = occupied[i];
+    //        }
+    //        nocc[occupied.Length] = chosen;
+
+    //        switch (chosen)
+    //        {
+    //            case 0:
+    //                chosenSpawnPosition = Spawn1;
+    //                break;
+    //            case 1:
+    //                chosenSpawnPosition = Spawn2;
+    //                break;
+    //            case 2:
+    //                chosenSpawnPosition = Spawn3;
+    //                break;
+    //            case 3:
+    //                chosenSpawnPosition = Spawn4;
+    //                break;
+    //        }
+
+    //        photonView.RPC("ChooseSpawn", PhotonTargets.OthersBuffered, nocc);
+    //    }
+    //}
+
+    protected void ChooseSpawn()
+    {
+        int chosen = Random.Range(0, 3);
+        while (occupiedSpawnPositions.Contains(chosen))
+        {
+            chosen = Random.Range(0, 3);
+        }
+        occupiedSpawnPositions.Add(chosen);
+
+        switch (chosen)
+        {
+            case 0:
+                chosenSpawnPosition = Spawn1;
+                break;
+            case 1:
+                chosenSpawnPosition = Spawn2;
+                break;
+            case 2:
+                chosenSpawnPosition = Spawn3;
+                break;
+            case 3:
+                chosenSpawnPosition = Spawn4;
+                break;
+        }
+    }
+
+    [RPC]
+    protected void ReceiveSpawnPosition(int pos)
+    {
+        switch (pos)
+        {
+            case 0:
+                chosenSpawnPosition = Spawn1;
+                break;
+            case 1:
+                chosenSpawnPosition = Spawn2;
+                break;
+            case 2:
+                chosenSpawnPosition = Spawn3;
+                break;
+            case 3:
+                chosenSpawnPosition = Spawn4;
+                break;
+        }
     }
 
     [RPC]
@@ -422,6 +523,19 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     {
         // Wait for two seconds to see if the other robot dies as well (from mortars)
         iDied = true;
+    }
+
+    void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
+    {
+        // Send spawn position to new player
+        int chosen = Random.Range(0, 3);
+        while (occupiedSpawnPositions.Contains(chosen))
+        {
+            chosen = Random.Range(0, 3);
+        }
+        occupiedSpawnPositions.Add(chosen);
+
+        photonView.RPC("ReceiveSpawnPosition", newPlayer, chosen);
     }
 
     //void OnPhotonPlayerConnected(PhotonPlayer newPlayer)

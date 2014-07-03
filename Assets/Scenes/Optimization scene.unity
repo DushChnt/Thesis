@@ -2787,6 +2787,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 13600000, guid: e2914c14f0983564e9ed6e9688a93d44, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e2914c14f0983564e9ed6e9688a93d44, type: 2}
   m_RootGameObject: {fileID: 1942969269}
@@ -3807,7 +3811,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1942969269}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .5
   m_Height: 2
   m_Direction: 1

@@ -54,6 +54,10 @@ public class Optimizer : MonoBehaviour {
             if (FirstFitness > -1)
             {
                 double diff = LastFitness - FirstFitness;
+                if (_ea != null)
+                {
+                    diff = _ea.Statistics._bestFitnessMA.Mean - FirstFitness;
+                }
 
                 if (diff < 0)
                 {                    

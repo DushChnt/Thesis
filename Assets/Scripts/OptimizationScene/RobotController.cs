@@ -234,10 +234,10 @@ public class RobotController : BaseController
             float towards = totalAngle / ticks;
 
             fit += towards * 100 * -dist;
-            fit += moved * 10;
-            fit += (1 - closest) * -dist * 200;
-            fit += longest * dist * 200;
-            fit += (1 - sum) * -dist * 100;
+            fit += moved * 2;
+            fit += (1 - closest) * -dist * 100;
+            fit += longest * dist * 100;
+            fit += (1 - sum) * -dist * 1000;
 
             if (distanceMoved < 2)
             {
