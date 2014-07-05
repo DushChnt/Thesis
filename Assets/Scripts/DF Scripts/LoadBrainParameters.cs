@@ -65,6 +65,8 @@ public class LoadBrainParameters : MonoBehaviour {
         GameObject.Find("s_FaceTarget").GetComponent<dfSlider>().Value = Settings.Brain.FaceTarget;
         GameObject.Find("s_TurretFaceTarget").GetComponent<dfSlider>().Value = Settings.Brain.TurretFaceTarget;
         GameObject.Find("s_MeleeAttacks").GetComponent<dfSlider>().Value = Settings.Brain.MeleeAttacks;
+        GameObject.Find("s_MeleeHits").GetComponent<dfSlider>().Value = Settings.Brain.MeleeHits;
+        GameObject.Find("s_MeleePrecision").GetComponent<dfSlider>().Value = Settings.Brain.MeleePrecision;
         GameObject.Find("s_RifleAttacks").GetComponent<dfSlider>().Value = Settings.Brain.RifleAttacks;
         GameObject.Find("s_RifleHits").GetComponent<dfSlider>().Value = Settings.Brain.RifleHits;
         GameObject.Find("s_RiflePrecision").GetComponent<dfSlider>().Value = Settings.Brain.RiflePrecision;

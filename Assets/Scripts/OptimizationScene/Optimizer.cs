@@ -237,7 +237,7 @@ public class Optimizer : MonoBehaviour {
 
     public void StopEA()
     {
-        Target.GetComponent<TargetController>().Stop();
+        
         if (_ea != null && _ea.RunState == SharpNeat.Core.RunState.Running)
         {
             _ea.Stop();
@@ -264,7 +264,7 @@ public class Optimizer : MonoBehaviour {
 
     void ea_PauseEvent(object sender, EventArgs e)
     {
-        
+        Target.GetComponent<TargetController>().Stop();
         Utility.Log("Done ea'ing (and neat'ing)");
 
         XmlWriterSettings _xwSettings = new XmlWriterSettings();

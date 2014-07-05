@@ -146,7 +146,7 @@ public class RobotController : BaseController
         //{
         //    return 0;
         //}
-        float fit = 0;
+        float fit = 1000;
         // Approach fitness
         float approach = 1.0f / (totalDistance / ticks) * Settings.Brain.KeepDistance;
         fit += approach;
@@ -154,6 +154,15 @@ public class RobotController : BaseController
         // Melee fitness
         float melee = Hits * Settings.Brain.MeleeAttacks;
         fit += melee;
+
+        float meleeAttacks = MeleeAttacks;
+        fit += meleeAttacks * Settings.Brain.MeleeAttacks;
+
+        float meleeHits = Hits;
+        fit += meleeHits * Settings.Brain.MeleeHits;
+
+        float meleePrecision = MeleeAttacks > 0 ? Hits / MeleeAttacks : 0;
+        fit += meleePrecision * Settings.Brain.MeleePrecision;
 
         // Rifle fitness
         float rifle = RifleHits * Settings.Brain.RifleHits;

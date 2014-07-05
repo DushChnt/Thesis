@@ -190,7 +190,8 @@ public class DFClicks : MonoBehaviour
         Settings.Brain.FaceTarget = OptimizerParameters.WAngleTowards;
         Settings.Brain.TurretFaceTarget = OptimizerParameters.WTurretAngleTowards;
         Settings.Brain.MeleeAttacks = OptimizerParameters.WMeleeAttack;
-
+        Settings.Brain.MeleeHits = GameObject.Find("s_MeleeHits").GetComponent<dfSlider>().Value;
+        Settings.Brain.MeleePrecision = GameObject.Find("s_MeleePrecision").GetComponent<dfSlider>().Value;
 
         Settings.Brain.RifleAttacks = OptimizerParameters.WRifleAttack;
         Settings.Brain.RifleHits = OptimizerParameters.WRifleHits;
