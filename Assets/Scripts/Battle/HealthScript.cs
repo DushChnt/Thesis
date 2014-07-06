@@ -43,6 +43,10 @@ public class HealthScript : Photon.MonoBehaviour {
         print("Taking damage " + damage);
         
 		_health -= damage;
+        if (_health > 100)
+        {
+            _health = 100;
+        }
 		photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health);
         if (photonView.isMine)
         {

@@ -47,6 +47,7 @@ public abstract class BaseController : Photon.MonoBehaviour {
 
     // For SMovement
     protected float distanceMoved;
+    protected float turnAmount;
     protected float closestToTarget = int.MaxValue;
     protected float longestFromTarget = -1;
     protected float sumOfDistToTarget;
@@ -68,6 +69,7 @@ public abstract class BaseController : Photon.MonoBehaviour {
     public abstract void ReceiveMortarInfo(float hitRate, float distFromCenterSquared);
     public abstract void Activate(IBlackBox box, GameObject target);
     public abstract void Stop();
+    public abstract void PickupHealth();
 
 	// Use this for initialization
 	void Start () {
@@ -281,9 +283,9 @@ public abstract class BaseController : Photon.MonoBehaviour {
                 {
                     longestFromTarget = distance_target;
                 }
-                distanceMoved += moveDist;
+                distanceMoved += Mathf.Abs(moveDist);
                 sumOfDistToTarget += distance_target;
-
+                turnAmount += Mathf.Abs(turnAngle);
                 ticks++;
             }
         }

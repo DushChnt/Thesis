@@ -155,6 +155,8 @@ public class Optimizer : MonoBehaviour {
         {
             using (XmlReader xr = XmlReader.Create(champFileLoadPath))
                 genome = NeatGenomeXmlIO.ReadCompleteGenomeList(xr, false, (NeatGenomeFactory)experiment.CreateGenomeFactory())[0];
+
+            
         }
         catch (Exception e1)
         {
@@ -221,8 +223,8 @@ public class Optimizer : MonoBehaviour {
     public void StartEA()
     {
         Utility.DebugLog = true;
-        Utility.Log("Starting PhotoTaxis experiment");        
-
+        Utility.Log("Starting PhotoTaxis experiment");
+        print("Loading: " + popFileLoadPath);
         _ea = experiment.CreateEvolutionAlgorithm(popFileLoadPath);
 
         _ea.UpdateEvent += new EventHandler(ea_UpdateEvent);

@@ -2567,7 +2567,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1099621605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0807266235, y: -.125, z: 0}
+  m_LocalPosition: {x: .0777587891, y: -.126495361, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1350501660}
@@ -2619,10 +2619,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 15
     margins:
-      left: 31
-      top: 48
-      right: 31
-      bottom: 23
+      left: 29.859375
+      top: 48.5742188
+      right: 32.140625
+      bottom: 22.4257812
     owner: {fileID: 1099621608}
   renderOrder: 8
   isLocalized: 0
@@ -2652,6 +2652,7 @@ MonoBehaviour:
   BattleButton: {fileID: 1315267402}
   BlankBrainButton: {fileID: 1542040736}
   mouseCursor: {fileID: 2800000, guid: c6a0ac56cb4d78242bb20cc989f98ac4, type: 3}
+  ListItem: {fileID: 100010, guid: ca9e462ea9264f54a9d5196fa66921ca, type: 2}
 --- !u!1 &1109268033
 GameObject:
   m_ObjectHideFlags: 0

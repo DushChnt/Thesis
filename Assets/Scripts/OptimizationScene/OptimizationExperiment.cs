@@ -123,7 +123,10 @@ public class OptimizationExperiment : INeatExperiment
         IGenomeFactory<NeatGenome> genomeFactory = CreateGenomeFactory();
         try
         {
-           
+            if (fileName.Contains("/.pop.xml"))
+            {
+                throw new Exception();
+            }
             using (XmlReader xr = XmlReader.Create(fileName))
             {
                 genomeList = LoadPopulation(xr);

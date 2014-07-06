@@ -13,7 +13,7 @@ public class RobotController : BaseController
     private int MortarHits;
     private float AccMortarDamage;
     private float MortarHitDamage;
-    
+    private int HealthPickups;
 
     // Use this for initialization
     void Start()
@@ -39,6 +39,11 @@ public class RobotController : BaseController
         this.HumanControlled = true;
         int targetLayer = LayerMask.NameToLayer("Robot");
         HitLayers = 1 << targetLayer;
+    }
+
+    public override void PickupHealth()
+    {
+        HealthPickups++;
     }
 
     protected override void RifleAttack()
@@ -148,7 +153,8 @@ public class RobotController : BaseController
         //}
         float fit = 1000;
         // Approach fitness
-        float approach = 1.0f / (totalDistance / ticks) * Settings.Brain.KeepDistance;
+       // float approach = 1.0f / (totalDistance / ticks) * Settings.Brain.KeepDistance;
+        float approach = Settings.Brain.KeepDistance * -totalDistance / ticks;
         fit += approach;
 
         // Melee fitness
@@ -204,6 +210,11 @@ public class RobotController : BaseController
         float mDamagePerHit = MortarAttacks > 0 ? ((MortarHitDamage / (float)MortarAttacks)) * Settings.Brain.MortarDamagePerHit : 0;
         fit += mDamagePerHit;
 
+        if (distanceMoved + turnAmount < 2)
+        {
+            fit = 1;
+        }
+
         return fit;
     }
 
@@ -242,11 +253,15 @@ public class RobotController : BaseController
             float dist = Settings.Brain.SDistance - 2;
             float towards = totalAngle / ticks;
 
-            fit += towards * 100 * -dist;
+            fit += towards * 10 * -dist;
             fit += moved * 2;
-            fit += (1 - closest) * -dist * 100;
-            fit += longest * dist * 100;
+            fit += (1 - closest) * -dist * 10;
+            fit += longest * dist * 10;
             fit += (1 - sum) * -dist * 1000;
+
+            fit -= MortarAttacks * 10;
+            fit -= RifleAttacks * 10;
+            fit -= MeleeAttacks * 10;
 
             if (distanceMoved < 2)
             {

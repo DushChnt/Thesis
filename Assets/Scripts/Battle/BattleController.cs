@@ -97,6 +97,11 @@ public class BattleController : BaseController {
         this.brain.ResetState();
     }
 
+    public override void PickupHealth()
+    {
+        Health.TakeDamage(-20); // Using negative damage as healing
+    }
+
     protected override void Attack(float distance, float angle)
     {
         if (attackTimer > AttackCoolDown)

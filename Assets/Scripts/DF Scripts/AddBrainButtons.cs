@@ -29,6 +29,8 @@ public class AddBrainButtons : MonoBehaviour {
 	public Texture2D mouseCursor;
 	private DialogShow _dialog;
 
+    public GameObject ListItem;
+
 	Player Player
 	{
 		get
@@ -237,6 +239,72 @@ public class AddBrainButtons : MonoBehaviour {
 		return angle;
 	}
 
+    private float AddBox(Brain b, int level, float prev_center, Color32 color)
+    {
+        var spacing = 150;
+      //  var button = _panel.AddControl<BrainButton>();
+        BrainButton button = _panel.AddPrefab(ListItem) as BrainButton; // as UserListItem;
+        dfLabel NameLabel = button.Find("Brain Name Label").GetComponent<dfLabel>();
+        dfLabel GenerationLabel = button.Find("Generation Label").GetComponent<dfLabel>();
+        dfLabel FitnessLabel = button.Find("Fitness Label").GetComponent<dfLabel>();
+        BrainButton branchButton = button.Find("Branch Button").GetComponent<BrainButton>();
+
+        NameLabel.Text = b.Name;
+        GenerationLabel.Text = "Generation: " + b.Generation;
+        FitnessLabel.Text = "Fitness: " + b.BestFitness;
+        button.Brain = b;
+        button.Click += button_Click;
+        button.IsNewBrain = b.IsNewBrain;
+        button.DragStart += button_DragStart;
+        //button.BackgroundSprite = "BLANK_TEXTURE";
+        button.NormalBackgroundColor = color;
+        //button.HoverSprite = "listitem-hover";
+        //button.PressedSprite = "listitem-selected";
+        
+        //button.Width = 150;
+        //button.Height = 80;
+
+        var center_spacing = _panel.Width / (LevelCount[level]);
+        var center = center_spacing * CurrentCount[level] - center_spacing / 2;
+        CurrentCount[level] += 1;
+
+        button.RelativePosition = new Vector3(center - button.Width / 2, level * spacing);
+
+        var plus = branchButton;
+        
+        
+        plus.Brain = b;
+        
+        plus.Click += new_button_Click;
+
+        if (level > 0)
+        {
+            var line = _panel.AddControl<dfSprite>();
+            line.SpriteName = "vslider-track-normal";
+            line.Width = 12;
+            //line.Height = spacing - button.Height;
+            float B = spacing - button.Height;
+            line.Height = HypotenuseLength(prev_center, center, B);
+            Vector3 rot = Vector3.forward;
+            float angle = Angle(B, center - prev_center);
+            print("Angle: " + angle);
+            line.transform.Rotate(rot, angle);
+            float padding = 0;
+            if (angle < 0)
+            {
+                padding = -5;
+            }
+            if (angle > 0)
+            {
+                padding = 5;
+            }
+            line.RelativePosition = new Vector3(prev_center, level * spacing - B + padding);
+            line.ZOrder = 0;
+        }
+
+        return center;
+    }
+
 	private float AddButton(Brain b, int level, float ratio, float idx, float prev_center)
 	{
 		var spacing = 90;
@@ -247,6 +315,7 @@ public class AddBrainButtons : MonoBehaviour {
 		button.PressedSprite = "listitem-selected";
 		button.Text = level + ". " + b.Name;
 		button.Width = _panel.Width * ratio - 10;
+      //  button.Width = 150;
 		button.Height = 48;
 		button.RelativePosition = new Vector3(_panel.Width * idx + 5, level * spacing);
 		button.IsNewBrain = b.IsNewBrain;
@@ -425,16 +494,64 @@ public class AddBrainButtons : MonoBehaviour {
 		int idx = 0;
 		float ratio = 1.0f / brains.Count;
 
-		foreach (Brain b in brains)
-		{
-			recurseAdd(b, level, ratio, idx, idx * ratio, 0);
-			idx++;
-		}
+		
+
+        LevelCount = new Dictionary<int, int>();
+        CurrentCount = new Dictionary<int, int>();
+        foreach (Brain b in brains)
+        {
+            countLevels(b, 0);
+        }
+        printLevels();
+
+        foreach (Brain b in brains)
+        {
+            Color32 color = new Color32(0, 100, 0, 254);
+            if (idx > 0) {
+                color = new Color32(100, 0, 0, 254);
+            }
+            recurseAdd(b, level, ratio, idx, idx * ratio, 0, color);
+            idx++;
+        }
 	}
 
-	void recurseAdd(Brain b, int level, float ratio, int idx, float startRatio, float prev_center)
+    private void countLevels(Brain b, int level)
+    {        
+        if (b != null)
+        {
+            if (!LevelCount.ContainsKey(level))
+            {
+                LevelCount.Add(level, 0);
+                CurrentCount.Add(level, 1);
+            }
+            LevelCount[level]++;
+            if (b.Children != null)
+            {
+                foreach (Brain child in b.Children)
+                {
+                    countLevels(child, level + 1);
+                }
+            }
+        }
+    }
+
+    private void printLevels()
+    {
+        int i = 0;
+        while (LevelCount.ContainsKey(i))
+        {
+            print("Level " + i + ": " + LevelCount[i]);
+            i++;
+        }
+    }
+
+    private Dictionary<int, int> LevelCount = new Dictionary<int, int>();
+    private Dictionary<int, int> CurrentCount = new Dictionary<int, int>();
+
+	void recurseAdd(Brain b, int level, float ratio, int idx, float startRatio, float prev_center, Color32 color)
 	{
-		float center = AddButton(b, level, ratio, startRatio, prev_center);
+	//	float center = AddButton(b, level, ratio, startRatio, prev_center);
+        var center = AddBox(b, level, prev_center, color);
 		print(level + ". " + b.Name + ", Startratio: " + startRatio + ", center: " + center);
 		
 		if (b.Children.Count > 0)
@@ -444,7 +561,7 @@ public class AddBrainButtons : MonoBehaviour {
 			int i = 0;
 			foreach (Brain child in b.Children)
 			{
-				recurseAdd(child, level + 1, r, i, startRatio + i * r, center);
+				recurseAdd(child, level + 1, r, i, startRatio + i * r, center, color);
 				i++;
 			}
 		}
