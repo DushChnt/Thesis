@@ -241,6 +241,7 @@ public class AddBrainButtons : MonoBehaviour {
 
     private float AddBox(Brain b, int level, float prev_center, Color32 color)
     {
+        var top_padding = 10;
         var spacing = 150;
       //  var button = _panel.AddControl<BrainButton>();
         BrainButton button = _panel.AddPrefab(ListItem) as BrainButton; // as UserListItem;
@@ -268,7 +269,7 @@ public class AddBrainButtons : MonoBehaviour {
         var center = center_spacing * CurrentCount[level] - center_spacing / 2;
         CurrentCount[level] += 1;
 
-        button.RelativePosition = new Vector3(center - button.Width / 2, level * spacing);
+        button.RelativePosition = new Vector3(center - button.Width / 2, top_padding + level * spacing);
 
         var plus = branchButton;
         
@@ -284,7 +285,7 @@ public class AddBrainButtons : MonoBehaviour {
             line.Width = 12;
             //line.Height = spacing - button.Height;
             float B = spacing - button.Height;
-            line.Height = HypotenuseLength(prev_center, center, B);
+            line.Height = HypotenuseLength(prev_center, center, B) + 20;
             Vector3 rot = Vector3.forward;
             float angle = Angle(B, center - prev_center);
             print("Angle: " + angle);
@@ -298,7 +299,7 @@ public class AddBrainButtons : MonoBehaviour {
             {
                 padding = 5;
             }
-            line.RelativePosition = new Vector3(prev_center, level * spacing - B + padding);
+            line.RelativePosition = new Vector3(prev_center, top_padding + level * spacing - B + padding - 2);
             line.ZOrder = 0;
         }
 

@@ -122,6 +122,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
                     photonView.RPC("StartGame", PhotonTargets.All);
                     GameStarted = true;
                     Camera.main.GetComponent<MousePan>().Activated = true;
+                    
                 }
             }
         }
@@ -177,6 +178,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         iDied = false;
         opponentDied = false;
         gui.StopGame();
+        GameLogger.Instance.StopLogging();
         SaveSequentially();        
     }
 
@@ -510,6 +512,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             {
                 other.transform.Find("Body").renderer.material = ownColor;
             }
+            GameLogger.Instance.StartLogging(controller1, controller1.Opponent);
         }
     }
 

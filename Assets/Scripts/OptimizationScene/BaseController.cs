@@ -12,6 +12,7 @@ public abstract class BaseController : Photon.MonoBehaviour {
     public float AttackCoolDown = 0.7f;
     public float RifleCoolDown = 0.2f;
     public float MortarCoolDown = 1.5f;
+    public float CurrentSpeed;
     /// <summary>
     /// Current speed
     /// </summary>
@@ -245,6 +246,7 @@ public abstract class BaseController : Photon.MonoBehaviour {
                     turretTurn, mortarForce, transform.position, transform.rotation, turret.rotation, PhotonNetwork.time);
             }
             var moveDist = gas * Speed * Time.deltaTime;
+            CurrentSpeed = moveDist;
             var turnAngle = steer * TurnSpeed * Time.deltaTime; // * gas;
             var turretTurnAngle = turretTurn * TurretTurnSpeed * Time.deltaTime;
 

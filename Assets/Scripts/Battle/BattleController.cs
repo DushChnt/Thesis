@@ -17,6 +17,8 @@ public class BattleController : BaseController {
 
     IBlackBox brain1, brain2, brain3, brain4, defaultBrain;
 
+    public int ActiveBrain;
+
     // Use this for initialization
     void Start () {
         turret = gameObject.transform.FindChild("Turret");
@@ -47,6 +49,7 @@ public class BattleController : BaseController {
 
     public void SwitchBrain(int number)
     {
+        ActiveBrain = number;
         switch (number)
         {
             case 1:

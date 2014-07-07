@@ -16,6 +16,14 @@ public class NetworkGUI : MonoBehaviour {
 
     public bool GameStarted;
 
+    public float _Timer
+    {
+        get
+        {
+            return timer;
+        }
+    }
+
     private float timer = 99.99f;
     public int Timer
     {

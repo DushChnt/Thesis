@@ -255,6 +255,8 @@ GameObject:
   - 23: {fileID: 2300000}
   - 33: {fileID: 3300000}
   - 114: {fileID: 11400080}
+  - 114: {fileID: 11400096}
+  - 114: {fileID: 11400094}
   m_Layer: 0
   m_Name: Battle GUI
   m_TagString: Untagged
@@ -650,8 +652,8 @@ Transform:
   m_LocalPosition: {x: -.416671753, y: .236976624, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400048}
   - {fileID: 400004}
+  - {fileID: 400048}
   - {fileID: 400044}
   - {fileID: 400072}
   m_Father: {fileID: 400028}
@@ -679,7 +681,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &400006
 Transform:
   m_ObjectHideFlags: 1
@@ -958,11 +960,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .111968994, y: -.0632324219, z: 0}
+  m_LocalPosition: {x: 0, y: -.0632324219, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &400050
 Transform:
   m_ObjectHideFlags: 1
@@ -1115,7 +1117,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100072}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .111968994, y: -.15901947, z: 0}
+  m_LocalPosition: {x: 0, y: -.15901947, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
@@ -1496,8 +1498,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .609375, y: .0677083358, z: .00100000005}
-  m_Center: {x: .3046875, y: -.0338541679, z: 0}
+  m_Size: {x: .833333373, y: .0677083358, z: .00100000005}
+  m_Center: {x: .416666687, y: -.0338541679, z: 0}
 --- !u!65 &6500050
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1616,8 +1618,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .609375, y: .0677083358, z: .00100000005}
-  m_Center: {x: .3046875, y: -.0338541679, z: 0}
+  m_Size: {x: .833333373, y: .0677083358, z: .00100000005}
+  m_Center: {x: .416666687, y: -.0338541679, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3431,7 +3433,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 234, y: 26}
+  size: {x: 320, y: 26}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -3441,9 +3443,9 @@ MonoBehaviour:
   layout:
     anchorStyle: 13
     margins:
-      left: 42.9960938
+      left: 0
       top: 24.28125
-      right: 43.0039062
+      right: 0
       bottom: 131.71875
     owner: {fileID: 11400060}
   renderOrder: 3
@@ -3456,10 +3458,10 @@ MonoBehaviour:
   backgroundColor:
     serializedVersion: 2
     rgba: 4294967295
-  autoSize: 1
+  autoSize: 0
   autoHeight: 0
   wordWrap: 0
-  text: Waiting for opponent
+  text: You Won/Lost!
   bottomColor:
     serializedVersion: 2
     rgba: 4294967295
@@ -3964,8 +3966,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartTimer: 3
   ownColor: {fileID: 2100000, guid: 78f2330731464954aa1080777ea2bdee, type: 2}
-  MasterClientSpawn: {fileID: 0}
-  OtherClientSpawn: {fileID: 0}
+  Spawn1: {fileID: 0}
+  Spawn2: {fileID: 0}
+  Spawn3: {fileID: 0}
+  Spawn4: {fileID: 0}
 --- !u!114 &11400084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4133,7 +4137,7 @@ MonoBehaviour:
   anchorStyle: 13
   isEnabled: 1
   isVisible: 1
-  isInteractive: 1
+  isInteractive: 0
   tooltip: 
   pivot: 0
   zindex: 2
@@ -4143,7 +4147,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 234, y: 26}
+  size: {x: 320, y: 26}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -4153,9 +4157,9 @@ MonoBehaviour:
   layout:
     anchorStyle: 13
     margins:
-      left: 42.9960938
+      left: 0
       top: 61.0625
-      right: 43.0039062
+      right: 0
       bottom: 94.9375
     owner: {fileID: 11400092}
   renderOrder: 4
@@ -4168,7 +4172,7 @@ MonoBehaviour:
   backgroundColor:
     serializedVersion: 2
     rgba: 4294967295
-  autoSize: 1
+  autoSize: 0
   autoHeight: 0
   wordWrap: 0
   text: Waiting for opponent
@@ -4200,6 +4204,29 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
+--- !u!114 &11400094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f50f78d724d087343a959cc5a26985ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecd9f9631ff0ae04ab3c77d83ff0ad08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Totem: {fileID: 100000, guid: 4debb5d0763e87c48bbb091702c313e3, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
