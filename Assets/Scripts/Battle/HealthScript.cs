@@ -6,6 +6,8 @@ public class HealthScript : Photon.MonoBehaviour {
 
 	private float _health;
     public ParticleSystem Explosion;
+    dfGUIManager GUI;
+    GameObject label;
 
 	public float Health
 	{
@@ -31,6 +33,8 @@ public class HealthScript : Photon.MonoBehaviour {
 		{
 			BattleGUI.Robot2Health = Health;
 		}
+        GUI = GameObject.Find("Battle GUI").GetComponent<dfGUIManager>();
+        label = (GameObject)Resources.Load("Floating Label", typeof(GameObject));
 	}
 	
 	// Update is called once per frame
@@ -38,9 +42,38 @@ public class HealthScript : Photon.MonoBehaviour {
 	
 	}
 
+    private void ShowFloatingText(float damage)
+    {   
+        dfTweenVector3 tween = label.GetComponent<dfTweenVector3>();
+        //Destroy(tween);
+        tween.StartValue = GUI.WorldPointToGUI(gameObject.transform.position) + new Vector2(0, -50); ;
+        //print("Pos: " + label.transform.position);
+        //dfFollowObject follow = label.GetComponent<dfFollowObject>();
+        //follow.attach = gameObject;
+        //follow.mainCamera = Camera.main;
+
+        dfLabel glabel = GUI.AddPrefab(label) as dfLabel;
+
+        glabel.RelativePosition = GUI.WorldPointToGUI(gameObject.transform.position) + new Vector2(0, -50);
+        if (damage > 0)
+        {
+            glabel.Text = String.Format("-{0:#.##}!", damage);
+            glabel.BottomColor = new Color32(254, 0, 0, 254);
+        }
+        else
+        {
+            glabel.Text = String.Format("+{0:#.##}!", damage);
+            glabel.BottomColor = new Color32(0, 254, 0, 254);
+        }
+        
+       
+    }
+
 	public void TakeDamage(float damage)
 	{
         print("Taking damage " + damage);
+
+        ShowFloatingText(damage);
         
 		_health -= damage;
         if (_health > 100)

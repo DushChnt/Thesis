@@ -91,7 +91,23 @@ public abstract class BaseController : Photon.MonoBehaviour {
         {
 
             Utility.Log("Firing!");
+            dfGUIManager UI = GameObject.Find("UI Root").GetComponent<dfGUIManager>();
+            GameObject label = (GameObject) Resources.Load("Floating Label", typeof(GameObject));
+            print("Pos: " + label.transform.position);
+           
+            
+            dfTweenVector3 tween = label.GetComponent<dfTweenVector3>();
+            //Destroy(tween);
+            tween.StartValue = UI.WorldPointToGUI(gameObject.transform.position) + new Vector2(0, -50); ;
+            //print("Pos: " + label.transform.position);
+            //dfFollowObject follow = label.GetComponent<dfFollowObject>();
+            //follow.attach = gameObject;
+            //follow.mainCamera = Camera.main;
 
+            dfLabel glabel = UI.AddPrefab(label) as dfLabel;
+
+            glabel.RelativePosition = UI.WorldPointToGUI(gameObject.transform.position) + new Vector2(0, -50);
+            glabel.Text = "Lars!";
             Attack(properDistance, angle);
         }
 
