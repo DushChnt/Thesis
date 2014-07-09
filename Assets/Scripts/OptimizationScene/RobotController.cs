@@ -14,6 +14,8 @@ public class RobotController : BaseController
     private float AccMortarDamage;
     private float MortarHitDamage;
     private int HealthPickups;
+    dfGUIManager GUI;
+    GameObject label;
 
     // Use this for initialization
     void Start()
@@ -29,6 +31,12 @@ public class RobotController : BaseController
         {
             int targetLayer = LayerMask.NameToLayer("Target");
             HitLayers = 1 << targetLayer;
+        }
+
+        if (RunBestOnly)
+        {
+            GUI = GameObject.Find("UI Root").GetComponent<dfGUIManager>();
+            label = (GameObject)Resources.Load("Floating Label", typeof(GameObject));
         }
     }
 
@@ -57,6 +65,7 @@ public class RobotController : BaseController
             RaycastHit hit;
           //  Utility.Log("Raycasting");
             Vector3 point = transform.position + transform.forward * SensorRange;
+
             bool hitIt = false;
             if (Physics.Raycast(transform.position, transform.forward, out hit, SensorRange, HitLayers))
             {
@@ -74,10 +83,12 @@ public class RobotController : BaseController
                 if (hitIt)
                 {
                     Debug.DrawLine(transform.position, point, Color.green, 0.1f);
+                    ShowFloatingText("Rifle hit!", new Color32(0, 254, 0, 254));
                 }
                 else
                 {
                     Debug.DrawLine(transform.position, point, Color.red, 0.1f);
+                    ShowFloatingText("Rifle attack!", new Color32(0, 254, 0, 254));
                 }
 
                 //if (turret != null)
@@ -121,6 +132,7 @@ public class RobotController : BaseController
             Speed -= MeleeSpeedPenalty;
             RecoveryRate = MeleeRecoveryRate;
             MeleeAttacks++;
+            bool hit = false;
             if (distance < MeleeRange && angle > -15 && angle < 15)
             {
                 // Do attack
@@ -129,6 +141,7 @@ public class RobotController : BaseController
                 Hits++;
                 if (RunBestOnly)
                 {
+                    hit = true;
                     //   sphere.renderer.material = AttackSphereMat;
                     //  AttackShowState = true;
                     Debug.DrawLine(transform.position, target.transform.position, Color.blue, 0.1f);
@@ -141,8 +154,33 @@ public class RobotController : BaseController
                     //}
                 }
             }
+
+            if (RunBestOnly)
+            {
+                if (hit)
+                {
+                    ShowFloatingText("Melee hit!", new Color32(254, 0, 0, 254));
+                }
+                else
+                {
+                    ShowFloatingText("Melee attack!", new Color32(254, 0, 0, 254));
+                }
+            }
         }
 
+    }
+
+    private void ShowFloatingText(string text, Color32 color)
+    {
+        dfTweenVector3 tween = label.GetComponent<dfTweenVector3>();       
+        tween.StartValue = GUI.WorldPointToGUI(gameObject.transform.position) + new Vector2(0, -10);        
+
+        dfLabel glabel = GUI.AddPrefab(label) as dfLabel;
+
+        glabel.RelativePosition = GUI.WorldPointToGUI(gameObject.transform.position) + new Vector2(0, -10);
+        glabel.BottomColor = color;
+    
+        glabel.Text = text;
     }
 
     private float GetAdvancedFitness()
@@ -207,8 +245,8 @@ public class RobotController : BaseController
         //float mDamage = MortarHits > 0 ? (1 - (AccMortarDamage / (float)MortarAttacks)) * Settings.Brain.mor.WMortarDamage : 0;
         //fit += mDamage;
 
-        float mDamagePerHit = MortarAttacks > 0 ? ((MortarHitDamage / (float)MortarAttacks)) * Settings.Brain.MortarDamagePerHit : 0;
-        fit += mDamagePerHit;
+        float mDamagePerAttack = MortarAttacks > 0 ? ((MortarHitDamage / (float)MortarAttacks)) * Settings.Brain.MortarDamagePerHit : 0;
+        fit += mDamagePerAttack;
 
         if (distanceMoved + turnAmount < 2)
         {
@@ -344,17 +382,27 @@ public class RobotController : BaseController
 
     public float GetFitness()
     {
+        float fitness = 0;
         switch (Settings.Brain.FitnessMode)
         {
             case Brain.SIMPLE:
-                return GetSimpleFitness();
+                fitness = GetSimpleFitness();
+                break;
             case Brain.ADVANCED:
-                return GetAdvancedFitness();
+                fitness = GetAdvancedFitness();
+                break;
             case Brain.BATTLE:
-                return GetBattleFitness();                
+                fitness = GetBattleFitness();
+                break;
             default:
-                return GetAdvancedFitness();
+                fitness = GetAdvancedFitness();
+                break;
         }
+        if (fitness < 0)
+        {
+            fitness = 0;
+        }
+        return fitness;
     }
 
     public float GetFitness2()

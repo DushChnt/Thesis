@@ -57,12 +57,12 @@ public class HealthScript : Photon.MonoBehaviour {
         glabel.RelativePosition = GUI.WorldPointToGUI(gameObject.transform.position) + new Vector2(0, -50);
         if (damage > 0)
         {
-            glabel.Text = String.Format("-{0:#.##}!", damage);
+            glabel.Text = string.Format("-{0:#.##}!", damage);
             glabel.BottomColor = new Color32(254, 0, 0, 254);
         }
         else
         {
-            glabel.Text = String.Format("+{0:#.##}!", damage);
+            glabel.Text = string.Format("+{0:#.##}!", damage);
             glabel.BottomColor = new Color32(0, 254, 0, 254);
         }
         
