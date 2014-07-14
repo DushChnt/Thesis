@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 16712174}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0399999991, y: -.203164071, z: 0}
+  m_LocalPosition: {x: .0400009155, y: -.203163147, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 464523366}
@@ -134,6 +134,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -142,11 +143,15 @@ MonoBehaviour:
       right: 13
       bottom: 107.050781
     owner: {fileID: 16712176}
-  renderOrder: 16
+  renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
   padding:
     m_Left: 0
     m_Right: 0
@@ -224,6 +229,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -232,11 +238,15 @@ MonoBehaviour:
       right: 13
       bottom: 6
     owner: {fileID: 77216791}
-  renderOrder: 12
+  renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
   padding:
     m_Left: 0
     m_Right: 0
@@ -302,6 +312,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 192
     margins:
@@ -310,11 +321,15 @@ MonoBehaviour:
       right: 80
       bottom: 60
     owner: {fileID: 79354789}
-  renderOrder: 3
+  renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: frame-basic
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
   padding:
     m_Left: 0
     m_Right: 0
@@ -388,8 +403,10 @@ MonoBehaviour:
   loopType: 0
   autoRun: 1
   skipToEndOnStop: 0
+  delayBeforeStarting: 0
   startValue: 0
   endValue: 1
+  direction: 0
 --- !u!1 &112312235
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +467,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 11
     margins:
@@ -458,9 +476,10 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 112312237}
-  renderOrder: 25
+  renderOrder: 24
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: textbox-normal
   hoverSprite: 
@@ -469,6 +488,9 @@ MonoBehaviour:
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   selectedIndex: 4
   triggerButton: {fileID: 439763975}
+  disabledTextColor:
+    serializedVersion: 2
+    rgba: 4286545791
   textColor:
     serializedVersion: 2
     rgba: 4294967295
@@ -508,6 +530,7 @@ MonoBehaviour:
     rgba: 4278190080
   shadowOffset: {x: 1, y: -1}
   openOnMouseDown: 1
+  clickWhenSpacePressed: 1
 --- !u!65 &112312238
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -539,6 +562,8 @@ MonoBehaviour:
     MemberName: SelectedIndex
   FormatString: 
   TwoWay: 1
+  AutoBind: 1
+  AutoUnbind: 1
 --- !u!1 &123378042
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,6 +622,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -605,9 +631,10 @@ MonoBehaviour:
       right: 218
       bottom: 0
     owner: {fileID: 123378044}
-  renderOrder: 13
+  renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -658,148 +685,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .189999998, y: .086666666, z: .00100000005}
   m_Center: {x: .0949999988, y: -.043333333, z: 0}
---- !u!1 &155965957
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 155965958}
-  - 65: {fileID: 155965962}
-  - 114: {fileID: 155965961}
-  - 114: {fileID: 155965959}
-  - 114: {fileID: 155965960}
-  m_Layer: 8
-  m_Name: Back
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &155965958
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 155965957}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.31666565, y: .983337402, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 820836332}
---- !u!114 &155965959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 155965957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b43a1196f8397347b663f024fbdd493, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelName: sprites - menu
---- !u!114 &155965960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 155965957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf54a1ea4442ea4ab8cc50042221f8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenName: Slide In
-  target:
-    Component: {fileID: 155965961}
-    MemberName: Position
-  easingType: 24
-  animCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  length: .660000026
-  syncStartWhenRun: 0
-  startValueIsOffset: 1
-  syncEndWhenRun: 1
-  endValueIsOffset: 0
-  loopType: 0
-  autoRun: 1
-  skipToEndOnStop: 0
-  startValue: {x: 0, y: 100, z: 0}
-  endValue: {x: 0, y: 0, z: 0}
---- !u!114 &155965961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 155965957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 2
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 54, y: 46}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 5
-      top: 5
-      right: 741
-      bottom: 549
-    owner: {fileID: 155965961}
-  renderOrder: 2
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
-  spriteName: left-arrow
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!65 &155965962
-BoxCollider:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 155965957}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .180000007, y: .153333336, z: .00100000005}
-  m_Center: {x: .0900000036, y: -.0766666681, z: 0}
 --- !u!1 &165016888
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,6 +744,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -867,9 +753,10 @@ MonoBehaviour:
       right: 1
       bottom: 8.99804688
     owner: {fileID: 165016890}
-  renderOrder: 11
+  renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: progress-frame
   progressSprite: progress-fill
@@ -917,6 +804,8 @@ MonoBehaviour:
     MemberName: Value
   FormatString: 
   TwoWay: 1
+  AutoBind: 1
+  AutoUnbind: 1
 --- !u!1 &262953968
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +866,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -985,9 +875,10 @@ MonoBehaviour:
       right: 309
       bottom: 0
     owner: {fileID: 262953970}
-  renderOrder: 27
+  renderOrder: 26
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: frame-info
@@ -1063,7 +954,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 277007081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .3333368, y: -.0299978554, z: 0}
+  m_LocalPosition: {x: .333335876, y: -.0299987793, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 16712175}
@@ -1086,6 +977,8 @@ MonoBehaviour:
     MemberName: Value
   FormatString: 
   TwoWay: 1
+  AutoBind: 1
+  AutoUnbind: 1
 --- !u!114 &277007084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1116,6 +1009,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1124,9 +1018,10 @@ MonoBehaviour:
       right: 1
       bottom: 9
     owner: {fileID: 277007084}
-  renderOrder: 18
+  renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: progress-frame
   progressSprite: progress-fill
@@ -1213,6 +1108,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1221,9 +1117,10 @@ MonoBehaviour:
       right: -4
       bottom: -4
     owner: {fileID: 302351319}
-  renderOrder: 30
+  renderOrder: 29
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: check-checked
   flip: 0
@@ -1300,6 +1197,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1308,9 +1206,10 @@ MonoBehaviour:
       right: 5
       bottom: 7.99804688
     owner: {fileID: 439763975}
-  renderOrder: 26
+  renderOrder: 25
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: guillemet
   flip: 0
@@ -1353,7 +1252,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 464523365}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.16421413e-07, y: 9.23871994e-07, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 16712175}
@@ -1387,6 +1286,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1395,9 +1295,10 @@ MonoBehaviour:
       right: 206
       bottom: 0
     owner: {fileID: 464523367}
-  renderOrder: 17
+  renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -1509,6 +1410,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1517,9 +1419,10 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 486821140}
-  renderOrder: 15
+  renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: frame-info
@@ -1630,6 +1533,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1638,9 +1542,10 @@ MonoBehaviour:
       right: 309
       bottom: 99
     owner: {fileID: 567243300}
-  renderOrder: 8
+  renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: frame-info
@@ -1751,6 +1656,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1759,11 +1665,15 @@ MonoBehaviour:
       right: 13
       bottom: 33.0019531
     owner: {fileID: 616790900}
-  renderOrder: 9
+  renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
   padding:
     m_Left: 0
     m_Right: 0
@@ -1839,6 +1749,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 13
     margins:
@@ -1847,9 +1758,10 @@ MonoBehaviour:
       right: 0
       bottom: 385
     owner: {fileID: 726032497}
-  renderOrder: 6
+  renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -1960,6 +1872,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 15
     margins:
@@ -1968,9 +1881,10 @@ MonoBehaviour:
       right: 2
       bottom: 219
     owner: {fileID: 737966908}
-  renderOrder: 36
+  renderOrder: 35
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -2084,6 +1998,7 @@ MonoBehaviour:
   clipChildren: 1
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 14
     margins:
@@ -2092,11 +2007,15 @@ MonoBehaviour:
       right: 16.0019531
       bottom: 15
     owner: {fileID: 787443451}
-  renderOrder: 7
+  renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
   padding:
     m_Left: 0
     m_Right: 0
@@ -2173,6 +2092,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2181,9 +2101,10 @@ MonoBehaviour:
       right: 161
       bottom: 6
     owner: {fileID: 811642052}
-  renderOrder: 20
+  renderOrder: 19
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: check-unchecked
   flip: 0
@@ -2234,6 +2155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiScale: 1
+  uiScaleLegacy: 1
   inputManager: {fileID: 820836328}
   fixedWidth: 800
   fixedHeight: 600
@@ -2260,6 +2182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderCamera: {fileID: 1303365698}
   useTouch: 0
+  useMouse: 1
   useJoystick: 0
   joystickClickButton: 0
   horizontalAxis: Horizontal
@@ -2267,6 +2190,8 @@ MonoBehaviour:
   axisPollingInterval: .150000006
   retainFocus: 0
   touchClickRadius: 10
+  hoverStartDelay: .25
+  hoverNotifactionFrequency: .100000001
 --- !u!65 &820836329
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -2291,7 +2216,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e773281c06b5e024db5e1a4f549afe5d, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2314,7 +2239,6 @@ Transform:
   m_LocalPosition: {x: -100, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 155965958}
   - {fileID: 1583368053}
   - {fileID: 79354791}
   - {fileID: 1303365699}
@@ -2377,6 +2301,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2385,9 +2310,10 @@ MonoBehaviour:
       right: 188
       bottom: 0
     owner: {fileID: 864401795}
-  renderOrder: 31
+  renderOrder: 30
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -2498,6 +2424,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 13
     margins:
@@ -2506,9 +2433,10 @@ MonoBehaviour:
       right: 0
       bottom: 479
     owner: {fileID: 1019829674}
-  renderOrder: 5
+  renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
 --- !u!65 &1019829675
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -2580,6 +2508,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2588,11 +2517,15 @@ MonoBehaviour:
       right: 460.001953
       bottom: 215
     owner: {fileID: 1071637036}
-  renderOrder: 37
+  renderOrder: 36
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: frame-bracketed-filled
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
   padding:
     m_Left: 0
     m_Right: 0
@@ -2668,6 +2601,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2676,9 +2610,10 @@ MonoBehaviour:
       right: -4
       bottom: -4.00195312
     owner: {fileID: 1117318659}
-  renderOrder: 34
+  renderOrder: 33
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: check-checked
   flip: 0
@@ -2755,6 +2690,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 7
     margins:
@@ -2763,9 +2699,10 @@ MonoBehaviour:
       right: 192
       bottom: 0
     owner: {fileID: 1161600806}
-  renderOrder: 24
+  renderOrder: 23
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -2866,6 +2803,8 @@ MonoBehaviour:
     MemberName: IsChecked
   FormatString: 
   TwoWay: 1
+  AutoBind: 1
+  AutoUnbind: 1
 --- !u!114 &1275746044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2896,6 +2835,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2904,13 +2844,15 @@ MonoBehaviour:
       right: 13
       bottom: 3
     owner: {fileID: 1275746044}
-  renderOrder: 28
+  renderOrder: 27
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   isChecked: 0
   checkIcon: {fileID: 302351319}
   label: {fileID: 864401795}
   group: {fileID: 0}
+  clickWhenSpacePressed: 1
 --- !u!65 &1275746045
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -2965,7 +2907,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 256
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
 --- !u!4 &1303365699
@@ -2975,7 +2917,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1303365697}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00166666671, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 820836332}
@@ -3049,6 +2991,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3057,9 +3000,10 @@ MonoBehaviour:
       right: 262
       bottom: 6
     owner: {fileID: 1366086447}
-  renderOrder: 33
+  renderOrder: 32
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: check-unchecked
   flip: 0
@@ -3138,6 +3082,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3146,11 +3091,15 @@ MonoBehaviour:
       right: 13
       bottom: 132.001953
     owner: {fileID: 1368436077}
-  renderOrder: 23
+  renderOrder: 22
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
   padding:
     m_Left: 0
     m_Right: 0
@@ -3305,6 +3254,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3313,9 +3263,10 @@ MonoBehaviour:
       right: 224
       bottom: 0
     owner: {fileID: 1397198068}
-  renderOrder: 10
+  renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -3416,6 +3367,8 @@ MonoBehaviour:
     MemberName: IsChecked
   FormatString: 
   TwoWay: 1
+  AutoBind: 1
+  AutoUnbind: 1
 --- !u!114 &1505584863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3446,6 +3399,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3454,13 +3408,15 @@ MonoBehaviour:
       right: 13
       bottom: 81
     owner: {fileID: 1505584863}
-  renderOrder: 19
+  renderOrder: 18
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   isChecked: 0
   checkIcon: {fileID: 1563729002}
   label: {fileID: 2110577468}
   group: {fileID: 0}
+  clickWhenSpacePressed: 1
 --- !u!65 &1505584864
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -3531,6 +3487,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 13
     margins:
@@ -3539,9 +3496,10 @@ MonoBehaviour:
       right: 0
       bottom: 479
     owner: {fileID: 1514080706}
-  renderOrder: 4
+  renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: tab-hilite
@@ -3650,6 +3608,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3658,9 +3617,10 @@ MonoBehaviour:
       right: -4
       bottom: -4
     owner: {fileID: 1563729002}
-  renderOrder: 21
+  renderOrder: 20
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: check-checked
   flip: 0
@@ -3716,6 +3676,8 @@ MonoBehaviour:
     MemberName: Value
   FormatString: 
   TwoWay: 1
+  AutoBind: 1
+  AutoUnbind: 1
 --- !u!114 &1564190369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3746,6 +3708,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3754,9 +3717,10 @@ MonoBehaviour:
       right: 1
       bottom: 9
     owner: {fileID: 1564190369}
-  renderOrder: 14
+  renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: progress-frame
   progressSprite: progress-fill
@@ -3855,6 +3819,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 14
     margins:
@@ -3866,6 +3831,7 @@ MonoBehaviour:
   renderOrder: 1
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: fca14cda3e3e58245af2a8772760ca99, type: 2}
   backgroundSprite: 
@@ -3987,6 +3953,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3995,9 +3962,10 @@ MonoBehaviour:
       right: 19.0019531
       bottom: 19
     owner: {fileID: 1655091215}
-  renderOrder: 38
+  renderOrder: 37
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: placeholder-text
   flip: 0
@@ -4088,6 +4056,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -4096,9 +4065,10 @@ MonoBehaviour:
       right: 162
       bottom: 0
     owner: {fileID: 1762168211}
-  renderOrder: 35
+  renderOrder: 34
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -4210,6 +4180,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -4218,9 +4189,10 @@ MonoBehaviour:
       right: 262
       bottom: 6
     owner: {fileID: 1797170291}
-  renderOrder: 29
+  renderOrder: 28
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: check-unchecked
   flip: 0
@@ -4287,6 +4259,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -4295,13 +4268,15 @@ MonoBehaviour:
       right: 13
       bottom: 29
     owner: {fileID: 1833989343}
-  renderOrder: 32
+  renderOrder: 31
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   isChecked: 0
   checkIcon: {fileID: 1117318659}
   label: {fileID: 1762168211}
   group: {fileID: 0}
+  clickWhenSpacePressed: 1
 --- !u!65 &1833989344
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -4346,6 +4321,8 @@ MonoBehaviour:
     MemberName: IsChecked
   FormatString: 
   TwoWay: 1
+  AutoBind: 1
+  AutoUnbind: 1
 --- !u!1 &2110577466
 GameObject:
   m_ObjectHideFlags: 0
@@ -4404,6 +4381,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -4412,9 +4390,10 @@ MonoBehaviour:
       right: 223
       bottom: 0
     owner: {fileID: 2110577468}
-  renderOrder: 22
+  renderOrder: 21
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 

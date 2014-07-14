@@ -145,6 +145,7 @@ MonoBehaviour:
   renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: fca14cda3e3e58245af2a8772760ca99, type: 2}
   backgroundSprite: dark-fill-trans
@@ -288,6 +289,7 @@ MonoBehaviour:
   renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: dfd92b6abc62d9a4b811cafb70579f9d, type: 2}
   spriteName: tesseract0
   flip: 0
@@ -359,7 +361,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 256
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
 --- !u!4 &449201583
@@ -455,6 +457,7 @@ MonoBehaviour:
   renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: dfd92b6abc62d9a4b811cafb70579f9d, type: 2}
   spriteName: tesseract0
   flip: 0
@@ -565,6 +568,7 @@ MonoBehaviour:
   renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: dfd92b6abc62d9a4b811cafb70579f9d, type: 2}
   spriteName: gear0
   flip: 0
@@ -636,6 +640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiScale: 1
+  uiScaleLegacy: 1
   inputManager: {fileID: 1269087299}
   fixedWidth: 800
   fixedHeight: 600
@@ -662,6 +667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderCamera: {fileID: 449201582}
   useTouch: 0
+  useMouse: 1
   useJoystick: 0
   joystickClickButton: 330
   horizontalAxis: NavHorizontal
@@ -669,6 +675,8 @@ MonoBehaviour:
   axisPollingInterval: .150000006
   retainFocus: 0
   touchClickRadius: 10
+  hoverStartDelay: .25
+  hoverNotifactionFrequency: .100000001
 --- !u!23 &1269087300
 Renderer:
   m_ObjectHideFlags: 2
@@ -735,7 +743,6 @@ GameObject:
   - 65: {fileID: 1276848375}
   - 114: {fileID: 1276848374}
   - 114: {fileID: 1276848376}
-  - 114: {fileID: 1276848379}
   - 114: {fileID: 1276848377}
   m_Layer: 8
   m_Name: HoverAnim
@@ -798,6 +805,7 @@ MonoBehaviour:
   renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: dfd92b6abc62d9a4b811cafb70579f9d, type: 2}
   spriteName: button1
   flip: 0
@@ -849,18 +857,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverAnimation: {fileID: 1276848376}
---- !u!114 &1276848379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1276848372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b43a1196f8397347b663f024fbdd493, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelName: sprites - menu
 --- !u!1 &1506946510
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,6 +949,7 @@ MonoBehaviour:
   renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: dfd92b6abc62d9a4b811cafb70579f9d, type: 2}
   spriteName: tesseract0
   flip: 0
@@ -1041,6 +1038,7 @@ MonoBehaviour:
   renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: dark-fill
@@ -1168,6 +1166,7 @@ MonoBehaviour:
   renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: 
@@ -1298,6 +1297,7 @@ MonoBehaviour:
   renderOrder: 1
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: BLANK_TEXTURE
   backgroundColor:
@@ -1455,6 +1455,7 @@ MonoBehaviour:
   renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: dfd92b6abc62d9a4b811cafb70579f9d, type: 2}
   spriteName: tesseract0
   flip: 0
@@ -1622,6 +1623,7 @@ MonoBehaviour:
   renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -1732,6 +1734,7 @@ MonoBehaviour:
   renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: dfd92b6abc62d9a4b811cafb70579f9d, type: 2}
   backgroundSprite: text1
   hoverSprite: 

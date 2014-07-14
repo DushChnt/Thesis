@@ -1,4 +1,20 @@
 ------------------------
+Daikon Forge GUI v1.0.16 hotfix 1
+
+* Replaced step() function in UI shaders, which wasn't available on all target platforms
+* Removed dfRenderGroup.getViewSize(), which was preventing compilation for Windows Store platform
+* Bitmapped font creator now performs additional checks to ensure that the font definition file is correct format
+* dfListbox.AddItem() now invalidates the control, causing it to refresh properly
+* Bitmapped font import now notifies user when font definition specifies multiple pages, which is not supported
+* Resolved issue with dfGUIManager not releasing clones of Material instances generated during rendering
+* Resolved issue with NullReferenceException caused by deleting controls during event processing
+* Resolved "font corruption" issues with dynamic fonts on Label, Textbox, Dropdown, Button, and List controls
+* Added AutoFitVirtualTiles property.
+* Added anchoring options to dfFollowObject script.
+* Added screen clamping option for dfFollowObject (thanks to kathode for the idea)
+* ScrollPanel inspector now exposes virtual scrolling properties.
+
+------------------------
 Daikon Forge GUI v1.0.16
 
 * dfInputManager.RetainFocus now works on mobile/touch

@@ -1169,7 +1169,10 @@ public class dfInputManager : MonoBehaviour
 							}
 
 							info.control = this.control;
-							this.control.OnMouseUp( info );
+							if( this.control )
+							{
+								this.control.OnMouseUp( info );
+							}
 
 						}
 
@@ -1289,6 +1292,10 @@ public class dfInputManager : MonoBehaviour
 
 			private bool canFireClickEvent( TouchRaycast info, TouchRaycast touch )
 			{
+
+				// It is possible that a control could have been deleted during event processing.
+				if( this.control == null )
+					return false;
 
 				#region Should not fire click event if control has been moved
 

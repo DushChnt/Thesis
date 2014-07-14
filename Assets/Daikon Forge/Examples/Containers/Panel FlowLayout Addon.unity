@@ -127,7 +127,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 256
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
 --- !u!4 &163863052
@@ -137,7 +137,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 163863049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .00166666671, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1999133592}
@@ -165,7 +165,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 173721810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.06666672, y: -.716666698, z: 0}
+  m_LocalPosition: {x: 1.06666565, y: -.716667175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -199,6 +199,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -210,6 +211,7 @@ MonoBehaviour:
   renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -284,7 +286,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 242939295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0166666675, y: -1.06666672, z: 0}
+  m_LocalPosition: {x: .0166702271, y: -1.06666565, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -318,6 +320,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -329,6 +332,7 @@ MonoBehaviour:
   renderOrder: 18
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -403,7 +407,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 395884512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.76666665, y: -1.06666672, z: 0}
+  m_LocalPosition: {x: 1.76667023, y: -1.06666565, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -437,6 +441,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -448,6 +453,7 @@ MonoBehaviour:
   renderOrder: 23
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -522,7 +528,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 423861123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .366666675, y: -1.06666672, z: 0}
+  m_LocalPosition: {x: .366668701, y: -1.06666565, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -556,6 +562,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -567,6 +574,7 @@ MonoBehaviour:
   renderOrder: 19
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -641,7 +649,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 604878530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.76666665, y: -.366666675, z: 0}
+  m_LocalPosition: {x: 1.76667023, y: -.366668701, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -675,6 +683,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -686,6 +695,7 @@ MonoBehaviour:
   renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -760,7 +770,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 609502029}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0166666675, y: -1.41666675, z: 0}
+  m_LocalPosition: {x: .0166702271, y: -1.41666412, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -794,6 +804,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -805,6 +816,7 @@ MonoBehaviour:
   renderOrder: 24
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -879,7 +891,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 644198756}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .716666698, y: -.716666698, z: 0}
+  m_LocalPosition: {x: .716667175, y: -.716667175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -913,6 +925,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -924,6 +937,7 @@ MonoBehaviour:
   renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -998,7 +1012,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 828975149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0166666675, y: -.716666698, z: 0}
+  m_LocalPosition: {x: .0166702271, y: -.716667175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -1032,6 +1046,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1043,6 +1058,7 @@ MonoBehaviour:
   renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -1117,7 +1133,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 837930763}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .366666675, y: -1.41666675, z: 0}
+  m_LocalPosition: {x: .366668701, y: -1.41666412, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -1151,6 +1167,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1162,6 +1179,7 @@ MonoBehaviour:
   renderOrder: 25
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -1236,7 +1254,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 895515167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0166666675, y: -.366666675, z: 0}
+  m_LocalPosition: {x: .0166702271, y: -.366668701, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -1270,6 +1288,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1281,6 +1300,7 @@ MonoBehaviour:
   renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -1355,7 +1375,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1007467187}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.06666672, y: -.0166666675, z: 0}
+  m_LocalPosition: {x: 1.06666565, y: -.0166702271, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -1389,6 +1409,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1400,6 +1421,7 @@ MonoBehaviour:
   renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -1553,7 +1575,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1319897461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.06666672, y: -1.06666672, z: 0}
+  m_LocalPosition: {x: 1.06666565, y: -1.06666565, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -1587,6 +1609,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1598,6 +1621,7 @@ MonoBehaviour:
   renderOrder: 21
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -1672,7 +1696,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1342250420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .366666675, y: -.366666675, z: 0}
+  m_LocalPosition: {x: .366668701, y: -.366668701, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -1706,6 +1730,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1717,6 +1742,7 @@ MonoBehaviour:
   renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -1814,6 +1840,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1825,6 +1852,7 @@ MonoBehaviour:
   renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -1882,7 +1910,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1486405068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .716666698, y: -.366666675, z: 0}
+  m_LocalPosition: {x: .716667175, y: -.366668701, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -1944,6 +1972,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -1955,6 +1984,7 @@ MonoBehaviour:
   renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -2029,7 +2059,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1543778218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .716666698, y: -1.06666672, z: 0}
+  m_LocalPosition: {x: .716667175, y: -1.06666565, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -2063,6 +2093,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2074,6 +2105,7 @@ MonoBehaviour:
   renderOrder: 20
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -2148,7 +2180,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1689839405}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.41666675, y: -.0166666675, z: 0}
+  m_LocalPosition: {x: 1.41666412, y: -.0166702271, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -2182,6 +2214,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2193,6 +2226,7 @@ MonoBehaviour:
   renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -2301,6 +2335,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 13
     margins:
@@ -2312,6 +2347,7 @@ MonoBehaviour:
   renderOrder: 26
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
   backgroundSprite: 
@@ -2392,7 +2428,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1824481465}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.41666675, y: -.716666698, z: 0}
+  m_LocalPosition: {x: 1.41666412, y: -.716667175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -2426,6 +2462,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2437,6 +2474,7 @@ MonoBehaviour:
   renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -2511,7 +2549,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1825996641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .366666675, y: -.716666698, z: 0}
+  m_LocalPosition: {x: .366668701, y: -.716667175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -2545,6 +2583,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2556,6 +2595,7 @@ MonoBehaviour:
   renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -2630,7 +2670,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1829546111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.41666675, y: -1.06666672, z: 0}
+  m_LocalPosition: {x: 1.41666412, y: -1.06666565, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -2664,6 +2704,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2675,6 +2716,7 @@ MonoBehaviour:
   renderOrder: 22
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -2771,6 +2813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiScale: 1
+  uiScaleLegacy: 1
   inputManager: {fileID: 1999133597}
   fixedWidth: 800
   fixedHeight: 600
@@ -2796,8 +2839,8 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e773281c06b5e024db5e1a4f549afe5d, type: 2}
-  - {fileID: 2100000, guid: 15ec4961902cc5e41bf37d7b73a08882, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -2835,6 +2878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderCamera: {fileID: 163863051}
   useTouch: 1
+  useMouse: 1
   useJoystick: 0
   joystickClickButton: 0
   horizontalAxis: Horizontal
@@ -2842,6 +2886,8 @@ MonoBehaviour:
   axisPollingInterval: .150000006
   retainFocus: 0
   touchClickRadius: 20
+  hoverStartDelay: .25
+  hoverNotifactionFrequency: .100000001
 --- !u!1 &2024817199
 GameObject:
   m_ObjectHideFlags: 0
@@ -2866,7 +2912,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2024817199}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.41666675, y: -.366666675, z: 0}
+  m_LocalPosition: {x: 1.41666412, y: -.366668701, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -2900,6 +2946,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -2911,6 +2958,7 @@ MonoBehaviour:
   renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -2985,7 +3033,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2043836269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.76666665, y: -.716666698, z: 0}
+  m_LocalPosition: {x: 1.76667023, y: -.716667175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -3019,6 +3067,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3030,6 +3079,7 @@ MonoBehaviour:
   renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -3138,6 +3188,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3149,6 +3200,7 @@ MonoBehaviour:
   renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -3223,7 +3275,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2112954671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.06666672, y: -.366666675, z: 0}
+  m_LocalPosition: {x: 1.06666565, y: -.366668701, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2112980880}
@@ -3257,6 +3309,7 @@ MonoBehaviour:
   clipChildren: 0
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 5
     margins:
@@ -3268,6 +3321,7 @@ MonoBehaviour:
   renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 9c86eb12c10660e44883cad627ec47dd, type: 2}
   backgroundSprite: frame-style7
@@ -3401,6 +3455,7 @@ MonoBehaviour:
   clipChildren: 1
   tabIndex: -1
   canFocus: 0
+  autoFocus: 0
   layout:
     anchorStyle: 271
     margins:
@@ -3412,8 +3467,12 @@ MonoBehaviour:
   renderOrder: 1
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: frame-basic-opaque
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
   padding:
     m_Left: 0
     m_Right: 0
@@ -3450,3 +3509,5 @@ MonoBehaviour:
   itemSpacing: {x: 5, y: 5}
   flowDirection: 0
   hideClippedControls: 1
+  maxLayoutSize: 0
+  excludedControls: []

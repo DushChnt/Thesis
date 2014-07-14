@@ -78,7 +78,7 @@ NavMeshSettings:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 34924311}
@@ -95,7 +95,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 34924310}
   m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -107,7 +107,7 @@ Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2300000, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 34924310}
   m_Enabled: 1
   m_CastShadows: 0
@@ -126,7 +126,7 @@ MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 3300000, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 34924310}
   m_Mesh: {fileID: 10205, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &76754010
@@ -263,6 +263,7 @@ MonoBehaviour:
   renderOrder: 1
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 27698b9a984ea004aad5f803f00e81ec, type: 2}
   spriteName: Jump
   flip: 0
@@ -289,7 +290,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 108962832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f73df87b706ea941b08a53365dc47dc, type: 3}
+  m_Script: {fileID: 11500000, guid: e02598f0fcd307b4c9079ab4184bd903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isMouseDown: 0
@@ -466,6 +467,7 @@ MonoBehaviour:
   renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 27698b9a984ea004aad5f803f00e81ec, type: 2}
   spriteName: TouchButton
   flip: 0
@@ -484,46 +486,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .625, y: .625, z: .00100000005}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &490872093
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 400002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.10000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-  m_RootGameObject: {fileID: 1062420104}
-  m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &511217121
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,6 +638,7 @@ MonoBehaviour:
   renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: dot
   flip: 0
@@ -835,6 +798,7 @@ MonoBehaviour:
   renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 27698b9a984ea004aad5f803f00e81ec, type: 2}
   spriteName: TouchButton
   flip: 0
@@ -936,6 +900,7 @@ MonoBehaviour:
   renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
   backgroundSprite: medium-fill
@@ -1067,7 +1032,6 @@ GameObject:
   - 65: {fileID: 942635878}
   - 114: {fileID: 942635879}
   - 114: {fileID: 942635877}
-  - 114: {fileID: 942635882}
   - 23: {fileID: 942635881}
   - 33: {fileID: 942635880}
   m_Layer: 31
@@ -1132,6 +1096,7 @@ MonoBehaviour:
   renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: 
   backgroundColor:
@@ -1198,18 +1163,6 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
---- !u!114 &942635882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 942635875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa59885e8cb3dc341b20ffab82c4d2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipType: 0
 --- !u!1 &987614836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,7 +1174,6 @@ GameObject:
   - 65: {fileID: 987614839}
   - 114: {fileID: 987614840}
   - 114: {fileID: 987614838}
-  - 114: {fileID: 987614843}
   - 23: {fileID: 987614842}
   - 33: {fileID: 987614841}
   m_Layer: 31
@@ -1286,6 +1238,7 @@ MonoBehaviour:
   renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: radar-main
   flip: 0
@@ -1347,23 +1300,11 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
---- !u!114 &987614843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 987614836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa59885e8cb3dc341b20ffab82c4d2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipType: 1
 --- !u!1 &1062420104
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1062420109}
@@ -1383,11 +1324,11 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400004, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1062420104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb5d4e0e1c5f1945a2d69da5a0e6d0a, type: 3}
+  m_Script: {fileID: 11500000, guid: a7391a0c731e43a4a9e7b3d6d475d499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   joystickID: LeftJoystick
@@ -1396,20 +1337,20 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400002, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1062420104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef21a08c70acf0343ab2881cd5ab0735, type: 3}
+  m_Script: {fileID: 11500000, guid: b391d35b27203884cab8c9b79ea3ac4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canControl: 1
-  useFixedUpdate: 0
+  useFixedUpdate: 1
   inputSprint: 0
   movement:
-    maxForwardSpeed: 6
-    maxSidewaysSpeed: 6
-    maxBackwardsSpeed: 6
+    maxForwardSpeed: 3
+    maxSidewaysSpeed: 2
+    maxBackwardsSpeed: 2
     slopeSpeedMultiplier:
       serializedVersion: 2
       m_Curve:
@@ -1430,14 +1371,14 @@ MonoBehaviour:
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-    maxGroundAcceleration: 20
-    maxAirAcceleration: 15
-    gravity: 20
+    maxGroundAcceleration: 30
+    maxAirAcceleration: 20
+    gravity: 9.81000042
     maxFallSpeed: 20
   jumping:
     enabled: 1
     baseHeight: 1
-    extraHeight: 1
+    extraHeight: 4.0999999
     perpAmount: 0
     steepPerpAmount: .5
   movingPlatform:
@@ -1445,7 +1386,7 @@ MonoBehaviour:
     movementTransfer: 2
   sliding:
     enabled: 1
-    slidingSpeed: 10
+    slidingSpeed: 15
     sidewaysControl: 1
     speedControl: .400000006
 --- !u!143 &1062420108
@@ -1453,7 +1394,7 @@ CharacterController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 14300000, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1062420104}
   serializedVersion: 2
   m_Height: 2
@@ -1467,7 +1408,7 @@ CharacterController:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1062420104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.10000002, z: 0}
@@ -1481,21 +1422,21 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1062420104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e914bddc8647524a872dedc263b3e0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5665226ff06e33d4db8d98844778905a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   joystickName: RightJoystick
-  axes: 1
-  sensitivityX: 3
-  sensitivityY: .5
+  axes: 0
+  sensitivityX: 15
+  sensitivityY: 15
   minimumX: -360
   maximumX: 360
-  minimumY: 0
-  maximumY: 0
+  minimumY: -60
+  maximumY: 60
 --- !u!1 &1399109644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1633,6 +1574,7 @@ MonoBehaviour:
   renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 27698b9a984ea004aad5f803f00e81ec, type: 2}
   spriteName: Radar_layer1
   flip: 0
@@ -1744,7 +1686,6 @@ GameObject:
   - 65: {fileID: 1753980497}
   - 114: {fileID: 1753980498}
   - 114: {fileID: 1753980496}
-  - 114: {fileID: 1753980501}
   - 23: {fileID: 1753980500}
   - 33: {fileID: 1753980499}
   m_Layer: 31
@@ -1807,6 +1748,7 @@ MonoBehaviour:
   renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
   backgroundSprite: 
@@ -1867,7 +1809,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1753980494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6cffd4f68e7ae047b0dec8e2a5440b0, type: 3}
+  m_Script: {fileID: 11500000, guid: a07a68489005386498c1d0266d2e66ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   updateInterval: .5
@@ -1896,23 +1838,11 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
---- !u!114 &1753980501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1753980494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa59885e8cb3dc341b20ffab82c4d2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipType: 0
 --- !u!1 &1871282322
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100004, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1871282323}
@@ -1932,7 +1862,7 @@ GameObject:
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400004, guid: 9d4133d5d30b644bd87802a347eaccbe, type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871282322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: .907083511, z: 0}
@@ -1944,7 +1874,7 @@ AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 8100000, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871282322}
   m_Enabled: 1
 --- !u!124 &1871282326
@@ -1952,7 +1882,7 @@ Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 12400000, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871282322}
   m_Enabled: 1
 --- !u!92 &1871282327
@@ -1960,7 +1890,7 @@ Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 9200000, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871282322}
   m_Enabled: 1
 --- !u!20 &1871282328
@@ -1968,7 +1898,7 @@ Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 2000000, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871282322}
   m_Enabled: 1
   serializedVersion: 2
@@ -1997,11 +1927,11 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400006, guid: 9d4133d5d30b644bd87802a347eaccbe,
     type: 2}
-  m_PrefabInternal: {fileID: 490872093}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1871282322}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e914bddc8647524a872dedc263b3e0c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5665226ff06e33d4db8d98844778905a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   joystickName: RightJoystick
@@ -2107,6 +2037,11 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
@@ -2227,6 +2162,7 @@ MonoBehaviour:
   renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: 
   backgroundColor:
@@ -2398,6 +2334,7 @@ MonoBehaviour:
   renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 27698b9a984ea004aad5f803f00e81ec, type: 2}
   spriteName: Move
   flip: 0
@@ -2469,7 +2406,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 2147483648
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
 --- !u!4 &2047889607

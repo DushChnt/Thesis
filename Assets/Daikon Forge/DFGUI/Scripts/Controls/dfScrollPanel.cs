@@ -102,6 +102,9 @@ public class dfScrollPanel : dfControl
 	protected bool useVirtualScrolling = false;
 
 	[SerializeField]
+	protected bool autoFitVirtualTiles = true;
+
+	[SerializeField]
 	protected dfControl virtualScrollingTile;
 
 	#endregion
@@ -418,6 +421,16 @@ public class dfScrollPanel : dfControl
 				VirtualScrollingTile = null;
 			}
 		}
+	}
+
+	/// <summary>
+	/// Gets or sets whether or not virtualized tiles will be automatically stretched to fit horizontally for vertically
+	/// scrolling <see cref="dfScrollPanel"/>, or vertically for horizontally scrolling <see cref="dfScrollPanel"/> controls.
+	/// </summary>
+	public bool AutoFitVirtualTiles
+	{
+		get { return autoFitVirtualTiles; }
+		set { autoFitVirtualTiles = value; }
 	}
 
 	/// <summary>
@@ -1276,6 +1289,24 @@ public class dfScrollPanel : dfControl
 		Virtualize( backingList, 0 );
 	}
 
+	public void ResetVirtualScrollingData()
+	{
+
+		virtualScrollData = null;
+
+		var temp = controls.ToArray();
+		
+		for( int i = 0; i < temp.Length; i++ )
+		{
+			var c = temp[ i ];
+			RemoveControl( c );
+			Destroy( c.gameObject );
+		}
+
+		ScrollPosition = Vector2.zero;
+
+	}
+
 	/// <summary>
 	/// Get a reference to the store virtual scrolling information.
 	/// </summary>
@@ -1575,7 +1606,7 @@ public class dfScrollPanel : dfControl
 		 */
 		var isPaging = Mathf.Abs( d ) > Height;
 
-		if( isPaging )
+		if( isPaging && ( VertScrollbar || HorzScrollbar ) )
 		{
 
 			var pct = ( isVerticalFlow )
@@ -1702,13 +1733,15 @@ public class dfScrollPanel : dfControl
 
 		AddControl( panel );
 
-		if( isVerticalFlow )
+		if ( AutoFitVirtualTiles )
 		{
-			panel.Width = Width - padding.horizontal;
-		}
-		else
-		{
-			panel.Height = Height - padding.vertical;
+			if ( isVerticalFlow )
+			{
+				panel.Width = Width - padding.horizontal;
+			} else
+			{
+				panel.Height = Height - padding.vertical;
+			}
 		}
 
 		panel.RelativePosition = new Vector3( padding.left, padding.top );

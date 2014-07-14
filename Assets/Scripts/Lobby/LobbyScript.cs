@@ -58,6 +58,7 @@ public class LobbyScript : Photon.MonoBehaviour {
                     dfPanel listItem = ActiveRoomsPanel.AddPrefab(ListItem) as dfPanel; // as UserListItem;
                     listItem.Width = ActiveRoomsPanel.Width - ActiveRoomsPanel.FlowPadding.left - ActiveRoomsPanel.FlowPadding.right;
                     listItem.Click += new MouseEventHandler(listItem_Click);
+                    listItem.DoubleClick += new MouseEventHandler(listItem_DoubleClick);
 
                     RoomData data = listItem.GetComponent<RoomData>();
                     data.Game = game;
@@ -98,6 +99,24 @@ public class LobbyScript : Photon.MonoBehaviour {
         }
     }
 
+    void listItem_DoubleClick(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        if (currentlySelected != null)
+        {
+            currentlySelected.BackgroundColor = new Color32(255, 255, 255, 255);
+            currentlySelected.Find("Selected Indicator").GetComponent<dfSprite>().Hide();
+        }
+
+        dfPanel item = control as dfPanel;
+        RoomData data = item.GetComponent<RoomData>();
+        data.Selected = true;
+        item.BackgroundColor = new Color32(0, 0, 0, 255);
+        currentlySelected = item;
+        currentlySelected.Find("Selected Indicator").GetComponent<dfSprite>().Show();
+
+        UpdateInfoBox();
+    }
+
     void listItem_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
         if (currentlySelected != null)
@@ -114,6 +133,11 @@ public class LobbyScript : Photon.MonoBehaviour {
         currentlySelected.Find("Selected Indicator").GetComponent<dfSprite>().Show();
 
         UpdateInfoBox();
+
+        if (data.Game.playerCount < data.Game.maxPlayers)
+        {
+            JoinButton.DoClick();
+        }
     }
 
     void UpdateInfoBox()

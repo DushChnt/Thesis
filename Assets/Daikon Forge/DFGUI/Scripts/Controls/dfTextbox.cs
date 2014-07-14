@@ -17,7 +17,7 @@ using System.Collections.Generic;
 [Serializable]
 [ExecuteInEditMode]
 [AddComponentMenu( "Daikon Forge/User Interface/Textbox" )]
-public class dfTextbox : dfInteractiveBase, IDFMultiRender
+public class dfTextbox : dfInteractiveBase, IDFMultiRender, IRendersText
 {
 
 	#region Public events
@@ -151,6 +151,8 @@ public class dfTextbox : dfInteractiveBase, IDFMultiRender
 	private string undoText = "";
 	private float tripleClickTimer = 0f;
 
+	private bool isFontCallbackAssigned = false;
+
 #if UNITY_IPHONE || UNITY_ANDROID || UNITY_BLACKBERRY || UNITY_WP8 || UNITY_EDITOR
 	private static TouchScreenKeyboard mobileKeyboard;
 #endif
@@ -181,7 +183,9 @@ public class dfTextbox : dfInteractiveBase, IDFMultiRender
 		{
 			if( value != this.font )
 			{
+				unbindTextureRebuildCallback();
 				this.font = value;
+				bindTextureRebuildCallback();
 				Invalidate();
 			}
 		}
@@ -455,6 +459,7 @@ public class dfTextbox : dfInteractiveBase, IDFMultiRender
 			value = Mathf.Max( 0.1f, value );
 			if( !Mathf.Approximately( textScale, value ) )
 			{
+				dfFontManager.Invalidate( this.Font );
 				this.textScale = value;
 				Invalidate();
 			}
@@ -839,6 +844,14 @@ public class dfTextbox : dfInteractiveBase, IDFMultiRender
 
 		#endregion
 
+		bindTextureRebuildCallback();
+
+	}
+
+	public override void OnDisable()
+	{
+		base.OnDisable();
+		unbindTextureRebuildCallback();
 	}
 
 	public override void Awake()
@@ -2048,6 +2061,76 @@ protected internal override void OnClick( dfMouseEventArgs args )
 
 		return buffers;
 
+	}
+
+	#endregion
+
+	#region Dynamic font management
+
+	private void bindTextureRebuildCallback()
+	{
+
+		if( isFontCallbackAssigned || Font == null )
+			return;
+
+		if( Font is dfDynamicFont )
+		{
+
+			Font font = ( Font as dfDynamicFont ).BaseFont;
+			font.textureRebuildCallback = (UnityEngine.Font.FontTextureRebuildCallback)Delegate.Combine( font.textureRebuildCallback, (Font.FontTextureRebuildCallback)this.onFontTextureRebuilt );
+
+			isFontCallbackAssigned = true;
+
+		}
+
+	}
+
+	private void unbindTextureRebuildCallback()
+	{
+
+		if( !isFontCallbackAssigned || Font == null )
+			return;
+
+		if( Font is dfDynamicFont )
+		{
+
+			Font font = ( Font as dfDynamicFont ).BaseFont;
+			font.textureRebuildCallback = (UnityEngine.Font.FontTextureRebuildCallback)Delegate.Remove( font.textureRebuildCallback, (UnityEngine.Font.FontTextureRebuildCallback)this.onFontTextureRebuilt );
+		}
+
+		isFontCallbackAssigned = false;
+
+	}
+
+	private void requestCharacterInfo()
+	{
+
+		var dynamicFont = this.Font as dfDynamicFont;
+		if( dynamicFont == null )
+			return;
+
+		if( !dfFontManager.IsDirty( this.Font ) )
+			return;
+
+		if( string.IsNullOrEmpty( this.text ) )
+			return;
+
+		var effectiveTextScale = TextScale * getTextScaleMultiplier();
+		var effectiveFontSize = Mathf.CeilToInt( this.font.FontSize * effectiveTextScale );
+
+		dynamicFont.AddCharacterRequest( this.text, effectiveFontSize, FontStyle.Normal );
+
+	}
+
+	private void onFontTextureRebuilt()
+	{
+		requestCharacterInfo();
+		Invalidate();
+	}
+
+	public void UpdateFontInfo()
+	{
+		requestCharacterInfo();
 	}
 
 	#endregion

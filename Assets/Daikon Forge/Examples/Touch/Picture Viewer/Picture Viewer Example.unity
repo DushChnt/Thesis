@@ -366,11 +366,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 334290394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!1 &359196963
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,11 +489,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 359196963}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!1 &367502596
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,11 +612,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 367502596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!1 &515037742
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,11 +723,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 515037742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!114 &515037747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 542019338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb51f69f73562634bb29e3c1d911e773, type: 3}
+  m_Script: {fileID: 11500000, guid: 2abd8469f98dda0419e4ad2a80a8be06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &542019343
@@ -874,7 +874,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 542019338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
@@ -887,7 +887,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 542019338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5038aab00776e1f478a5ab6983725c43, type: 3}
+  m_Script: {fileID: 11500000, guid: 95e0fb471693a064da610e60377e104d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minDistance: 25
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 542019338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f4a208b97dcdb42be66ccd6f9c306b, type: 3}
+  m_Script: {fileID: 11500000, guid: 967ff58865a2f2f4cb248772ed456de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   thresholdAngle: 10
@@ -1261,7 +1261,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 692596012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3decb584561b1e741bb84eb3579cf91c, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c7f28d4604b9d34e8f92cf281f321ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   editorOnly: 1
@@ -1387,11 +1387,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 755764064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!1 &894122257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1510,11 +1510,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 894122257}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!1 &952739983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1633,11 +1633,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 952739983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!1 &1349479456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,11 +1756,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1349479456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!1 &1569800173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,11 +1958,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1611708113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!1 &1866492965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,6 +2076,7 @@ MonoBehaviour:
   scrollWithArrowKeys: 1
   useScrollMomentum: 1
   useVirtualScrolling: 0
+  autoFitVirtualTiles: 1
   virtualScrollingTile: {fileID: 0}
 --- !u!33 &1866492969
 MeshFilter:
@@ -2231,11 +2232,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1968437838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35
 --- !u!1 &2094314633
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,8 +2422,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2130967815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29ead70e6ed85bf4cb7466dc505a389e, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9dc90e5dca62943b466dc0c47fe538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeout: .5
-  maxDistance: 75
+  maxDistance: 35

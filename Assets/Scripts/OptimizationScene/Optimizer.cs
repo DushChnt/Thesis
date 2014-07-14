@@ -231,7 +231,12 @@ public class Optimizer : MonoBehaviour {
         _ea.PausedEvent += new EventHandler(ea_PauseEvent);
         
         startTime = DateTime.Now;
-        Time.timeScale = 10;
+        int evoSpeed = PlayerPrefs.GetInt("Evolution Speed");
+        if (evoSpeed < 6 || evoSpeed > 10)
+        {
+            evoSpeed = 8;
+        }
+        Time.timeScale = evoSpeed;
         Target.GetComponent<TargetController>().Activate();
         _ea.StartContinue();
         EARunning = true;

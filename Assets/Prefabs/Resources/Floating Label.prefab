@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .484741211, y: -.0531921387, z: 0}
+  m_LocalPosition: {x: .624137878, y: .203514099, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .0598958358, y: .0416666679, z: .00100000005}
-  m_Center: {x: .0299479179, y: -.020833334, z: 0}
+  m_Size: {x: .078125, y: .0572916679, z: .00100000005}
+  m_Center: {x: .0390625, y: -.028645834, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -159,7 +159,7 @@ MonoBehaviour:
   autoRun: 1
   skipToEndOnStop: 0
   delayBeforeStarting: 0
-  startValue: {x: 667.518494, y: 363.229858, z: 0}
+  startValue: {x: 789.122375, y: 409.564545, z: 0}
   endValue: {x: 0, y: -100, z: 0}
   direction: 0
 --- !u!114 &11400008
@@ -186,7 +186,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 23, y: 16}
+  size: {x: 30, y: 22}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -196,10 +196,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 5
     margins:
-      left: 186.140625
-      top: 20.4257812
-      right: 752.859375
-      bottom: 610.574219
+      left: 239.667969
+      top: -78.1523438
+      right: 692.332031
+      bottom: 703.152344
     owner: {fileID: 11400008}
   renderOrder: 10
   isLocalized: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
     rgba: 4278190335
   align: 0
   vertAlign: 0
-  textScale: .625
+  textScale: .833333313
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
@@ -256,10 +256,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
   attach: {fileID: 0}
+  anchor: 4
   offset: {x: 0, y: 8, z: 0}
   hideDistance: 20000
   fadeDistance: 10000
   constantScale: 0
+  stickToScreenEdge: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

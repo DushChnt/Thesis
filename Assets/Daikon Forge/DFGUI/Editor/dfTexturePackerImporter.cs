@@ -161,6 +161,10 @@ public class dfTexturePackerImporter : EditorWindow
 		atlas.Items.Clear();
 		atlas.Items.AddRange( newSprites );
 
+		EditorUtility.SetDirty( atlas.gameObject );
+		EditorUtility.SetDirty( atlas );
+		EditorUtility.SetDirty( atlas.Material );
+		
 		var prefabPath = AssetDatabase.GetAssetPath( atlas );
 		var go = atlas.gameObject;
 

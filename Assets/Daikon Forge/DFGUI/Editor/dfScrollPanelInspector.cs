@@ -130,6 +130,40 @@ public class dfScrollPanelInspector : dfControlInspector
 
 		using( dfEditorUtil.BeginGroup( "Scrolling" ) )
 		{
+			var useVirtualScrolling = EditorGUILayout.Toggle( "Virtual Scrolling", control.UseVirtualScrolling );
+			if ( useVirtualScrolling != control.UseVirtualScrolling )
+			{
+				dfEditorUtil.MarkUndo( control, "Toggle Virtual Scrolling" );
+				control.UseVirtualScrolling = useVirtualScrolling;
+			}
+
+			if ( useVirtualScrolling )
+			{
+				var virtualScrollingTile = (dfPanel) EditorGUILayout.ObjectField( "Virtual Tile", control.VirtualScrollingTile, typeof ( dfPanel ), true );
+				if ( virtualScrollingTile != control.VirtualScrollingTile )
+				{
+					dfEditorUtil.MarkUndo( control, "Set Virtual Tile" );
+					control.VirtualScrollingTile = virtualScrollingTile;
+				}
+
+				if ( virtualScrollingTile != null )
+				{
+					var inter = virtualScrollingTile.GetComponents<MonoBehaviour>()
+													.FirstOrDefault( p => p is IDFVirtualScrollingTile );
+					if ( !inter )
+					{
+						EditorGUILayout.HelpBox( "The tile you've chosen does not implement IDFVirtualScrollingTile!", MessageType.Error );
+					}
+
+				}
+
+				var autoFitVirtualTiles = EditorGUILayout.Toggle( "Auto Fit Tile", control.AutoFitVirtualTiles );
+				if ( autoFitVirtualTiles != control.AutoFitVirtualTiles )
+				{
+					dfEditorUtil.MarkUndo( control, "Set Auto-fit Tile" );
+					control.AutoFitVirtualTiles = autoFitVirtualTiles;
+				}
+			}
 
 			var scrollWithKeys = EditorGUILayout.Toggle( "Use Arrow Keys", control.ScrollWithArrowKeys );
 			if( scrollWithKeys != control.ScrollWithArrowKeys )

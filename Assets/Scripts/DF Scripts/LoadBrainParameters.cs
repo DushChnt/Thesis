@@ -107,6 +107,16 @@ public class LoadBrainParameters : MonoBehaviour {
                 break;
         }
         
+        dfSlider slider = GameObject.Find("Speed Slider").GetComponent<dfSlider>();
+        int evoSpeed = PlayerPrefs.GetInt("Evolution Speed");
+        if (evoSpeed >= 6 && evoSpeed <= 10)
+        {
+            slider.Value = evoSpeed - 6;
+        }
+        else
+        {
+            slider.Value = 2;
+        }
     }
 	
 	// Update is called once per frame

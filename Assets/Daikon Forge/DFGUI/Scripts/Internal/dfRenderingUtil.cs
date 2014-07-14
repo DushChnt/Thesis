@@ -54,6 +54,7 @@ internal class dfMaterialCache
 	public static void Clear()
 	{
 		Cache.ClearAll();
+		caches.Clear();
 	}
 
 	#endregion
@@ -114,6 +115,7 @@ internal class dfMaterialCache
 			{
 				cacheInstances[ i ].Clear();
 			}
+			cacheInstances.Clear();
 		}
 
 		/// <summary>
@@ -171,8 +173,25 @@ internal class dfMaterialCache
 		/// </summary>
 		public void Clear()
 		{
+
 			currentIndex = 0;
+
+			// NOTE: The first instance is always the original, we only destroy copies,
+			// so this loop starts at index 1
+			for( int i = 1; i < instances.Count; i++ )
+			{
+				var instance = instances[ i ];
+				if( instance != null )
+				{
+					if( Application.isPlaying )
+						UnityEngine.Object.Destroy( instance );
+					else
+						UnityEngine.Object.DestroyImmediate( instance );
+				}
+			}
+
 			instances.Clear();
+
 		}
 
 		#endregion
@@ -218,41 +237,46 @@ internal class dfTempArray<T>
 	public static T[] Obtain( int length, int maxCacheSize )
 	{
 
-		// Search for an existing list of the correct size
-		for( int i = 0; i < cache.Count; i++ )
+		lock( cache )
 		{
 
-			var list = cache[ i ];
-			if( list.Length == length )
+			// Search for an existing list of the correct size
+			for( int i = 0; i < cache.Count; i++ )
 			{
 
-				// Always keep the most-recently-accessed list at the
-				// front of the cache
-				if( i > 0 )
+				var list = cache[ i ];
+				if( list.Length == length )
 				{
-					cache.RemoveAt( i );
-					cache.Insert( 0, list );
-				}
 
-				return list;
+					// Always keep the most-recently-accessed list at the
+					// front of the cache
+					if( i > 0 )
+					{
+						cache.RemoveAt( i );
+						cache.Insert( 0, list );
+					}
+
+					return list;
+
+				}
 
 			}
 
+			// No list of the correct size was found. If the cache is already 
+			// full, remove the least-recently-accessed list from the cache 
+			// in order to make room for another list.
+			if( cache.Count >= maxCacheSize )
+			{
+				cache.RemoveAt( cache.Count - 1 );
+			}
+
+			// Create a new list of the correct size and add it to the cache
+			var newList = new T[ length ];
+			cache.Insert( 0, newList );
+
+			return newList;
+
 		}
-
-		// No list of the correct size was found. If the cache is already 
-		// full, remove the least-recently-accessed list from the cache 
-		// in order to make room for another list.
-		if( cache.Count >= maxCacheSize )
-		{
-			cache.RemoveAt( cache.Count - 1 );
-		}
-
-		// Create a new list of the correct size and add it to the cache
-		var newList = new T[ length ];
-		cache.Insert( 0, newList );
-
-		return newList;
 
 	}
 

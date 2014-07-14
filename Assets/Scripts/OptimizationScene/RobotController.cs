@@ -179,7 +179,8 @@ public class RobotController : BaseController
 
         glabel.RelativePosition = GUI.WorldPointToGUI(gameObject.transform.position) + new Vector2(0, -10);
         glabel.BottomColor = color;
-    
+        float effectiveFontSize = 16;
+        glabel.TextScale = (float)effectiveFontSize / (float)glabel.Font.FontSize;
         glabel.Text = text;
     }
 

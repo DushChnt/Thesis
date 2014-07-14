@@ -14,7 +14,7 @@ using UnityEngine;
 [dfTooltip( "Provides a basic Button implementation that allows the developer to specify individual sprite images to be used to represent common button states." )]
 [dfHelp( "http://www.daikonforge.com/docs/df-gui/classdf_button.html" )]
 [AddComponentMenu( "Daikon Forge/User Interface/Button" )]
-public class dfButton : dfInteractiveBase, IDFMultiRender
+public class dfButton : dfInteractiveBase, IDFMultiRender, IRendersText
 {
 
 	#region Public enums
@@ -305,7 +305,9 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 		{
 			if( value != this.font )
 			{
+				unbindTextureRebuildCallback();
 				this.font = value;
+				bindTextureRebuildCallback();
 			}
 			Invalidate();
 		}
@@ -321,6 +323,7 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 		{
 			if( value != this.text )
 			{
+				dfFontManager.Invalidate( this.Font );
 				this.localizationKey = value;
 				this.text = getLocalizedValue( value );
 				Invalidate();
@@ -466,6 +469,7 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 			value = Mathf.Max( 0.1f, value );
 			if( !Mathf.Approximately( textScale, value ) )
 			{
+				dfFontManager.Invalidate( this.Font );
 				this.textScale = value;
 				Invalidate();
 			}
@@ -555,6 +559,7 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 	#region Private runtime variables
 
 	private Vector2 startSize = Vector2.zero;
+	private bool isFontCallbackAssigned = false;
 
 	#endregion
 
@@ -603,6 +608,14 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 
 		#endregion
 
+		bindTextureRebuildCallback();
+
+	}
+
+	public override void OnDisable()
+	{
+		base.OnDisable();
+		unbindTextureRebuildCallback();
 	}
 
 	public override void Awake()
@@ -1096,6 +1109,76 @@ public class dfButton : dfInteractiveBase, IDFMultiRender
 
 		return buffers;
 
+	}
+
+	#endregion
+
+	#region Dynamic font management
+
+	private void bindTextureRebuildCallback()
+	{
+
+		if( isFontCallbackAssigned || Font == null )
+			return;
+
+		if( Font is dfDynamicFont )
+		{
+
+			Font font = ( Font as dfDynamicFont ).BaseFont;
+			font.textureRebuildCallback = (UnityEngine.Font.FontTextureRebuildCallback)Delegate.Combine( font.textureRebuildCallback, (Font.FontTextureRebuildCallback)this.onFontTextureRebuilt );
+
+			isFontCallbackAssigned = true;
+
+		}
+
+	}
+
+	private void unbindTextureRebuildCallback()
+	{
+
+		if( !isFontCallbackAssigned || Font == null )
+			return;
+
+		if( Font is dfDynamicFont )
+		{
+
+			Font font = ( Font as dfDynamicFont ).BaseFont;
+			font.textureRebuildCallback = (UnityEngine.Font.FontTextureRebuildCallback)Delegate.Remove( font.textureRebuildCallback, (UnityEngine.Font.FontTextureRebuildCallback)this.onFontTextureRebuilt );
+		}
+
+		isFontCallbackAssigned = false;
+
+	}
+
+	private void requestCharacterInfo()
+	{
+
+		var dynamicFont = this.Font as dfDynamicFont;
+		if( dynamicFont == null )
+			return;
+
+		if( !dfFontManager.IsDirty( this.Font ) )
+			return;
+
+		if( string.IsNullOrEmpty( this.text ) )
+			return;
+
+		var effectiveTextScale = TextScale * getTextScaleMultiplier();
+		var effectiveFontSize = Mathf.CeilToInt( this.font.FontSize * effectiveTextScale );
+
+		dynamicFont.AddCharacterRequest( this.text, effectiveFontSize, FontStyle.Normal );
+
+	}
+
+	private void onFontTextureRebuilt()
+	{
+		requestCharacterInfo();
+		Invalidate();
+	}
+
+	public void UpdateFontInfo()
+	{
+		requestCharacterInfo();
 	}
 
 	#endregion

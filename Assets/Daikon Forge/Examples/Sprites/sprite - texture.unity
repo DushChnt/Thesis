@@ -131,7 +131,7 @@ MonoBehaviour:
       right: 192
       bottom: 147
     owner: {fileID: 79354789}
-  renderOrder: 3
+  renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -288,7 +288,7 @@ MonoBehaviour:
       right: 18
       bottom: 19
     owner: {fileID: 223885704}
-  renderOrder: 14
+  renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 223885702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94b61c3eb355db4aa7c151c5188670f, type: 3}
+  m_Script: {fileID: 11500000, guid: c6dd38fc117d4624ead6bb9661f44efb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Sprite: {fileID: 223885704}
@@ -466,7 +466,7 @@ MonoBehaviour:
       right: 460
       bottom: 16
     owner: {fileID: 341160288}
-  renderOrder: 10
+  renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -559,7 +559,7 @@ MonoBehaviour:
       right: 0
       bottom: 375
     owner: {fileID: 726032497}
-  renderOrder: 6
+  renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -682,7 +682,7 @@ MonoBehaviour:
       right: -457
       bottom: 1
     owner: {fileID: 737966908}
-  renderOrder: 9
+  renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -856,7 +856,6 @@ Transform:
   m_LocalPosition: {x: -100, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1587813241}
   - {fileID: 1583368053}
   - {fileID: 79354791}
   - {fileID: 1303365699}
@@ -928,7 +927,7 @@ MonoBehaviour:
       right: 0
       bottom: 472
     owner: {fileID: 1019829674}
-  renderOrder: 5
+  renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1013,7 +1012,7 @@ MonoBehaviour:
       right: 460
       bottom: 197
     owner: {fileID: 1071637036}
-  renderOrder: 7
+  renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1107,7 +1106,7 @@ MonoBehaviour:
       right: -311
       bottom: -3.30078125
     owner: {fileID: 1205774716}
-  renderOrder: 13
+  renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1400,7 +1399,7 @@ MonoBehaviour:
       right: 0
       bottom: 186
     owner: {fileID: 1414359780}
-  renderOrder: 16
+  renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1489,7 +1488,7 @@ MonoBehaviour:
       right: -457
       bottom: 33
     owner: {fileID: 1513585985}
-  renderOrder: 11
+  renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1612,7 +1611,7 @@ MonoBehaviour:
       right: 0
       bottom: 472
     owner: {fileID: 1514080706}
-  renderOrder: 4
+  renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1733,7 +1732,7 @@ MonoBehaviour:
       right: 0
       bottom: 366
     owner: {fileID: 1515535363}
-  renderOrder: 15
+  renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1889,152 +1888,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interval: .5
---- !u!1 &1587813240
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1587813241}
-  - 65: {fileID: 1587813245}
-  - 114: {fileID: 1587813244}
-  - 114: {fileID: 1587813242}
-  - 114: {fileID: 1587813246}
-  m_Layer: 8
-  m_Name: Back
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1587813241
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1587813240}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3203125, y: .986984253, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 820836332}
---- !u!114 &1587813242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1587813240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b43a1196f8397347b663f024fbdd493, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelName: sprites - menu
---- !u!114 &1587813244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1587813240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 2
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 54, y: 46}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  autoFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 5
-      top: 5
-      right: 965
-      bottom: 717
-    owner: {fileID: 1587813244}
-  renderOrder: 2
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  allowSignalEvents: 1
-  atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
-  spriteName: left-arrow
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!65 &1587813245
-BoxCollider:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1587813240}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .140625, y: .119791672, z: .00100000005}
-  m_Center: {x: .0703125, y: -.0598958358, z: 0}
---- !u!114 &1587813246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1587813240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf54a1ea4442ea4ab8cc50042221f8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenName: Slide In
-  target:
-    Component: {fileID: 1587813244}
-    MemberName: Position
-  easingType: 24
-  animCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  length: .660000026
-  syncStartWhenRun: 0
-  startValueIsOffset: 1
-  syncEndWhenRun: 1
-  endValueIsOffset: 0
-  loopType: 0
-  autoRun: 1
-  skipToEndOnStop: 0
-  delayBeforeStarting: 0
-  startValue: {x: 0, y: 100, z: 0}
-  endValue: {x: 0, y: 0, z: 0}
-  direction: 0
 --- !u!1 &1655091213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2102,7 +1955,7 @@ MonoBehaviour:
       right: 18
       bottom: 18
     owner: {fileID: 1655091215}
-  renderOrder: 8
+  renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2199,7 +2052,7 @@ MonoBehaviour:
       right: -137
       bottom: 3
     owner: {fileID: 1853550640}
-  renderOrder: 12
+  renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1

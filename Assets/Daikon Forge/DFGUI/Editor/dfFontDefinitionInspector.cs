@@ -96,7 +96,13 @@ public class dfFontDefinitionInspector : Editor
 		using( var file = File.OpenText( path ) )
 		{
 
-			var fileData = file.ReadToEnd();
+			var fileData = file.ReadToEnd().Trim();
+
+			if( !fileData.StartsWith( "info " ) )
+			{
+				Debug.LogError( "This file does not appear to be a valid BMFont text-format file" );
+				return null;
+			}
 
 			var font = owner.AddComponent<dfFont>();
 
@@ -114,21 +120,35 @@ public class dfFontDefinitionInspector : Editor
 				var type = typeMatch.Groups[ "Type" ].Value;
 				if( type != "char" )
 				{
+
 					if( type == "kerning" )
 					{
+
 						var kprop = new Dictionary<string, string>();
 						parseProperties( kprop, line );
+
 						font.AddKerning(
 							int.Parse( kprop[ "first" ] ),
 							int.Parse( kprop[ "second" ] ),
 							int.Parse( kprop[ "amount" ] )
 						);
+
 					}
 					else
 					{
+
+						if( type == "page" && globalProperties.ContainsKey( "page" ) )
+						{
+							Debug.LogError( "Multi-page fonts are currently not supported" );
+							return null;
+						}
+
 						parseProperties( globalProperties, line );
+
 					}
+
 					continue;
+
 				}
 
 				var glyph = new dfFont.GlyphDefinition();
@@ -155,7 +175,7 @@ public class dfFontDefinitionInspector : Editor
 
 			if( globalProperties.Count == 0 )
 			{
-				Debug.LogError( "This file does not appear to be a valid BMFont file" );
+				Debug.LogError( "This file does not appear to be a valid BMFont text-format file" );
 				DestroyImmediate( font );
 				return null;
 			}

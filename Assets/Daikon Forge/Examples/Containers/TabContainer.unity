@@ -130,9 +130,10 @@ MonoBehaviour:
       right: 488
       bottom: 14
     owner: {fileID: 117754089}
-  renderOrder: 6
+  renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: placeholder-text
   flip: 0
@@ -229,9 +230,10 @@ MonoBehaviour:
       right: 27.0019531
       bottom: 187
     owner: {fileID: 132174201}
-  renderOrder: 10
+  renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -356,9 +358,10 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 148646402}
-  renderOrder: 5
+  renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
   backgroundColor:
@@ -449,9 +452,10 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 630767525}
-  renderOrder: 9
+  renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
   backgroundColor:
@@ -621,9 +625,10 @@ MonoBehaviour:
       right: 249.001953
       bottom: 172
     owner: {fileID: 805420364}
-  renderOrder: 15
+  renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: frame-info
@@ -742,9 +747,10 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 840551531}
-  renderOrder: 16
+  renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
 --- !u!65 &840551532
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -825,9 +831,10 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 855603968}
-  renderOrder: 12
+  renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -954,9 +961,10 @@ MonoBehaviour:
       right: 444.001953
       bottom: -4
     owner: {fileID: 1006106798}
-  renderOrder: 20
+  renderOrder: 19
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: tab-normal
   hoverSprite: tab-hilite
@@ -1090,9 +1098,10 @@ MonoBehaviour:
       right: 520
       bottom: -4
     owner: {fileID: 1020774433}
-  renderOrder: 19
+  renderOrder: 18
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: tab-normal
   hoverSprite: tab-hilite
@@ -1226,9 +1235,10 @@ MonoBehaviour:
       right: .001953125
       bottom: 0
     owner: {fileID: 1062583601}
-  renderOrder: 25
+  renderOrder: 24
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: resize
   edges: 10
@@ -1360,156 +1370,10 @@ Transform:
   m_LocalPosition: {x: -100, y: 100, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1182283909}
   - {fileID: 1510313898}
   - {fileID: 2083192871}
   - {fileID: 2108407890}
   m_Father: {fileID: 0}
---- !u!1 &1182283908
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1182283909}
-  - 65: {fileID: 1182283911}
-  - 114: {fileID: 1182283910}
-  - 114: {fileID: 1182283912}
-  - 114: {fileID: 1182283913}
-  m_Layer: 8
-  m_Name: Back
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1182283909
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1182283908}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.30667114, y: .980003357, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1117909061}
---- !u!114 &1182283910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1182283908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d50ece95d8fc77c4f98cff1aba1da9fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anchorStyle: 5
-  isEnabled: 1
-  isVisible: 1
-  isInteractive: 1
-  tooltip: 
-  pivot: 0
-  zindex: 0
-  color:
-    serializedVersion: 2
-    rgba: 4294967295
-  disabledColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  size: {x: 53, y: 43}
-  minSize: {x: 0, y: 0}
-  maxSize: {x: 0, y: 0}
-  clipChildren: 0
-  tabIndex: -1
-  canFocus: 0
-  autoFocus: 0
-  layout:
-    anchorStyle: 5
-    margins:
-      left: 8
-      top: 6
-      right: 739
-      bottom: 551
-    owner: {fileID: 1182283910}
-  renderOrder: 1
-  isLocalized: 0
-  hotZoneScale: {x: 1, y: 1}
-  atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
-  spriteName: left-arrow
-  flip: 0
-  fillDirection: 0
-  fillAmount: 1
-  invertFill: 0
---- !u!65 &1182283911
-BoxCollider:
-  m_ObjectHideFlags: 2
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1182283908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .176666677, y: .143333331, z: .00100000005}
-  m_Center: {x: .0883333385, y: -.0716666654, z: 0}
---- !u!114 &1182283912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1182283908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b43a1196f8397347b663f024fbdd493, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LevelName: Container Examples
---- !u!114 &1182283913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1182283908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf54a1ea4442ea4ab8cc50042221f8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tweenName: Slide In
-  target:
-    Component: {fileID: 1182283910}
-    MemberName: Position
-  easingType: 0
-  animCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  length: .660000026
-  syncStartWhenRun: 0
-  startValueIsOffset: 1
-  syncEndWhenRun: 1
-  endValueIsOffset: 0
-  loopType: 0
-  autoRun: 1
-  skipToEndOnStop: 0
-  delayBeforeStarting: 0
-  startValue: {x: 0, y: 100, z: 0}
-  endValue: {x: 0, y: 0, z: 0}
-  direction: 0
 --- !u!1 &1191351729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,9 +1441,10 @@ MonoBehaviour:
       right: 12
       bottom: 155
     owner: {fileID: 1191351731}
-  renderOrder: 7
+  renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -1703,9 +1568,10 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 1224515384}
-  renderOrder: 11
+  renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
   backgroundColor:
@@ -1799,9 +1665,10 @@ MonoBehaviour:
       right: 5.00195312
       bottom: 5
     owner: {fileID: 1281250732}
-  renderOrder: 4
+  renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: frame-basic
   padding:
@@ -1878,9 +1745,10 @@ MonoBehaviour:
       right: 5.00195312
       bottom: 438
     owner: {fileID: 1446031312}
-  renderOrder: 18
+  renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
   layoutPadding:
@@ -1930,7 +1798,6 @@ GameObject:
   - 65: {fileID: 1510313900}
   - 114: {fileID: 1510313899}
   - 114: {fileID: 1510313901}
-  - 114: {fileID: 1510313904}
   - 23: {fileID: 1510313903}
   - 33: {fileID: 1510313902}
   m_Layer: 8
@@ -1990,9 +1857,10 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 1510313899}
-  renderOrder: 2
+  renderOrder: 1
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: fca14cda3e3e58245af2a8772760ca99, type: 2}
   backgroundSprite: 
@@ -2080,18 +1948,6 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
---- !u!114 &1510313904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1510313897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa59885e8cb3dc341b20ffab82c4d2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipType: 1
 --- !u!1 &1637923106
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,9 +2015,10 @@ MonoBehaviour:
       right: 8.99804688
       bottom: 13
     owner: {fileID: 1637923108}
-  renderOrder: 17
+  renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: 
@@ -2280,9 +2137,10 @@ MonoBehaviour:
       right: 0
       bottom: 480
     owner: {fileID: 1706035270}
-  renderOrder: 24
+  renderOrder: 23
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
 --- !u!65 &1706035271
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -2362,9 +2220,10 @@ MonoBehaviour:
       right: 0
       bottom: 479
     owner: {fileID: 1743974388}
-  renderOrder: 23
+  renderOrder: 22
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   font: {fileID: 11400000, guid: 5a5e0c230ac62a04f8a31145e6ab7bc0, type: 2}
   backgroundSprite: tab-normal
@@ -2473,9 +2332,10 @@ MonoBehaviour:
       right: 368.001953
       bottom: -4
     owner: {fileID: 1986727719}
-  renderOrder: 21
+  renderOrder: 20
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: tab-normal
   hoverSprite: tab-hilite
@@ -2623,9 +2483,10 @@ MonoBehaviour:
       right: 11
       bottom: 10
     owner: {fileID: 1989708147}
-  renderOrder: 8
+  renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: button-normal
   hoverSprite: button-hilite
@@ -2819,9 +2680,10 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 2000125175}
-  renderOrder: 14
+  renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: 
   backgroundColor:
@@ -2936,9 +2798,10 @@ MonoBehaviour:
       right: 292
       bottom: -4
     owner: {fileID: 2069525654}
-  renderOrder: 22
+  renderOrder: 21
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: tab-normal
   hoverSprite: tab-hilite
@@ -3078,9 +2941,10 @@ MonoBehaviour:
       right: .899999976
       bottom: .899999976
     owner: {fileID: 2083192872}
-  renderOrder: 3
+  renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   backgroundSprite: frame-basic
   backgroundColor:
@@ -3213,9 +3077,10 @@ MonoBehaviour:
       right: 208
       bottom: 93.0019531
     owner: {fileID: 2088625988}
-  renderOrder: 13
+  renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
   spriteName: 
   flip: 0

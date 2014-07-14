@@ -265,6 +265,7 @@ public class dfTextureAtlasInspector : Editor
 			atlas.Items.Sort();
 			atlas.RebuildIndexes();
 
+			EditorUtility.SetDirty( atlas.gameObject );
 			EditorUtility.SetDirty( atlas );
 			EditorUtility.SetDirty( atlas.Material );
 
@@ -397,7 +398,7 @@ public class dfTextureAtlasInspector : Editor
 
 		importer.ReadTextureSettings( settings );
 		settings.mipmapEnabled = false;
-		settings.readable = false;
+		settings.readable = true;
 		settings.maxTextureSize = 4096;
 		settings.textureFormat = TextureImporterFormat.AutomaticTruecolor;
 		settings.wrapMode = TextureWrapMode.Clamp;

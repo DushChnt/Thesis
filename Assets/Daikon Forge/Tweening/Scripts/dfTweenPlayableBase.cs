@@ -1,4 +1,5 @@
-﻿using System;
+﻿/* Copyright 2013-2014 Daikon Forge */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

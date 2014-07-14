@@ -30,6 +30,9 @@ public class AddBrainButtons : MonoBehaviour {
 	private DialogShow _dialog;
 
     public GameObject ListItem;
+    public GameObject Tutorial;
+
+    int numberOfBrains;
 
 	Player Player
 	{
@@ -115,6 +118,7 @@ public class AddBrainButtons : MonoBehaviour {
 		b.UserId = ParseUser.CurrentUser.ObjectId;
 		b.IsNewBrain = true;
 		rootBrains.Add(b);
+        
 
 		AddBrains(rootBrains);
 	}
@@ -514,6 +518,18 @@ public class AddBrainButtons : MonoBehaviour {
             recurseAdd(b, level, ratio, idx, idx * ratio, 0, color);
             idx++;
         }
+
+        print("Count: " + allBrains.Count());
+        if (numberOfBrains < 2)
+        {
+            print("Joe");
+            dfTextureSprite sprite = _panel.AddPrefab(Tutorial) as dfTextureSprite;
+
+            var center_x = _panel.Width / 2;
+            sprite.RelativePosition = new Vector3(center_x - sprite.Width / 2, 7, 0);
+            sprite.ZOrder = 0;
+            print("Joe 2");
+        }
 	}
 
     private void countLevels(Brain b, int level)
@@ -526,6 +542,7 @@ public class AddBrainButtons : MonoBehaviour {
                 CurrentCount.Add(level, 1);
             }
             LevelCount[level]++;
+            numberOfBrains++;
             if (b.Children != null)
             {
                 foreach (Brain child in b.Children)

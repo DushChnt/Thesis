@@ -599,6 +599,11 @@ public class dfGUIManager : MonoBehaviour, IDFControlHost, IComparable<dfGUIMana
 	public void OnDestroy()
 	{
 
+		if( activeInstances.Count == 0 )
+		{
+			dfMaterialCache.Clear();
+		}
+
 		if( renderMesh == null || renderFilter == null )
 			return;
 
@@ -738,6 +743,9 @@ public class dfGUIManager : MonoBehaviour, IDFControlHost, IComparable<dfGUIMana
 		if( activeInstances[ 0 ] == this )
 		{
 
+			// Rebuild all dynamic font atlases (if needed) before rendering
+			dfFontManager.RebuildDynamicFonts();
+
 			var updateMaterials = false;
 
 			for( int i = 0; i < activeInstances.Count; i++ )
@@ -761,6 +769,7 @@ public class dfGUIManager : MonoBehaviour, IDFControlHost, IComparable<dfGUIMana
 			if( updateMaterials )
 			{
 
+				// Reset the material cache before rendering
 				dfMaterialCache.Reset();
 
 				updateDrawCalls();
@@ -1931,9 +1940,9 @@ public class dfGUIManager : MonoBehaviour, IDFControlHost, IComparable<dfGUIMana
 			// Build the master mesh
 			var mesh = renderFilter.sharedMesh = getRenderMesh();
 			mesh.Clear( true );
-			mesh.vertices = masterBuffer.Vertices.ToTempArray();
-			mesh.uv = masterBuffer.UV.ToTempArray();
-			mesh.colors32 = masterBuffer.Colors.ToTempArray();
+			mesh.vertices = masterBuffer.Vertices.Items;
+			mesh.uv = masterBuffer.UV.Items;
+			mesh.colors32 = masterBuffer.Colors.Items;
 
 			// Only set the mesh normals and tangents if the GUIManager has 
 			// been asked to generate that information
@@ -1943,8 +1952,8 @@ public class dfGUIManager : MonoBehaviour, IDFControlHost, IComparable<dfGUIMana
 				// TODO: Determine why normal buffer length may not be exact match for vertice buffer length on first frame
 				if( masterBuffer.Normals.Items.Length == masterBuffer.Vertices.Items.Length )
 				{
-					mesh.normals = masterBuffer.Normals.ToTempArray();
-					mesh.tangents = masterBuffer.Tangents.ToTempArray();
+					mesh.normals = masterBuffer.Normals.Items;
+					mesh.tangents = masterBuffer.Tangents.Items;
 				}
 			}
 
@@ -1966,7 +1975,7 @@ public class dfGUIManager : MonoBehaviour, IDFControlHost, IComparable<dfGUIMana
 					length = submeshes[ i + 1 ] - startIndex;
 				}
 
-				var submeshTriangles = dfTempArray<int>.Obtain( length, 128 );
+				var submeshTriangles = dfTempArray<int>.Obtain( length );
 				masterBuffer.Triangles.CopyTo( startIndex, submeshTriangles, 0, length );
 
 				// Set the submesh's triangle index array
@@ -2424,7 +2433,7 @@ public class dfGUIManager : MonoBehaviour, IDFControlHost, IComparable<dfGUIMana
 
 			var materialRenderQueue = renderQueueBase;
 
-			var renderMaterials = dfTempArray<Material>.Obtain( materialCount, 128 );
+			var renderMaterials = dfTempArray<Material>.Obtain( materialCount );
 			for( int i = 0; i < drawCallBuffers.Count; i++ )
 			{
 

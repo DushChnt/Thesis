@@ -24,8 +24,16 @@ public class DFClicks : MonoBehaviour
     //    OptimizerParameters.WriteXML();
         SaveBrainToServer();
         PlayerPrefs.SetString("Mode", "Train");
+        PlayerPrefs.SetInt("Evolution Speed", GetEvolutionSpeed());
 
         Application.LoadLevel("Optimization scene");
+    }
+
+    private int GetEvolutionSpeed()
+    {
+        dfSlider slider = GameObject.Find("Speed Slider").GetComponent<dfSlider>();
+
+        return 6 + (int)slider.Value;
     }
 
     public void RunBestButton()

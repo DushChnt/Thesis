@@ -223,6 +223,7 @@ MonoBehaviour:
   renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: hammer
   flip: 0
@@ -312,6 +313,7 @@ MonoBehaviour:
   renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -405,6 +407,7 @@ MonoBehaviour:
   renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -486,6 +489,7 @@ MonoBehaviour:
   renderOrder: 1
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
   backgroundSprite: 
@@ -618,6 +622,7 @@ MonoBehaviour:
   renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -699,6 +704,7 @@ MonoBehaviour:
   renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: axe_two
   flip: 0
@@ -770,7 +776,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 256
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
 --- !u!4 &579375989
@@ -865,6 +871,7 @@ MonoBehaviour:
   renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
   backgroundSprite: 
@@ -988,6 +995,7 @@ MonoBehaviour:
   renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
   backgroundSprite: 
@@ -1192,6 +1200,7 @@ MonoBehaviour:
   renderOrder: 18
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: sword
   flip: 0
@@ -1280,6 +1289,7 @@ MonoBehaviour:
   renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: wand
   flip: 0
@@ -1369,6 +1379,7 @@ MonoBehaviour:
   renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -1462,6 +1473,7 @@ MonoBehaviour:
   renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -1555,6 +1567,7 @@ MonoBehaviour:
   renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -1647,6 +1660,7 @@ MonoBehaviour:
   renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: potion
   flip: 0
@@ -1735,6 +1749,7 @@ MonoBehaviour:
   renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: dagger
   flip: 0
@@ -1823,6 +1838,7 @@ MonoBehaviour:
   renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: axe_one
   flip: 0
@@ -1853,7 +1869,6 @@ GameObject:
   - 114: {fileID: 1761553672}
   - 114: {fileID: 1761553671}
   - 114: {fileID: 1761553668}
-  - 114: {fileID: 1761553675}
   - 23: {fileID: 1761553674}
   - 33: {fileID: 1761553673}
   m_Layer: 8
@@ -1905,6 +1920,7 @@ MonoBehaviour:
   renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -2028,18 +2044,6 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
---- !u!114 &1761553675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1761553667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa59885e8cb3dc341b20ffab82c4d2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipType: 1
 --- !u!1 &1918312122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2111,6 +2115,7 @@ MonoBehaviour:
   renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -2233,6 +2238,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
+  - {fileID: 0}
   - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}

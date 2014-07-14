@@ -339,9 +339,9 @@ internal class dfRenderGroup : MonoBehaviour
 		// Build the master mesh
 		var mesh = renderMesh;
 		mesh.Clear( true );
-		mesh.vertices = masterBuffer.Vertices.ToTempArray();
-		mesh.uv = masterBuffer.UV.ToTempArray();
-		mesh.colors32 = masterBuffer.Colors.ToTempArray();
+		mesh.vertices = masterBuffer.Vertices.Items;
+		mesh.uv = masterBuffer.UV.Items;
+		mesh.colors32 = masterBuffer.Colors.Items;
 
 		#region Set sub-meshes
 
@@ -357,7 +357,7 @@ internal class dfRenderGroup : MonoBehaviour
 				length = submeshes[ i + 1 ] - startIndex;
 			}
 
-			var submeshTriangles = dfTempArray<int>.Obtain( length, 128 );
+			var submeshTriangles = dfTempArray<int>.Obtain( length );
 			masterBuffer.Triangles.CopyTo( startIndex, submeshTriangles, 0, length );
 
 			// Set the submesh's triangle index array
@@ -387,7 +387,7 @@ internal class dfRenderGroup : MonoBehaviour
 		var materialCount = getMaterialCount();
 		var index = 0;
 
-		var renderMaterials = dfTempArray<Material>.Obtain( materialCount, 128 );
+		var renderMaterials = dfTempArray<Material>.Obtain( materialCount );
 		for( int i = 0; i < drawCallBuffers.Count; i++ )
 		{
 
@@ -735,13 +735,6 @@ internal class dfRenderGroup : MonoBehaviour
 
 	}
 
-	private Vector2 getViewSize()
-	{
-		System.Type type = System.Type.GetType( "UnityEditor.GameView,UnityEditor" );
-		var s_GetSizeOfMainGameView = type.GetMethod( "GetSizeOfMainGameView", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static );
-		return (Vector2)s_GetSizeOfMainGameView.Invoke( null, null );
-	}
-
 	private void resetDrawCalls()
 	{
 
@@ -816,12 +809,16 @@ internal class dfRenderGroup : MonoBehaviour
 
 		meshRenderer = GetComponent<MeshRenderer>();
 		if( meshRenderer == null )
+		{
 			meshRenderer = gameObject.AddComponent<MeshRenderer>();
+		}
 		meshRenderer.hideFlags = HideFlags.HideInInspector;
 
 		renderFilter = GetComponent<MeshFilter>();
 		if( renderFilter == null )
+		{
 			renderFilter = gameObject.AddComponent<MeshFilter>();
+		}
 		renderFilter.hideFlags = HideFlags.HideInInspector;
 
 		renderMesh = new Mesh() { hideFlags = HideFlags.DontSave };

@@ -7,7 +7,7 @@ public class NetworkGUI : MonoBehaviour {
    
 	public dfPanel Slot1, Slot2, Slot3, Slot4, CountdownPanel;
 	public BattleController MyRobot, OpponentRobot;
-    public dfLabel OwnWinsLabel, OpponentWinsLabel, TimeLabel, OwnNameLabel, OpponentNameLabel, StatusLabel;
+    public dfLabel OwnWinsLabel, OpponentWinsLabel, TimeLabel, OwnNameLabel, OpponentNameLabel, StatusLabel, TipLabel;
 
 	BrainPanelState activePanel;
     dfLabel countdownLabel, countdownTitle, countdownFraction;
@@ -75,6 +75,12 @@ public class NetworkGUI : MonoBehaviour {
         countdownLabel = CountdownPanel.transform.Find("Countdown Label").GetComponent<dfLabel>();
         countdownTitle = CountdownPanel.transform.Find("Title Part").GetComponent<dfLabel>();
         countdownFraction = CountdownPanel.transform.Find("Fraction Part").GetComponent<dfLabel>();
+        TipLabel = CountdownPanel.transform.Find("Tip Label").GetComponent<dfLabel>();
+
+        if (Random.Range(0, 2) == 0)
+        {
+            TipLabel.Text = "Use your mouse as an alternative target to guide your robot.";
+        }
 
         StatusLabel.Text = "";
 	}
@@ -107,6 +113,7 @@ public class NetworkGUI : MonoBehaviour {
     {
         if (visible)
         {
+           
             CountdownPanel.Show();
             countdownTitle.Text = "Match starts in";
             countdownFraction.Show();
@@ -121,6 +128,7 @@ public class NetworkGUI : MonoBehaviour {
 
     public void ShowMatchStatus(string status, Color color)
     {
+        TipLabel.Hide();
         CountdownPanel.Show();
         StatusLabel.Text = status;
         StatusLabel.Color = color;

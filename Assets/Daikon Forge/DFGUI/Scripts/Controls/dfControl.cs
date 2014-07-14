@@ -902,7 +902,7 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 
 			// If there is no significant difference between the current size and
 			// the specified size, then just exit without doing anything.
-			if( ( value - size ).sqrMagnitude <= float.Epsilon )
+			if( ( value - size ).sqrMagnitude <= 1f )
 				return;
 
 			// Assign the new size value
@@ -4140,9 +4140,15 @@ public abstract class dfControl : MonoBehaviour, IDFControlHost, IComparable<dfC
 	public dfControl AddControl( Type controlType )
 	{
 
-		if( !typeof( dfControl ).IsAssignableFrom( controlType ) )
+#if !UNITY_EDITOR && UNITY_METRO 
+		var isControlType = typeof( dfControl ).GetTypeInfo().IsAssignableFrom( controlType.GetTypeInfo() );
+#else
+		var isControlType = typeof( dfControl ).IsAssignableFrom( controlType );
+#endif
+
+		if( !isControlType )
 		{
-			throw new InvalidCastException();
+			throw new System.InvalidCastException( string.Format( "Type {0} does not inherit from {1}", controlType.Name, typeof( dfControl ).Name ) );
 		}
 
 		var go = new GameObject( controlType.Name );

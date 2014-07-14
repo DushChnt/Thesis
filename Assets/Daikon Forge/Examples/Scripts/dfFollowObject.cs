@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
@@ -7,10 +9,23 @@ public class dfFollowObject : MonoBehaviour
 
 	public Camera mainCamera;
 	public GameObject attach;
+
+	/// <summary>
+	/// Gets or sets control positioning in relation to the target GameObject.
+	/// </summary>
+	//[Tooltip("Gets or sets control positioning in relation to the target GameObject.")]
+	public dfPivotPoint anchor = dfPivotPoint.MiddleCenter;
+
 	public Vector3 offset;
 	public float hideDistance = 20;
 	public float fadeDistance = 15;
 	public bool constantScale = false;
+
+	/// <summary>
+	/// If true, the control should never leave the viewable screen area.
+	/// </summary>
+	//[Tooltip("If true, the control should never leave the viewable screen area.")]
+	public bool stickToScreenEdge = false;
 
 	private Transform controlTransform;
 	private Transform followTransform;
@@ -100,9 +115,19 @@ public class dfFollowObject : MonoBehaviour
 				controlTransform.localScale = Vector3.one;
 		}
 
-		// Center control over the followed object
-		screenPoint.x -= ( myControl.Width / 2 ) * controlTransform.localScale.x;
-		screenPoint.y -= myControl.Height * controlTransform.localScale.y;
+		// Place control over the followed object at designated anchor
+		var anchoredPosition = getAnchoredControlPosition();
+
+		screenPoint.x -= anchoredPosition.x * controlTransform.localScale.x;
+		screenPoint.y -= anchoredPosition.y * controlTransform.localScale.y;
+
+		if ( stickToScreenEdge )
+		{
+			var s = manager.GetScreenSize();
+
+			screenPoint.x = Mathf.Clamp( screenPoint.x, 0, s.x - myControl.Width );
+			screenPoint.y = Mathf.Clamp( screenPoint.y, 0, s.y - myControl.Height );
+		}
 
 		// Don't bother trying to update if nothing has changed 
 		if( Vector2.Distance( screenPoint, lastPosition ) <= 0.5f )
@@ -130,4 +155,60 @@ public class dfFollowObject : MonoBehaviour
 
 	}
 
+	private Vector2 getAnchoredControlPosition()
+	{
+		var top = myControl.Height;
+		var center = myControl.Width / 2;
+		const int bottom = 0;
+
+		var left = myControl.Width;
+		var middle = myControl.Height / 2;
+		const int right = 0;
+
+		var vector = new Vector2();
+
+		switch ( anchor )
+		{
+			case dfPivotPoint.TopLeft:
+				vector.x = left;
+				vector.y = top;
+				break;
+			case dfPivotPoint.TopCenter:
+				vector.x = center;
+				vector.y = top;
+				break;
+			case dfPivotPoint.TopRight:
+				vector.x = right;
+				vector.y = top;
+				break;
+
+			case dfPivotPoint.MiddleLeft:
+				vector.x = left;
+				vector.y = middle;
+				break;
+			case dfPivotPoint.MiddleCenter:
+				vector.x = center;
+				vector.y = middle;
+				break;
+			case dfPivotPoint.MiddleRight:
+				vector.x = right;
+				vector.y = middle;
+				break;
+
+			case dfPivotPoint.BottomLeft:
+				vector.x = left;
+				vector.y = bottom;
+				break;
+			case dfPivotPoint.BottomCenter:
+				vector.x = center;
+				vector.y = bottom;
+				break;
+			case dfPivotPoint.BottomRight:
+				vector.x = right;
+				vector.y = bottom;
+				break;
+		}
+
+		return vector;
+	}
 }

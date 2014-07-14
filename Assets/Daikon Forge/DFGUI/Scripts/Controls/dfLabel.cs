@@ -42,7 +42,7 @@ using System.Collections.Generic;
 [dfTooltip( "Displays text information, optionally allowing the use of markup to specify colors and embedded sprites" )]
 [dfHelp( "http://www.daikonforge.com/docs/df-gui/classdf_label.html" )]
 [AddComponentMenu( "Daikon Forge/User Interface/Label" )]
-public class dfLabel : dfControl, IDFMultiRender
+public class dfLabel : dfControl, IDFMultiRender, IRendersText
 {
 
 	#region Public events
@@ -189,7 +189,9 @@ public class dfLabel : dfControl, IDFMultiRender
 		{
 			if( value != this.font )
 			{
+				unbindTextureRebuildCallback();
 				this.font = value;
+				bindTextureRebuildCallback();
 				Invalidate();
 			}
 		}
@@ -239,6 +241,7 @@ public class dfLabel : dfControl, IDFMultiRender
 			value = Mathf.Max( 0.1f, value );
 			if( !Mathf.Approximately( textScale, value ) )
 			{
+				dfFontManager.Invalidate( this.Font );
 				this.textScale = value;
 				Invalidate();
 			}
@@ -348,13 +351,20 @@ public class dfLabel : dfControl, IDFMultiRender
 		get { return this.text; }
 		set
 		{
-			value = value.Replace( "\\t", "\t" ).Replace( "\\n", "\n" );
+
+			if( value == null )
+				value = string.Empty;
+			else
+				value = value.Replace( "\\t", "\t" ).Replace( "\\n", "\n" );
+
 			if( !string.Equals( value, this.text ) )
 			{
+				dfFontManager.Invalidate( this.Font );
 				this.localizationKey = value;
 				this.text = this.getLocalizedValue( value );
 				OnTextChanged();
 			}
+
 		}
 	}
 
@@ -597,6 +607,7 @@ public class dfLabel : dfControl, IDFMultiRender
 	#region Private runtime variables
 
 	private Vector2 startSize = Vector2.zero;
+	private bool isFontCallbackAssigned = false;
 
 	#endregion
 
@@ -644,6 +655,8 @@ public class dfLabel : dfControl, IDFMultiRender
 			Font = GetManager().DefaultFont;
 		}
 
+		bindTextureRebuildCallback();
+
 		#endregion
 
 		// Default size for newly-created dfLabel controls
@@ -652,6 +665,12 @@ public class dfLabel : dfControl, IDFMultiRender
 			this.Size = new Vector2( 150, 25 );
 		}
 
+	}
+
+	public override void OnDisable()
+	{
+		base.OnDisable();
+		unbindTextureRebuildCallback();
 	}
 
 	public override void Update()
@@ -737,6 +756,9 @@ public class dfLabel : dfControl, IDFMultiRender
 
 		}
 
+		var previousSize = this.size;
+
+		// TODO: There should be no need to do this when the text, font, and textscale have not changed
 		using( var textRenderer = obtainRenderer() )
 		{
 
@@ -755,14 +777,17 @@ public class dfLabel : dfControl, IDFMultiRender
 			if( AutoSize || sizeIsUninitialized )
 			{
 				this.size = renderSize + new Vector2( padding.horizontal, padding.vertical );
-				raiseSizeChangedEvent();
 			}
 			else if( AutoHeight )
 			{
 				this.size = new Vector2( size.x, renderSize.y + padding.vertical );
-				raiseSizeChangedEvent();
 			}
 
+		}
+
+		if( ( this.size - previousSize ).sqrMagnitude >= 1f )
+		{
+			raiseSizeChangedEvent();
 		}
 
 	}
@@ -1048,6 +1073,76 @@ public class dfLabel : dfControl, IDFMultiRender
 
 		}
 
+	}
+
+	#endregion
+
+	#region Dynamic font management 
+
+	private void bindTextureRebuildCallback()
+	{
+
+		if( isFontCallbackAssigned || Font == null )
+			return;
+
+		if( Font is dfDynamicFont )
+		{
+
+			Font font = ( Font as dfDynamicFont ).BaseFont;
+			font.textureRebuildCallback = (UnityEngine.Font.FontTextureRebuildCallback)Delegate.Combine( font.textureRebuildCallback, (Font.FontTextureRebuildCallback)this.onFontTextureRebuilt );
+
+			isFontCallbackAssigned = true;
+
+		}
+
+	}
+
+	private void unbindTextureRebuildCallback()
+	{
+
+		if( !isFontCallbackAssigned || Font == null )
+			return;
+
+		if( Font is dfDynamicFont )
+		{
+
+			Font font = ( Font as dfDynamicFont ).BaseFont;
+			font.textureRebuildCallback = (UnityEngine.Font.FontTextureRebuildCallback)Delegate.Remove( font.textureRebuildCallback, (UnityEngine.Font.FontTextureRebuildCallback)this.onFontTextureRebuilt );
+		}
+
+		isFontCallbackAssigned = false;
+
+	}
+
+	private void requestCharacterInfo()
+	{
+
+		var dynamicFont = this.Font as dfDynamicFont;
+		if( dynamicFont == null )
+			return;
+
+		if( !dfFontManager.IsDirty( this.Font ) )
+			return;
+
+		if( string.IsNullOrEmpty( this.text ) )
+			return;
+
+		var effectiveTextScale = TextScale * getTextScaleMultiplier();
+		var effectiveFontSize = Mathf.CeilToInt( this.font.FontSize * effectiveTextScale );
+
+		dynamicFont.AddCharacterRequest( this.text, effectiveFontSize, FontStyle.Normal );
+
+	}
+
+	private void onFontTextureRebuilt()
+	{
+		requestCharacterInfo();
+		Invalidate();
+	}
+
+	public void UpdateFontInfo()
+	{
+		requestCharacterInfo();
 	}
 
 	#endregion

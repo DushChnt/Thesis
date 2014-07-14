@@ -81,7 +81,8 @@
 				// Determine whether the current pixel is within the clip region.
 				// If it is not, set the pixel's alpha to zero.
 				float2 clipFactor = abs(IN.clipPos);
-				color.a *= step(0, 1.0 - max(clipFactor.x, clipFactor.y));
+				if( max(clipFactor.x, clipFactor.y) > 1.0 )
+					color.a = 0.0;
 
 				return color;
 

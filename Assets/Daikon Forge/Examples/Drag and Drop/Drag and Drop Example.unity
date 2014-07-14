@@ -144,6 +144,7 @@ MonoBehaviour:
   renderOrder: 7
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: cogwheels
   flip: 0
@@ -233,6 +234,7 @@ MonoBehaviour:
   renderOrder: 24
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: panel
   backgroundColor:
@@ -315,6 +317,7 @@ MonoBehaviour:
   renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -451,6 +454,7 @@ MonoBehaviour:
   renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -543,6 +547,7 @@ MonoBehaviour:
   renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: 
   flip: 0
@@ -631,6 +636,7 @@ MonoBehaviour:
   renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   font: {fileID: 11400000, guid: b9ef156d1973a39429667204db118529, type: 2}
   backgroundSprite: 
@@ -753,6 +759,7 @@ MonoBehaviour:
   renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   font: {fileID: 11400000, guid: b9ef156d1973a39429667204db118529, type: 2}
   backgroundSprite: 
@@ -875,6 +882,7 @@ MonoBehaviour:
   renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   font: {fileID: 11400000, guid: b9ef156d1973a39429667204db118529, type: 2}
   backgroundSprite: 
@@ -997,6 +1005,7 @@ MonoBehaviour:
   renderOrder: 1
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: armor
   flip: 0
@@ -1096,6 +1105,7 @@ MonoBehaviour:
   renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   font: {fileID: 11400000, guid: b9ef156d1973a39429667204db118529, type: 2}
   backgroundSprite: 
@@ -1233,6 +1243,7 @@ MonoBehaviour:
   renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -1342,6 +1353,7 @@ MonoBehaviour:
   renderOrder: 18
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -1396,6 +1408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiScale: 1
+  uiScaleLegacy: 1
   inputManager: {fileID: 943310269}
   fixedWidth: 800
   fixedHeight: 600
@@ -1441,6 +1454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderCamera: {fileID: 1985019966}
   useTouch: 1
+  useMouse: 1
   useJoystick: 0
   joystickClickButton: 330
   horizontalAxis: NavHorizontal
@@ -1448,6 +1462,8 @@ MonoBehaviour:
   axisPollingInterval: .150000006
   retainFocus: 0
   touchClickRadius: 10
+  hoverStartDelay: .25
+  hoverNotifactionFrequency: .100000001
 --- !u!65 &943310270
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -1472,8 +1488,6 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: a70342ba67d8db44780564f766baeca1, type: 2}
-  - {fileID: 2100000, guid: 8aef305aa24d2d44ab52fc3351c4f647, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1482,7 +1496,9 @@ Renderer:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 2100000, guid: b524d7a0bdaa57b49a90a71f6ecbac59, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1579,6 +1595,7 @@ MonoBehaviour:
   renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: cogwheels
   flip: 0
@@ -1667,6 +1684,7 @@ MonoBehaviour:
   renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: 
   flip: 0
@@ -1772,6 +1790,7 @@ MonoBehaviour:
   renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -1864,6 +1883,7 @@ MonoBehaviour:
   renderOrder: 19
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: cogwheels
   flip: 0
@@ -1952,6 +1972,7 @@ MonoBehaviour:
   renderOrder: 25
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   font: {fileID: 11400000, guid: 32f3a9f198f13d041a8c9bdf08a834bb, type: 2}
   text: '<h3 color="orange" margin="0">Drag and Drop Example</h3>
@@ -2064,6 +2085,7 @@ MonoBehaviour:
   renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: 
   flip: 0
@@ -2231,6 +2253,7 @@ MonoBehaviour:
   renderOrder: 22
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: 259ff1d1192cd094ab45e0e241c47908, type: 2}
   spriteName: cogwheels
   flip: 0
@@ -2319,6 +2342,7 @@ MonoBehaviour:
   renderOrder: 23
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   font: {fileID: 11400000, guid: b9ef156d1973a39429667204db118529, type: 2}
   backgroundSprite: 
@@ -2456,6 +2480,7 @@ MonoBehaviour:
   renderOrder: 6
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: panel2
   backgroundColor:
@@ -2548,6 +2573,7 @@ MonoBehaviour:
   renderOrder: 20
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   font: {fileID: 11400000, guid: b9ef156d1973a39429667204db118529, type: 2}
   backgroundSprite: 
@@ -2640,7 +2666,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 256
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
 --- !u!4 &1985019967
@@ -2735,6 +2761,7 @@ MonoBehaviour:
   renderOrder: 5
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   font: {fileID: 11400000, guid: b9ef156d1973a39429667204db118529, type: 2}
   backgroundSprite: 
@@ -2857,6 +2884,7 @@ MonoBehaviour:
   renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   font: {fileID: 11400000, guid: b9ef156d1973a39429667204db118529, type: 2}
   backgroundSprite: 
@@ -2994,6 +3022,7 @@ MonoBehaviour:
   renderOrder: 21
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
   atlas: {fileID: 11400000, guid: b1c85ce876406b34ba8a6f1f8e636bcc, type: 2}
   backgroundSprite: panel2
   backgroundColor:

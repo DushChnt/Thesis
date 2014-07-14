@@ -27,7 +27,7 @@ using UnityMaterial = UnityEngine.Material;
 [Serializable]
 [ExecuteInEditMode]
 [AddComponentMenu( "Daikon Forge/User Interface/Rich Text Label" )]
-public class dfRichTextLabel : dfControl, IDFMultiRender
+public class dfRichTextLabel : dfControl, IDFMultiRender, IRendersText
 {
 
 	#region Public events
@@ -124,6 +124,7 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 	private Vector2 scrollMomentum = Vector2.zero;
 	private bool isMarkupInvalidated = true;
 	private Vector2 startSize = Vector2.zero;
+	private bool isFontCallbackAssigned = false;
 
 	#endregion
 
@@ -186,9 +187,16 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 		{
 			if( value != this.font )
 			{
+
+				unbindTextureRebuildCallback();
 				this.font = value;
+				bindTextureRebuildCallback();
+
 				this.LineHeight = value.FontSize;
+
+				dfFontManager.Invalidate( this.Font );
 				Invalidate();
+
 			}
 		}
 	}
@@ -221,9 +229,9 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 			value = this.getLocalizedValue( value );
 			if( !string.Equals( this.text, value ) )
 			{
+				dfFontManager.Invalidate( this.Font );
 				this.text = value;
 				scrollPosition = Vector2.zero;
-				releaseMarkupReferences();
 				Invalidate();
 				OnTextChanged();
 			}
@@ -242,6 +250,7 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 			value = Mathf.Max( 6, value );
 			if( value != this.fontSize )
 			{
+				dfFontManager.Invalidate( this.Font );
 				this.fontSize = value;
 				Invalidate();
 			}
@@ -352,6 +361,9 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 			if( !allowScrolling || autoHeight )
 				value = Vector2.zero;
 
+			if( isMarkupInvalidated )
+				processMarkup();
+
 			var maxPosition = ContentSize - Size;
 
 			value = Vector2.Min( maxPosition, value );
@@ -438,6 +450,7 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 	public override void Invalidate()
 	{
 		base.Invalidate();
+		dfFontManager.Invalidate( this.Font );
 		isMarkupInvalidated = true;
 	}
 
@@ -451,13 +464,21 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 	{
 		
 		base.OnEnable();
-		
+
+		bindTextureRebuildCallback();
+
 		if( this.size.sqrMagnitude <= float.Epsilon )
 		{
 			this.Size = new Vector2( 320, 200 );
 			this.FontSize = this.LineHeight = 16;
 		}
 
+	}
+
+	public override void OnDisable()
+	{
+		base.OnDisable();
+		unbindTextureRebuildCallback();
 	}
 
 	public override void Update()
@@ -759,6 +780,10 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 		try
 		{
 
+			// Clear the 'dirty' flag first, because some events (like font texture rebuild)
+			// should be able to set the control to 'dirty' again.
+			this.isControlInvalidated = false;
+
 			// Parse the markup and perform document layout
 			if( isMarkupInvalidated )
 			{
@@ -790,7 +815,6 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 		}
 		finally
 		{
-			this.isControlInvalidated = false;
 			updateCollider();
 		}
 
@@ -1072,6 +1096,82 @@ public class dfRichTextLabel : dfControl, IDFMultiRender
 		cachedClippingPlanes[ 3 ] = new Plane( Vector3.down, corners[ 0 ] );
 
 		return cachedClippingPlanes;
+
+	}
+
+	#endregion
+
+	#region IRendersText Members
+
+	public void UpdateFontInfo()
+	{
+
+		if( !dfFontManager.IsDirty( this.Font ) )
+			return;
+
+		if( string.IsNullOrEmpty( this.text ) )
+			return;
+
+		updateFontInfo( viewportBox );
+
+	}
+
+	private void updateFontInfo( dfMarkupBox box )
+	{
+
+		if( box == null )
+			return;
+
+		var intersectionType = ( box == viewportBox ) ? dfIntersectionType.Inside : getViewportIntersection( box );
+		if( intersectionType == dfIntersectionType.None )
+		{
+			return;
+		}
+
+		var textBox = box as dfMarkupBoxText;
+		if( textBox != null )
+		{
+			Profiler.BeginSample( "Adding character request" );
+			font.AddCharacterRequest( textBox.Text, textBox.Style.FontSize, textBox.Style.FontStyle );
+			Profiler.EndSample();
+		}
+
+		for( int i = 0; i < box.Children.Count; i++ )
+		{
+			updateFontInfo( box.Children[ i ] );
+		}
+
+	}
+
+	private void onFontTextureRebuilt()
+	{
+		Invalidate();
+		updateFontInfo( viewportBox );
+	}
+
+	private void bindTextureRebuildCallback()
+	{
+
+		if( isFontCallbackAssigned || Font == null )
+			return;
+
+		var baseFont = Font.BaseFont;
+		baseFont.textureRebuildCallback = (UnityEngine.Font.FontTextureRebuildCallback)Delegate.Combine( baseFont.textureRebuildCallback, (Font.FontTextureRebuildCallback)this.onFontTextureRebuilt );
+
+		isFontCallbackAssigned = true;
+
+	}
+
+	private void unbindTextureRebuildCallback()
+	{
+
+		if( !isFontCallbackAssigned || Font == null)
+			return;
+
+		var baseFont = Font.BaseFont;
+		baseFont.textureRebuildCallback = (UnityEngine.Font.FontTextureRebuildCallback)Delegate.Remove( baseFont.textureRebuildCallback, (UnityEngine.Font.FontTextureRebuildCallback)this.onFontTextureRebuilt );
+
+		isFontCallbackAssigned = false;
 
 	}
 

@@ -10,6 +10,19 @@ using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Describes the minimum required interface for poolable objects
+/// </summary>
+public interface IPoolable
+{
+
+	/// <summary>
+	/// Release the object back to the object pool, freeing it for re-use
+	/// </summary>
+	void Release();
+
+}
+
 [Serializable]
 public class dfDesignGuide
 {
