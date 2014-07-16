@@ -21,3 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Arenas/Arena 2.unity
   - enabled: 1
     path: Assets/Scenes/Statistics Web scene.unity
+  - enabled: 1
+    path: Assets/Scenes/New UI/Main Menu.unity
+  - enabled: 1
+    path: Assets/Scenes/New UI/Bootcamp.unity

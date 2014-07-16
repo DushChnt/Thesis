@@ -285,6 +285,7 @@ public class AddBrainButtons : MonoBehaviour {
         if (level > 0)
         {
             var line = _panel.AddControl<dfSprite>();
+            
             line.SpriteName = "vslider-track-normal";
             line.Width = 12;
             //line.Height = spacing - button.Height;
