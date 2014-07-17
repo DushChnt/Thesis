@@ -52,6 +52,20 @@ public class Brain : ParseObject {
         set { SetProperty<int>(value, "NumOutputs"); }
     }
 
+    [ParseFieldName("moveAround")]
+    public float MoveAround
+    {
+        get { return GetProperty<float>("MoveAround"); }
+        set { SetProperty<float>(value, "MoveAround"); }
+    }
+
+    [ParseFieldName("reachDistance")]
+    public float ReachDistance
+    {
+        get { return GetProperty<float>("ReachDistance"); }
+        set { SetProperty<float>(value, "ReachDistance"); }
+    }
+
     [ParseFieldName("keepDistance")]
     public float KeepDistance
     {
@@ -225,6 +239,13 @@ public class Brain : ParseObject {
     {
         get { return GetProperty<int>("Generation"); }
         set { SetProperty<int>(value, "Generation"); }
+    }
+
+    [ParseFieldName("multipleTargets")]
+    public bool MultipleTargets
+    {
+        get { return GetProperty<bool>("MultipleTargets"); }
+        set { SetProperty<bool>(value, "MultipleTargets"); }
     }
 
     [ParseFieldName("population")]

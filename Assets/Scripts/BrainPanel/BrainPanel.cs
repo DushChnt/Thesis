@@ -426,7 +426,7 @@ public class BrainPanel : MonoBehaviour {
         BrainButton bb = control as BrainButton;
         Settings.Brain = bb.Brain;
         //    Settings.IsNewBrain = bb.IsNewBrain;
-        Application.LoadLevel("Training Overview");
+        Application.LoadLevel("Training");
 
     }
 

@@ -406,6 +406,59 @@ MonoBehaviour:
   shadowOffset: {x: 1, y: -1}
   autoSize: 0
   clickWhenSpacePressed: 1
+--- !u!1 &1295630571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1295630573}
+  - 114: {fileID: 1295630572}
+  - 114: {fileID: 1295630574}
+  m_Layer: 0
+  m_Name: Parse.com
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1295630572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1295630571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 762677091, guid: fede690bfde7b824982738b893ca459f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applicationID: EKqAh63rbFOllLH7q9GHh8BnBp5c3vJ1Q6kM2Kvs
+  dotnetKey: MFVgx6pUbI7MJpHZUvvVXIMbNSfLsqueMCotX8D6
+--- !u!4 &1295630573
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1295630571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -100.063065, y: 99.9921722, z: -4.68237305}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+--- !u!114 &1295630574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1295630571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f235b1b132f194bb63b75a9801123e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1402694200
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,6 +852,7 @@ MonoBehaviour:
   ChampionsButton: {fileID: 1584972048}
   StatisticsButton: {fileID: 1403469434}
   OptionsButton: {fileID: 1595785790}
+  LogoutButton: {fileID: 1875243758}
   ExitButton: {fileID: 1875243758}
 --- !u!1 &1584972045
 GameObject:

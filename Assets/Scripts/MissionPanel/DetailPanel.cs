@@ -3,9 +3,11 @@ using System.Collections;
 
 public class DetailPanel : MonoBehaviour {
 
-    public dfButton CloseButton, TestButton;
-    public dfLabel MissionTextLabel;
+    public dfButton TestButton;
+    public dfLabel MissionTextLabel, TitleLabel;
     dfPanel panel;
+
+    
 
     string mission1Text = "Train your robot to move around.\n\n" + 
         "Do so by adjusting the correct sliders for the brain that you are training.\n\n" + 
@@ -16,20 +18,13 @@ public class DetailPanel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        panel = GetComponent<dfPanel>();
-        CloseButton.Click += new MouseEventHandler(CloseButton_Click);
+        panel = GetComponent<dfPanel>();    
 	}
 
-    void CloseButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
-    {
-        panel.Hide();
-    }
+   
 
-    public void DisplayMission(int mission, float y)
-    {
-        panel.Show();       
-        print("Y: " + y);
-        panel.RelativePosition = new Vector3(16, y);
+    public void DisplayMission(int mission, string title)
+    {       
         if (mission == 1)
         {
             MissionTextLabel.Text = mission1Text;
@@ -38,7 +33,7 @@ public class DetailPanel : MonoBehaviour {
         {
             MissionTextLabel.Text = mission2Text;
         }
-        panel.Height = MissionTextLabel.Height + 100;
+        TitleLabel.Text = title;     
     }
 	
 	// Update is called once per frame

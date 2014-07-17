@@ -101,9 +101,9 @@ public class DFClicks : MonoBehaviour
             yield return null;
         }
 
-        GameObject.Find("Main Panel").GetComponent<dfPanel>().Enable();
+        GameObject.Find("Panel").GetComponent<dfPanel>().Enable();
         GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Hide();
-        Application.LoadLevel("Start Menu");
+        Application.LoadLevel("Bootcamp");
 
     }
 
@@ -127,22 +127,22 @@ public class DFClicks : MonoBehaviour
             yield return null;
         }
 
-        GameObject.Find("Main Panel").GetComponent<dfPanel>().Enable();
+        GameObject.Find("Panel").GetComponent<dfPanel>().Enable();
         GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Hide();
-        Application.LoadLevel("Start Menu");
+        Application.LoadLevel("Bootcamp");
 
     }
 
     public void NoDeleteClicked()
     {        
-        GameObject.Find("Main Panel").GetComponent<dfPanel>().Enable();
+        GameObject.Find("Panel").GetComponent<dfPanel>().Enable();
         GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Hide();
     }
 
     public void DeleteClicked()
     {
         
-        GameObject.Find("Main Panel").GetComponent<dfPanel>().Disable();
+        GameObject.Find("Panel").GetComponent<dfPanel>().Disable();
         GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Show();
     }
 
@@ -208,8 +208,9 @@ public class DFClicks : MonoBehaviour
         Settings.Brain.MortarHits = OptimizerParameters.WMortarHits;
         Settings.Brain.MortarPrecision = OptimizerParameters.WMortarPrecision;
         Settings.Brain.MortarDamagePerHit = OptimizerParameters.WMortarDamagePerHit;
-        Settings.Brain.TargetBehaviorMovement = System.Enum.GetName(typeof(TargetMove), OptimizerParameters.TargetMoveStrategy);
 
+        Settings.Brain.TargetBehaviorMovement = System.Enum.GetName(typeof(TargetMove), OptimizerParameters.TargetMoveStrategy);
+       
 
         //string popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", "MyPopulation8");
         //System.IO.StreamReader stream = new System.IO.StreamReader (popFilePath);
