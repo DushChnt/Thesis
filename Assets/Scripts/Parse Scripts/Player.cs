@@ -5,6 +5,30 @@ using System.Collections.Generic;
 
 public class Player : ParseUser {
 
+    public bool CanUseMelee
+    {
+        get
+        {
+            return this.Level > 1;
+        }
+    }
+
+    public bool CanUseRifle
+    {
+        get
+        {
+            return this.Level > 2;
+        }
+    }
+
+    public bool CanUseMortar
+    {
+        get
+        {
+            return this.Level > 3;
+        }
+    }
+
     [ParseFieldName("isOnline")]
     public bool IsOnline
     {
