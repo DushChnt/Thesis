@@ -24,7 +24,7 @@ public abstract class LevelController : MonoBehaviour {
     }
 
     // Abstract functions
-    protected abstract void Activate(IBlackBox box, GameObject target);
+    public abstract void Activate(IBlackBox box, GameObject target);
     protected abstract bool CanRun();
     protected abstract void MeleeAttack();
     protected abstract void RifleAttack();
@@ -37,14 +37,20 @@ public abstract class LevelController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void FixedUpdate () {
+        Loop();
 	}
+
+    public void Stop()
+    {
+        this.IsRunning = false;
+    }
 
     void Loop()
     {       
         if (IsRunning && CanRun())
         {
+          //  print("Is Running!");
             // All pies input are the distance to the target in the pie, 1 if close, 0 if far away
             float pie_front = 0; // Pie in [-15, 15]
             float pie_left1 = 0; // Pie slice in [-90, -15]
@@ -188,8 +194,11 @@ public abstract class LevelController : MonoBehaviour {
 
         pickup_sensor = GetAngleToNearestPickup();
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit, SensorRange))
+        int layerMask = 1 << LayerMask.NameToLayer("Target");
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, SensorRange, layerMask))
         {
+            
             if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
             {
                 on_target = 1;

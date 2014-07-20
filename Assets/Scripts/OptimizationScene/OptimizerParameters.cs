@@ -27,7 +27,7 @@ public class OptimizerParameters {
     const string __Description = "Description";
     const string __WTurretAngleTowards = "WTurretAngleTowards";
 
-    public static int NumInputs = 9;
+    public static int NumInputs = 11;
     public static int NumOutputs = 6;
 
     // Fitness weights

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TrainingController : LevelController {
 
-    private float DistanceMoved, TurnAmount, TurretTurnAmount, KeepDistanceCount, ReachDistanceCount = 1000, FaceTarget, ticks;
+    private float DistanceMoved, TurnAmount, TurretTurnAmount, KeepDistanceCount, ReachDistanceCount = 1000, ReachedTick, FaceTarget, ticks;
 
 	// Use this for initialization
 	void Start () {
@@ -40,10 +40,22 @@ public class TrainingController : LevelController {
 
         float dist = GetDistance();
         float desiredDist = Mathf.Abs(dist - Settings.Brain.DistanceToKeep); // Close to 0 is better
-        KeepDistanceCount += desiredDist;
+        if (desiredDist < 5)
+        {
+            KeepDistanceCount += 10;
+        }
+        else if (desiredDist < 10)
+        {
+            KeepDistanceCount += 2;
+        }
+        else if (desiredDist < 18)
+        {
+            KeepDistanceCount += 1;
+        }
         if (desiredDist < ReachDistanceCount)
         {
             ReachDistanceCount = desiredDist;
+            ReachedTick = ticks;
         }
 
         FaceTarget += on_target;
@@ -61,7 +73,7 @@ public class TrainingController : LevelController {
         return 0.0f;
     }
 
-    protected override void Activate(SharpNeat.Phenomes.IBlackBox box, GameObject target)
+    public override void Activate(SharpNeat.Phenomes.IBlackBox box, GameObject target)
     {
         this.brain = box;
         this.brain.ResetState();
@@ -81,14 +93,20 @@ public class TrainingController : LevelController {
         float moveAround = DistanceMoved / ticks * Settings.Brain.MoveAround;
         fit += moveAround;
 
-        float reachDistance = (1 - ReachDistanceCount) * Settings.Brain.ReachDistance;
+        float reachDistance = (1 - ReachDistanceCount / 50f) * Settings.Brain.ReachDistance; // *(1 - ReachedTick / ticks);
         fit += reachDistance;
 
-        float keepDistance = (1 - KeepDistanceCount / (20 * ticks)) * Settings.Brain.KeepDistance;
+        float keepDistance = (KeepDistanceCount / (10 * ticks)) * Settings.Brain.KeepDistance;
+        fit += keepDistance;
 
         float faceTarget = FaceTarget / ticks * Settings.Brain.FaceTarget;
         fit += faceTarget;
+        print("Fitness: " + fit);
 
+        if (DistanceMoved + TurnAmount < 2)
+        {
+            return 0;
+        }
         return fit;
     }
 }

@@ -5,7 +5,7 @@ using System;
 public class TrainingPanel : MonoBehaviour {
 
     public dfLabel GenerationLabel, IterationLabel, FitnessLabel, EvolutionLabel, TimeLabel, TotalTimeLabel, BrainNameLabel;
-    public dfButton TrainButton, BackButton;
+    public dfButton TrainButton, BackButton, RunBestButton;
     public Optimizer Optimizer;
     public DialogPanel DialogPanel;
     bool EARunning;
@@ -48,6 +48,7 @@ public class TrainingPanel : MonoBehaviour {
 
         string t_niceTime = string.Format("{0:0}:{1:00}", t_minutes, t_seconds);
         TotalTimeLabel.Text = t_niceTime;
+        RunBestButton.Click += new MouseEventHandler(RunBestButton_Click); 
 	}
 
     void Optimizer_EAStopped(object sender, EventArgs e)
@@ -60,6 +61,8 @@ public class TrainingPanel : MonoBehaviour {
         TrainButton.PressedTextColor = new Color32(0, 255, 0, 255);
         EARunning = false;
         Settings.Brain.TotalTime += Time;
+
+        RunBestButton.Enable();
     }
 
     void BackButton_Dismissed(object sender, EventArgs e, ButtonState s)
@@ -84,7 +87,8 @@ public class TrainingPanel : MonoBehaviour {
         }
         else
         {
-            Application.LoadLevel("Training Overview");
+            //Application.LoadLevel("Training Overview");
+            Application.LoadLevel("Training");
         }
     }
 
@@ -116,6 +120,8 @@ public class TrainingPanel : MonoBehaviour {
             EARunning = true;
 
             startTime = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond * 1000);
+
+            RunBestButton.Disable();
         }
     }
 
