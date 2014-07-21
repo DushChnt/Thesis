@@ -104,12 +104,13 @@ Click on a brain to train it. Drag your brains to the 'Selected brains' panel to
             NextButton.Click += new MouseEventHandler(NextButton_Click);
         }
 
-        RobotFlash.Stop();
-        MissionFlash.Stop();
-        BrainsFlash.Stop();
+       
         RobotFlash.Reset();
         MissionFlash.Reset();
         BrainsFlash.Reset();
+        RobotFlash.Stop();
+        MissionFlash.Stop();
+        BrainsFlash.Stop();
         switch (CurrentPage)
         {
             case 2:

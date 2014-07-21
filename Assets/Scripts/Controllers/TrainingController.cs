@@ -4,6 +4,7 @@ using System.Collections;
 public class TrainingController : LevelController {
 
     private float DistanceMoved, TurnAmount, TurretTurnAmount, KeepDistanceCount, ReachDistanceCount = 1000, ReachedTick, FaceTarget, ticks;
+    private int MeleeAttacks, MeleeHits, RifleAttacks, RifleHits;    
 
 	// Use this for initialization
 	void Start () {
@@ -17,12 +18,34 @@ public class TrainingController : LevelController {
 
     protected override void MeleeAttack()
     {
-        throw new System.NotImplementedException();
+        MeleeAttacks++;
+        RaycastHit hit;       
+        
+        // Check raycast a short distance in front of the robot
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerMask))
+        {
+
+            if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+            {
+                MeleeHits++;
+            }
+        }
     }
 
     protected override void RifleAttack()
     {
-        throw new System.NotImplementedException();
+        RifleAttacks++;
+        RaycastHit hit;
+
+        // Check raycast a short distance in front of the robot
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerMask))
+        {
+
+            if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+            {
+                RifleHits++;
+            }
+        }
     }
 
     protected override void MortarAttack(float mortarForce)

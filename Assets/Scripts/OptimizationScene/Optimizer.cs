@@ -23,6 +23,10 @@ public class Optimizer : MonoBehaviour {
 	public GameObject Robot;
 	public GameObject Target;
     List<TrainingController> BestRunners = new List<TrainingController>();
+    float evaluationStartTime;
+
+    float timeLeft, accum, updateInterval = 12;
+    int frames;
 
 	bool EARunning;
 
@@ -48,6 +52,17 @@ public class Optimizer : MonoBehaviour {
 			return string.Format("{0} / {1}", OptimizerGUI.CurrentIteration, Trials);
 		}
 	}
+
+    public float ProgressIteration
+    {
+        get
+        {
+            var pg = evaluationStartTime / TrialDuration;  
+            var val = OptimizerGUI.CurrentIteration - 1 + pg;            
+            return val > 0 ? val : 0;
+        }
+    }
+
 	public string Evolution
 	{
 		get
@@ -144,6 +159,7 @@ public class Optimizer : MonoBehaviour {
 		{
 			robo.Activate(box, Target);
 		}
+        evaluationStartTime = 0;
 	}
 
 	public void RunBest()
@@ -253,6 +269,7 @@ public class Optimizer : MonoBehaviour {
 			evoSpeed = 8;
 		}
         evoSpeed = 20;
+       
         Time.fixedDeltaTime = 0.045f;
 		Time.timeScale = evoSpeed;
 		Target.GetComponent<TargetController>().Activate();
@@ -341,6 +358,24 @@ public class Optimizer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        evaluationStartTime += Time.deltaTime;
+
+        timeLeft -= Time.deltaTime;
+        accum += Time.timeScale / Time.deltaTime;
+        ++frames;
+
+        if (timeLeft <= 0.0)
+        {
+            var fps = accum / frames;
+            timeLeft = updateInterval;
+            accum = 0.0f;
+            frames = 0;
+         //   print("FPS: " + fps);
+            if (fps < 10)
+            {
+                Time.timeScale = Time.timeScale - 1;
+                print("Lowering time scale to " + Time.timeScale);
+            }
+        }
 	}
 }

@@ -14,6 +14,7 @@ public abstract class LevelController : MonoBehaviour {
     protected float rifleTimer = 0;
     protected float mortarTimer = 0;
 
+    protected int layerMask = 1 << LayerMask.NameToLayer("Target");
 
     Player Player
     {
@@ -194,7 +195,7 @@ public abstract class LevelController : MonoBehaviour {
 
         pickup_sensor = GetAngleToNearestPickup();
 
-        int layerMask = 1 << LayerMask.NameToLayer("Target");
+        
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, SensorRange, layerMask))
         {
