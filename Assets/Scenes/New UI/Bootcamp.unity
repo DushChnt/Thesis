@@ -3682,6 +3682,7 @@ GameObject:
   - 114: {fileID: 729312817}
   - 65: {fileID: 729312816}
   - 114: {fileID: 729312818}
+  - 114: {fileID: 729312819}
   m_Layer: 10
   m_Name: Mission Panel
   m_TagString: Untagged
@@ -3793,6 +3794,53 @@ MonoBehaviour:
   Mission4: {fileID: 1540651706}
   Mission5: {fileID: 1984436813}
   DetailPanel: {fileID: 1807021229}
+--- !u!114 &729312819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 729312814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a8c518628d86c43b78aecafd8bb696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: Flash
+  target:
+    Component: {fileID: 729312817}
+    MemberName: BackgroundColor
+  easingType: 0
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  length: 1
+  syncStartWhenRun: 0
+  startValueIsOffset: 0
+  syncEndWhenRun: 0
+  endValueIsOffset: 0
+  loopType: 2
+  autoRun: 0
+  skipToEndOnStop: 0
+  delayBeforeStarting: 0
+  startValue:
+    serializedVersion: 2
+    rgba: 4294967295
+  endValue:
+    serializedVersion: 2
+    rgba: 1572608
+  direction: 0
 --- !u!1 &745331065
 GameObject:
   m_ObjectHideFlags: 0
@@ -6809,6 +6857,7 @@ GameObject:
   - 4: {fileID: 1442928704}
   - 114: {fileID: 1442928706}
   - 65: {fileID: 1442928705}
+  - 114: {fileID: 1442928707}
   m_Layer: 10
   m_Name: Brain Panel
   m_TagString: Untagged
@@ -6899,6 +6948,53 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
+--- !u!114 &1442928707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1442928703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a8c518628d86c43b78aecafd8bb696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: Brains Flash
+  target:
+    Component: {fileID: 1442928706}
+    MemberName: BackgroundColor
+  easingType: 0
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  length: 1
+  syncStartWhenRun: 0
+  startValueIsOffset: 0
+  syncEndWhenRun: 0
+  endValueIsOffset: 0
+  loopType: 2
+  autoRun: 0
+  skipToEndOnStop: 0
+  delayBeforeStarting: 0
+  startValue:
+    serializedVersion: 2
+    rgba: 4294967295
+  endValue:
+    serializedVersion: 2
+    rgba: 851712
+  direction: 0
 --- !u!1 &1476545767
 GameObject:
   m_ObjectHideFlags: 0
@@ -7265,6 +7361,10 @@ Prefab:
     - target: {fileID: 400020, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: backgroundColor.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
@@ -7954,6 +8054,7 @@ GameObject:
   - 114: {fileID: 1795332088}
   - 65: {fileID: 1795332087}
   - 114: {fileID: 1795332089}
+  - 114: {fileID: 1795332090}
   m_Layer: 10
   m_Name: Robot Panel
   m_TagString: Untagged
@@ -8070,6 +8171,53 @@ MonoBehaviour:
   HealthLabel: {fileID: 595457200}
   MaxSpeedLabel: {fileID: 1764338472}
   Avatar: {fileID: 872968594}
+--- !u!114 &1795332090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1795332085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8a8c518628d86c43b78aecafd8bb696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenName: Robot Flash
+  target:
+    Component: {fileID: 1795332088}
+    MemberName: BackgroundColor
+  easingType: 0
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  length: 1
+  syncStartWhenRun: 0
+  startValueIsOffset: 0
+  syncEndWhenRun: 0
+  endValueIsOffset: 0
+  loopType: 2
+  autoRun: 0
+  skipToEndOnStop: 0
+  delayBeforeStarting: 0
+  startValue:
+    serializedVersion: 2
+    rgba: 4294967295
+  endValue:
+    serializedVersion: 2
+    rgba: 8322915
+  direction: 0
 --- !u!1 &1807021225
 GameObject:
   m_ObjectHideFlags: 0
@@ -9200,6 +9348,9 @@ MonoBehaviour:
   NextButton: {fileID: 127173589}
   PrevButton: {fileID: 1943494385}
   CloseButton: {fileID: 1018165772}
+  MissionFlash: {fileID: 729312819}
+  RobotFlash: {fileID: 1795332090}
+  BrainsFlash: {fileID: 1442928707}
   MaxPages: 4
 --- !u!1 &2033257398
 GameObject:

@@ -30,6 +30,11 @@ public class TrainingController : LevelController {
         throw new System.NotImplementedException();
     }
 
+    private float InverseDistance(float x)
+    {
+        return 20 / (((x * x) / 20) + 1);
+    }
+
     protected override void FitnessStats(float moveDist, float turnAngle, float turretTurnAngle, float pickup_sensor, float on_target, float turret_on_target)
     {
         ticks++;
@@ -40,18 +45,21 @@ public class TrainingController : LevelController {
 
         float dist = GetDistance();
         float desiredDist = Mathf.Abs(dist - Settings.Brain.DistanceToKeep); // Close to 0 is better
-        if (desiredDist < 5)
-        {
-            KeepDistanceCount += 10;
-        }
-        else if (desiredDist < 10)
-        {
-            KeepDistanceCount += 2;
-        }
-        else if (desiredDist < 18)
-        {
-            KeepDistanceCount += 1;
-        }
+
+        KeepDistanceCount += InverseDistance(desiredDist);
+
+        //if (desiredDist < 5)
+        //{
+        //    KeepDistanceCount += 10;
+        //}
+        //else if (desiredDist < 10)
+        //{
+        //    KeepDistanceCount += 5;
+        //}
+        //else if (desiredDist < 18)
+        //{
+        //    KeepDistanceCount += 2;
+        //}
         if (desiredDist < ReachDistanceCount)
         {
             ReachDistanceCount = desiredDist;

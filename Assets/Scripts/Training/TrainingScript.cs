@@ -95,7 +95,9 @@ public class TrainingScript : MonoBehaviour {
         GameObject.Find("s_MortarHits").GetComponent<dfSlider>().Value = Settings.Brain.MortarHits;
         GameObject.Find("s_MortarPrecision").GetComponent<dfSlider>().Value = Settings.Brain.MortarPrecision;
         GameObject.Find("s_MortarDamagePerHit").GetComponent<dfSlider>().Value = Settings.Brain.MortarDamagePerHit;
-        GameObject.Find("s_MortarDamagePerHit").GetComponent<dfSlider>().PerformLayout();               
+        GameObject.Find("s_MortarDamagePerHit").GetComponent<dfSlider>().PerformLayout();
+
+        GameObject.Find("Multiple Targets Checkbox").GetComponent<dfCheckbox>().IsChecked = Settings.Brain.MultipleTargets;
 
         dfDropdown dropdown = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>();
 

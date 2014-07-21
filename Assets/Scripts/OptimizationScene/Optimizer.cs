@@ -97,7 +97,7 @@ public class Optimizer : MonoBehaviour {
 		experiment.Initialize(Settings.Brain.Name, xmlConfig.DocumentElement, Settings.Brain.NumInputs, Settings.Brain.NumOutputs);
 		//filePath = string.Format(@"Assets\Scripts\Populations\{0}Champ.gnm.xml", OptimizerParameters.Name);
 		//popFilePath = string.Format(@"Assets\Scripts\Populations\{0}.pop.xml", OptimizerParameters.Name);
-		OptimizerParameters.MultipleTargets = false;
+	//	OptimizerParameters.MultipleTargets = false;
 
 		//filePath = Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", OptimizerParameters.Name);
 		//popFilePath = Application.persistentDataPath + string.Format("/Populations/{0}.pop.xml", OptimizerParameters.Name);
@@ -131,9 +131,10 @@ public class Optimizer : MonoBehaviour {
 		Target.transform.position = new Vector3(0, 1, 0);
 		dict.Add(box, robo);
 
-		if (OptimizerParameters.MultipleTargets)
+		if (Settings.Brain.MultipleTargets)
 		{
 			GameObject t = Instantiate(Target, new Vector3(0, 1, 0), Quaternion.identity) as GameObject;
+            t.transform.localScale = new Vector3(1, 1, 1);
 			TargetController tc = t.AddComponent<TargetController>();
 			tc.Activate(obj.transform);
 			targetDict.Add(box, tc);
@@ -181,9 +182,10 @@ public class Optimizer : MonoBehaviour {
 		TrainingController robo = obj.GetComponent<TrainingController>();
 	 //   robo.RunBestOnly = true;
 
-		if (OptimizerParameters.MultipleTargets)
+		if (Settings.Brain.MultipleTargets)
 		{
 			GameObject t = Instantiate(Target, new Vector3(0, 1, 0), Quaternion.identity) as GameObject;
+            t.transform.localScale = new Vector3(1, 1, 1);
 			TargetController tc = t.AddComponent<TargetController>();
 			tc.Activate(obj.transform);
 			targetDict.Add(phenome, tc);

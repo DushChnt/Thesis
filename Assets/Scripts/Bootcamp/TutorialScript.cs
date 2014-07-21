@@ -5,6 +5,7 @@ public class TutorialScript : MonoBehaviour {
 
     public dfLabel TitleLabel, ExplanationLabel, ProgressLabel;
     public dfButton NextButton, PrevButton, CloseButton;
+    public dfTweenColor32 MissionFlash, RobotFlash, BrainsFlash;
     dfPanel panel;
     public int MaxPages = 4;
 
@@ -89,6 +90,12 @@ Click on a brain to train it. Drag your brains to the 'Selected brains' panel to
             NextButton.Text = "Close";
             NextButton.RemoveAllEventHandlers();
             NextButton.Click += new MouseEventHandler(CloseButton_Click);
+            RobotFlash.Stop();
+            MissionFlash.Stop();
+            BrainsFlash.Stop();
+            RobotFlash.Reset();
+            MissionFlash.Reset();
+            BrainsFlash.Reset();
         }
         else
         {
@@ -96,6 +103,26 @@ Click on a brain to train it. Drag your brains to the 'Selected brains' panel to
             NextButton.RemoveAllEventHandlers();
             NextButton.Click += new MouseEventHandler(NextButton_Click);
         }
+
+        RobotFlash.Stop();
+        MissionFlash.Stop();
+        BrainsFlash.Stop();
+        RobotFlash.Reset();
+        MissionFlash.Reset();
+        BrainsFlash.Reset();
+        switch (CurrentPage)
+        {
+            case 2:
+                RobotFlash.Play();
+                break;
+            case 3:
+                MissionFlash.Play();
+                break;
+            case 4:
+                BrainsFlash.Play();
+                break;
+        }
+
         ShowText();
     }
 
@@ -134,7 +161,12 @@ Click on a brain to train it. Drag your brains to the 'Selected brains' panel to
 
     void CloseButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        
+        RobotFlash.Stop();
+        MissionFlash.Stop();
+        BrainsFlash.Stop();
+        RobotFlash.Reset();
+        MissionFlash.Reset();
+        BrainsFlash.Reset();
         panel.Hide();
     }
 	
