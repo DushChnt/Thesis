@@ -18,39 +18,49 @@ public class TrainingController : LevelController {
 
     protected override void MeleeAttack()
     {
-        MeleeAttacks++;
-        RaycastHit hit;       
-        
-        // Check raycast a short distance in front of the robot
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerMask))
+        if (attackTimer >= MeleeWeapon.CoolDown)
         {
+            MeleeAttacks++;
+            RaycastHit hit;
 
-            if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+            // Check raycast a short distance in front of the robot
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerMask))
             {
-                MeleeHits++;
+
+                if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+                {
+                    MeleeHits++;
+                }
             }
         }
     }
 
     protected override void RifleAttack()
     {
-        RifleAttacks++;
-        RaycastHit hit;
-
-        // Check raycast a short distance in front of the robot
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerMask))
+        if (rifleTimer >= RifleWeapon.CoolDown)
         {
+            RifleAttacks++;
+            RaycastHit hit;
 
-            if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+            // Check raycast a short distance in front of the robot
+            if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerMask))
             {
-                RifleHits++;
+
+                if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+                {
+                    RifleHits++;
+                }
+
             }
         }
     }
 
     protected override void MortarAttack(float mortarForce)
     {
-        throw new System.NotImplementedException();
+        if (mortarTimer >= MortarWeapon.CoolDown)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     private float InverseDistance(float x)

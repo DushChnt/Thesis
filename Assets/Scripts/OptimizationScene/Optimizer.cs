@@ -96,7 +96,7 @@ public class Optimizer : MonoBehaviour {
 	string popFileSavePath, champFileSavePath;
 
 	Dictionary<IBlackBox, TrainingController> dict = new Dictionary<IBlackBox, TrainingController>();
-	Dictionary<IBlackBox, TargetController> targetDict = new Dictionary<IBlackBox, TargetController>();
+    Dictionary<TrainingController, TargetController> targetDict = new Dictionary<TrainingController, TargetController>();
 
 	// Use this for initialization
 	void Start()
@@ -152,7 +152,7 @@ public class Optimizer : MonoBehaviour {
             t.transform.localScale = new Vector3(1, 1, 1);
 			TargetController tc = t.AddComponent<TargetController>();
 			tc.Activate(obj.transform);
-			targetDict.Add(box, tc);
+			targetDict.Add(robo, tc);
 			robo.Activate(box, t);
 		}
 		else
@@ -204,7 +204,7 @@ public class Optimizer : MonoBehaviour {
             t.transform.localScale = new Vector3(1, 1, 1);
 			TargetController tc = t.AddComponent<TargetController>();
 			tc.Activate(obj.transform);
-			targetDict.Add(phenome, tc);
+			targetDict.Add(robo, tc);
 			robo.Activate(phenome, t);
 		}
 		else
@@ -220,6 +220,11 @@ public class Optimizer : MonoBehaviour {
     {
         foreach (TrainingController robo in BestRunners)
         {
+            if (Settings.Brain.MultipleTargets)
+            {
+                targetDict[robo].Stop();
+                Destroy(targetDict[robo].gameObject);
+            }
             robo.Stop();
             Destroy(robo.gameObject);
 
@@ -231,11 +236,11 @@ public class Optimizer : MonoBehaviour {
 	{
 		TrainingController robo = dict[box];
 		robo.Stop();
-		if (targetDict.ContainsKey(box))
+		if (targetDict.ContainsKey(robo))
 		{
-			targetDict[box].Stop();
-			Destroy(targetDict[box].gameObject);
-			targetDict.Remove(box);
+			targetDict[robo].Stop();
+            Destroy(targetDict[robo].gameObject);
+            targetDict.Remove(robo);
 		}
 		Destroy(robo.gameObject);
 	}

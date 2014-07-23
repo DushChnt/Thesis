@@ -7,6 +7,8 @@ public class MousePan : MonoBehaviour {
     public float PanSpeed = 2.0f;
     public bool Activated;
 
+    public dfPanel BrainsPanel;
+
     private float horizontalPanPixels, verticalPanPixels;
     private float leftPanBorder, rightPanBorder;
     private float topPanBorder, bottomPanBorder;
@@ -21,7 +23,20 @@ public class MousePan : MonoBehaviour {
         rightPanBorder = Screen.width - horizontalPanPixels;
         topPanBorder = verticalPanPixels;
         bottomPanBorder = Screen.height - verticalPanPixels;
+
+        BrainsPanel.MouseEnter += new MouseEventHandler(BrainsPanel_MouseEnter);
+        BrainsPanel.MouseLeave += new MouseEventHandler(BrainsPanel_MouseLeave);
 	}
+
+    void BrainsPanel_MouseLeave(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        Activated = true;
+    }
+
+    void BrainsPanel_MouseEnter(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        Activated = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {

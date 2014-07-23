@@ -27,3 +27,5 @@ EditorBuildSettings:
     path: Assets/Scenes/New UI/Bootcamp.unity
   - enabled: 1
     path: Assets/Scenes/New UI/Training.unity
+  - enabled: 1
+    path: Assets/Scenes/Mission Arenas/Mission 1.unity

@@ -8,7 +8,7 @@ public class TutorialScript : MonoBehaviour {
     public dfTweenColor32 MissionFlash, RobotFlash, BrainsFlash;
     dfPanel panel;
     public int MaxPages = 4;
-
+    public const string TUTORIAL_SEEN = "TutorialSeen";
    
 
     int CurrentPage = 1;
@@ -43,6 +43,11 @@ Click on a brain to train it. Drag your brains to the 'Selected brains' panel to
         PrevButton.Click += new MouseEventHandler(PrevButton_Click);
 
         UpdatePage();
+
+        if (PlayerPrefs.GetInt(TUTORIAL_SEEN, 0) == 1)
+        {
+            panel.Hide();
+        }
 	}
 
     void PrevButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
@@ -169,6 +174,8 @@ Click on a brain to train it. Drag your brains to the 'Selected brains' panel to
         MissionFlash.Reset();
         BrainsFlash.Reset();
         panel.Hide();
+
+        PlayerPrefs.SetInt(TUTORIAL_SEEN, 1);
     }
 	
 	// Update is called once per frame

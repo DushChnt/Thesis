@@ -37,7 +37,7 @@ public class TrainingScript : MonoBehaviour {
     IEnumerator WaitForRequest(Brain brain, bool pop)
     {
         WWW www = new WWW(pop ? brain.Population.Url.AbsoluteUri : brain.ChampionGene.Url.AbsoluteUri);
-        print("Downloading");
+        print("Downloading " + brain.ObjectId);
         yield return www;
         print("Done downloading");
 

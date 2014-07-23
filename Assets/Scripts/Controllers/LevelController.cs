@@ -14,7 +14,9 @@ public abstract class LevelController : MonoBehaviour {
     protected float rifleTimer = 0;
     protected float mortarTimer = 0;
 
-    protected int layerMask = 1 << LayerMask.NameToLayer("Target");
+    protected Weapon MeleeWeapon, RifleWeapon, MortarWeapon;
+
+    protected int layerMask;
 
     Player Player
     {
@@ -34,7 +36,7 @@ public abstract class LevelController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        layerMask = 1 << LayerMask.NameToLayer("Target");
 	}
 	
 	// Update is called once per frame

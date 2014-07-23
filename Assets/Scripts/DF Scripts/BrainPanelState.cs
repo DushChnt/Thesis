@@ -16,6 +16,8 @@ public class BrainPanelState : MonoBehaviour {
     Brain _brain;
     public bool InUse;
     public int SlotNo;
+    public bool RemoveRemove;
+    public dfSprite Indicator;
 
     Player Player
     {
@@ -28,9 +30,14 @@ public class BrainPanelState : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         this._panel = GetComponent<dfPanel>();
+        this._indicator = Indicator;
         try
         {
-            this._removeButton = transform.Find("Remove").GetComponent<dfButton>(); 
+            this._removeButton = transform.Find("Remove").GetComponent<dfButton>();
+            if (RemoveRemove)
+            {
+                this._removeButton.Hide();
+            }
             _removeButton.Click += RemoveButton_Click;
         }
         catch (Exception)
@@ -62,6 +69,11 @@ public class BrainPanelState : MonoBehaviour {
         {
             _indicator.Show();
         }
+    }
+
+    public dfPanel GetPanel()
+    {
+        return _panel;
     }
 
     public void DeactivatePanel()

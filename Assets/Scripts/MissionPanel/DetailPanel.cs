@@ -18,8 +18,14 @@ public class DetailPanel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        panel = GetComponent<dfPanel>();    
+        panel = GetComponent<dfPanel>();
+        TestButton.Click += new MouseEventHandler(TestButton_Click);
 	}
+
+    void TestButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        Application.LoadLevel(string.Format("Mission {0}", PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1)));
+    }
 
    
 

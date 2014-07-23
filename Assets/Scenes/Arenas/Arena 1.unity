@@ -179,7 +179,7 @@ MonoBehaviour:
       right: 3
       bottom: 3
     owner: {fileID: 116960992}
-  renderOrder: 13
+  renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -474,7 +474,7 @@ MonoBehaviour:
       right: 0
       bottom: 12.3554688
     owner: {fileID: 165212432}
-  renderOrder: 17
+  renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1100,7 +1100,7 @@ MonoBehaviour:
       right: 8
       bottom: 708
     owner: {fileID: 364242722}
-  renderOrder: 12
+  renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1372,7 +1372,7 @@ MonoBehaviour:
       right: 47
       bottom: 11
     owner: {fileID: 411806149}
-  renderOrder: 11
+  renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2226,6 +2226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InUse: 0
   SlotNo: 3
+  RemoveRemove: 0
+  Indicator: {fileID: 0}
 --- !u!1 &801580796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2377,7 +2379,7 @@ MonoBehaviour:
       right: 106
       bottom: 13
     owner: {fileID: 812316964}
-  renderOrder: 10
+  renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2501,7 +2503,7 @@ MonoBehaviour:
       right: 0
       bottom: 12
     owner: {fileID: 813254952}
-  renderOrder: 14
+  renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2657,6 +2659,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InUse: 0
   SlotNo: 2
+  RemoveRemove: 0
+  Indicator: {fileID: 0}
 --- !u!1 &880671120
 GameObject:
   m_ObjectHideFlags: 0
@@ -3193,7 +3197,7 @@ MonoBehaviour:
       right: 7
       bottom: 13
     owner: {fileID: 1020183173}
-  renderOrder: 9
+  renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3653,6 +3657,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InUse: 0
   SlotNo: 1
+  RemoveRemove: 0
+  Indicator: {fileID: 0}
 --- !u!1 &1371821216
 GameObject:
   m_ObjectHideFlags: 0
@@ -3738,7 +3744,7 @@ MonoBehaviour:
       right: 449
       bottom: 708
     owner: {fileID: 1371821219}
-  renderOrder: 8
+  renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5062,7 +5068,7 @@ MonoBehaviour:
       right: 2.78125
       bottom: 2.59765625
     owner: {fileID: 1969916923}
-  renderOrder: 16
+  renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5359,7 +5365,7 @@ MonoBehaviour:
       right: .430664062
       bottom: .078125
     owner: {fileID: 2063263615}
-  renderOrder: 15
+  renderOrder: 8
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5853,3 +5859,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InUse: 0
   SlotNo: 4
+  RemoveRemove: 0
+  Indicator: {fileID: 0}

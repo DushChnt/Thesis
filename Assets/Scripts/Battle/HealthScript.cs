@@ -6,8 +6,17 @@ public class HealthScript : Photon.MonoBehaviour {
 
 	private float _health;
     public ParticleSystem Explosion;
-    dfGUIManager GUI;
+    public dfGUIManager GUI;
     GameObject label;
+    public bool IsOpponent;
+
+    public float GuiHealth
+    {
+        get
+        {
+            return IsOpponent ? 100 - Health : Health;
+        }
+    }
 
 	public float Health
 	{
@@ -33,7 +42,10 @@ public class HealthScript : Photon.MonoBehaviour {
 		{
 			BattleGUI.Robot2Health = Health;
 		}
-        GUI = GameObject.Find("Battle GUI").GetComponent<dfGUIManager>();
+        if (GUI == null)
+        {
+            GUI = GameObject.Find("Battle GUI").GetComponent<dfGUIManager>();
+        }
         label = (GameObject)Resources.Load("Floating Label", typeof(GameObject));
 	}
 	
