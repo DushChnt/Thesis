@@ -8,6 +8,13 @@ public class MissionUI : MonoBehaviour {
     public float WaitingTime = 0.5f;
     public FightController Controller;
     public GameObject Target;
+    public dfLabel QuestLabel;
+
+    public Mission1 Mission1;
+
+    public dfButton StartButton;
+
+    public dfPanel MissionDonePanel;
 
     bool initialized;
     Player Player
@@ -21,8 +28,14 @@ public class MissionUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-       
+        StartButton.Click += new MouseEventHandler(StartButton_Click);
+      //  Camera.main.GetComponent<MousePan>().Activated = false;
 	}
+
+    void StartButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        Initialize();
+    }
 
     void SlotClick(dfControl control, dfMouseEventArgs mouseEvent, int slot)
     {
@@ -49,6 +62,7 @@ public class MissionUI : MonoBehaviour {
 
     void Initialize()
     {
+       // Camera.main.GetComponent<MousePan>().Activated = true;
         Slot1.ActivatePanel();
         activePanel = Slot1;
 
@@ -99,20 +113,33 @@ public class MissionUI : MonoBehaviour {
 
         Controller.Activate(activeBrain, Target);
         Controller.SetBrains(brain1, brain2, brain3, brain4);
+
+        Mission1.Initialize(this);
+    }
+
+    public void UpdateQuest(int quest)
+    {
+        QuestLabel.Text = string.Format("{0} / 3", quest);
+    }
+
+    public void MissionDone()
+    {
+        MissionDonePanel.Show();
+       // Camera.main.GetComponent<MousePan>().Activated = false;
     }
 
 	// Update is called once per frame
 	void Update () {
 
-        if (!initialized && WaitingTime < 0)
-        {
-            initialized = true;
-            Initialize();
-        }
-        else
-        {
-            WaitingTime -= Time.deltaTime;
-        }
+        //if (!initialized && WaitingTime < 0)
+        //{
+        //    initialized = true;
+        //    Initialize();
+        //}
+        //else
+        //{
+        //    WaitingTime -= Time.deltaTime;
+        //}
 
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
         {

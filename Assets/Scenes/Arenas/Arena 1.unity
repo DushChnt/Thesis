@@ -1696,6 +1696,7 @@ MonoBehaviour:
   PanAreaPercent: .200000003
   PanSpeed: 10
   Activated: 0
+  BrainsPanel: {fileID: 0}
   PanMaxX: 20
   PanMinX: -20
   PanMaxY: 10

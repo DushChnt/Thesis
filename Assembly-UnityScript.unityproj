@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{0CDEF5B4-5D89-843D-4E19-A4A5D599C4FF}</ProjectGuid>
+	<ProjectGuid>{F1BBA24D-0A7C-2BDA-5992-B8F80860D3DF}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_5_0;UNITY_4_5;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_5_2;UNITY_4_5;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -94,21 +94,21 @@
      <None Include="Assets\Photon Unity Networking\changelog.txt" />
      <None Include="Assets\Scripts\Populations\optimizerChamp.gnm.xml" />
  <Reference Include="Awesomium.Unity">
- <HintPath>E:/Workspaces/Thesis/Unity/Assets/Awesomium.Unity.dll</HintPath>
+ <HintPath>C:/Users/Daniel.DATAKNOWHOW/Documents/Development/GitHub/Thesis/Assets/Awesomium.Unity.dll</HintPath>
  </Reference>
  <Reference Include="dfScriptLite">
- <HintPath>E:/Workspaces/Thesis/Unity/Assets/Daikon Forge/DataBinding/Plugins/dfScriptLite.dll</HintPath>
+ <HintPath>C:/Users/Daniel.DATAKNOWHOW/Documents/Development/GitHub/Thesis/Assets/Daikon Forge/DataBinding/Plugins/dfScriptLite.dll</HintPath>
  </Reference>
  <Reference Include="Parse.Unity">
- <HintPath>E:/Workspaces/Thesis/Unity/Assets/Plugins/Parse.Unity.dll</HintPath>
+ <HintPath>C:/Users/Daniel.DATAKNOWHOW/Documents/Development/GitHub/Thesis/Assets/Plugins/Parse.Unity.dll</HintPath>
  </Reference>
  <Reference Include="Photon3Unity3D">
- <HintPath>E:/Workspaces/Thesis/Unity/Assets/Plugins/Photon3Unity3D.dll</HintPath>
+ <HintPath>C:/Users/Daniel.DATAKNOWHOW/Documents/Development/GitHub/Thesis/Assets/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{2662B409-6332-1E56-D797-C9025C53BDD6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{139C9E39-A4F7-7572-0A26-5C79D9A4F105}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
