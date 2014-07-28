@@ -6,6 +6,7 @@ public class RobotPanel : MonoBehaviour {
 
     public dfLabel UsernameLabel, LevelLabel, HealthLabel, MaxSpeedLabel;
     public dfSprite Avatar;
+    public SelectWeaponScript SelectWeapon;
 
     Player Player
     {
@@ -27,4 +28,9 @@ public class RobotPanel : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void ShowSelectWeapon(WeaponType type) 
+    {
+        SelectWeapon.ShowSelectWeapons(type);
+    }
 }

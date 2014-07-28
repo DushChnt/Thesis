@@ -4,11 +4,24 @@ using System.Collections;
 public class TrainingController : LevelController {
 
     private float DistanceMoved, TurnAmount, TurretTurnAmount, KeepDistanceCount, ReachDistanceCount = 1000, ReachedTick, FaceTarget, ticks;
-    private int MeleeAttacks, MeleeHits, RifleAttacks, RifleHits;    
+    private int MeleeAttacks, MeleeHits, RifleAttacks, RifleHits;
+    private float MaxMeleeAttacks, MeleeCooldown, RifleCooldown, MortarCooldown;
 
 	// Use this for initialization
 	void Start () {
-	
+        if (MeleeWeapon != null)
+        {
+            MaxMeleeAttacks = MeleeWeapon.AttackSpeed * 20; // Should be Optimizer.TrialDuration
+            MeleeCooldown = 1 / MeleeWeapon.AttackSpeed;
+        }
+        if (RangedWeapon != null)
+        {
+            RifleCooldown = 1 / RangedWeapon.AttackSpeed;
+        }
+        if (MortarWeapon != null)
+        {
+            MortarCooldown = 1 / MortarWeapon.AttackSpeed;
+        }
 	}	
 
     protected override bool CanRun()
@@ -18,8 +31,9 @@ public class TrainingController : LevelController {
 
     protected override void MeleeAttack()
     {
-        if (attackTimer >= MeleeWeapon.CoolDown)
+        if (attackTimer >= MeleeCooldown)
         {
+            attackTimer = 0;
             MeleeAttacks++;
             RaycastHit hit;
 
@@ -37,7 +51,7 @@ public class TrainingController : LevelController {
 
     protected override void RifleAttack()
     {
-        if (rifleTimer >= RifleWeapon.CoolDown)
+        if (rifleTimer >= RifleCooldown)
         {
             RifleAttacks++;
             RaycastHit hit;
@@ -57,7 +71,7 @@ public class TrainingController : LevelController {
 
     protected override void MortarAttack(float mortarForce)
     {
-        if (mortarTimer >= MortarWeapon.CoolDown)
+        if (mortarTimer >= MortarCooldown)
         {
             throw new System.NotImplementedException();
         }
@@ -129,6 +143,10 @@ public class TrainingController : LevelController {
 
     private float GetAdvancedFitness()
     {
+        if (DistanceMoved + TurnAmount < 2)
+        {
+            return 0;
+        }
         float fit = 1000;
 
         float moveAround = DistanceMoved / ticks * Settings.Brain.MoveAround;
@@ -142,12 +160,17 @@ public class TrainingController : LevelController {
 
         float faceTarget = FaceTarget / ticks * Settings.Brain.FaceTarget;
         fit += faceTarget;
-        print("Fitness: " + fit);
 
-        if (DistanceMoved + TurnAmount < 2)
-        {
-            return 0;
-        }
+        float meleeAttacks = MeleeAttacks / MaxMeleeAttacks * Settings.Brain.MeleeAttacks;
+        fit += meleeAttacks;
+
+        float meleeHits = MeleeHits / MaxMeleeAttacks * Settings.Brain.MeleeHits;
+        fit += MeleeHits;
+
+        float meleePrecision = MeleeAttacks > 0 ? MeleeHits / MeleeAttacks : 0;
+        meleePrecision *= Settings.Brain.MeleePrecision;
+        fit += meleePrecision;
+        
         return fit;
     }
 }

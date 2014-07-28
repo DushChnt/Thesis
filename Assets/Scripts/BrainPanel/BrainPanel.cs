@@ -436,7 +436,7 @@ public class BrainPanel : MonoBehaviour {
 
         Settings.Brain = bb.Brain.Branch();
 
-        Application.LoadLevel("Training Overview");
+        Application.LoadLevel("Training");
 
         //    Application.LoadLevel("Training Overview");
         mouseEvent.Use();

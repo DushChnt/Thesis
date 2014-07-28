@@ -24,6 +24,25 @@ public class MissionPanel : MonoBehaviour {
 
         DisableLockedMissions();
      //   MissionClick(null, null, Player.Level);
+
+        switch (Player.Level)
+        {
+            case 1:
+                Mission1.DoClick();                
+                break;
+            case 2:
+                Mission2.DoClick();                
+                break;
+            case 3:
+                Mission3.DoClick();
+                break;
+            case 4:
+                Mission4.DoClick();
+                break;
+            case 5:
+                Mission5.DoClick();
+                break;
+        }
 	}
 
     void DisableLockedMissions()

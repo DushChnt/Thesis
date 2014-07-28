@@ -14,7 +14,7 @@ public abstract class LevelController : MonoBehaviour {
     protected float rifleTimer = 0;
     protected float mortarTimer = 0;
 
-    protected Weapon MeleeWeapon, RifleWeapon, MortarWeapon;
+    protected Weapon MeleeWeapon, RangedWeapon, MortarWeapon;
 
     protected int layerMask;
 
@@ -35,8 +35,20 @@ public abstract class LevelController : MonoBehaviour {
     protected abstract void FitnessStats(float moveDist, float turnAngle, float turretTurnAngle, float pickup_sensor, float on_target, float turret_on_target);
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         layerMask = 1 << LayerMask.NameToLayer("Target");
+        if (Player.MeleeWeapon != null)
+        {
+            MeleeWeapon = WeaponList.WeaponDict[Player.MeleeWeapon];
+        }
+        if (Player.RangedWeapon != null)
+        {
+            RangedWeapon = WeaponList.WeaponDict[Player.RangedWeapon];
+        }
+        if (Player.MortarWeapon != null)
+        {
+            MortarWeapon = WeaponList.WeaponDict[Player.MortarWeapon];
+        }
 	}
 	
 	// Update is called once per frame

@@ -2,8 +2,18 @@
 using System.Collections;
 using Parse;
 using System.Collections.Generic;
+using System;
 
 public class Player : ParseUser {
+
+    public delegate void WeaponChangedEventHandler(object sender, EventArgs e);
+
+    public event WeaponChangedEventHandler WeaponChanged;
+
+    public void PushWeaponChange()
+    {
+        WeaponChanged(this, EventArgs.Empty);
+    }
 
     public bool CanUseMelee
     {
