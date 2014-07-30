@@ -51,6 +51,10 @@ public class SelectWeaponSlot : MonoBehaviour {
 
     public void SetWeapon(Weapon weapon)
     {
+        if (weaponButton == null)
+        {
+            print("Weapon button is null");
+        }
         if (weapon == null)
         {
             print("NulL");
@@ -60,6 +64,10 @@ public class SelectWeaponSlot : MonoBehaviour {
             print("Notnull");
         }
         this.Weapon = weapon;
+        if (NameLabel == null)
+        {
+            print("WTF?");
+        }
         NameLabel.Text = weapon.Name;
         if (weapon.MinimumDamage < weapon.MaximumDamage)
         {

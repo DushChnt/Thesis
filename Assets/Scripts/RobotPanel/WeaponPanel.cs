@@ -6,12 +6,15 @@ using System.Collections.Generic;
 public class WeaponPanel : MonoBehaviour {
 
     public dfLabel UnlockLabel, ReadyLabel;
-    public SelectWeaponSlot WeaponButton;
+    public dfButton WeaponButton;
     public WeaponType WeaponType;
     public Weapon Weapon;
     dfPanel panel;
     dfTweenColor32 colorTween;
     RobotPanel robotPanel;
+    SelectWeaponSlot weaponSlot;
+
+    bool Clicked;
 
     Player Player
     {
@@ -23,23 +26,73 @@ public class WeaponPanel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        weaponSlot = WeaponButton.GetComponent<SelectWeaponSlot>();
         Player.WeaponChanged += new global::Player.WeaponChangedEventHandler(Player_WeaponChanged);
         robotPanel = transform.parent.GetComponent<RobotPanel>();
         panel = this.GetComponent<dfPanel>();
         colorTween = this.GetComponent<dfTweenColor32>();
+        
         Initialize();
 	}
 
     void Player_WeaponChanged(object sender, System.EventArgs e)
     {
-        Initialize();
+        if (Clicked)
+        {
+            UpdateWeapon();
+            Clicked = false; 
+        }
+    }
+
+    void UpdateWeapon()
+    {
+        switch (WeaponType)
+        {
+            case WeaponType.Melee:
+                if (Player.MeleeWeapon != null)
+                {
+                    Weapon = WeaponList.WeaponDict[Player.MeleeWeapon];
+                    print("Weapon: " + Weapon.Name);
+                    weaponSlot.SetWeapon(Weapon);
+                }
+                if (Player.Level > 1)
+                {
+                    Activate();
+                }
+
+                break;
+            case WeaponType.Ranged:
+                if (Player.RangedWeapon != null)
+                {
+                    Weapon = WeaponList.WeaponDict[Player.RangedWeapon];
+                    weaponSlot.SetWeapon(Weapon);
+                }
+                if (Player.Level > 2)
+                {
+                    Activate();
+                }
+
+                break;
+            case WeaponType.Mortar:
+                if (Player.MortarWeapon != null)
+                {
+                    Weapon = WeaponList.WeaponDict[Player.MortarWeapon];
+                    weaponSlot.SetWeapon(Weapon);
+                }
+                if (Player.Level > 3)
+                {
+                    Activate();
+                }
+
+                break;
+        }
     }
 
     void Initialize()
     {
 
-        WeaponButton.weaponButton.RemoveAllEventHandlers();
-        WeaponButton.weaponButton.Click += new MouseEventHandler(panel_Click);
+        WeaponButton.RemoveAllEventHandlers();
+        WeaponButton.Click += new MouseEventHandler(panel_Click);
         
         
         Deactivate();
@@ -49,7 +102,7 @@ public class WeaponPanel : MonoBehaviour {
                 if (Player.MeleeWeapon != null)
                 {
                     Weapon = WeaponList.WeaponDict[Player.MeleeWeapon];
-                    WeaponButton.SetWeapon(Weapon);
+                    weaponSlot.SetWeapon(Weapon);
                 }
                 if (Player.Level > 1)
                 {
@@ -61,7 +114,7 @@ public class WeaponPanel : MonoBehaviour {
                 if (Player.RangedWeapon != null)
                 {
                     Weapon = WeaponList.WeaponDict[Player.RangedWeapon];
-                    WeaponButton.SetWeapon(Weapon);
+                    weaponSlot.SetWeapon(Weapon);
                 }
                 if (Player.Level > 2)
                 {
@@ -72,8 +125,8 @@ public class WeaponPanel : MonoBehaviour {
             case WeaponType.Mortar:
                 if (Player.MortarWeapon != null)
                 {
-                    Weapon = WeaponList.WeaponDict[Player.MortarWeapon]; 
-                    WeaponButton.SetWeapon(Weapon);
+                    Weapon = WeaponList.WeaponDict[Player.MortarWeapon];
+                    weaponSlot.SetWeapon(Weapon);
                 }
                 if (Player.Level > 3)
                 {
@@ -86,6 +139,7 @@ public class WeaponPanel : MonoBehaviour {
 
     void panel_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
+        Clicked = true;
         robotPanel.ShowSelectWeapon(WeaponType);
     }
 
@@ -106,7 +160,7 @@ public class WeaponPanel : MonoBehaviour {
         }
         UnlockLabel.Text = "Unlock in level " + lvl;
         UnlockLabel.Show();
-        WeaponButton.weaponButton.Hide();
+        WeaponButton.Hide();
         ReadyLabel.Hide();
     }
 
@@ -117,14 +171,14 @@ public class WeaponPanel : MonoBehaviour {
         if (Weapon == null)
         {           
             UnlockLabel.Hide();
-            WeaponButton.weaponButton.Hide();
+            WeaponButton.Hide();
             ReadyLabel.Show();
             colorTween.Play();
         }
         else
         {
             UnlockLabel.Hide();
-            WeaponButton.weaponButton.Show();
+            WeaponButton.Show();
             ReadyLabel.Hide();
         }
     }

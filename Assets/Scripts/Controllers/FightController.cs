@@ -87,7 +87,7 @@ public class FightController : LevelController {
       //  throw new System.NotImplementedException();
     }
 
-    protected override void RifleAttack()
+    protected override void RangedAttack()
     {
         throw new System.NotImplementedException();
     }

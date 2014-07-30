@@ -2935,7 +2935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnlockLabel: {fileID: 11400000}
   ReadyLabel: {fileID: 11400002}
-  WeaponButton: {fileID: 11400010}
+  WeaponButton: {fileID: 11400014}
   WeaponType: 0
 --- !u!114 &11400008
 MonoBehaviour:
@@ -3565,7 +3565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnlockLabel: {fileID: 11400042}
   ReadyLabel: {fileID: 11400030}
-  WeaponButton: {fileID: 11400128}
+  WeaponButton: {fileID: 11400124}
   WeaponType: 1
 --- !u!114 &11400028
 MonoBehaviour:
@@ -7779,7 +7779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UnlockLabel: {fileID: 11400156}
   ReadyLabel: {fileID: 11400154}
-  WeaponButton: {fileID: 11400146}
+  WeaponButton: {fileID: 11400142}
   WeaponType: 2
 --- !u!114 &11400152
 MonoBehaviour:

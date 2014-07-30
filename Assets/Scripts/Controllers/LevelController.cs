@@ -9,10 +9,11 @@ public abstract class LevelController : MonoBehaviour {
     protected bool IsRunning;
     protected IBlackBox brain;
     protected Transform turret;
-    public float Speed, TurnSpeed, TurretTurnSpeed;
-    protected float attackTimer = 0;
-    protected float rifleTimer = 0;
+    public float TopSpeed, Speed, TurnSpeed, TurretTurnSpeed;
+    protected float meleeTimer = 0;
+    protected float rangedTimer = 0;
     protected float mortarTimer = 0;
+    protected float MeleeCooldown, RangedCooldown, MortarCooldown, RecoveryRate = 2;
 
     protected Weapon MeleeWeapon, RangedWeapon, MortarWeapon;
 
@@ -30,7 +31,7 @@ public abstract class LevelController : MonoBehaviour {
     public abstract void Activate(IBlackBox box, GameObject target);
     protected abstract bool CanRun();
     protected abstract void MeleeAttack();
-    protected abstract void RifleAttack();
+    protected abstract void RangedAttack();
     protected abstract void MortarAttack(float mortarForce);
     protected abstract void FitnessStats(float moveDist, float turnAngle, float turretTurnAngle, float pickup_sensor, float on_target, float turret_on_target);
 
@@ -40,14 +41,17 @@ public abstract class LevelController : MonoBehaviour {
         if (Player.MeleeWeapon != null)
         {
             MeleeWeapon = WeaponList.WeaponDict[Player.MeleeWeapon];
+            MeleeCooldown = 1 / MeleeWeapon.AttackSpeed;
         }
         if (Player.RangedWeapon != null)
         {
             RangedWeapon = WeaponList.WeaponDict[Player.RangedWeapon];
+            RangedCooldown = 1 / RangedWeapon.AttackSpeed;
         }
         if (Player.MortarWeapon != null)
         {
             MortarWeapon = WeaponList.WeaponDict[Player.MortarWeapon];
+            MortarCooldown = 1 / MortarWeapon.AttackSpeed;
         }
 	}
 	
@@ -61,10 +65,55 @@ public abstract class LevelController : MonoBehaviour {
         this.IsRunning = false;
     }
 
+    protected void DoMeleeAttack()
+    {
+        if (meleeTimer >= MeleeCooldown)
+        {
+            meleeTimer = 0;
+            MeleeAttack();
+            float slowdown = TopSpeed * MeleeWeapon.SlowDown / 100f;
+            Speed -= slowdown;
+        }
+    }
+
+    protected void DoRangedAttack()
+    {
+        if (rangedTimer >= RangedCooldown)
+        {
+            rangedTimer = 0;
+            RangedAttack();
+            float slowdown = TopSpeed * RangedWeapon.SlowDown / 100f;
+            Speed -= slowdown;
+        }
+    }
+
+    protected void DoMortarAttack(float mortarForce)
+    {
+        if (mortarTimer >= MortarCooldown)
+        {
+            mortarTimer = 0;
+            MortarAttack(mortarForce);
+            float slowdown = TopSpeed * MortarWeapon.SlowDown / 100f;
+            Speed -= slowdown;
+        }
+    }
+
     void Loop()
     {       
         if (IsRunning && CanRun())
         {
+            if (Speed < TopSpeed)
+            {
+                if (Speed < 0)
+                {
+                    Speed = 0;
+                }
+                Speed += RecoveryRate * Time.deltaTime;
+                if (Speed > TopSpeed)
+                {
+                    Speed = TopSpeed;
+                }
+            }
           //  print("Is Running!");
             // All pies input are the distance to the target in the pie, 1 if close, 0 if far away
             float pie_front = 0; // Pie in [-15, 15]
@@ -120,18 +169,18 @@ public abstract class LevelController : MonoBehaviour {
 
         if (Player.CanUseMelee && meleeAttack > 0.5f)
         {
-            MeleeAttack();
+            DoMeleeAttack();
         }
         if (Player.CanUseRifle && rifleAttack > 0.5f)
         {
-            RifleAttack();
+            DoRangedAttack();
         }
         if (Player.CanUseMortar && mortarForce > 0.5f)
         {
-            MortarAttack(mortarForce);
+            DoMortarAttack(mortarForce);
         }
-        attackTimer += Time.deltaTime;
-        rifleTimer += Time.deltaTime;
+        meleeTimer += Time.deltaTime;
+        rangedTimer += Time.deltaTime;
         mortarTimer += Time.deltaTime;
 
         transform.Rotate(new Vector3(0, turnAngle, 0));

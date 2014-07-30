@@ -5,23 +5,14 @@ public class TrainingController : LevelController {
 
     private float DistanceMoved, TurnAmount, TurretTurnAmount, KeepDistanceCount, ReachDistanceCount = 1000, ReachedTick, FaceTarget, ticks;
     private int MeleeAttacks, MeleeHits, RifleAttacks, RifleHits;
-    private float MaxMeleeAttacks, MeleeCooldown, RifleCooldown, MortarCooldown;
+    private float MaxMeleeAttacks;
 
 	// Use this for initialization
 	void Start () {
         if (MeleeWeapon != null)
         {
-            MaxMeleeAttacks = MeleeWeapon.AttackSpeed * 20; // Should be Optimizer.TrialDuration
-            MeleeCooldown = 1 / MeleeWeapon.AttackSpeed;
-        }
-        if (RangedWeapon != null)
-        {
-            RifleCooldown = 1 / RangedWeapon.AttackSpeed;
-        }
-        if (MortarWeapon != null)
-        {
-            MortarCooldown = 1 / MortarWeapon.AttackSpeed;
-        }
+            MaxMeleeAttacks = MeleeWeapon.AttackSpeed * 20; // Should be Optimizer.TrialDuration          
+        }        
 	}	
 
     protected override bool CanRun()
@@ -31,50 +22,43 @@ public class TrainingController : LevelController {
 
     protected override void MeleeAttack()
     {
-        if (attackTimer >= MeleeCooldown)
+        MeleeAttacks++;
+        RaycastHit hit;
+
+        // Check raycast a short distance in front of the robot
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerMask))
         {
-            attackTimer = 0;
-            MeleeAttacks++;
-            RaycastHit hit;
 
-            // Check raycast a short distance in front of the robot
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerMask))
+            if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
             {
-
-                if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
-                {
-                    MeleeHits++;
-                }
+                MeleeHits++;
             }
         }
+
     }
 
-    protected override void RifleAttack()
+    protected override void RangedAttack()
     {
-        if (rifleTimer >= RifleCooldown)
+
+        RifleAttacks++;
+        RaycastHit hit;
+
+        // Check raycast a long distance in front of the robot
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 50, layerMask))
         {
-            RifleAttacks++;
-            RaycastHit hit;
 
-            // Check raycast a short distance in front of the robot
-            if (Physics.Raycast(transform.position, transform.forward, out hit, 5, layerMask))
+            if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
             {
-
-                if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
-                {
-                    RifleHits++;
-                }
-
+                RifleHits++;
             }
+
         }
+
     }
 
     protected override void MortarAttack(float mortarForce)
     {
-        if (mortarTimer >= MortarCooldown)
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 
     private float InverseDistance(float x)
