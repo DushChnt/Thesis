@@ -22,7 +22,8 @@ public class Optimizer : MonoBehaviour {
 	private DateTime startTime;
 	public GameObject Robot;
 	public GameObject Target;
-    List<TrainingController> BestRunners = new List<TrainingController>();
+    public GameObject HammerRobot;
+    List<FightController> BestRunners = new List<FightController>();
     float evaluationStartTime;
 
     float timeLeft, accum, updateInterval = 12;
@@ -97,6 +98,7 @@ public class Optimizer : MonoBehaviour {
 
 	Dictionary<IBlackBox, TrainingController> dict = new Dictionary<IBlackBox, TrainingController>();
     Dictionary<TrainingController, TargetController> targetDict = new Dictionary<TrainingController, TargetController>();
+    Dictionary<FightController, TargetController> bestTargetDict = new Dictionary<FightController, TargetController>();
 
 	// Use this for initialization
 	void Start()
@@ -194,8 +196,8 @@ public class Optimizer : MonoBehaviour {
 		Vector3 dir = new Vector3(UnityEngine.Random.Range(-1f, 1f), 0, UnityEngine.Random.Range(-1f, 1f));
 		Vector3 pos = dir.normalized * 20;
 		pos.y = 1;
-		GameObject obj = Instantiate(Robot, pos, Quaternion.identity) as GameObject;
-		TrainingController robo = obj.GetComponent<TrainingController>();
+		GameObject obj = Instantiate(HammerRobot, pos, Quaternion.identity) as GameObject;
+        FightController robo = obj.GetComponent<FightController>();
 	 //   robo.RunBestOnly = true;
 
 		if (Settings.Brain.MultipleTargets)
@@ -204,7 +206,7 @@ public class Optimizer : MonoBehaviour {
             t.transform.localScale = new Vector3(1, 1, 1);
 			TargetController tc = t.AddComponent<TargetController>();
 			tc.Activate(obj.transform);
-			targetDict.Add(robo, tc);
+			bestTargetDict.Add(robo, tc);
 			robo.Activate(phenome, t);
 		}
 		else
@@ -218,18 +220,18 @@ public class Optimizer : MonoBehaviour {
 
     void CleanUpScene()
     {
-        foreach (TrainingController robo in BestRunners)
+        foreach (FightController robo in BestRunners)
         {
             if (Settings.Brain.MultipleTargets)
             {
-                targetDict[robo].Stop();
-                Destroy(targetDict[robo].gameObject);
+                bestTargetDict[robo].Stop();
+                Destroy(bestTargetDict[robo].gameObject);
             }
             robo.Stop();
             Destroy(robo.gameObject);
 
         }
-        BestRunners = new List<TrainingController>();
+        BestRunners = new List<FightController>();
     }
 
 	public void StopEvaluation(IBlackBox box)
@@ -273,7 +275,7 @@ public class Optimizer : MonoBehaviour {
 		{
 			evoSpeed = 8;
 		}
-        evoSpeed = 20;
+        evoSpeed = 25;
        
         Time.fixedDeltaTime = 0.045f;
 		Time.timeScale = evoSpeed;

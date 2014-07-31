@@ -10,6 +10,13 @@ public class HealthScript : Photon.MonoBehaviour {
     GameObject label;
     public bool IsOpponent;
 
+    public bool IsDead {
+        get
+        {
+            return Health <= 0.0f;
+        }
+    }
+
     public float GuiHealth
     {
         get
@@ -72,12 +79,16 @@ public class HealthScript : Photon.MonoBehaviour {
             glabel.Text = string.Format("-{0:#.##}!", damage);
             glabel.BottomColor = new Color32(254, 0, 0, 254);
         }
-        else
+        else if (damage > 0)
         {
             glabel.Text = string.Format("+{0:#.##}!", damage);
             glabel.BottomColor = new Color32(0, 254, 0, 254);
         }
-        
+        else
+        {
+            glabel.Text = "Hit!";
+            glabel.BottomColor = new Color32(0, 0, 254, 254);
+        }
        
     }
 
@@ -117,6 +128,8 @@ public class HealthScript : Photon.MonoBehaviour {
                 Destroy(FollowScript.gameObject);
                 Destroy(FollowScript);
             }
+           
+            Destroy(gameObject);
        //     PhotonNetwork.Destroy(gameObject);
 		}
 	}

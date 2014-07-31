@@ -4,7 +4,6 @@ using System;
 
 public interface IMission {
 
-    event EventHandler MissionComplete;
-    event EventHandler SubMissionComplete;
+    void Initialize(MissionUI UI);
 
 }

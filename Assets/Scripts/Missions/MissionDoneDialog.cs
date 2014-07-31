@@ -4,6 +4,7 @@ using System.Collections;
 public class MissionDoneDialog : MonoBehaviour {
 
     public dfButton LevelUpButton;
+    public bool LoseDialog;
 
     Player Player
     {
@@ -20,7 +21,10 @@ public class MissionDoneDialog : MonoBehaviour {
 
     void LevelUpButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        LevelUp();
+        if (!LoseDialog)
+        {
+            LevelUp();
+        }
         Application.LoadLevel("Bootcamp");
     }
 

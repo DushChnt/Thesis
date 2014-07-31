@@ -19,7 +19,7 @@ public abstract class LevelController : MonoBehaviour {
 
     protected int layerMask;
 
-    Player Player
+    protected Player Player
     {
         get
         {
@@ -28,6 +28,7 @@ public abstract class LevelController : MonoBehaviour {
     }
 
     // Abstract functions
+    protected abstract void Initialize();
     public abstract void Activate(IBlackBox box, GameObject target);
     protected abstract bool CanRun();
     protected abstract void MeleeAttack();
@@ -42,6 +43,7 @@ public abstract class LevelController : MonoBehaviour {
         {
             MeleeWeapon = WeaponList.WeaponDict[Player.MeleeWeapon];
             MeleeCooldown = 1 / MeleeWeapon.AttackSpeed;
+            
         }
         if (Player.RangedWeapon != null)
         {
@@ -53,6 +55,7 @@ public abstract class LevelController : MonoBehaviour {
             MortarWeapon = WeaponList.WeaponDict[Player.MortarWeapon];
             MortarCooldown = 1 / MortarWeapon.AttackSpeed;
         }
+        Initialize();
 	}
 	
 	// Update is called once per frame
@@ -167,15 +170,15 @@ public abstract class LevelController : MonoBehaviour {
         var turnAngle = steer * TurnSpeed * Time.deltaTime; // * gas;
         var turretTurnAngle = turretTurn * TurretTurnSpeed * Time.deltaTime;
 
-        if (Player.CanUseMelee && meleeAttack > 0.5f)
+        if (Player.CanUseMelee && Player.MeleeWeapon != null && meleeAttack > 0.5f)
         {
             DoMeleeAttack();
         }
-        if (Player.CanUseRifle && rifleAttack > 0.5f)
+        if (Player.CanUseRifle && Player.RangedWeapon != null && rifleAttack > 0.5f)
         {
             DoRangedAttack();
         }
-        if (Player.CanUseMortar && mortarForce > 0.5f)
+        if (Player.CanUseMortar && Player.MortarWeapon != null && mortarForce > 0.5f)
         {
             DoMortarAttack(mortarForce);
         }

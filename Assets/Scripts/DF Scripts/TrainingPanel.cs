@@ -70,7 +70,7 @@ public class TrainingPanel : MonoBehaviour {
         switch (s)
         {
             case ButtonState.OK:
-                Application.LoadLevel("Training Overview");
+                Application.LoadLevel("Training");
                 break;
             case ButtonState.Cancel:
 

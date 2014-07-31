@@ -28,6 +28,28 @@ public class Utility : MonoBehaviour {
         }
     }
 
+    public static float GetDistance(GameObject A, GameObject B)
+    {
+        if (A != null && B != null)
+        {
+            Vector2 a = new Vector2(A.transform.position.x, A.transform.position.z);
+            Vector2 b = new Vector2(B.transform.position.x, B.transform.position.z);
+            return Vector2.Distance(a, b);
+        }
+        else
+        {
+            if (A == null)
+            {
+                throw new ArgumentNullException("GameObject A is null");
+            }
+            else
+            {
+                throw new ArgumentNullException("GameObject B is null");
+            }
+        }
+        return 0.0f;
+    }
+
     /// <summary>
     /// Clamps a value between 0 and 1
     /// </summary>

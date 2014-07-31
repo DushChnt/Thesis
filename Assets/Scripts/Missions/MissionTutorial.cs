@@ -14,11 +14,18 @@ public class MissionTutorial : MonoBehaviour {
 
     void StartButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
+        Time.timeScale = 1;
         panel.Hide();
     }
-	
+
+    public void ShowTutorial()
+    {
+        panel.Show();
+        StartButton.Text = "OK";
+    }
+
 	// Update is called once per frame
 	void Update () {
-	
+      
 	}
 }

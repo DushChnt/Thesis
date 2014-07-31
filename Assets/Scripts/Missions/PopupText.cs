@@ -7,11 +7,25 @@ public class PopupText : MonoBehaviour {
     float timer, fadeTimer;
     bool show;
     dfTweenVector3 posTween;
+    dfTweenFloat widthTween, heightTween;
 
 	// Use this for initialization
 	void Awake () {
         this.label = GetComponent<dfLabel>();
         this.posTween = GetComponent<dfTweenVector3>();
+        dfTweenFloat[] tweens = GetComponents<dfTweenFloat>();
+        foreach (dfTweenFloat tw in tweens)
+        {
+           
+            if (tw.TweenName.Equals("Scale width"))
+            {
+                widthTween = tw;
+            }
+            else
+            {
+                heightTween = tw;
+            }
+        }
 	}
 	
 	// Update is called once per frame
@@ -23,12 +37,16 @@ public class PopupText : MonoBehaviour {
             //label.Hide();
             show = false;
             posTween.Play();
+            widthTween.Play();
+            heightTween.Play();
         }
 	}
 
     public void ShowText(string text, float duration)
     {
         posTween.Reset();
+        widthTween.Reset();
+        heightTween.Reset();
         label.RelativePosition = posTween.StartValue;
         label.Text = text;
         label.Show();

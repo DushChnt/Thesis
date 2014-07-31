@@ -117,7 +117,7 @@ public class LoginPanel : MonoBehaviour {
         }
         Player.IsOnline = true;
         Player.SaveAsync();
-        Application.LoadLevel("Start Menu");
+        Application.LoadLevel("Main Menu");
         Destroy(this);
     }
 

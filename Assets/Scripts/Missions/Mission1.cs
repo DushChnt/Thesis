@@ -3,11 +3,11 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
-public class Mission1 : MonoBehaviour {
+public class Mission1 : MonoBehaviour, IMission {
 
     public FightController Controller;
     public OpponentController Opponent;
-
+    int MaxQuest = 3;
     Mission1State state;
     MissionUI UI;
 
@@ -95,7 +95,7 @@ public class Mission1 : MonoBehaviour {
         print("Showing text");
         PopupText.ShowText("Get close!");
         state = Mission1State.Approach;
-        UI.UpdateQuest(1);
+        UI.UpdateQuest(1, MaxQuest);
     }
 
     private void StartFlee()
@@ -104,7 +104,7 @@ public class Mission1 : MonoBehaviour {
         Opponent.SwitchMovement(OpponentState.Approaching);
         PastDistances = new Queue<float>(100);
         PopupText.ShowText("Flee!");
-        UI.UpdateQuest(2);
+        UI.UpdateQuest(2, MaxQuest);
     }
 
     private void StartFollow()
@@ -112,7 +112,7 @@ public class Mission1 : MonoBehaviour {
         state = Mission1State.Follow;
         Opponent.SwitchMovement(OpponentState.Fleeing);
         PopupText.ShowText("Catch him!");
-        UI.UpdateQuest(3);
+        UI.UpdateQuest(3, MaxQuest);
     }
 
     private void CheckFlee()

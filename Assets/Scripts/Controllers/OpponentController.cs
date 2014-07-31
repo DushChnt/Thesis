@@ -8,17 +8,36 @@ public class OpponentController : MonoBehaviour {
     public float Speed = 4;
     public float TurnSpeed = 180;
     bool IsRunning;
+    HammerAttack hammer;
+    bool TargetIsInMeleeBox;
+    public HealthScript OpponentHealth;
+    float meleeTimer, rangedTimer, mortarTimer;
 
 	// Use this for initialization
 	void Start () {
         state = OpponentState.Stationary;
         IsRunning = true;
+
+        hammer = transform.FindChild("Hammer").GetComponent<HammerAttack>();
+        if (hammer != null)
+        {
+            hammer.ActivateAnimations();
+        }
+
+        OpponentHealth.Died += new HealthScript.DeathEventHandler(OpponentHealth_Died);
 	}
+
+    void OpponentHealth_Died(object sender, System.EventArgs e)
+    {
+        Stop();
+    }
 	
 	// Update is called once per frame
 	void Update () {
         DoMovement();
-        
+        meleeTimer += Time.deltaTime;
+        rangedTimer += Time.deltaTime;
+        mortarTimer += Time.deltaTime;
 	}
 
     public void Stop()
@@ -47,7 +66,23 @@ public class OpponentController : MonoBehaviour {
                 case OpponentState.Fleeing:
                     FleeMovement();
                     break;
+                case OpponentState.MeleeAttack:
+                    MeleeMovement();
+                    break;
+                case OpponentState.CircleMovement:
+                    CircleMovement();
+                    break;
             }
+        }
+    }
+
+    void MeleeMovement()
+    {
+        ApproachMovment();
+        if (meleeTimer >= 1.5f && Utility.GetDistance(this.gameObject, Target) < 5)
+        {
+            meleeTimer = 0;
+            MeleeAttack();
         }
     }
 
@@ -95,11 +130,55 @@ public class OpponentController : MonoBehaviour {
         transform.Translate(Vector3.forward * moveDist);
     }
 
+    void CircleMovement()
+    {
+        var steer = 1;
+        var gas = 0.5f;
+       
+
+        var moveDist = gas * Speed * Time.deltaTime;
+        var turnAngle = steer * TurnSpeed * Time.deltaTime;
+
+        transform.Rotate(new Vector3(0, turnAngle, 0));
+        transform.Translate(Vector3.forward * moveDist);
+    }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.tag.Equals("Robot"))
+        {
+            print("Enter!");
+            TargetIsInMeleeBox = true;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        //     print("Hammer: " + col.tag);
+        if (col.tag.Equals("Robot"))
+        {
+            print("Exit!");
+            TargetIsInMeleeBox = false;
+        }
+    }
+
+    void MeleeAttack()
+    {
+        hammer.PerformAttack();
+        if (TargetIsInMeleeBox)
+        {
+            float dmg = 8 + Random.value * 2;
+            OpponentHealth.TakeDamage(dmg);
+        }
+
+    }
     
 }
 public enum OpponentState
 {
     Stationary,
     Approaching,
-    Fleeing
+    Fleeing,
+    MeleeAttack,
+    CircleMovement
 }

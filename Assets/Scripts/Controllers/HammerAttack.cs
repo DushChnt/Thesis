@@ -6,11 +6,17 @@ public class HammerAttack : MonoBehaviour {
     public GameObject Hammer;
     bool isAttacking;
     public Animator animator;
+    bool hasBeenEnabled;
 
 	// Use this for initialization
     void Start()
     {
-        animator.enabled = false;
+        if (!hasBeenEnabled)
+        {
+            animator.enabled = false;
+            
+        }
+        
     }
 
     public void PerformAttack()
@@ -23,16 +29,18 @@ public class HammerAttack : MonoBehaviour {
 
     public void ActivateAnimations()
     {
+        
+        hasBeenEnabled = true;
         animator.enabled = true;
-        animator.Play("hammer idle");
+       // animator.Play("hammer idle");
     }
 
 	// Update is called once per frame
 	void Update () {
-        //if (Input.GetKeyDown(KeyCode.H)) 
-        //{
-        //    PerformAttack();
-        //}
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            PerformAttack();
+        }
     
 	}
 }

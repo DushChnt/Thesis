@@ -11,10 +11,12 @@ public class MissionUI : MonoBehaviour {
     public dfLabel QuestLabel;
 
     public Mission1 Mission1;
+    public Mission2 Mission2;
 
     public dfButton StartButton;
 
     public dfPanel MissionDonePanel;
+    public dfPanel MissionDoneLosePanel;
 
     bool initialized;
     Player Player
@@ -30,6 +32,7 @@ public class MissionUI : MonoBehaviour {
 	void Start () {
         StartButton.Click += new MouseEventHandler(StartButton_Click);
       //  Camera.main.GetComponent<MousePan>().Activated = false;
+        PhotonNetwork.offlineMode = true;
 	}
 
     void StartButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
@@ -114,17 +117,46 @@ public class MissionUI : MonoBehaviour {
         Controller.Activate(activeBrain, Target);
         Controller.SetBrains(brain1, brain2, brain3, brain4);
 
-        Mission1.Initialize(this);
+        switch (PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1))
+        {
+            case 1:
+
+
+                Mission1.Initialize(this);
+                break;
+            case 2:
+
+                Mission2.Initialize(this);
+                break;
+        }
     }
 
-    public void UpdateQuest(int quest)
+    public void UpdateQuest(int quest, int maxQuest)
     {
-        QuestLabel.Text = string.Format("{0} / 3", quest);
+        QuestLabel.Text = string.Format("{0} / {1}", quest, maxQuest);
     }
 
     public void MissionDone()
     {
-        MissionDonePanel.Show();
+        MissionDone(true);
+    }
+
+    public void MissionDone(bool win)
+    {
+        StartCoroutine(missionDone(win));
+    }
+
+    public IEnumerator missionDone(bool win)
+    {
+        yield return new WaitForSeconds(2);
+        if (win)
+        {
+            MissionDonePanel.Show();
+        }
+        else
+        {
+            MissionDoneLosePanel.Show();
+        }
        // Camera.main.GetComponent<MousePan>().Activated = false;
     }
 

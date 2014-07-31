@@ -63,10 +63,10 @@ public class OptimizationEvaluator : IPhenomeEvaluator<IBlackBox>
         {
             FitnessInfo fit = dict[phenome];
             dict.Remove(phenome);
-            
+           
             return fit;
         }
-       
+        
         return FitnessInfo.Zero;
     }
 }

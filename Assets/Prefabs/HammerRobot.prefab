@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 65: {fileID: 6500000}
   - 23: {fileID: 2300000}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ GameObject:
   - 33: {fileID: 3300002}
   - 136: {fileID: 13600000}
   - 23: {fileID: 2300002}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,8 +47,10 @@ GameObject:
   - 33: {fileID: 3300004}
   - 136: {fileID: 13600002}
   - 23: {fileID: 2300004}
-  m_Layer: 0
-  m_Name: Capsule
+  - 114: {fileID: 11400008}
+  - 54: {fileID: 5400002}
+  m_Layer: 11
+  m_Name: Hammer Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +67,7 @@ GameObject:
   - 33: {fileID: 3300006}
   - 136: {fileID: 13600004}
   - 23: {fileID: 2300006}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +85,7 @@ GameObject:
   - 33: {fileID: 3300008}
   - 65: {fileID: 6500002}
   - 23: {fileID: 2300008}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +102,7 @@ GameObject:
   - 4: {fileID: 400010}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,9 +120,9 @@ GameObject:
   - 33: {fileID: 3300010}
   - 65: {fileID: 6500004}
   - 23: {fileID: 2300010}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +138,7 @@ GameObject:
   - 33: {fileID: 3300012}
   - 65: {fileID: 6500006}
   - 23: {fileID: 2300012}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +157,9 @@ GameObject:
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
-  m_Layer: 9
+  - 65: {fileID: 6500008}
+  - 114: {fileID: 11400010}
+  m_Layer: 11
   m_Name: HammerRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,8 +198,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: .898407221, z: 0}
-  m_LocalScale: {x: .5, y: .5, z: .5}
+  m_LocalPosition: {x: -5.96046448e-08, y: 1.5, z: 5.96046448e-08}
+  m_LocalScale: {x: .800000012, y: .800000012, z: .800000012}
   m_Children: []
   m_Father: {fileID: 400010}
   m_RootOrder: 1
@@ -218,8 +222,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .393674374, z: 0}
-  m_LocalScale: {x: .200000003, y: 1, z: .200000003}
+  m_LocalPosition: {x: -5.96046448e-08, y: .603259981, z: 5.96046448e-08}
+  m_LocalScale: {x: .200000003, y: 1.5, z: .200000003}
   m_Children: []
   m_Father: {fileID: 400010}
   m_RootOrder: 0
@@ -269,8 +273,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
-  m_LocalRotation: {x: 0, y: -.965812802, z: 0, w: .259240478}
-  m_LocalPosition: {x: 0, y: .278125763, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.30047393, y: .381155968, z: -15.4986391}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -482,6 +486,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &5400002
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  serializedVersion: 2
+  m_Mass: 1.00000001e-07
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -530,6 +549,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6500008
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1, z: 2}
+  m_Center: {x: -.460000008, y: 0, z: 2}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -541,7 +572,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 4907c76b27ae0ed4788ed49524192627, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
 --- !u!114 &11400000
@@ -565,15 +596,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 100016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf82704bdfe3d834185c9e64c1a98eff, type: 3}
+  m_Script: {fileID: 11500000, guid: 11cdc45b56c9e4b47ae346335c8522a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   SensorRange: 100
-  TopSpeed: 0
+  TopSpeed: 5
   Speed: 5
   TurnSpeed: 180
   TurretTurnSpeed: 180
+  HealthScript: {fileID: 11400010}
+  OpponentHealth: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -628,6 +661,32 @@ MonoBehaviour:
     m_Bits: 256
   Mortar: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
   HumanControlled: 0
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeca11cdb09c45442892b0650d5ee17d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab29464a6e794804f9255644d50797cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Explosion: {fileID: 19800000, guid: 137f7081769254d41ba394328a63c704, type: 2}
+  GUI: {fileID: 0}
+  IsOpponent: 0
+  FollowScript: {fileID: 0}
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -648,10 +707,10 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
+  m_Radius: 1
+  m_Height: 2.20000005
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13600004

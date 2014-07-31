@@ -145,16 +145,26 @@ public class TrainingController : LevelController {
         float faceTarget = FaceTarget / ticks * Settings.Brain.FaceTarget;
         fit += faceTarget;
 
-        float meleeAttacks = MeleeAttacks / MaxMeleeAttacks * Settings.Brain.MeleeAttacks;
-        fit += meleeAttacks;
+        if (Player.CanUseMelee && Player.MeleeWeapon != null)
+        {
 
-        float meleeHits = MeleeHits / MaxMeleeAttacks * Settings.Brain.MeleeHits;
-        fit += MeleeHits;
+            float meleeAttacks = MeleeAttacks / MaxMeleeAttacks * Settings.Brain.MeleeAttacks;
+            fit += meleeAttacks;                     
 
-        float meleePrecision = MeleeAttacks > 0 ? MeleeHits / MeleeAttacks : 0;
-        meleePrecision *= Settings.Brain.MeleePrecision;
-        fit += meleePrecision;
-        
+            float meleeHits = MeleeHits / MaxMeleeAttacks * Settings.Brain.MeleeHits;
+            fit += MeleeHits;
+
+            float meleePrecision = MeleeAttacks > 0 ? MeleeHits / MeleeAttacks : 0;
+            meleePrecision *= Settings.Brain.MeleePrecision;
+            fit += meleePrecision;
+
+        }
+
         return fit;
+    }
+
+    protected override void Initialize()
+    {
+        // Do nothing;
     }
 }
