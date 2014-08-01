@@ -101,6 +101,8 @@ public class TrainingScript : MonoBehaviour {
 
         dfDropdown dropdown = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>();
 
+        GameObject.Find("TargetSize Slider").GetComponent<dfSlider>().Value = Settings.Brain.TargetSize > 0 ? Settings.Brain.TargetSize : 3;
+
         int index = 0;
         dropdown.SelectedIndex = index;
         for (index = 0; index < dropdown.Items.Length; index++)
@@ -190,6 +192,8 @@ public class TrainingScript : MonoBehaviour {
         string value = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>().SelectedValue;
         Settings.Brain.TargetBehaviorMovement = value;
         Settings.Brain.MultipleTargets = GameObject.Find("Multiple Targets Checkbox").GetComponent<dfCheckbox>().IsChecked;
+
+        Settings.Brain.TargetSize = (int)GameObject.Find("TargetSize Slider").GetComponent<dfSlider>().Value;
 
         if (ParseUser.CurrentUser != null)
         {

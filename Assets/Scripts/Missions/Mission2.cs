@@ -16,7 +16,7 @@ public class Mission2 : MonoBehaviour, IMission {
     public void Initialize(MissionUI ui)
     {
         this.UI = ui;
-        Controller.MeleeHitEvent += new FightController.MeleeAttackEventHandler(Controller_MeleeHit);
+        Controller.MeleeHitEvent += new FightController.AttackEventHandler(Controller_MeleeHit);
         StartHit5();
     }
 

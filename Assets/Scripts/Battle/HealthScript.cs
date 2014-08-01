@@ -87,7 +87,7 @@ public class HealthScript : Photon.MonoBehaviour {
         else
         {
             glabel.Text = "Hit!";
-            glabel.BottomColor = new Color32(0, 0, 254, 254);
+            glabel.BottomColor = new Color32(100, 100, 254, 254);
         }
        
     }

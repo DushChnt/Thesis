@@ -12,6 +12,7 @@ public class MissionUI : MonoBehaviour {
 
     public Mission1 Mission1;
     public Mission2 Mission2;
+    public Mission3 Mission3;
 
     public dfButton StartButton;
 
@@ -117,6 +118,8 @@ public class MissionUI : MonoBehaviour {
         Controller.Activate(activeBrain, Target);
         Controller.SetBrains(brain1, brain2, brain3, brain4);
 
+        print("Current mission: " + PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1));
+
         switch (PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1))
         {
             case 1:
@@ -127,6 +130,9 @@ public class MissionUI : MonoBehaviour {
             case 2:
 
                 Mission2.Initialize(this);
+                break;
+            case 3:
+                Mission3.Initialize(this);
                 break;
         }
     }

@@ -30,6 +30,13 @@ public class SelectWeaponScript : MonoBehaviour {
         Weapon3.SetWeapon(WeaponList.M_SWORD);
     }
 
+    private void ShowRangedWeapons()
+    {
+        Weapon1.SetWeapon(WeaponList.R_CROSSBOW);
+        Weapon2.SetWeapon(WeaponList.R_RIFLE);
+        Weapon3.SetWeapon(WeaponList.R_PHASERGUN);
+    }
+
     public void ShowSelectWeapons(WeaponType type)
     {
         Weapon1.weaponButton.Click += new MouseEventHandler(weaponButton_Click);
@@ -42,7 +49,7 @@ public class SelectWeaponScript : MonoBehaviour {
                 ShowMeleeWeapons();
                 break;
             case WeaponType.Ranged:
-
+                ShowRangedWeapons();
                 break;
             case WeaponType.Mortar:
 

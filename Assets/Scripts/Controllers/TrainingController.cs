@@ -4,15 +4,19 @@ using System.Collections;
 public class TrainingController : LevelController {
 
     private float DistanceMoved, TurnAmount, TurretTurnAmount, KeepDistanceCount, ReachDistanceCount = 1000, ReachedTick, FaceTarget, ticks;
-    private int MeleeAttacks, MeleeHits, RifleAttacks, RifleHits;
-    private float MaxMeleeAttacks;
+    private int MeleeAttacks, MeleeHits, RangedAttacks, RangedHits;
+    private float MaxMeleeAttacks, MaxRangedAttacks;
 
 	// Use this for initialization
 	void Start () {
         if (MeleeWeapon != null)
         {
             MaxMeleeAttacks = MeleeWeapon.AttackSpeed * 20; // Should be Optimizer.TrialDuration          
-        }        
+        }
+        if (RangedWeapon != null)
+        {
+            MaxRangedAttacks = RangedWeapon.AttackSpeed * 20; // Should be Optimizer.TrialDuration
+        }
 	}	
 
     protected override bool CanRun()
@@ -40,7 +44,7 @@ public class TrainingController : LevelController {
     protected override void RangedAttack()
     {
 
-        RifleAttacks++;
+        RangedAttacks++;
         RaycastHit hit;
 
         // Check raycast a long distance in front of the robot
@@ -49,7 +53,7 @@ public class TrainingController : LevelController {
 
             if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
             {
-                RifleHits++;
+                RangedHits++;
             }
 
         }
@@ -154,10 +158,30 @@ public class TrainingController : LevelController {
             float meleeHits = MeleeHits / MaxMeleeAttacks * Settings.Brain.MeleeHits;
             fit += MeleeHits;
 
-            float meleePrecision = MeleeAttacks > 0 ? MeleeHits / MeleeAttacks : 0;
+            float meleePrecision = MeleeAttacks > 0 ? (float)MeleeHits / (float)MeleeAttacks : 0;
             meleePrecision *= Settings.Brain.MeleePrecision;
             fit += meleePrecision;
 
+        }
+
+        if (Player.CanUseRanged && Player.RangedWeapon != null)
+        {
+            float rangedAttacks = RangedAttacks / MaxRangedAttacks * Settings.Brain.RifleAttacks;
+            fit += rangedAttacks;
+
+            float rangedHits = RangedHits / MaxRangedAttacks * Settings.Brain.RifleHits;
+            fit += rangedHits;
+
+            //if (RangedHits > 0)
+            //{
+            //    print("Ranged hits: " + RangedHits + ", score: " + rangedHits + 
+            //        ". Facetarget: " + FaceTarget + ", score: " + faceTarget +
+            //        ". Ranged attacks: " + RangedAttacks + ", score: " + rangedAttacks);
+            //}
+
+            float rangedPrecision = RangedAttacks > 0 ? RangedHits / RangedAttacks : 0;
+            rangedPrecision *= Settings.Brain.RiflePrecision;
+            fit += rangedPrecision;
         }
 
         return fit;

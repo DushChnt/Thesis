@@ -146,6 +146,7 @@ public class Optimizer : MonoBehaviour {
 		GameObject obj = Instantiate(Robot, pos, Quaternion.identity) as GameObject;
 		TrainingController robo = obj.GetComponent<TrainingController>();
 		Target.transform.position = new Vector3(0, 1, 0);
+        Target.transform.localScale = new Vector3(Settings.Brain.TargetSize, 2, Settings.Brain.TargetSize);
 		dict.Add(box, robo);
 
 		if (Settings.Brain.MultipleTargets)

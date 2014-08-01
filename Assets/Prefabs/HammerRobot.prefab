@@ -159,6 +159,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 65: {fileID: 6500008}
   - 114: {fileID: 11400010}
+  - 120: {fileID: 12000000}
   m_Layer: 11
   m_Name: HammerRobot
   m_TagString: Untagged
@@ -274,7 +275,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.30047393, y: .381155968, z: -15.4986391}
+  m_LocalPosition: {x: 8.40967178, y: 21.0330391, z: -3.26800394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -559,8 +560,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 1, z: 2}
-  m_Center: {x: -.460000008, y: 0, z: 2}
+  m_Size: {x: 1.5, y: 2, z: 2}
+  m_Center: {x: -.460000008, y: .75999999, z: 2}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 3
@@ -607,6 +608,8 @@ MonoBehaviour:
   TurretTurnSpeed: 180
   HealthScript: {fileID: 11400010}
   OpponentHealth: {fileID: 0}
+  DummyAttack: 0
+  LaserExposure: .100000001
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -687,6 +690,39 @@ MonoBehaviour:
   GUI: {fileID: 0}
   IsOpponent: 0
   FollowScript: {fileID: 0}
+--- !u!120 &12000000
+LineRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100016}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 4e76dd0f692583740996e3ff723a47c0, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: .0500000007
+    endWidth: .5
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4292804573
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4278386432
+  m_UseWorldSpace: 1
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

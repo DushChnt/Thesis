@@ -23,7 +23,7 @@ public class Player : ParseUser {
         }
     }
 
-    public bool CanUseRifle
+    public bool CanUseRanged
     {
         get
         {

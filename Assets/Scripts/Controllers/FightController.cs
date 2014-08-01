@@ -13,10 +13,16 @@ public class FightController : LevelController {
     public HealthScript HealthScript;
     public HealthScript OpponentHealth;
     public bool DummyAttack;
-    public delegate void MeleeAttackEventHandler();
+    public delegate void AttackEventHandler();
+    float laserTimer;
+    public float LaserExposure = 0.1f;
 
-    public event MeleeAttackEventHandler MeleeAttackEvent;
-    public event MeleeAttackEventHandler MeleeHitEvent;
+    public event AttackEventHandler MeleeAttackEvent;
+    public event AttackEventHandler MeleeHitEvent;
+    public event AttackEventHandler RangedAttackEvent;
+    public event AttackEventHandler RangedHitEvent;
+
+    LineRenderer lineRenderer;
 
     public override void Activate(IBlackBox box, GameObject target)
     {
@@ -46,6 +52,38 @@ public class FightController : LevelController {
         Stop();
     }
 
+    protected virtual void OnMeleeHitEvent()
+    {
+        if (MeleeHitEvent != null)
+        {
+            MeleeHitEvent();
+        }
+    }
+
+    protected virtual void OnMeleeAttackEvent()
+    {
+        if (MeleeAttackEvent != null)
+        {
+            MeleeAttackEvent();
+        }
+    }
+
+    protected virtual void OnRangedAttackEvent()
+    {
+        if (RangedAttackEvent != null)
+        {
+            RangedAttackEvent();
+        }
+    }
+
+    protected virtual void OnRangedHitEvent()
+    {
+        if (RangedHitEvent != null)
+        {
+            RangedHitEvent();
+        }
+    }
+
     void OpponentHealth_Died(object sender, EventArgs e)
     {
         print("Died");
@@ -56,7 +94,20 @@ public class FightController : LevelController {
         
         hammer = transform.FindChild("Hammer").GetComponent<HammerAttack>();
         hammer.ActivateAnimations();
-        
+
+        lineRenderer = GetComponent<LineRenderer>();
+    }
+
+    void Update()
+    {
+        if (lineRenderer.enabled)
+        {
+            laserTimer += Time.deltaTime;
+            if (laserTimer > LaserExposure)
+            {
+                lineRenderer.enabled = false;
+            }
+        }
     }
    
     public void SetBrains(IBlackBox _brain1, IBlackBox _brain2, IBlackBox _brain3, IBlackBox _brain4)
@@ -150,7 +201,7 @@ public class FightController : LevelController {
         hammer.PerformAttack();
         if (TargetIsInMeleeBox)
         {
-            MeleeHitEvent();
+            OnMeleeHitEvent();
             float dmg = 0;
             if (!DummyAttack)
             {
@@ -163,7 +214,51 @@ public class FightController : LevelController {
 
     protected override void RangedAttack()
     {
-        throw new System.NotImplementedException();
+        RaycastHit hit;
+        bool isHit = false;
+        OnRangedAttackEvent();
+        Vector3 s_0 = transform.position + transform.forward * 1.1f;
+        Vector3 p_0 = s_0 + transform.forward * 50;
+        Vector3 t = new Vector3(p_0.x, transform.position.y, p_0.z);
+        Vector3 dir = Vector3.Normalize(t - s_0);
+        if (Physics.Raycast(s_0, dir, out hit, 50))
+        {
+            isHit = true;
+            if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+            {
+                // Do damage
+         //       print("Ranged Damage!");
+                OnRangedHitEvent();
+                float dmg = 0;
+                if (!DummyAttack)
+                {
+                    dmg = RangedWeapon.MinimumDamage + UnityEngine.Random.value * (RangedWeapon.MaximumDamage - RangedWeapon.MinimumDamage);
+                }
+                if (OpponentHealth != null)
+                {
+                    OpponentHealth.TakeDamage(dmg);
+                }
+            }
+
+        }
+        Vector3 point;
+        if (isHit)
+        {
+            point = hit.point;
+        }
+        else
+        {
+            point = t;
+        }
+        ShootLaser(point);
+    }
+
+    protected void ShootLaser(Vector3 endPoint)
+    {
+        laserTimer = 0;
+        lineRenderer.enabled = true;
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, endPoint);
     }
 
     protected override void MortarAttack(float mortarForce)

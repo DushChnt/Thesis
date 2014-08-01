@@ -174,7 +174,7 @@ public abstract class LevelController : MonoBehaviour {
         {
             DoMeleeAttack();
         }
-        if (Player.CanUseRifle && Player.RangedWeapon != null && rifleAttack > 0.5f)
+        if (Player.CanUseRanged && Player.RangedWeapon != null && rifleAttack > 0.5f)
         {
             DoRangedAttack();
         }
@@ -263,12 +263,19 @@ public abstract class LevelController : MonoBehaviour {
 
         
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit, SensorRange, layerMask))
-        {
+        //if (Physics.Raycast(transform.position, transform.forward, out hit, SensorRange, layerMask))
+        //{
             
-            if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+        //    if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+        //    {
+        //        on_target = 1;
+        //    }
+        //}
+        if (on_target < 1)
+        {
+            if (angle > -10 && angle < 10)
             {
-                on_target = 1;
+                on_target = 1 - Mathf.Abs(angle / 10);
             }
         }
         distance_to_target = distance;

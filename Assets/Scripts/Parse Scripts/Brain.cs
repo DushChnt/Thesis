@@ -248,6 +248,13 @@ public class Brain : ParseObject {
         set { SetProperty<bool>(value, "MultipleTargets"); }
     }
 
+    [ParseFieldName("targetSize")]
+    public int TargetSize
+    {
+        get { return GetProperty<int>("TargetSize"); }
+        set { SetProperty<int>(value, "TargetSize"); }
+    }
+
     [ParseFieldName("population")]
     public ParseFile Population
     {
