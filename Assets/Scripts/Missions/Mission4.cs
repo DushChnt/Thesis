@@ -1,87 +1,85 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Mission2 : MonoBehaviour, IMission {
+public class Mission4 : MonoBehaviour {
 
     public FightController Controller;
     public OpponentController Opponent;
     int MaxQuest = 2;
-    Mission2State state;
+    Mission4State state;
     MissionUI UI;
-
-    int meleeHits;
+    int mortarHits;
 
     public PopupText PopupText;
-
-    void Awake()
-    {
-        PlayerPrefs.SetInt(MissionPanel.CURRENT_MISSION, 2);
-    }
 
     public void Initialize(MissionUI ui)
     {
         this.UI = ui;
-        Controller.MeleeHitEvent += new FightController.AttackEventHandler(Controller_MeleeHit);
+        Controller.MortarHitEvent += new FightController.AttackEventHandler(Controller_MortarHitEvent);
         StartHit3();
+       // StartBeatIt();
     }
 
-    void Controller_MeleeHit()
+    void Controller_MortarHitEvent()
     {
-        if (state.Equals(Mission2State.Hit5))
+        if (state.Equals(Mission4State.Hit3))
         {
-            meleeHits++;
-            UI.SetGoalText(string.Format("{0} / {1}", meleeHits, 3));
+            mortarHits++;
+            UI.SetGoalText(string.Format("{0} / {1}", mortarHits, 3));
         }
     }
-
-   
 
 	// Use this for initialization
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        CheckConditions();
-	}
 
-    private void CheckConditions()
+    void Awake()
     {
-        switch (state)
-        {
-            case Mission2State.Hit5:
-                CheckHit5();
-                break;
-            case Mission2State.BeatIt:
-                CheckBeatIt();
-                break;            
-        }
+        PlayerPrefs.SetInt(MissionPanel.CURRENT_MISSION, 4);
     }
 
     private void StartHit3()
     {
         Opponent.SwitchMovement(OpponentState.CircleMovement);
-        PopupText.ShowText("3x hits!", 1);
-        state = Mission2State.Hit5;
+        PopupText.ShowText("3x bombs!", 1);
+        state = Mission4State.Hit3;
         UI.UpdateQuest(1, MaxQuest);
         Controller.DummyAttack = true;
-        UI.SetGoalText("Hit target with melee weapon", string.Format("{0} / {1}", meleeHits, 3));
+        UI.SetGoalText("Hit target with mortar", string.Format("{0} / {1}", mortarHits, 3));
     }
 
     private void StartBeatIt()
     {
-        Opponent.SwitchMovement(OpponentState.MeleeAttack);
+        Opponent.SwitchMovement(OpponentState.MortarFiring);
         PopupText.ShowText("Beat it!", 1);
-        state = Mission2State.BeatIt;
+        state = Mission4State.BeatIt;
         UI.UpdateQuest(2, MaxQuest);
         Controller.DummyAttack = false;
         UI.SetGoalText("Beat opponent", string.Format("Health remaining: {0:0.00}", Controller.OpponentHealth.Health > 0 ? Controller.OpponentHealth.Health : 0));
     }
 
-    private void CheckHit5()
+    void Update()
     {
-        if (meleeHits >= 3)
+        CheckConditions();
+    }
+
+    private void CheckConditions()
+    {
+        switch (state)
+        {
+            case Mission4State.Hit3:
+                CheckHit3();
+                break;            
+            case Mission4State.BeatIt:
+                CheckBeatIt();
+                break;
+        }
+    }
+
+    private void CheckHit3()
+    {
+        if (mortarHits >= 3)
         {
             StartBeatIt();
         }
@@ -90,21 +88,22 @@ public class Mission2 : MonoBehaviour, IMission {
     private void CheckBeatIt()
     {
         UI.SetGoalText(string.Format("Health remaining: {0:0.00}", Controller.OpponentHealth.Health > 0 ? Controller.OpponentHealth.Health : 0));
-        if (Controller.OpponentHealth.IsDead)
-        {
-            // You win!
-            DoneWin(); 
-        }
-        else if (Opponent.OpponentHealth.IsDead)
+        if (Opponent.OpponentHealth.IsDead)
         {
             // You lose!
             DoneLose();
         }
+        else if (Controller.OpponentHealth.IsDead)
+        {
+            // You win!
+            DoneWin();
+        }
+
     }
 
     private void DoneWin()
     {
-        state = Mission2State.Done;
+        state = Mission4State.Done;
         if (Controller != null)
         {
             Controller.Stop();
@@ -118,7 +117,7 @@ public class Mission2 : MonoBehaviour, IMission {
 
     private void DoneLose()
     {
-        state = Mission2State.Done;
+        state = Mission4State.Done;
         if (Controller != null)
         {
             Controller.Stop();
@@ -130,8 +129,8 @@ public class Mission2 : MonoBehaviour, IMission {
         UI.MissionDone(false);
     }
 
-    enum Mission2State
+    enum Mission4State
     {
-        Hit5, BeatIt, Done
+        Hit3, BeatIt, Done
     }
 }

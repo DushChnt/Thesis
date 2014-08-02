@@ -5,7 +5,7 @@ public class MissionDoneDialog : MonoBehaviour {
 
     public dfButton LevelUpButton;
     public bool LoseDialog;
-
+    int mission;
     Player Player
     {
         get
@@ -15,9 +15,15 @@ public class MissionDoneDialog : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
+    void Start()
+    {
+        mission = PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1);
         LevelUpButton.Click += new MouseEventHandler(LevelUpButton_Click);
-	}
+        if (Player.Level > mission)
+        {
+            LevelUpButton.Text = "Back";
+        }
+    }
 
     void LevelUpButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
@@ -29,8 +35,7 @@ public class MissionDoneDialog : MonoBehaviour {
     }
 
     void LevelUp()
-    {
-        int mission = PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1);
+    {        
         if (Player.Level <= mission)
         {
             Player.Level = mission + 1;

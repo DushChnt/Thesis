@@ -33,3 +33,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Mission Arenas/Mission 2.unity
   - enabled: 1
     path: Assets/Scenes/Mission Arenas/Mission 3.unity
+  - enabled: 1
+    path: Assets/Scenes/Mission Arenas/Mission 4.unity

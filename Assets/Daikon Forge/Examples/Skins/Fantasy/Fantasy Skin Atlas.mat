@@ -9,7 +9,7 @@ Material:
   m_Name: Fantasy Skin Atlas
   m_Shader: {fileID: 4800000, guid: f0158d23026963f4ba301b99ab9b050a, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: 3023
+  m_CustomRenderQueue: 3002
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -32,12 +32,12 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _SpecColor
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
           name: _Emission
         second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: CameraPos

@@ -12,6 +12,11 @@ public class Mission3 : MonoBehaviour {
 
     public PopupText PopupText;
 
+    void Awake()
+    {
+        PlayerPrefs.SetInt(MissionPanel.CURRENT_MISSION, 3);
+    }
+
     public void Initialize(MissionUI ui)
     {
         this.UI = ui;
@@ -22,6 +27,10 @@ public class Mission3 : MonoBehaviour {
     void Controller_RangedHitEvent()
     {
         rangedHits++;
+        if (state.Equals(Mission3State.Shoot5) || state.Equals(Mission3State.CircleShoot5))
+        {
+            UI.SetGoalText(string.Format("{0} / {1}", rangedHits, 5));
+        }
     }
 
 	// Use this for initialization
@@ -59,6 +68,7 @@ public class Mission3 : MonoBehaviour {
         state = Mission3State.Shoot5;
         UI.UpdateQuest(1, MaxQuest);
         Controller.DummyAttack = true;
+        UI.SetGoalText("Hit target with ranged weapon", string.Format("{0} / {1}", rangedHits, 5));
     }
 
     private void StartCircleShoot5()
@@ -69,6 +79,7 @@ public class Mission3 : MonoBehaviour {
         state = Mission3State.CircleShoot5;
         UI.UpdateQuest(2, MaxQuest);
         Controller.DummyAttack = true;
+        UI.SetGoalText("Hit moving target with ranged weapon", string.Format("{0} / {1}", rangedHits, 5));
     }
 
     private void StartBeatIt()
@@ -78,6 +89,7 @@ public class Mission3 : MonoBehaviour {
         state = Mission3State.BeatIt;
         UI.UpdateQuest(3, MaxQuest);
         Controller.DummyAttack = false;
+        UI.SetGoalText("Beat opponent", string.Format("Health remaining: {0:0.00}", Controller.OpponentHealth.Health > 0 ? Controller.OpponentHealth.Health : 0));
     }
 
     private void CheckShoot5()
@@ -98,6 +110,7 @@ public class Mission3 : MonoBehaviour {
 
     private void CheckBeatIt()
     {
+        UI.SetGoalText(string.Format("Health remaining: {0:0.00}", Controller.OpponentHealth.Health > 0 ? Controller.OpponentHealth.Health : 0));
         if (Controller.OpponentHealth.IsDead)
         {
             // You win!

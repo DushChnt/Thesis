@@ -385,6 +385,9 @@ MonoBehaviour:
   Speed: 5
   TurnSpeed: 180
   TurretTurnSpeed: 180
+  Mortar: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
+  MaxMortarForce: 500
+  DamageRadius: 10
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

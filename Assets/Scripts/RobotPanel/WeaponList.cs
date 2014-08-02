@@ -64,6 +64,36 @@ public static class WeaponList {
         Type = WeaponType.Ranged
     };
 
+    public static Weapon C_BOMB = new Weapon
+    {
+        Name = "Bomb",
+        MinimumDamage = 1,
+        MaximumDamage = 30,
+        AttackSpeed = 0.5f,
+        SlowDown = 90,
+        Type = WeaponType.Mortar
+    };
+
+    public static Weapon C_FIREBALL = new Weapon
+    {
+        Name = "Fireball",
+        MinimumDamage = 1,
+        MaximumDamage = 20,
+        AttackSpeed = 0.75f,
+        SlowDown = 80,
+        Type = WeaponType.Mortar
+    };
+
+    public static Weapon C_DESTROYER = new Weapon
+    {
+        Name = "Destroyer",
+        MinimumDamage = 1,
+        MaximumDamage = 60,
+        AttackSpeed = 0.25f,
+        SlowDown = 100,
+        Type = WeaponType.Mortar
+    };
+
     public static Dictionary<string, Weapon> WeaponDict = new Dictionary<string, Weapon>()
     {
         { M_AXE.Name, M_AXE },
@@ -71,7 +101,10 @@ public static class WeaponList {
         {  M_SWORD.Name, M_SWORD },
         { R_CROSSBOW.Name, R_CROSSBOW },
         { R_RIFLE.Name, R_RIFLE },
-        { R_PHASERGUN.Name, R_PHASERGUN }
+        { R_PHASERGUN.Name, R_PHASERGUN },
+        { C_BOMB.Name, C_BOMB },
+        { C_FIREBALL.Name, C_FIREBALL },
+        { C_DESTROYER.Name, C_DESTROYER }
     };
 
 }

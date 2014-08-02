@@ -14,6 +14,9 @@ public abstract class LevelController : MonoBehaviour {
     protected float rangedTimer = 0;
     protected float mortarTimer = 0;
     protected float MeleeCooldown, RangedCooldown, MortarCooldown, RecoveryRate = 2;
+    public GameObject Mortar;
+    public float MaxMortarForce = 500f;
+    public float DamageRadius = 10f;
 
     protected Weapon MeleeWeapon, RangedWeapon, MortarWeapon;
 
@@ -54,6 +57,7 @@ public abstract class LevelController : MonoBehaviour {
         {
             MortarWeapon = WeaponList.WeaponDict[Player.MortarWeapon];
             MortarCooldown = 1 / MortarWeapon.AttackSpeed;
+            turret = gameObject.transform.FindChild("Turret");
         }
         Initialize();
 	}
@@ -188,7 +192,7 @@ public abstract class LevelController : MonoBehaviour {
 
         transform.Rotate(new Vector3(0, turnAngle, 0));
         transform.Translate(Vector3.forward * moveDist);
-        if (Player.CanUseMortar)
+        if (Player.CanUseMortar && turret != null)
         {
             turret.Rotate(new Vector3(0, turretTurnAngle, 0));
         }
@@ -283,12 +287,17 @@ public abstract class LevelController : MonoBehaviour {
         if (Player.CanUseMortar)
         {
             // Only turret for advanced robots
-            if (Physics.Raycast(turret.position, turret.forward, out hit, SensorRange))
+            //if (Physics.Raycast(turret.position, turret.forward, out hit, SensorRange))
+            //{
+            //    if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
+            //    {
+            //        turret_on_target = 1;
+            //    }
+            //}
+            float turretAngle = Utility.AngleSigned(direction, turret.forward, turret.up);
+            if (turretAngle < 10 && turretAngle > -10)
             {
-                if (hit.collider.tag.Equals("Target") || hit.collider.tag.Equals("Robot"))
-                {
-                    turret_on_target = 1;
-                }
+                turret_on_target = 1 - Mathf.Abs(turretAngle / 10f);
             }
         }
     }

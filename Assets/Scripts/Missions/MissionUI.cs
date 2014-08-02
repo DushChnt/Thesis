@@ -13,11 +13,14 @@ public class MissionUI : MonoBehaviour {
     public Mission1 Mission1;
     public Mission2 Mission2;
     public Mission3 Mission3;
+    public Mission4 Mission4;
 
     public dfButton StartButton;
 
     public dfPanel MissionDonePanel;
     public dfPanel MissionDoneLosePanel;
+
+    public dfLabel GoalExplanationLabel, GoalLabel;
 
     bool initialized;
     Player Player
@@ -134,12 +137,27 @@ public class MissionUI : MonoBehaviour {
             case 3:
                 Mission3.Initialize(this);
                 break;
+
+            case 4:
+                Mission4.Initialize(this);
+                break;
         }
     }
 
     public void UpdateQuest(int quest, int maxQuest)
     {
         QuestLabel.Text = string.Format("{0} / {1}", quest, maxQuest);
+    }
+
+    public void SetGoalText(string goal)
+    {
+        this.GoalLabel.Text = goal;
+    }
+
+    public void SetGoalText(string goalExplanation, string goal)
+    {
+        this.GoalExplanationLabel.Text = goalExplanation;
+        this.GoalLabel.Text = goal;
     }
 
     public void MissionDone()

@@ -11,9 +11,12 @@ public class OpponentController : MonoBehaviour {
     HammerAttack hammer;
     bool TargetIsInMeleeBox;
     public HealthScript OpponentHealth;
+    public HealthScript OwnHealth;
+    public GameObject Mortar, Bloom;
     float meleeTimer, rangedTimer, mortarTimer, laserTimer, LaserExposure = 0.2f;
     LineRenderer lineRenderer;
     float forwardTimer;
+    Transform turret;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +30,8 @@ public class OpponentController : MonoBehaviour {
         }
         lineRenderer = GetComponent<LineRenderer>();
         OpponentHealth.Died += new HealthScript.DeathEventHandler(OpponentHealth_Died);
+        turret = gameObject.transform.FindChild("Turret");
+        
 	}
 
     void OpponentHealth_Died(object sender, System.EventArgs e)
@@ -86,16 +91,144 @@ public class OpponentController : MonoBehaviour {
                 case OpponentState.BackwardsFiring:
                     BackwardsFiringMovement();
                     break;
+
+                case OpponentState.MortarFiring:
+                    MortarFiringMovement();
+                    break;
             }
         }
+    }
+
+    void MortarFiringMovement()
+    {
+         if (transform.position.z < -20 || transform.position.z > 20 || transform.position.x < -20 || transform.position.x > 20)
+        {
+            forwardTimer = 0;
+        }
+
+         if (forwardTimer < 8f)
+         {
+             ApproachMovement(1);
+         }
+         else
+         {
+             ApproachMovement(-1);
+         }
+
+        var direction = Target.transform.position - transform.position;
+        var turretAngle = Utility.AngleSigned(direction, turret.forward, turret.up);
+        var turretSpeed = 1f;
+        if (turretAngle < 20 && turretAngle > -20)
+        {
+            turretSpeed = 0.1f;
+        }
+         var turretTurnAngle = turretSpeed * 180 * Time.deltaTime;
+         turret.Rotate(new Vector3(0, turretTurnAngle, 0));
+
+         if (mortarTimer >= 2.0f && (turretSpeed == 0.1f || Random.value < 0.1f))
+         {             
+             MortarAttack(0.6f + Random.value * 0.4f);
+         }
+
+         if (Utility.GetDistance(this.gameObject, Target) < 5)
+         {
+             if (meleeTimer >= 1.5f)
+             {
+                 MeleeAttack();
+             }
+         }
+         else
+         {
+             if (rangedTimer >= 0.5f)
+             {
+                 
+                 RangedAttack();
+             }
+         }
+    }
+
+    protected void MortarAttack(float mortarForce)
+    {
+        mortarTimer = 0;
+        GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
+        Rigidbody body = m.GetComponent<Rigidbody>();
+        m.GetComponent<MortarHit>().MortarCollision += new MortarHit.MortarEventHandler(OpponentController_MortarCollision);
+        var direction = (turret.forward + turret.up * 1f) * mortarForce * 500f;
+        body.AddForce(direction);
+    }
+
+    void OpponentController_MortarCollision(object sender, MortarEventArgs args)
+    {
+        if (this != null && transform != null && Target != null)
+        {
+            float x = args.CollisionPoint.x;
+            float z = args.CollisionPoint.z;
+
+            float gx = Target.transform.position.x;
+            float gz = Target.transform.position.z;
+
+            float distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
+            float dmgRadiusSquared = 100;
+            float dmg = -1;
+            if (distFromCenterSquared < dmgRadiusSquared)
+            {
+                dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+            }
+
+            if (dmg > 0)
+            {
+                // Hit the target!
+                
+                if (OpponentHealth != null)
+                {
+                    float damage = 20 * dmg;
+                    if (damage < 1)
+                    {
+                        damage = 1;
+                    }
+                    
+                    OpponentHealth.TakeDamage(damage);
+                    
+                }
+            }
+
+            gx = transform.position.x;
+            gz = transform.position.z;
+
+            distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
+
+            dmg = -1;
+
+            if (distFromCenterSquared < dmgRadiusSquared)
+            {
+                dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+            }
+
+            if (dmg > 0)
+            {
+                // Hit yourself... noob
+                if (OwnHealth != null)
+                {
+                    float damage = 20 * dmg;
+                    if (damage < 1)
+                    {
+                        damage = 1;
+                    }
+                    OwnHealth.TakeDamage(damage);
+                }
+            }
+
+            GameObject mortar = ((MortarHit)sender).gameObject;
+            Instantiate(Bloom, mortar.transform.position, Quaternion.identity);
+        }
+
     }
 
     void MeleeMovement()
     {
         ApproachMovement();
         if (meleeTimer >= 1.5f && Utility.GetDistance(this.gameObject, Target) < 5)
-        {
-            meleeTimer = 0;
+        {            
             MeleeAttack();
         }
     }
@@ -142,15 +275,14 @@ public class OpponentController : MonoBehaviour {
         {
             if (meleeTimer >= 1.5f)
             {
-                meleeTimer = 0;
+                
                 MeleeAttack();
             }
         }
         else
         {
             if (rangedTimer >= 0.5f)
-            {
-                rangedTimer = 0;
+            {               
                 RangedAttack();
             }
         }
@@ -217,6 +349,7 @@ public class OpponentController : MonoBehaviour {
 
     void MeleeAttack()
     {
+        meleeTimer = 0;
         hammer.PerformAttack();
         if (TargetIsInMeleeBox)
         {
@@ -228,6 +361,7 @@ public class OpponentController : MonoBehaviour {
 
     void RangedAttack()
     {
+        rangedTimer = 0;
         RaycastHit hit;
         bool isHit = false;
         Vector3 s_0 = transform.position + transform.forward * 1.1f;
@@ -262,7 +396,7 @@ public class OpponentController : MonoBehaviour {
         else
         {
             //point = transform.position + transform.forward * 50;
-            point = t;
+            point = transform.position + ray * 50;
         }
         ShootLaser(point);
     }
@@ -284,4 +418,5 @@ public enum OpponentState
     MeleeAttack,
     CircleMovement,
     BackwardsFiring,
+    MortarFiring
 }

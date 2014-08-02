@@ -16,11 +16,14 @@ public class FightController : LevelController {
     public delegate void AttackEventHandler();
     float laserTimer;
     public float LaserExposure = 0.1f;
+    public GameObject Bloom;
 
     public event AttackEventHandler MeleeAttackEvent;
     public event AttackEventHandler MeleeHitEvent;
     public event AttackEventHandler RangedAttackEvent;
     public event AttackEventHandler RangedHitEvent;
+    public event AttackEventHandler MortarAttackEvent;
+    public event AttackEventHandler MortarHitEvent;
 
     LineRenderer lineRenderer;
 
@@ -84,6 +87,22 @@ public class FightController : LevelController {
         }
     }
 
+    protected virtual void OnMortarAttackEvent()
+    {
+        if (MortarAttackEvent != null)
+        {
+            MortarAttackEvent();
+        }
+    }
+
+    protected virtual void OnMortarHitEvent()
+    {
+        if (MortarHitEvent != null)
+        {
+            MortarHitEvent();
+        }
+    }
+
     void OpponentHealth_Died(object sender, EventArgs e)
     {
         print("Died");
@@ -96,6 +115,8 @@ public class FightController : LevelController {
         hammer.ActivateAnimations();
 
         lineRenderer = GetComponent<LineRenderer>();
+
+        Bloom = (GameObject) Resources.Load("Mortar Bloom", typeof(GameObject));
     }
 
     void Update()
@@ -263,7 +284,82 @@ public class FightController : LevelController {
 
     protected override void MortarAttack(float mortarForce)
     {
-        throw new System.NotImplementedException();
+        OnMortarAttackEvent();
+        GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
+        Rigidbody body = m.GetComponent<Rigidbody>();
+        m.GetComponent<MortarHit>().MortarCollision += new MortarHit.MortarEventHandler(FightController_MortarCollision);
+        var direction = (turret.forward + turret.up * 1f) * mortarForce * MaxMortarForce;
+        body.AddForce(direction);
+    }
+
+    void FightController_MortarCollision(object sender, MortarEventArgs args)
+    {
+        if (this != null && transform != null && Target != null)
+        {
+            float x = args.CollisionPoint.x;
+            float z = args.CollisionPoint.z;
+
+            float gx = Target.transform.position.x;
+            float gz = Target.transform.position.z;
+
+            float distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
+            float dmgRadiusSquared = DamageRadius * DamageRadius;
+            float dmg = -1;
+            if (distFromCenterSquared < dmgRadiusSquared)
+            {
+                dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+            }
+
+            if (dmg > 0)
+            {
+                // Hit the target!
+                OnMortarHitEvent();
+                if (OpponentHealth != null)
+                {
+                    float damage = 0;
+                    
+                        
+                    if (!DummyAttack)
+                    {
+                        damage = MortarWeapon.MaximumDamage * dmg;
+                    }
+                    OpponentHealth.TakeDamage(damage);
+                }
+            }
+
+            gx = transform.position.x;
+            gz = transform.position.z;
+
+            distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
+
+            dmg = -1;
+
+            if (distFromCenterSquared < dmgRadiusSquared)
+            {
+                dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+            }
+
+            if (dmg > 0)
+            {
+                // Hit yourself... noob
+                if (HealthScript != null)
+                {
+                    float damage = MortarWeapon.MaximumDamage * dmg;
+                    if (damage < 1)
+                    {
+                        damage = 1;
+                    }
+                    if (!DummyAttack)
+                    {
+                        HealthScript.TakeDamage(damage);
+                    }
+                }
+            }
+
+            GameObject mortar = ((MortarHit)sender).gameObject;
+            Instantiate(Bloom, mortar.transform.position, Quaternion.identity);
+        }
+      
     }
 
     protected override void FitnessStats(float moveDist, float turnAngle, float turretTurnAngle, float pickup_sensor, float on_target, float turret_on_target)

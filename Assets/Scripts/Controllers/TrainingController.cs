@@ -4,8 +4,17 @@ using System.Collections;
 public class TrainingController : LevelController {
 
     private float DistanceMoved, TurnAmount, TurretTurnAmount, KeepDistanceCount, ReachDistanceCount = 1000, ReachedTick, FaceTarget, ticks;
-    private int MeleeAttacks, MeleeHits, RangedAttacks, RangedHits;
-    private float MaxMeleeAttacks, MaxRangedAttacks;
+    private int MeleeAttacks, MeleeHits, RangedAttacks, RangedHits, MortarAttacks, MortarHits;
+    private float MortarDamage;
+    private float MaxMeleeAttacks, MaxRangedAttacks, MaxMortarAttacks;
+    private float AimTurret;
+
+    const float A = 19.8232173425f;
+    const float B = 1.3229827143f;
+    const float C = 0.5331043504f;
+
+    const float At = 1.8050623168f;
+    const float Bt = 0.3424113095f;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +25,10 @@ public class TrainingController : LevelController {
         if (RangedWeapon != null)
         {
             MaxRangedAttacks = RangedWeapon.AttackSpeed * 20; // Should be Optimizer.TrialDuration
+        }
+        if (MortarWeapon != null)
+        {
+            MaxMortarAttacks = MortarWeapon.AttackSpeed * 20; // Should be Optimizer.TrialDuration
         }
 	}	
 
@@ -62,7 +75,132 @@ public class TrainingController : LevelController {
 
     protected override void MortarAttack(float mortarForce)
     {
-        
+        MortarAttacks++;
+        if (turret != null)
+        {
+            //GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
+            //Rigidbody body = m.GetComponent<Rigidbody>();
+            //m.GetComponent<MortarHit>().MortarCollision += new MortarHit.MortarEventHandler(TrainingController_MortarCollision);
+            //var direction = (turret.forward + turret.up * 1f) * mortarForce * MaxMortarForce;
+            //body.AddForce(direction);
+
+            SimulateMortarAttack(mortarForce, turret.position, turret.forward, true);
+        }
+    }
+
+    private void SimulateMortarAttack(float mortarForce, Vector3 startPos, Vector3 direction, bool simulateTime)
+    {       
+        float distance = A * mortarForce * mortarForce + B * mortarForce + C;
+        Vector3 hitPoint = startPos + direction.normalized * distance;
+
+        if (simulateTime)        {          
+
+            float time = At * mortarForce + Bt;
+
+            // print("Simulated: F: " + mortarForce + "; D: " + distance + "; H: " + hitPoint);
+            StartCoroutine(simulate(mortarForce, hitPoint, time));
+        }
+        else
+        {
+            MortarResult(mortarForce, hitPoint);
+        }
+    }
+
+    private void MortarResult(float mortarForce, Vector3 hitPoint)
+    {
+        if (this != null && transform != null)
+        {
+            float x = hitPoint.x;
+            float z = hitPoint.z;
+
+            float gx = Target.transform.position.x;
+            float gz = Target.transform.position.z;
+
+            float distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
+            float dmgRadiusSquared = DamageRadius * DamageRadius;
+            float dmg = -1;
+            if (distFromCenterSquared < dmgRadiusSquared)
+            {
+                dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+            }
+
+            if (dmg > 0)
+            {
+                // Hit the target!
+                MortarHits++;
+                MortarDamage += dmg;
+            }
+
+            gx = transform.position.x;
+            gz = transform.position.z;
+
+            distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
+
+            dmg = -1;
+
+            if (distFromCenterSquared < dmgRadiusSquared)
+            {
+                dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+            }
+
+            if (dmg > 0)
+            {
+                // Hit yourself... noob
+
+            }
+        }
+    }
+
+    private IEnumerator simulate(float mortarForce, Vector3 hitPoint, float time)
+    {
+        yield return new WaitForSeconds(time);
+      //  print("Simulated: F: " + mortarForce + "; T: " + time + "; H: " + hitPoint);
+        MortarResult(mortarForce, hitPoint);
+    }
+
+    void TrainingController_MortarCollision(object sender, MortarEventArgs args)
+    {
+        if (this != null && transform != null)
+        {
+            float x = args.CollisionPoint.x;
+            float z = args.CollisionPoint.z;
+
+            float gx = Target.transform.position.x;
+            float gz = Target.transform.position.z;
+
+            float distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
+            float dmgRadiusSquared = DamageRadius * DamageRadius;
+            float dmg = -1;
+            if (distFromCenterSquared < dmgRadiusSquared)
+            {
+                dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+            }
+
+            if (dmg > 0)
+            {
+                // Hit the target!
+                MortarHits++;
+                MortarDamage += dmg;
+            }
+
+            gx = transform.position.x;
+            gz = transform.position.z;
+
+            distFromCenterSquared = (gx - x) * (gx - x) + (gz - z) * (gz - z);
+
+            dmg = -1;
+
+            if (distFromCenterSquared < dmgRadiusSquared)
+            {
+                dmg = 1 - distFromCenterSquared / dmgRadiusSquared;
+            }
+
+            if (dmg > 0)
+            {
+                // Hit yourself... noob
+
+            }
+        }
     }
 
     private float InverseDistance(float x)
@@ -102,7 +240,7 @@ public class TrainingController : LevelController {
         }
 
         FaceTarget += on_target;
-        
+        AimTurret += turret_on_target;
     }
 
     public float GetDistance()
@@ -182,6 +320,26 @@ public class TrainingController : LevelController {
             float rangedPrecision = RangedAttacks > 0 ? RangedHits / RangedAttacks : 0;
             rangedPrecision *= Settings.Brain.RiflePrecision;
             fit += rangedPrecision;
+        }
+
+        if (Player.CanUseMortar && Player.MortarWeapon != null)
+        {
+            float aimTurret = AimTurret / ticks * Settings.Brain.TurretFaceTarget;
+            fit += aimTurret;
+
+            float mortarAttacks = MortarAttacks / MaxMortarAttacks * Settings.Brain.MortarAttacks;
+            fit += mortarAttacks;
+
+            float mortarHits = MortarHits / MaxMortarAttacks * Settings.Brain.MortarHits;
+            fit += mortarHits;
+
+            float mortarPrecision = MortarAttacks > 0 ? MortarHits / MortarAttacks : 0;
+            mortarPrecision *= Settings.Brain.MortarPrecision;
+            fit += mortarPrecision;
+
+            float mortarDamagePerHit = MortarAttacks > 0 ? MortarDamage / MortarAttacks : 0;
+            mortarDamagePerHit *= Settings.Brain.MortarDamagePerHit;
+            fit += mortarDamagePerHit;
         }
 
         return fit;

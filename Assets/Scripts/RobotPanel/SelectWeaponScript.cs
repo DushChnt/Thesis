@@ -37,6 +37,13 @@ public class SelectWeaponScript : MonoBehaviour {
         Weapon3.SetWeapon(WeaponList.R_PHASERGUN);
     }
 
+    private void ShowMortarWeapons()
+    {
+        Weapon1.SetWeapon(WeaponList.C_BOMB);
+        Weapon2.SetWeapon(WeaponList.C_FIREBALL);
+        Weapon3.SetWeapon(WeaponList.C_DESTROYER);
+    }
+
     public void ShowSelectWeapons(WeaponType type)
     {
         Weapon1.weaponButton.Click += new MouseEventHandler(weaponButton_Click);
@@ -52,7 +59,7 @@ public class SelectWeaponScript : MonoBehaviour {
                 ShowRangedWeapons();
                 break;
             case WeaponType.Mortar:
-
+                ShowMortarWeapons();
                 break;
         }
     }

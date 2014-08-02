@@ -37,7 +37,8 @@ public class ResetButton : MonoBehaviour {
         if (cooldown >= Cooldown)
         {
             Button.Enable();
-            CountdownLabel.Hide();
+            //CountdownLabel.Hide();
+            CountdownLabel.Text = "'R'";
         }
         else
         {

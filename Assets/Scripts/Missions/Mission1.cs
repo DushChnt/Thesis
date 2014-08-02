@@ -21,6 +21,11 @@ public class Mission1 : MonoBehaviour, IMission {
         
 	}
 
+    void Awake()
+    {
+        PlayerPrefs.SetInt(MissionPanel.CURRENT_MISSION, 1);
+    }
+
     public void Initialize(MissionUI ui)
     {
         this.UI = ui;
@@ -56,7 +61,7 @@ public class Mission1 : MonoBehaviour, IMission {
         
         if (dist >= 0)
         {
-            
+            UI.SetGoalText(string.Format("Distance remaining: {0:0.00}", GetDistance() - 2.5f));
             if (dist < 2.5f)
             {
                 print("Approach done!");
@@ -81,7 +86,7 @@ public class Mission1 : MonoBehaviour, IMission {
 
         if (dist >= 0)
         {
-
+            UI.SetGoalText(string.Format("Distance remaining: {0:0.00}", GetDistance() - 2.5f));
             if (dist < 2.5f)
             {                
                 Done();
@@ -96,6 +101,7 @@ public class Mission1 : MonoBehaviour, IMission {
         PopupText.ShowText("Get close!");
         state = Mission1State.Approach;
         UI.UpdateQuest(1, MaxQuest);
+        UI.SetGoalText("Approach the target", string.Format("Distance remaining: {0:0.00}", GetDistance() - 2.5f));
     }
 
     private void StartFlee()
@@ -105,6 +111,7 @@ public class Mission1 : MonoBehaviour, IMission {
         PastDistances = new Queue<float>(100);
         PopupText.ShowText("Flee!");
         UI.UpdateQuest(2, MaxQuest);
+        UI.SetGoalText("Flee from the target", string.Format("Distance remaining: {0:0.00}", 5f - PastDistances.Average()));
     }
 
     private void StartFollow()
@@ -113,6 +120,7 @@ public class Mission1 : MonoBehaviour, IMission {
         Opponent.SwitchMovement(OpponentState.Fleeing);
         PopupText.ShowText("Catch him!");
         UI.UpdateQuest(3, MaxQuest);
+        UI.SetGoalText("Catch the target", string.Format("Distance remaining: {0:0.00}", GetDistance() - 2.5f));
     }
 
     private void CheckFlee()
@@ -124,6 +132,7 @@ public class Mission1 : MonoBehaviour, IMission {
             PastDistances.Dequeue();
         }
         float avg = PastDistances.Average();
+        UI.SetGoalText("Flee from the target", string.Format("Distance remaining: {0:0.00}", 5f - avg));
       //  print("Average: " + avg);
         if (avg > 5)
         {
