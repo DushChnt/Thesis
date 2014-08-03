@@ -30,6 +30,7 @@ public class Mission1 : MonoBehaviour, IMission {
     {
         this.UI = ui;
         StartApproach();
+        Controller.DummyAttack = true;
     }
 
 	// Update is called once per frame

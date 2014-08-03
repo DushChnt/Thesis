@@ -243,6 +243,53 @@ public class BrainPanel : MonoBehaviour {
         return angle;
     }
 
+    public static Color32 hsvToRgb(float h, float s, float v)
+    {
+        int H = (int)(h * 6);
+        float f = h * 6 - H;
+        float p = v * (1 - s);
+        float q = v * (1 - f * s);
+        float t = v * (1 - (1 - f) * s);
+
+        float r = 0;
+        float g = 0;
+        float b = 0;
+        switch (H)
+        {
+            case 0:
+                r = v;
+                g = t;
+                b = p;
+                break;
+            case 1:
+                r = q;
+                g = v;
+                b = p;
+                break;
+            case 2:
+                r = p;
+                g = v;
+                b = t;
+                break;
+            case 3:
+                r = p;
+                g = q;
+                b = v;
+                break;
+            case 4:
+                r = t;
+                g = p;
+                b = v;
+                break;
+            case 5:
+                r = v;
+                g = p;
+                b = q;
+                break;
+        }
+        return new UnityEngine.Color32((byte)(255 * r), (byte)(255 * g), (byte)(255 * b), 255);
+    }
+
     private float AddBox(Brain b, int level, float prev_center, Color32 color)
     {
         var top_padding = 10;
@@ -253,16 +300,19 @@ public class BrainPanel : MonoBehaviour {
         dfLabel GenerationLabel = button.Find("Generation Label").GetComponent<dfLabel>();
         dfLabel FitnessLabel = button.Find("Fitness Label").GetComponent<dfLabel>();
         BrainButton branchButton = button.Find("Branch Button").GetComponent<BrainButton>();
+        dfPanel NamePanel = button.Find("Panel").GetComponent<dfPanel>();
 
         NameLabel.Text = b.Name;
-        GenerationLabel.Text = "Generation: " + b.Generation;
-        FitnessLabel.Text = "Fitness: " + b.BestFitness;
+        GenerationLabel.Text = "Age: " + b.Generation;
+        FitnessLabel.Text = string.Format("Fitness: {0:0.00}", b.BestFitness);
         button.Brain = b;
         button.Click += button_Click;
         button.IsNewBrain = b.IsNewBrain;
         button.DragStart += button_DragStart;
+
+        NamePanel.BackgroundColor = color;
         //button.BackgroundSprite = "BLANK_TEXTURE";
-        button.NormalBackgroundColor = color;
+     //   button.NormalBackgroundColor = color;
         //button.HoverSprite = "listitem-hover";
         //button.PressedSprite = "listitem-selected";
 
@@ -281,7 +331,7 @@ public class BrainPanel : MonoBehaviour {
         plus.Brain = b;
 
         plus.Click += new_button_Click;
-        plus.RelativePosition = new Vector3(124, plus.RelativePosition.y);
+     //   plus.RelativePosition = new Vector3(124, plus.RelativePosition.y);
 
         if (level > 0)
         {
@@ -304,7 +354,7 @@ public class BrainPanel : MonoBehaviour {
             {
                 padding = 5;
             }
-            line.RelativePosition = new Vector3(prev_center, top_padding + level * spacing - B + padding + 2);
+            line.RelativePosition = new Vector3(prev_center, top_padding + level * spacing - B + padding - 5);
             line.ZOrder = 0;
         }
 
@@ -514,13 +564,12 @@ public class BrainPanel : MonoBehaviour {
         }
         printLevels();
 
+        int numBrains = brains.Count;
+
         foreach (Brain b in brains)
         {
-            Color32 color = new Color32(0, 100, 0, 254);
-            if (idx > 0)
-            {
-                color = new Color32(100, 0, 0, 254);
-            }
+            Color32 color = hsvToRgb(idx / (float)numBrains, 1, 0.5f);
+            
             recurseAdd(b, level, ratio, idx, idx * ratio, 0, color);
             idx++;
         }

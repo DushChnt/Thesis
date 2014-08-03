@@ -30,7 +30,7 @@ Click on the ? to bring up this window again.";
 Once your brains are ready, select them for your robot and press on 'Test it!' to see if your robot can complete the mission.";
 
     string page4Title = "Your brains";
-    string page4Explanation = @"In the middle you can see the brains you have trained for your robot. It is a good idea to create separate brains for specific tasks. You can use your existing brains as basis for new brains by clicking + on the brains. That way the new brains already know what the existing brains knows and you can then train it in a new direction.
+    string page4Explanation = @"In the middle you can see the brains you have trained for your robot. It is a good idea to create separate brains for specific tasks. You can use your existing brains as basis for new brains by clicking + on the brains. That way the new brains already know what the existing brains know and you can then train it in a new direction.
 
 Click on a brain to train it. Drag your brains to the 'Selected brains' panel to use them in battle.";
     #endregion

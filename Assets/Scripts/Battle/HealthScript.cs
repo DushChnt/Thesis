@@ -9,6 +9,7 @@ public class HealthScript : Photon.MonoBehaviour {
     public dfGUIManager GUI;
     GameObject label;
     public bool IsOpponent;
+    public float MaxHealth = 100f;
 
     public bool IsDead {
         get
@@ -21,15 +22,26 @@ public class HealthScript : Photon.MonoBehaviour {
     {
         get
         {
-            return IsOpponent ? 100 - Health : Health;
+            var h = IsOpponent ? MaxHealth - Health : Health;
+            h = (h / MaxHealth) * 100;
+            return h;
         }
     }
 
-	public float Health
+    public float Health
+    {
+        get
+        {
+            return _health;
+        }
+    }
+
+	public float HealthPercentage
 	{
 		get
 		{
-			return _health;
+            var h = (Health / MaxHealth) * 100;           
+			return h;
 		}
 	}
 
@@ -39,7 +51,7 @@ public class HealthScript : Photon.MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_health = 100;
+		_health = MaxHealth;
 		isOne = this.gameObject.name.Contains("1");
 		if (isOne)
 		{
@@ -99,9 +111,9 @@ public class HealthScript : Photon.MonoBehaviour {
         ShowFloatingText(damage);
         
 		_health -= damage;
-        if (_health > 100)
+        if (_health > MaxHealth)
         {
-            _health = 100;
+            _health = MaxHealth;
         }
 		photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health);
         if (photonView.isMine)

@@ -38,7 +38,7 @@ public class MainMenu : MonoBehaviour {
 
     void ChampionsButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        throw new System.NotImplementedException();
+        Application.LoadLevel("Champions arena");
     }
 
     void BootcampButton_Click(dfControl control, dfMouseEventArgs mouseEvent)

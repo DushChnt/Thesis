@@ -246,23 +246,27 @@ public abstract class LevelController : MonoBehaviour {
             }
         }
 
-        RaycastHit hit;       
+        RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0.1f, 0, 1).normalized), out hit, SensorRange))
+        if (Physics.Raycast(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(0.2f, 0, 1).normalized), out hit, SensorRange))
         {
             if (hit.collider.tag.Equals("Wall"))
             {
                 wall_right = 1 - hit.distance / SensorRange;
+                print("Right hit wall: " + wall_right);
             }
         }
-        if (Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(-0.1f, 0, 1).normalized), out hit, SensorRange))
+        Debug.DrawRay(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(0.2f, 0, 1).normalized) * SensorRange, Color.red);
+
+        if (Physics.Raycast(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(-0.2f, 0, 1).normalized), out hit, SensorRange))
         {
             if (hit.collider.tag.Equals("Wall"))
             {
                 wall_left = 1 - hit.distance / SensorRange;
+                print("Left hit wall: " + wall_left);
             }
         }
-
+        Debug.DrawRay(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(-0.2f, 0, 1).normalized) * SensorRange, Color.green);
         pickup_sensor = GetAngleToNearestPickup();
 
         

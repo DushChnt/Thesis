@@ -15,16 +15,32 @@ public class DetailPanel : MonoBehaviour {
         }
     }
 
+    #region LONG_STRINGS
+
     string mission1Text = @"Train your robot to move around. 
 
 Do so by adjusting the correct sliders for the brain that you are training.
 
 In order to complete the mission you must create two brains; a brain that can approach the target and a brain that can flee from the target.";
-    string mission2Text = "22224 your robot to move around.\n\n" +
-        "Do so by adjusting the correct sliders for the brain that you are training. Something shorter now.\n\n";
-        
+    string mission2Text = @"Train your robot to use it's melee attack. 
 
-	// Use this for initialization
+In this mission you will need to be able to hit the opponent with melee attacks and beat the opponent in a battle.";
+
+    string mission3Text = @"Train your robot to use it's ranged attack.
+
+In this mission you have to be able to hit a moving target with your ranged weapon and then beat the opponent in a battle using both melee and ranged attacks.";
+
+    string mission4Text = @"Train your robot to use it's mortar attack.
+
+In this mission you must be able to hit the opponent with your mortar attack and then beat the opponent using all your combat skills.";
+
+    string mission5Text = @"Boss battle!
+
+By using your combined combat skills you must defeat the opponent before he defeats you.";
+
+    #endregion
+
+    // Use this for initialization
 	void Start () {
         panel = GetComponent<dfPanel>();
         TestButton.Click += new MouseEventHandler(TestButton_Click);
@@ -39,15 +55,26 @@ In order to complete the mission you must create two brains; a brain that can ap
    
 
     public void DisplayMission(int mission, string title)
-    {       
-        if (mission == 1)
+    {
+        switch (mission)
         {
-            MissionTextLabel.Text = mission1Text;
+            case 1:
+                MissionTextLabel.Text = mission1Text;
+                break;
+            case 2:
+                MissionTextLabel.Text = mission2Text;
+                break;
+            case 3:
+                MissionTextLabel.Text = mission3Text;
+                break;
+            case 4:
+                MissionTextLabel.Text = mission4Text;
+                break; 
+            case 5:
+                MissionTextLabel.Text = mission5Text;
+                break;
         }
-        else
-        {
-            MissionTextLabel.Text = mission2Text;
-        }
+     
         TitleLabel.Text = title;     
     }
 	

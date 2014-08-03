@@ -435,7 +435,7 @@ MonoBehaviour:
       right: 640
       bottom: 330
     owner: {fileID: 12514438}
-  renderOrder: 57
+  renderOrder: 63
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -574,6 +574,7 @@ MonoBehaviour:
   Explosion: {fileID: 19800000, guid: 137f7081769254d41ba394328a63c704, type: 2}
   GUI: {fileID: 1201523330}
   IsOpponent: 1
+  MaxHealth: 100
   FollowScript: {fileID: 698283307}
 --- !u!65 &14036658
 BoxCollider:
@@ -2102,7 +2103,7 @@ MonoBehaviour:
       right: 0
       bottom: 193.597656
     owner: {fileID: 401172726}
-  renderOrder: 61
+  renderOrder: 67
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2718,7 +2719,7 @@ MonoBehaviour:
       right: 63.4179688
       bottom: 78
     owner: {fileID: 471919019}
-  renderOrder: 59
+  renderOrder: 65
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3511,7 +3512,7 @@ MonoBehaviour:
       right: 63.4179688
       bottom: 19.5234375
     owner: {fileID: 590992429}
-  renderOrder: 60
+  renderOrder: 66
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5659,11 +5660,11 @@ Transform:
   m_LocalPosition: {x: -.851112366, y: .617774963, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1520454419}
   - {fileID: 1039120572}
+  - {fileID: 1520454419}
   - {fileID: 1602157773}
-  - {fileID: 1922174007}
   - {fileID: 1708100816}
+  - {fileID: 1922174007}
   m_Father: {fileID: 1201523327}
   m_RootOrder: 15
 --- !u!114 &844522971
@@ -5733,7 +5734,7 @@ MonoBehaviour:
       right: 417
       bottom: 171
     owner: {fileID: 844522973}
-  renderOrder: 62
+  renderOrder: 57
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7222,7 +7223,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 844522970}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!65 &1039120573
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -7276,7 +7277,7 @@ MonoBehaviour:
       right: 64
       bottom: 239.625
     owner: {fileID: 1039120574}
-  renderOrder: 67
+  renderOrder: 62
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -8168,6 +8169,7 @@ MonoBehaviour:
   Mission2: {fileID: 0}
   Mission3: {fileID: 0}
   Mission4: {fileID: 0}
+  Mission5: {fileID: 0}
   StartButton: {fileID: 901615370}
   MissionDonePanel: {fileID: 1740330590}
   MissionDoneLosePanel: {fileID: 844522973}
@@ -10363,7 +10365,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 844522970}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!65 &1520454420
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -10417,7 +10419,7 @@ MonoBehaviour:
       right: 57.78125
       bottom: 103.90625
     owner: {fileID: 1520454421}
-  renderOrder: 65
+  renderOrder: 60
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -10651,7 +10653,7 @@ MonoBehaviour:
       right: 283
       bottom: 17.5039062
     owner: {fileID: 1602157774}
-  renderOrder: 63
+  renderOrder: 58
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -10893,7 +10895,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 844522970}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!65 &1708100817
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -10947,7 +10949,7 @@ MonoBehaviour:
       right: 215
       bottom: 483.042969
     owner: {fileID: 1708100818}
-  renderOrder: 64
+  renderOrder: 59
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -11461,6 +11463,7 @@ MonoBehaviour:
   Explosion: {fileID: 19800000, guid: 137f7081769254d41ba394328a63c704, type: 2}
   GUI: {fileID: 1201523330}
   IsOpponent: 0
+  MaxHealth: 100
   FollowScript: {fileID: 1389562693}
 --- !u!65 &1777298643
 BoxCollider:
@@ -11697,7 +11700,7 @@ MonoBehaviour:
       right: 63.4179688
       bottom: 136.476562
     owner: {fileID: 1808603832}
-  renderOrder: 58
+  renderOrder: 64
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -12325,7 +12328,7 @@ MonoBehaviour:
       right: 57.78125
       bottom: 339.050781
     owner: {fileID: 1922174006}
-  renderOrder: 66
+  renderOrder: 61
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -12379,7 +12382,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 844522970}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1001 &1999935446
 Prefab:
   m_ObjectHideFlags: 0

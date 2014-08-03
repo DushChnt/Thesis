@@ -5,6 +5,7 @@ public class MissionPanel : MonoBehaviour {
 
     public dfButton Mission1, Mission2, Mission3, Mission4, Mission5;
     public DetailPanel DetailPanel;
+    public dfSprite SelectedSprite;
     public const string CURRENT_MISSION = "CurrentMission";
     Player Player
     {
@@ -24,22 +25,28 @@ public class MissionPanel : MonoBehaviour {
 
         DisableLockedMissions();
      //   MissionClick(null, null, Player.Level);
-
+        print("Clicking missions");
+        print("Player level: " + Player.Level);
         switch (Player.Level)
         {
             case 1:
-                Mission1.DoClick();                
+                Mission1.DoClick();
+                print("Clicking mission 1");
                 break;
             case 2:
-                Mission2.DoClick();                
+                Mission2.DoClick();  
+                print("Clicking mission 2");              
                 break;
             case 3:
                 Mission3.DoClick();
+                print("Clicking missions 3");
                 break;
             case 4:
                 Mission4.DoClick();
+                print("Clicking mission 4");
                 break;
-            case 5:
+            case 6:
+                print("Clicking mission 5");
                 Mission5.DoClick();
                 break;
         }
@@ -69,6 +76,8 @@ public class MissionPanel : MonoBehaviour {
     {        
         PlayerPrefs.SetInt(CURRENT_MISSION, mission);
         DetailPanel.DisplayMission(mission, ((dfButton)control).Text);
+        dfButton but = control as dfButton;
+        SelectedSprite.RelativePosition = new Vector2(SelectedSprite.RelativePosition.x, but.RelativePosition.y + (but.Height - SelectedSprite.Height) / 2);
     }
 
     

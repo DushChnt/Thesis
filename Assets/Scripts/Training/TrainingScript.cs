@@ -156,7 +156,16 @@ public class TrainingScript : MonoBehaviour {
 
     void BackButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        Application.LoadLevel("Bootcamp");
+        switch (PlayerPrefs.GetString(CameFromScript.CAME_FROM))
+        {
+            case CameFromScript.BOOTCAMP:
+                Application.LoadLevel("Bootcamp");
+                break;
+            case CameFromScript.CHAMPIONS_ARENA:
+                Application.LoadLevel("Champions arena");
+                break;
+        }
+       // Application.LoadLevel("Bootcamp");
     }
 
     private void GetOptimizerSettings()

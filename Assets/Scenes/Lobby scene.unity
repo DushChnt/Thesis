@@ -410,6 +410,7 @@ MonoBehaviour:
   scrollWithArrowKeys: 0
   useScrollMomentum: 0
   useVirtualScrolling: 0
+  autoFitVirtualTiles: 1
   virtualScrollingTile: {fileID: 0}
 --- !u!1 &225016052
 GameObject:
@@ -4105,6 +4106,7 @@ MonoBehaviour:
   scrollWithArrowKeys: 0
   useScrollMomentum: 0
   useVirtualScrolling: 0
+  autoFitVirtualTiles: 1
   virtualScrollingTile: {fileID: 0}
 --- !u!1 &1734140406
 GameObject:

@@ -14,6 +14,7 @@ public class MissionUI : MonoBehaviour {
     public Mission2 Mission2;
     public Mission3 Mission3;
     public Mission4 Mission4;
+    public Mission5 Mission5;
 
     public dfButton StartButton;
 
@@ -140,6 +141,10 @@ public class MissionUI : MonoBehaviour {
 
             case 4:
                 Mission4.Initialize(this);
+                break;
+
+            case 5:
+                Mission5.Initialize(this);
                 break;
         }
     }
