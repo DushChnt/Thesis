@@ -214,8 +214,8 @@ public class NetworkManager : Photon.MonoBehaviour {
             controller1.SetBrains(brain1, brain2, brain3, brain4);
 
             
-            gui.MyRobot = controller1;
-            gui.OpponentRobot = controller1.Opponent;
+        //    gui.MyRobot = controller1;
+        //    gui.OpponentRobot = controller1.Opponent;
 
             GameObject UIRoot = GameObject.Find("UI Root");
 

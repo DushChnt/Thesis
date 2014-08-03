@@ -117,10 +117,10 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
                 if (_startTimer > StartTimer)
                 {
-
+                    GameStarted = true;
                     print("RPC call start game");
                     photonView.RPC("StartGame", PhotonTargets.All);
-                    GameStarted = true;
+                    
                     Camera.main.GetComponent<MousePan>().Activated = true;
                     
                 }
@@ -220,7 +220,8 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
     void SpawnMyPlayer()
     {
-        GameObject player = PhotonNetwork.Instantiate("ModRobot", chosenSpawnPosition.position, chosenSpawnPosition.rotation, 0);
+     //   GameObject player = PhotonNetwork.Instantiate("ModRobot", chosenSpawnPosition.position, chosenSpawnPosition.rotation, 0);
+        GameObject player = PhotonNetwork.Instantiate("HammerRobot", chosenSpawnPosition.position, chosenSpawnPosition.rotation, 0);
         //float x = Random.Range(-10, 10);
         //float z = Random.Range(-10, 10);
         //if (PhotonNetwork.isMasterClient)
@@ -359,6 +360,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
     public void Stats()
     {
+       
         Player Player = ParseUser.CurrentUser as Player;
         PhotonView[] players = GameObject.FindObjectsOfType<PhotonView>();
         GameObject other = null;
@@ -366,7 +368,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         print("Number of PhotonViews: " + players.Length);
         foreach (PhotonView ph in players)
         {
-            if (!ph.gameObject.name.Contains("ModRobot"))
+            if (!ph.gameObject.name.Contains("HammerRobot"))
             {
                 continue;
             }
@@ -390,8 +392,8 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             // rc.HumanActivate(other);
             //mine.AddComponent<BattleController>();
             //  var brain1 = Utility.LoadBrain(Application.persistentDataPath + string.Format("/Populations/{0}Champ.gnm.xml", "Mortar Precision"));
-            var controller1 = mine.GetComponent<BattleController>();
-            controller1.HitLayers = 1 << LayerMask.NameToLayer("BattleRobot");
+            var controller1 = mine.GetComponent<FightController>();
+       //     controller1.HitLayers = 1 << LayerMask.NameToLayer("BattleRobot");
 
             IBlackBox brain1 = null, brain2 = null, brain3 = null, brain4 = null, activeBrain = null;
             string path = "";
@@ -432,21 +434,23 @@ public class NetworkBattleManager : Photon.MonoBehaviour
                 }
             }
 
-
+            print("Joe 1");
             controller1.Activate(activeBrain, other);
             controller1.SetBrains(brain1, brain2, brain3, brain4);
-
+            print("Joe 2");
+            var opponent = other.GetComponent<FightController>();
 
             gui.MyRobot = controller1;
-            gui.OpponentRobot = controller1.Opponent;
-            controller1.Opponent.Opponent = controller1;
-            controller1.Opponent.target = controller1.gameObject;
-
-            
+            gui.OpponentRobot = opponent;
+            opponent.Opponent = controller1;
+          //  controller1.Opponent.Opponent = controller1;
+          //  controller1.Opponent.target = controller1.gameObject;
+            gui.ResetButton.Controller = controller1.gameObject;
+            print("Joe 3");
 
             GameObject UIRoot = GameObject.Find("Battle GUI");
 
-            UIRoot.GetComponent<MouseTotem>().SetController(controller1);
+       //     UIRoot.GetComponent<MouseTotem>().SetController(controller1);
 
             HealthScript health = mine.GetComponent<HealthScript>();
             health.Died += new HealthScript.DeathEventHandler(health_Died);
@@ -474,6 +478,8 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             prop.Bind();
 
             prop.enabled = true;
+
+            print("Joe 4");
 
             HealthScript oppHealth = other.GetComponent<HealthScript>();
             oppHealth.Died += new HealthScript.DeathEventHandler(oppHealth_Died);
@@ -503,6 +509,8 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
             oppProp.enabled = true;
 
+            print("Joe 5");
+
 
             if (PhotonNetwork.isMasterClient)
             {
@@ -512,7 +520,9 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             {
                 other.transform.Find("Body").renderer.material = ownColor;
             }
-            GameLogger.Instance.StartLogging(controller1, controller1.Opponent);
+
+            print("Joe 6");
+         //   GameLogger.Instance.StartLogging(controller1, controller1.Opponent);
         }
     }
 

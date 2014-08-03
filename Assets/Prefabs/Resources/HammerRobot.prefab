@@ -658,6 +658,7 @@ MonoBehaviour:
   Explosion: {fileID: 19800000, guid: 137f7081769254d41ba394328a63c704, type: 2}
   GUI: {fileID: 0}
   IsOpponent: 0
+  MaxHealth: 100
   FollowScript: {fileID: 0}
 --- !u!120 &12000000
 LineRenderer:

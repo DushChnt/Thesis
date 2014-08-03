@@ -9,7 +9,7 @@ public class FightController : LevelController {
     int ActiveBrain;
     HammerAttack hammer;
     bool TargetIsInMeleeBox;
-    FightController Opponent;
+    public FightController Opponent;
     public HealthScript HealthScript;
     public HealthScript OpponentHealth;
     public bool DummyAttack;
@@ -35,6 +35,7 @@ public class FightController : LevelController {
         this.IsRunning = true;
         this.Target = target;
         FightController opponent = Target.GetComponent<FightController>();
+        OpponentHealth = Target.GetComponent<HealthScript>();
         if (opponent != null)
         {
             Opponent = opponent;
@@ -230,7 +231,16 @@ public class FightController : LevelController {
             }
             OpponentHealth.TakeDamage(dmg);
         }
-        
+        if (!PhotonNetwork.offlineMode)
+        {
+            photonView.RPC("GetMeleeAttack", PhotonTargets.Others);
+        }
+    }
+
+    [RPC]
+    protected void GetMeleeAttack()
+    {
+        hammer.PerformAttack();
     }
 
     protected override void RangedAttack()
@@ -242,6 +252,7 @@ public class FightController : LevelController {
         Vector3 p_0 = s_0 + transform.forward * 50;
         Vector3 t = new Vector3(p_0.x, transform.position.y, p_0.z);
         Vector3 dir = Vector3.Normalize(t - s_0);
+        bool hitOpponent = false;
         if (Physics.Raycast(s_0, dir, out hit, 50))
         {
             isHit = true;
@@ -259,6 +270,7 @@ public class FightController : LevelController {
                 {
                     OpponentHealth.TakeDamage(dmg);
                 }
+                hitOpponent = true;
             }
 
         }
@@ -270,6 +282,21 @@ public class FightController : LevelController {
         else
         {
             point = t;
+        }
+        ShootLaser(point);
+        if (!PhotonNetwork.offlineMode)
+        {
+            photonView.RPC("GetRangedAttack", PhotonTargets.Others, hitOpponent, point);
+        }
+    }
+
+    [RPC]
+    protected void GetRangedAttack(bool hit, Vector3 hitPoint)
+    {
+        Vector3 point = hitPoint;
+        if (hit)
+        {
+            point = Opponent.transform.position;
         }
         ShootLaser(point);
     }
@@ -286,9 +313,24 @@ public class FightController : LevelController {
     {
         OnMortarAttackEvent();
         GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
+        
+     //   GameObject m = PhotonNetwork.Instantiate("Mortar", turret.transform.position + Vector3.up, Quaternion.identity, 0);
         Rigidbody body = m.GetComponent<Rigidbody>();
         m.GetComponent<MortarHit>().MortarCollision += new MortarHit.MortarEventHandler(FightController_MortarCollision);
         var direction = (turret.forward + turret.up * 1f) * mortarForce * MaxMortarForce;
+        body.AddForce(direction);
+
+        if (!PhotonNetwork.offlineMode)
+        {
+            photonView.RPC("ShootMortar", PhotonTargets.Others, direction);
+        }
+    }
+
+    [RPC]
+    protected void ShootMortar(Vector3 direction)
+    {
+        GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
+        Rigidbody body = m.GetComponent<Rigidbody>();        
         body.AddForce(direction);
     }
 
@@ -356,8 +398,8 @@ public class FightController : LevelController {
                 }
             }
 
-            GameObject mortar = ((MortarHit)sender).gameObject;
-            Instantiate(Bloom, mortar.transform.position, Quaternion.identity);
+            //GameObject mortar = ((MortarHit)sender).gameObject;
+            //Instantiate(Bloom, mortar.transform.position, Quaternion.identity);
         }
       
     }
@@ -367,5 +409,25 @@ public class FightController : LevelController {
         // Do nothing
     }
 
-    
+
+
+    protected override void SendRPC(bool meleeAttack, bool rangedAttack, bool mortarAttack, float mortarForce)
+    {
+        // Do photon stuff
+        if (!PhotonNetwork.offlineMode)
+        {
+            photonView.RPC("GetMovement", PhotonTargets.Others, transform.position, transform.rotation, turret != null ? turret.rotation : Quaternion.identity, PhotonNetwork.time);
+        }
+    }
+
+    [RPC]
+    protected void GetMovement(Vector3 realPosition, Quaternion realRotation, Quaternion turretRotation, double time)
+    {
+        transform.position = realPosition; 
+        transform.rotation = realRotation; 
+        if (turret != null)
+        {
+            turret.rotation = turretRotation; 
+        }
+    }
 }

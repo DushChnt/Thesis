@@ -853,7 +853,7 @@ MonoBehaviour:
   StatisticsButton: {fileID: 1403469434}
   OptionsButton: {fileID: 1595785790}
   LogoutButton: {fileID: 1875243758}
-  ExitButton: {fileID: 1875243758}
+  ExitButton: {fileID: 1402694203}
 --- !u!1 &1584972045
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 using System.Collections;
 using SharpNeat.Phenomes;
 
-public abstract class LevelController : MonoBehaviour {
+public abstract class LevelController : Photon.MonoBehaviour {
 
     public GameObject Target;
     public float SensorRange = 100;
@@ -38,6 +38,7 @@ public abstract class LevelController : MonoBehaviour {
     protected abstract void RangedAttack();
     protected abstract void MortarAttack(float mortarForce);
     protected abstract void FitnessStats(float moveDist, float turnAngle, float turretTurnAngle, float pickup_sensor, float on_target, float turret_on_target);
+    protected abstract void SendRPC(bool meleeAttack, bool rangedAttack, bool mortarAttack, float mortarForce);
 
 	// Use this for initialization
 	void Awake () {
@@ -72,7 +73,7 @@ public abstract class LevelController : MonoBehaviour {
         this.IsRunning = false;
     }
 
-    protected void DoMeleeAttack()
+    protected bool DoMeleeAttack()
     {
         if (meleeTimer >= MeleeCooldown)
         {
@@ -80,10 +81,12 @@ public abstract class LevelController : MonoBehaviour {
             MeleeAttack();
             float slowdown = TopSpeed * MeleeWeapon.SlowDown / 100f;
             Speed -= slowdown;
+            return true;
         }
+        return false;
     }
 
-    protected void DoRangedAttack()
+    protected bool DoRangedAttack()
     {
         if (rangedTimer >= RangedCooldown)
         {
@@ -91,10 +94,12 @@ public abstract class LevelController : MonoBehaviour {
             RangedAttack();
             float slowdown = TopSpeed * RangedWeapon.SlowDown / 100f;
             Speed -= slowdown;
+            return true;
         }
+        return false;
     }
 
-    protected void DoMortarAttack(float mortarForce)
+    protected bool DoMortarAttack(float mortarForce)
     {
         if (mortarTimer >= MortarCooldown)
         {
@@ -102,7 +107,9 @@ public abstract class LevelController : MonoBehaviour {
             MortarAttack(mortarForce);
             float slowdown = TopSpeed * MortarWeapon.SlowDown / 100f;
             Speed -= slowdown;
+            return true;
         }
+        return false;
     }
 
     void Loop()
@@ -174,17 +181,21 @@ public abstract class LevelController : MonoBehaviour {
         var turnAngle = steer * TurnSpeed * Time.deltaTime; // * gas;
         var turretTurnAngle = turretTurn * TurretTurnSpeed * Time.deltaTime;
 
+        bool bMelee = false;
+        bool bRanged = false;
+        bool bMortar = false;
+
         if (Player.CanUseMelee && Player.MeleeWeapon != null && meleeAttack > 0.5f)
         {
-            DoMeleeAttack();
+            bMelee = DoMeleeAttack();
         }
         if (Player.CanUseRanged && Player.RangedWeapon != null && rifleAttack > 0.5f)
         {
-            DoRangedAttack();
+            bRanged = DoRangedAttack();
         }
         if (Player.CanUseMortar && Player.MortarWeapon != null && mortarForce > 0.5f)
         {
-            DoMortarAttack(mortarForce);
+           bMortar = DoMortarAttack(mortarForce);
         }
         meleeTimer += Time.deltaTime;
         rangedTimer += Time.deltaTime;
@@ -197,6 +208,7 @@ public abstract class LevelController : MonoBehaviour {
             turret.Rotate(new Vector3(0, turretTurnAngle, 0));
         }
 
+        SendRPC(bMelee, bRanged, bMortar, mortarForce);
         FitnessStats(moveDist, turnAngle, turretTurnAngle, pickup_sensor, on_target, turret_on_target);
     }
 
@@ -253,20 +265,20 @@ public abstract class LevelController : MonoBehaviour {
             if (hit.collider.tag.Equals("Wall"))
             {
                 wall_right = 1 - hit.distance / SensorRange;
-                print("Right hit wall: " + wall_right);
+               // print("Right hit wall: " + wall_right);
             }
         }
-        Debug.DrawRay(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(0.2f, 0, 1).normalized) * SensorRange, Color.red);
+   //     Debug.DrawRay(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(0.2f, 0, 1).normalized) * SensorRange, Color.red);
 
         if (Physics.Raycast(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(-0.2f, 0, 1).normalized), out hit, SensorRange))
         {
             if (hit.collider.tag.Equals("Wall"))
             {
                 wall_left = 1 - hit.distance / SensorRange;
-                print("Left hit wall: " + wall_left);
+           //     print("Left hit wall: " + wall_left);
             }
         }
-        Debug.DrawRay(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(-0.2f, 0, 1).normalized) * SensorRange, Color.green);
+     //   Debug.DrawRay(transform.position + transform.forward * 1.1f, transform.TransformDirection(new Vector3(-0.2f, 0, 1).normalized) * SensorRange, Color.green);
         pickup_sensor = GetAngleToNearestPickup();
 
         

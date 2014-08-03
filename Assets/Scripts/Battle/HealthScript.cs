@@ -115,7 +115,7 @@ public class HealthScript : Photon.MonoBehaviour {
         {
             _health = MaxHealth;
         }
-		photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health);
+		photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health, damage);
         if (photonView.isMine)
         {
 
@@ -155,9 +155,10 @@ public class HealthScript : Photon.MonoBehaviour {
     }
 
 	[RPC]
-	void SetHealth(float health)
+	void SetHealth(float health, float damage)
 	{
 		_health = health;
+        ShowFloatingText(damage);
         if (photonView.isMine)
         {
             if (Health <= 0)

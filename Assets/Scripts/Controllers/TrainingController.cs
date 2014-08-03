@@ -349,4 +349,9 @@ public class TrainingController : LevelController {
     {
         // Do nothing;
     }
+
+    protected override void SendRPC(bool meleeAttack, bool rangedAttack, bool mortarAttack, float mortarForce)
+    {
+        // Do nothing
+    }
 }

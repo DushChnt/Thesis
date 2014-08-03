@@ -97,7 +97,7 @@ public class GameLogger : MonoBehaviour {
 
     private void WriteLineToLog(string line)
     {
-        print("Writing line: " + line);
+     //   print("Writing line: " + line);
         using (StreamWriter writer = File.AppendText(filePath)) 
         {
             writer.WriteLine(line);

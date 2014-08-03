@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MortarHit : MonoBehaviour {
+public class MortarHit : Photon.MonoBehaviour {
 
     public delegate void MortarEventHandler(object sender, MortarEventArgs args);    
 
     public event MortarEventHandler MortarCollision;
+    public GameObject Bloom;
 
     protected virtual void OnMortarCollision(MortarEventArgs args)
     {
@@ -22,8 +23,14 @@ public class MortarHit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+       
 	}
+
+    [RPC]
+    protected void GetPosition(Vector3 position, float time)
+    {
+        transform.position = position;
+    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -31,6 +38,7 @@ public class MortarHit : MonoBehaviour {
         {
             CollisionPoint = this.transform.position
         };
+        Instantiate(Bloom, transform.position, Quaternion.identity);
         OnMortarCollision(args);
         Destroy(gameObject);
     }

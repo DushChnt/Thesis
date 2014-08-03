@@ -6,9 +6,9 @@ public class NetworkGUI : MonoBehaviour {
 	public dfButton BackButton;
    
 	public dfPanel Slot1, Slot2, Slot3, Slot4, CountdownPanel;
-	public BattleController MyRobot, OpponentRobot;
+	public FightController MyRobot, OpponentRobot;
     public dfLabel OwnWinsLabel, OpponentWinsLabel, TimeLabel, OwnNameLabel, OpponentNameLabel, StatusLabel, TipLabel;
-
+    public ResetButton ResetButton;
 	BrainPanelState activePanel;
     dfLabel countdownLabel, countdownTitle, countdownFraction;
 
@@ -43,7 +43,8 @@ public class NetworkGUI : MonoBehaviour {
         {
             if (MyRobot != null)
             {
-                return MyRobot.Health.Health;
+                var h = (MyRobot.HealthScript.Health / MyRobot.HealthScript.MaxHealth) * 100;
+                return h;
             }
             return -1;
         }       
@@ -55,7 +56,9 @@ public class NetworkGUI : MonoBehaviour {
         {
             if (OpponentRobot != null)
             {
-                return 100 - OpponentRobot.Health.Health;
+                var h = OpponentRobot.HealthScript.MaxHealth - OpponentRobot.HealthScript.Health;
+                h = (h / OpponentRobot.HealthScript.MaxHealth) * 100;
+                return h;
             }
             return 101;
         }
@@ -63,7 +66,7 @@ public class NetworkGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		BackButton.Click += BackButton_Click;     
+		//BackButton.Click += BackButton_Click;     
 
 		Slot1.Click += Slot1_Click;
 		Slot2.Click += Slot2_Click;

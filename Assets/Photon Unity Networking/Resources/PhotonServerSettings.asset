@@ -29,4 +29,9 @@ MonoBehaviour:
   - SendInfo
   - ChooseSpawn
   - ReceiveSpawnPosition
+  - GetMovement
+  - GetRangedAttack
+  - GetPosition
+  - ShootMortar
+  - GetMeleeAttack
   DisableAutoOpenWizard: 0
