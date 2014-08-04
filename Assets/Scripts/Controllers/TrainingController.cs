@@ -355,3 +355,11 @@ public class TrainingController : LevelController {
         // Do nothing
     }
 }
+
+public class FitnessDetails
+{
+    public float Fitness { get; set; }
+    public float MeleeAttacks { get; set; }
+    public float MeleeHits { get; set; }
+    public float MeleePrecision { get; set; }
+}

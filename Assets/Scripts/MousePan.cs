@@ -14,6 +14,9 @@ public class MousePan : MonoBehaviour {
     private float topPanBorder, bottomPanBorder;
 
     public float PanMaxX = 10, PanMinX = 0, PanMaxY = 20, PanMinY = -10, ZoomSpeed, ZoomMin, ZoomMax;
+    
+    public int PanAngleMin = 25;
+    public int PanAngleMax = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -70,8 +73,19 @@ public class MousePan : MonoBehaviour {
                 translation -= Vector3.up * ZoomSpeed * zoomDelta;
             }
 
+            var pan = camera.transform.eulerAngles.x - zoomDelta * 32;
+      //      print("Pan: " + pan);
+            pan = Mathf.Clamp(pan, PanAngleMin, PanAngleMax);
+       //     print("Pan clamp: " + pan);
+            if (zoomDelta < 0 || camera.transform.position.y < (ZoomMax / 2))
+            {
+                print("Apply pan: " + pan + ", zoomDelta: " + zoomDelta + ", camera.y: " + camera.transform.position.y);
+                camera.transform.eulerAngles = new Vector3(pan, 0, 0);
+             //   camera.transform.eulerAngles = Vector3.Lerp(camera.transform.eulerAngles, new Vector3(pan, 0, 0), 0.2f);
+            }
+
             // Move camera with arrow keys
-            translation += new Vector3(Input.GetAxis("Horizontal"), -Input.GetAxis("Vertical"), 0);
+            translation += new Vector3(Input.GetAxis("Horizontal"), 0, -Input.GetAxis("Vertical"));
 
             // Keep camera within level and zoom area
             var desiredPosition = camera.transform.position + translation;

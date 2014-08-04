@@ -8381,7 +8381,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1257628798}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!65 &607441474
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -14465,7 +14465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1257628798}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!65 &1121404256
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -14475,7 +14475,7 @@ BoxCollider:
   m_GameObject: {fileID: 1121404254}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: .395555556, y: .102222227, z: .00100000005}
   m_Center: {x: .197777778, y: -.0511111133, z: 0}
@@ -14486,7 +14486,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1356561861}
   m_GameObject: {fileID: 1121404254}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
   m_Name: 
@@ -14514,10 +14514,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 6
     margins:
-      left: 35
-      top: 410.039062
-      right: 67
-      bottom: 11.9609375
+      left: 34.9960938
+      top: 410.042969
+      right: 67.0039062
+      bottom: 11.9570312
     owner: {fileID: 1121404257}
   renderOrder: 11
   isLocalized: 0
@@ -14530,9 +14530,9 @@ MonoBehaviour:
   focusSprite: button-normal
   font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
   pressedSprite: button-normal
-  state: 0
+  state: 4
   group: {fileID: 0}
-  text: Test it!
+  text: Go to mission
   textAlign: 1
   vertAlign: 1
   normalColor:
@@ -14540,7 +14540,7 @@ MonoBehaviour:
     rgba: 4294967295
   textColor:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4282515200
   hoverText:
     serializedVersion: 2
     rgba: 4294967295
@@ -16083,8 +16083,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -.675476074, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 607441473}
   - {fileID: 1121404255}
+  - {fileID: 607441473}
   - {fileID: 1228269071}
   m_Father: {fileID: 604388109}
   m_RootOrder: 6
@@ -18580,6 +18580,26 @@ Prefab:
     - target: {fileID: 400022, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500010, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: renderOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: state
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
@@ -23011,8 +23031,6 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

@@ -3301,6 +3301,8 @@ MonoBehaviour:
   ZoomSpeed: 20
   ZoomMin: 10
   ZoomMax: 50
+  PanAngleMin: 25
+  PanAngleMax: 50
 --- !u!1 &548434201
 GameObject:
   m_ObjectHideFlags: 0
@@ -10363,6 +10365,7 @@ MonoBehaviour:
   Mortar: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
   MaxMortarForce: 500
   DamageRadius: 10
+  Opponent: {fileID: 0}
   HealthScript: {fileID: 1777298642}
   OpponentHealth: {fileID: 76722420}
   DummyAttack: 0
