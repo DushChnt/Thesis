@@ -608,6 +608,7 @@ MonoBehaviour:
   Mortar: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
   MaxMortarForce: 500
   DamageRadius: 10
+  Opponent: {fileID: 0}
   HealthScript: {fileID: 11400010}
   OpponentHealth: {fileID: 0}
   DummyAttack: 0
@@ -655,7 +656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab29464a6e794804f9255644d50797cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explosion: {fileID: 19800000, guid: 137f7081769254d41ba394328a63c704, type: 2}
+  Explosion: {fileID: 19800000, guid: dc6da1d6e30d6dd42ae82d67fdea65a3, type: 2}
   GUI: {fileID: 0}
   IsOpponent: 0
   MaxHealth: 100

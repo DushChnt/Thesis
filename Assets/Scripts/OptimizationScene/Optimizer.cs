@@ -25,6 +25,9 @@ public class Optimizer : MonoBehaviour {
     public GameObject HammerRobot;
     List<FightController> BestRunners = new List<FightController>();
     float evaluationStartTime;
+    float maxFitness = 0;
+    FitnessDetails bestFitness;
+    public dfRichTextLabel DetailsLabel;
 
     float timeLeft, accum, updateInterval = 12;
     int frames;
@@ -252,8 +255,14 @@ public class Optimizer : MonoBehaviour {
 	{
 		if (dict.ContainsKey(box))
 		{
-			float fit = dict[box].GetFitness();
+            FitnessDetails details = dict[box].GetFitness();
+            float fit = details.Fitness;
 			// print("Fitness: " + fit);
+            if (fit > maxFitness)
+            {
+                maxFitness = fit;
+                bestFitness = details;
+            }
 			return fit;
 		}
 		return 0.0f;
@@ -301,6 +310,8 @@ public class Optimizer : MonoBehaviour {
 		OptimizerGUI.CurrentGeneration = _ea.CurrentGeneration;
 		OptimizerGUI.BestFitness = _ea.Statistics._maxFitness;
 
+        WriteDetailsLabel();
+
 		_generation = _ea.CurrentGeneration;
 		LastFitness = _ea.Statistics._maxFitness;
 
@@ -310,7 +321,120 @@ public class Optimizer : MonoBehaviour {
 		{
 			FirstFitness = LastFitness;
 		}
+        maxFitness = 0;
 	}
+
+    private void WriteDetailsLabel()
+    {
+        string details = "";
+
+        if (Settings.Brain.MoveAround != 0)
+        {
+            string color = Settings.Brain.MoveAround < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Distance moved: {0:0.00}</span><br>", bestFitness.DistanceMoved, color);
+        }
+
+        if (Settings.Brain.ReachDistance != 0)
+        {
+            string color = Settings.Brain.ReachDistance < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Distance reached: {0:0.00}</span><br>", bestFitness.ReachDistance, color);
+            
+        }
+
+        if (Settings.Brain.KeepDistance != 0)
+        {
+            string color = Settings.Brain.KeepDistance < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Keep distance: {0:0.00}</span><br>", bestFitness.KeepDistance, color);
+            
+        }
+
+        if (Settings.Brain.FaceTarget != 0)
+        {
+            string color = Settings.Brain.FaceTarget < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Face target: {0:0.00}</span><br>", bestFitness.FaceTarget, color);           
+        }
+
+        if (Settings.Brain.MeleeAttacks != 0)
+        {
+            string color = Settings.Brain.MeleeAttacks < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Melee attacks: {0}</span><br>", bestFitness.MeleeAttacks, color);
+           
+        }
+
+        if (Settings.Brain.MeleeHits != 0)
+        {
+            string color = Settings.Brain.MeleeHits < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Melee hits: {0}</span><br>", bestFitness.MeleeHits, color);
+            
+        }
+
+        if (Settings.Brain.MeleePrecision != 0)
+        {
+            string color = Settings.Brain.MeleePrecision < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Melee precision: {0:0.00}%</span><br>", bestFitness.MeleePrecision, color);
+            
+        }
+
+        if (Settings.Brain.RifleAttacks != 0)
+        {
+            string color = Settings.Brain.RifleAttacks < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Ranged attacks: {0}</span><br>", bestFitness.RangedAttacks, color);
+            
+        }
+
+        if (Settings.Brain.RifleHits != 0)
+        {
+            string color = Settings.Brain.RifleHits < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Ranged hits: {0}</span><br>", bestFitness.RangedHits, color);
+            
+        }
+
+        if (Settings.Brain.RiflePrecision != 0)
+        {
+            string color = Settings.Brain.RiflePrecision < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Ranged precision: {0:0.00}%</span><br>", bestFitness.RangedPrecision, color);
+           
+        }
+
+        if (Settings.Brain.TurretFaceTarget != 0)
+        {
+            string color = Settings.Brain.TurretFaceTarget < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Aim turret: {0:0.00}</span><br>", bestFitness.AimTurret, color);
+            
+        }
+
+        if (Settings.Brain.MortarAttacks != 0)
+        {
+            string color = Settings.Brain.MortarAttacks < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Mortar attacks: {0}</span><br>", bestFitness.MortarAttacks, color);
+            
+        }
+
+        if (Settings.Brain.MortarHits != 0)
+        {
+            string color = Settings.Brain.MortarHits < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Mortar hits: {0}</span><br>", bestFitness.MortarHits, color);
+          
+        }
+
+        if (Settings.Brain.MortarPrecision != 0)
+        {
+            string color = Settings.Brain.MortarPrecision < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Mortar precision: {0:0.00}%</span><br>", bestFitness.MortarPrecision, color);
+           
+        }
+
+        if (Settings.Brain.MortarDamagePerHit != 0)
+        {
+            string color = Settings.Brain.MortarDamagePerHit < 0 ? "red" : "green";
+            details += string.Format("<span style=\"color: {1}\">Mortar dmg/hit: {0:0.00}</span><br>", bestFitness.MortarDamagePerHit, color);
+            
+        }
+
+        
+
+        DetailsLabel.Text = details;
+    }
 
 	void ea_PauseEvent(object sender, EventArgs e)
 	{

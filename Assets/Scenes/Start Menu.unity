@@ -185,6 +185,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InUse: 0
   SlotNo: 1
+  RemoveRemove: 0
+  Indicator: {fileID: 0}
 --- !u!1 &12933473
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +545,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InUse: 0
   SlotNo: 3
+  RemoveRemove: 0
+  Indicator: {fileID: 0}
 --- !u!1 &181848944
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,6 +780,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InUse: 0
   SlotNo: 2
+  RemoveRemove: 0
+  Indicator: {fileID: 0}
 --- !u!1 &259560125
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,6 +2024,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InUse: 0
   SlotNo: 4
+  RemoveRemove: 0
+  Indicator: {fileID: 0}
 --- !u!1 &947823381
 GameObject:
   m_ObjectHideFlags: 0

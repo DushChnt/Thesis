@@ -24,6 +24,8 @@ public class TrainingPanel : MonoBehaviour {
             TrainButton.FocusTextColor = new Color32(0, 205, 0, 255);
             TrainButton.HoverTextColor = new Color32(0, 255, 0, 255);
             TrainButton.PressedTextColor = new Color32(0, 255, 0, 255);
+
+            
         }
         else
         {
@@ -48,8 +50,19 @@ public class TrainingPanel : MonoBehaviour {
 
         string t_niceTime = string.Format("{0:0}:{1:00}", t_minutes, t_seconds);
         TotalTimeLabel.Text = t_niceTime;
-        RunBestButton.Click += new MouseEventHandler(RunBestButton_Click); 
+        RunBestButton.Click += new MouseEventHandler(RunBestButton_Click);
+
+        if (mode.Equals("Train"))
+        {
+            StartCoroutine(clickOnTrain());
+        }
 	}
+
+    private IEnumerator clickOnTrain()
+    {
+        yield return new WaitForSeconds(0.10f);
+        TrainButton.DoClick();
+    }
 
     void Optimizer_EAStopped(object sender, EventArgs e)
     {
@@ -98,7 +111,7 @@ public class TrainingPanel : MonoBehaviour {
     }
 
     void TrainButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
-    {
+    {        
         dfButton but = control as dfButton;
         if (EARunning)
         {

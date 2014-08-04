@@ -262,41 +262,52 @@ public class TrainingController : LevelController {
         this.IsRunning = true;
     }
 
-    public float GetFitness()
+    public FitnessDetails GetFitness()
     {
         return GetAdvancedFitness();
     }
 
-    private float GetAdvancedFitness()
+    private FitnessDetails GetAdvancedFitness()
     {
+        FitnessDetails details = new FitnessDetails();
         if (DistanceMoved + TurnAmount < 2)
         {
-            return 0;
+            return details;
         }
         float fit = 1000;
+
+        details.DistanceMoved = DistanceMoved;
 
         float moveAround = DistanceMoved / ticks * Settings.Brain.MoveAround;
         fit += moveAround;
 
+        details.ReachDistance = ReachDistanceCount;
+
         float reachDistance = (1 - ReachDistanceCount / 50f) * Settings.Brain.ReachDistance; // *(1 - ReachedTick / ticks);
         fit += reachDistance;
 
+        details.KeepDistance = KeepDistanceCount;
+
         float keepDistance = (KeepDistanceCount / (10 * ticks)) * Settings.Brain.KeepDistance;
         fit += keepDistance;
+
+        details.FaceTarget = FaceTarget;
 
         float faceTarget = FaceTarget / ticks * Settings.Brain.FaceTarget;
         fit += faceTarget;
 
         if (Player.CanUseMelee && Player.MeleeWeapon != null)
         {
-
+            details.MeleeAttacks = MeleeAttacks;
             float meleeAttacks = MeleeAttacks / MaxMeleeAttacks * Settings.Brain.MeleeAttacks;
-            fit += meleeAttacks;                     
+            fit += meleeAttacks;
 
+            details.MeleeHits = MeleeHits;
             float meleeHits = MeleeHits / MaxMeleeAttacks * Settings.Brain.MeleeHits;
             fit += MeleeHits;
 
             float meleePrecision = MeleeAttacks > 0 ? (float)MeleeHits / (float)MeleeAttacks : 0;
+            details.MeleePrecision = meleePrecision * 100;
             meleePrecision *= Settings.Brain.MeleePrecision;
             fit += meleePrecision;
 
@@ -304,9 +315,11 @@ public class TrainingController : LevelController {
 
         if (Player.CanUseRanged && Player.RangedWeapon != null)
         {
+            details.RangedAttacks = RangedAttacks;
             float rangedAttacks = RangedAttacks / MaxRangedAttacks * Settings.Brain.RifleAttacks;
             fit += rangedAttacks;
 
+            details.RangedHits = RangedHits;
             float rangedHits = RangedHits / MaxRangedAttacks * Settings.Brain.RifleHits;
             fit += rangedHits;
 
@@ -318,31 +331,40 @@ public class TrainingController : LevelController {
             //}
 
             float rangedPrecision = RangedAttacks > 0 ? RangedHits / RangedAttacks : 0;
+            details.RangedPrecision = rangedPrecision * 100;
             rangedPrecision *= Settings.Brain.RiflePrecision;
             fit += rangedPrecision;
         }
 
         if (Player.CanUseMortar && Player.MortarWeapon != null)
         {
+            details.AimTurret = AimTurret;
             float aimTurret = AimTurret / ticks * Settings.Brain.TurretFaceTarget;
             fit += aimTurret;
 
+            details.MortarAttacks = MortarAttacks;
             float mortarAttacks = MortarAttacks / MaxMortarAttacks * Settings.Brain.MortarAttacks;
             fit += mortarAttacks;
 
+            details.MortarHits = MortarHits;
             float mortarHits = MortarHits / MaxMortarAttacks * Settings.Brain.MortarHits;
             fit += mortarHits;
 
             float mortarPrecision = MortarAttacks > 0 ? MortarHits / MortarAttacks : 0;
+            details.MortarPrecision = mortarPrecision * 100;
             mortarPrecision *= Settings.Brain.MortarPrecision;
             fit += mortarPrecision;
 
             float mortarDamagePerHit = MortarAttacks > 0 ? MortarDamage / MortarAttacks : 0;
+            details.MortarDamagePerHit = mortarDamagePerHit;
             mortarDamagePerHit *= Settings.Brain.MortarDamagePerHit;
             fit += mortarDamagePerHit;
         }
 
-        return fit;
+
+        details.Fitness = fit; 
+
+        return details;
     }
 
     protected override void Initialize()
@@ -359,7 +381,26 @@ public class TrainingController : LevelController {
 public class FitnessDetails
 {
     public float Fitness { get; set; }
+
+    // Movement
+    public float DistanceMoved { get; set; }
+    public float ReachDistance { get; set; }
+    public float KeepDistance { get; set; }
+    public float FaceTarget { get; set; }
+
+    // Melee
     public float MeleeAttacks { get; set; }
     public float MeleeHits { get; set; }
     public float MeleePrecision { get; set; }
+    
+    // Ranged
+    public float RangedAttacks { get; set; }
+    public float RangedHits { get; set; }
+    public float RangedPrecision { get; set; }
+
+    public float MortarAttacks { get; set; }
+    public float MortarHits { get; set; }
+    public float MortarPrecision { get; set; }
+    public float MortarDamagePerHit { get; set; }
+    public float AimTurret { get; set; }
 }
