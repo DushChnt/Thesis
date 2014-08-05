@@ -218,8 +218,8 @@ public class OpponentController : MonoBehaviour {
                 }
             }
 
-            GameObject mortar = ((MortarHit)sender).gameObject;
-            Instantiate(Bloom, mortar.transform.position, Quaternion.identity);
+            //GameObject mortar = ((MortarHit)sender).gameObject;
+            //Instantiate(Bloom, mortar.transform.position, Quaternion.identity);
         }
 
     }

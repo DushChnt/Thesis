@@ -150,8 +150,8 @@ public class HealthScript : Photon.MonoBehaviour {
     {
         Died(this, EventArgs.Empty);
         ParticleSystem ps = Instantiate(Explosion, transform.position + new Vector3(0, 2, 0), Quaternion.identity) as ParticleSystem;
-        ps.Play();
-        Destroy(ps, ps.duration + ps.startLifetime);
+       // ps.Play();
+    //    Destroy(ps, ps.duration + ps.startLifetime);
     }
 
 	[RPC]

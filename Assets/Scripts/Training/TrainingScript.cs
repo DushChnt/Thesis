@@ -11,6 +11,8 @@ public class TrainingScript : MonoBehaviour {
     public dfPanel MovementPanel, MeleePanel, RiflePanel, MortarPanel;
     public dfSlicedSprite ZeroDenominator;
     public dfTextbox NameTextBox;
+    public TrainingDialogScript TrainingDialog;
+    dfPanel panel;
 
     Player Player
     {
@@ -22,6 +24,7 @@ public class TrainingScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        panel = this.GetComponent<dfPanel>();
         BackButton.Click += new MouseEventHandler(BackButton_Click);
         DeleteButton.Click += new MouseEventHandler(DeleteButton_Click);
         TrainButton.Click += new MouseEventHandler(TrainButton_Click);
@@ -115,15 +118,66 @@ public class TrainingScript : MonoBehaviour {
         }
     }
 
+    bool TestWeapons()
+    {
+        bool ok = true;
+        // Test for selected weapons
+        if (Player.Level > 1)
+        {
+            if (Player.MeleeWeapon == null || Player.MeleeWeapon.Equals(""))
+            {
+                ok = false;
+            }
+            if (Player.Level > 2)
+            {
+                if (Player.RangedWeapon == null || Player.RangedWeapon.Equals(""))
+                {
+                    ok = false;
+                }
+                if (Player.Level > 3)
+                {
+                    if (Player.MortarWeapon == null || Player.MortarWeapon.Equals(""))
+                    {
+                        ok = false;
+                    }
+                }
+            }
+        }
+        return ok;
+    }
+
     void TrainButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
         PhotonNetwork.offlineMode = true;
-        GetOptimizerSettings();
-       
-        PlayerPrefs.SetString("Mode", "Train");
-     //   PlayerPrefs.SetInt("Evolution Speed", GetEvolutionSpeed());
+        bool ok = GetOptimizerSettings();
 
-        Application.LoadLevel("Optimization scene");
+        if (ok)
+        {
+            if (TestWeapons())
+            {
+                PlayerPrefs.SetString("Mode", "Train");
+                //   PlayerPrefs.SetInt("Evolution Speed", GetEvolutionSpeed());
+
+                Application.LoadLevel("Optimization scene");
+            }
+            else
+            {
+                panel.Disable();
+                TrainingDialog.ShowDialog("You have to choose a weapon before continuing. Click on the flashing slot to the right to assign.");
+                TrainingDialog.panel.Click += new MouseEventHandler(panel_Click);
+            }
+        }
+        else
+        {
+            panel.Disable();
+            TrainingDialog.ShowDialog();
+            TrainingDialog.panel.Click += new MouseEventHandler(panel_Click);
+        }
+    }
+
+    void panel_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        panel.Enable();
     }  
 
     void DisableLockedFocusAreas()
@@ -168,7 +222,7 @@ public class TrainingScript : MonoBehaviour {
        // Application.LoadLevel("Bootcamp");
     }
 
-    private void GetOptimizerSettings()
+    private bool GetOptimizerSettings()
     {
       //  OptimizerParameters.Reset();
 
@@ -208,6 +262,14 @@ public class TrainingScript : MonoBehaviour {
         {
             Task saveTask = Settings.Brain.SaveAsync();
         }
+
+        bool ok = Settings.Brain.MoveAround != 0 || Settings.Brain.DistanceToKeep != 0 || Settings.Brain.ReachDistance != 0 || Settings.Brain.FaceTarget != 0 ||
+            Settings.Brain.MeleeAttacks != 0 || Settings.Brain.MeleeHits != 0 || Settings.Brain.MeleePrecision != 0 ||
+            Settings.Brain.RifleAttacks != 0 || Settings.Brain.RifleHits != 0 || Settings.Brain.RiflePrecision != 0 ||
+            Settings.Brain.TurretFaceTarget != 0 || Settings.Brain.MortarAttacks != 0 || Settings.Brain.MortarHits != 0 ||
+            Settings.Brain.MortarPrecision != 0 || Settings.Brain.MortarDamagePerHit != 0;
+
+        return ok;
     }    
 	
 	// Update is called once per frame

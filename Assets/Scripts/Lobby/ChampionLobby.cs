@@ -11,6 +11,16 @@ public class ChampionLobby : MonoBehaviour {
     public GameObject ListItem;
     dfPanel currentlySelected;   
     public dfDropdown ArenaDropdown, GameModeDropdown;
+    public TrainingDialogScript TrainingDialog;
+    public dfPanel MainPanel;
+
+    Player Player
+    {
+        get
+        {
+            return Parse.ParseUser.CurrentUser as Player;
+        }
+    }
 
     // Use this for i14itialization
     void Start()
@@ -90,8 +100,72 @@ public class ChampionLobby : MonoBehaviour {
         }
     }
 
+    bool TestWeapons()
+    {
+        bool ok = true;
+        // Test for selected weapons
+        if (Player.Level > 1)
+        {
+            if (Player.MeleeWeapon == null || Player.MeleeWeapon.Equals(""))
+            {
+                ok = false;
+            }
+            if (Player.Level > 2)
+            {
+                if (Player.RangedWeapon == null || Player.RangedWeapon.Equals(""))
+                {
+                    ok = false;
+                }
+                if (Player.Level > 3)
+                {
+                    if (Player.MortarWeapon == null || Player.MortarWeapon.Equals(""))
+                    {
+                        ok = false;
+                    }
+                }
+            }
+        }
+        return ok;
+    }
+
+    bool TestBrains()
+    {
+        bool ok = Player.Brain1 != null || Player.Brain2 != null || Player.Brain3 != null || Player.Brain4 != null;
+        return ok;
+    }
+
+    bool TestOK()
+    {
+        if (TestBrains())
+        {
+            if (TestWeapons())
+            {
+                return true;
+            }
+            else
+            {
+                MainPanel.Disable();
+                TrainingDialog.ShowDialog("You have to choose a weapon before continuing. Click on the flashing slot to the right to assign.");
+                TrainingDialog.panel.Click += new MouseEventHandler(panel_Click);
+            }
+        }
+        else
+        {
+            MainPanel.Disable();
+            TrainingDialog.ShowDialog("You haven't chosen any brains to use for battle! Drag the brains you wish to use down to the selected brains panel.");
+            TrainingDialog.panel.Click += new MouseEventHandler(panel_Click);
+        }
+        return false;
+    }
+
+    void panel_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        MainPanel.Enable();
+    }
+
     void listItem_DoubleClick(dfControl control, dfMouseEventArgs mouseEvent)
     {
+
         if (currentlySelected != null)
         {
             currentlySelected.BackgroundColor = new Color32(255, 255, 255, 255);
@@ -104,10 +178,12 @@ public class ChampionLobby : MonoBehaviour {
         item.BackgroundColor = new Color32(0, 0, 0, 255);
         currentlySelected = item;
         currentlySelected.Find("Selected Indicator").GetComponent<dfSprite>().Show();
-
-        if (data.Game.playerCount < data.Game.maxPlayers)
+        if (TestOK())
         {
-            PhotonNetwork.JoinOrCreateRoom(data.Game.name, null, null);
+            if (data.Game.playerCount < data.Game.maxPlayers)
+            {
+                PhotonNetwork.JoinOrCreateRoom(data.Game.name, null, null);
+            }
         }
     }
 
@@ -137,7 +213,10 @@ public class ChampionLobby : MonoBehaviour {
 
     void JoinRandomButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        PhotonNetwork.JoinRandomRoom();
+        if (TestOK())
+        {
+            PhotonNetwork.JoinRandomRoom();
+        }
     }
 
     void OnJoinedRoom()
@@ -230,8 +309,10 @@ public class ChampionLobby : MonoBehaviour {
 
         string[] roomPropsInLobby = { "map", "mode", "name" };
         Hashtable customRoomProperties = new Hashtable() { { "map", arena }, { "mode", mode }, { "name", Player.CurrentUser.Username } };
-
-        PhotonNetwork.CreateRoom(Player.CurrentUser.Username + GenerateRandomTag(), true, true, 2, customRoomProperties, roomPropsInLobby);
+        if (TestOK())
+        {
+            PhotonNetwork.CreateRoom(Player.CurrentUser.Username + GenerateRandomTag(), true, true, 2, customRoomProperties, roomPropsInLobby);
+        }
     }
 
     private string GenerateRandomTag()

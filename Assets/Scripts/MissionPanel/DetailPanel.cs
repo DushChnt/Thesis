@@ -6,6 +6,8 @@ public class DetailPanel : MonoBehaviour {
     public dfButton TestButton;
     public dfLabel MissionTextLabel, TitleLabel;
     dfPanel panel;
+    public dfPanel MainPanel;
+    public TrainingDialogScript BrainsDialog;
 
     Player Player
     {
@@ -49,7 +51,65 @@ By using your combined combat skills you must defeat the opponent before he defe
 
     void TestButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        Application.LoadLevel(string.Format("Mission {0}", PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1)));
+        if (TestBrains())
+        {
+            if (TestWeapons())
+            {
+
+                Application.LoadLevel(string.Format("Mission {0}", PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1)));
+            }
+            else
+            {
+                MainPanel.Disable();
+                BrainsDialog.ShowDialog("You have to choose a weapon before continuing. Click on the flashing slot to the right to assign.");
+                BrainsDialog.panel.Click += new MouseEventHandler(panel_Click);
+            }
+        }
+        else
+        {
+            MainPanel.Disable();
+            BrainsDialog.ShowDialog("You haven't chosen any brains to use for battle! Drag the brains you wish to use down to the selected brains panel.");
+            BrainsDialog.panel.Click += new MouseEventHandler(panel_Click);
+        }
+    }
+
+    bool TestWeapons()
+    {
+        bool ok = true;
+        // Test for selected weapons
+        if (Player.Level > 1)
+        {
+            if (Player.MeleeWeapon == null || Player.MeleeWeapon.Equals(""))
+            {
+                ok = false;
+            }
+            if (Player.Level > 2)
+            {
+                if (Player.RangedWeapon == null || Player.RangedWeapon.Equals(""))
+                {
+                    ok = false;
+                }
+                if (Player.Level > 3)
+                {
+                    if (Player.MortarWeapon == null || Player.MortarWeapon.Equals(""))
+                    {
+                        ok = false;
+                    }
+                }
+            }
+        }
+        return ok;
+    }
+
+    bool TestBrains()
+    {
+        bool ok = Player.Brain1 != null || Player.Brain2 != null || Player.Brain3 != null || Player.Brain4 != null;
+        return ok;
+    }
+
+    void panel_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        MainPanel.Enable();
     }
 
    
