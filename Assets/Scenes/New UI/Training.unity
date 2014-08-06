@@ -796,7 +796,7 @@ MonoBehaviour:
       right: 20.2148438
       bottom: 21.0195312
     owner: {fileID: 45988610}
-  renderOrder: 237
+  renderOrder: 241
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1929,7 +1929,7 @@ MonoBehaviour:
       right: 9.8125
       bottom: 72.8828125
     owner: {fileID: 161728121}
-  renderOrder: 240
+  renderOrder: 244
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3343,7 +3343,7 @@ MonoBehaviour:
       right: 28.0703125
       bottom: 73.8867188
     owner: {fileID: 252343219}
-  renderOrder: 235
+  renderOrder: 239
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4391,8 +4391,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .100000001, y: .0533333346, z: .00100000005}
-  m_Center: {x: .0500000007, y: -.0266666673, z: 0}
+  m_Size: {x: .166666672, y: .0533333346, z: .00100000005}
+  m_Center: {x: .0833333358, y: -.0266666673, z: 0}
 --- !u!114 &331121871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4417,7 +4417,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 45, y: 24}
+  size: {x: 75, y: 24}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -4429,7 +4429,7 @@ MonoBehaviour:
     margins:
       left: 13.9960938
       top: 355.414062
-      right: 346.003906
+      right: 316.003906
       bottom: 296.585938
     owner: {fileID: 331121871}
   renderOrder: 97
@@ -4445,7 +4445,7 @@ MonoBehaviour:
   autoSize: 1
   autoHeight: 0
   wordWrap: 0
-  text: Rifle
+  text: Ranged
   bottomColor:
     serializedVersion: 2
     rgba: 4294967295
@@ -5651,6 +5651,128 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
+--- !u!1 &441935938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 441935939}
+  - 114: {fileID: 441935941}
+  - 65: {fileID: 441935940}
+  m_Layer: 10
+  m_Name: Title Label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &441935939
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 441935938}
+  m_LocalRotation: {x: 0, y: 0, z: .000172633489, w: 1}
+  m_LocalPosition: {x: 2.02351634e-06, y: -.0576507784, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1453596141}
+  m_RootOrder: 0
+--- !u!65 &441935940
+BoxCollider:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 441935938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4822222, y: .0666666701, z: .00100000005}
+  m_Center: {x: .7411111, y: -.0333333351, z: 0}
+--- !u!114 &441935941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 441935938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e3359ffaefe124a992e17c8830875c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 13
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 1
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 667, y: 30}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  autoFocus: 0
+  layout:
+    anchorStyle: 13
+    margins:
+      left: .00390625
+      top: 25.9414062
+      right: -.00390625
+      bottom: 455.058594
+    owner: {fileID: 441935941}
+  renderOrder: 235
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
+  atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
+  font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
+  backgroundSprite: 
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  autoSize: 0
+  autoHeight: 0
+  wordWrap: 0
+  text: 'Mission 1: Movement'
+  bottomColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  align: 1
+  vertAlign: 0
+  textScale: 1.16666663
+  textScaleMode: 0
+  charSpacing: 0
+  colorizeSymbols: 0
+  processMarkup: 0
+  outline: 0
+  outlineWidth: 1
+  enableGradient: 0
+  outlineColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  tabSize: 48
+  tabStops: 
 --- !u!1 &443617950
 GameObject:
   m_ObjectHideFlags: 0
@@ -6185,7 +6307,7 @@ MonoBehaviour:
       right: 640
       bottom: 330
     owner: {fileID: 469588967}
-  renderOrder: 239
+  renderOrder: 243
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -8932,6 +9054,114 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .248888895, y: .248888895, z: .00100000005}
   m_Center: {x: .124444447, y: -.124444447, z: 0}
+--- !u!1 &630103945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 630103946}
+  - 114: {fileID: 630103948}
+  - 65: {fileID: 630103947}
+  m_Layer: 10
+  m_Name: Info Label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &630103946
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630103945}
+  m_LocalRotation: {x: 0, y: 0, z: .000172633489, w: 1}
+  m_LocalPosition: {x: .0666664019, y: -.16444692, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1453596141}
+  m_RootOrder: 1
+--- !u!65 &630103947
+BoxCollider:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630103945}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.34888887, y: .784444451, z: .00100000005}
+  m_Center: {x: .674444437, y: -.392222226, z: 0}
+--- !u!114 &630103948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630103945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420359c2850ee3e42b9a6589bc671536, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 15
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 2
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 607, y: 353}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  autoFocus: 0
+  layout:
+    anchorStyle: 15
+    margins:
+      left: 30
+      top: 73.9960938
+      right: 30
+      bottom: 84.0039062
+    owner: {fileID: 630103948}
+  renderOrder: 236
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
+  atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
+  font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
+  text: "<b>Your robot is fully upgraded and has learned all the different combat
+    skills. Now you must fine tune your robot to be able to beat the final mission.</b>\n<br><br>\n<span
+    style=\"color: green\"><b>Tip:</b></span> It is a good idea to base your melee
+    attack brains on brains that can approach already. Generally it is a good idea
+    to base advanced brains on simple brains.\r\n<br><br>\n<span color=\"green\"><b>Tip
+    2:</b></span> Don't select too many focus areas at once. Gradually change the
+    focus areas, e.g. first train aiming, then train attacks, then train hits and
+    precision and finally train damage per attack.\n<br><br>\n<span style=\"color:
+    green\"><b>Tip 3:</b></span> Bigger targets are easier to hit, smaller targets
+    give more precision.\n<br><br>\nClick on ? to bring up this dialog again."
+  fontSize: 20
+  lineheight: 24
+  textScaleMode: 0
+  fontStyle: 0
+  preserveWhitespace: 0
+  blankTextureSprite: BLANK_TEXTURE
+  align: 0
+  allowScrolling: 0
+  horzScrollbar: {fileID: 0}
+  vertScrollbar: {fileID: 0}
+  useScrollMomentum: 0
+  autoHeight: 0
 --- !u!1 &635704354
 GameObject:
   m_ObjectHideFlags: 0
@@ -10765,7 +10995,7 @@ MonoBehaviour:
       right: 87
       bottom: 192.792969
     owner: {fileID: 783009952}
-  renderOrder: 242
+  renderOrder: 246
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -10900,7 +11130,7 @@ MonoBehaviour:
       right: 1745
       bottom: 726
     owner: {fileID: 792079420}
-  renderOrder: 238
+  renderOrder: 242
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -12076,7 +12306,7 @@ MonoBehaviour:
       right: 4
       bottom: 130.785156
     owner: {fileID: 898479557}
-  renderOrder: 234
+  renderOrder: 238
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -18179,6 +18409,7 @@ Transform:
   - {fileID: 1137812347}
   - {fileID: 1248519510}
   - {fileID: 1257634522}
+  - {fileID: 1453596141}
   - {fileID: 1548694092}
   - {fileID: 1771373324}
   - {fileID: 1807516919}
@@ -18211,6 +18442,7 @@ MonoBehaviour:
   ZeroDenominator: {fileID: 5868717}
   NameTextBox: {fileID: 955650515}
   TrainingDialog: {fileID: 469588968}
+  HintsDialog: {fileID: 1453596144}
 --- !u!1 &1326783119
 GameObject:
   m_ObjectHideFlags: 0
@@ -20321,6 +20553,119 @@ MonoBehaviour:
     m_Bottom: 0
   tabSize: 48
   tabStops: 
+--- !u!1 &1453596140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1453596141}
+  - 114: {fileID: 1453596143}
+  - 65: {fileID: 1453596142}
+  - 114: {fileID: 1453596144}
+  m_Layer: 10
+  m_Name: Hints Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1453596141
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1453596140}
+  m_LocalRotation: {x: 0, y: 0, z: -.000172633489, w: 1}
+  m_LocalPosition: {x: 1.0355556, y: -.431111127, z: 0}
+  m_LocalScale: {x: 1, y: .999997795, z: 1}
+  m_Children:
+  - {fileID: 441935939}
+  - {fileID: 630103946}
+  - {fileID: 2004665168}
+  m_Father: {fileID: 1309160141}
+  m_RootOrder: 7
+--- !u!65 &1453596142
+BoxCollider:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1453596140}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4822222, y: 1.13555562, z: .00100000005}
+  m_Center: {x: .7411111, y: -.567777812, z: 0}
+--- !u!114 &1453596143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1453596140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e0e5854c8aa374597bb28d9adf228a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 192
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 12
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 667, y: 511}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  autoFocus: 0
+  layout:
+    anchorStyle: 192
+    margins:
+      left: 466
+      top: 194.003906
+      right: 467
+      bottom: 194.996094
+    owner: {fileID: 1453596143}
+  renderOrder: 233
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
+  atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
+  backgroundSprite: group
+  backgroundColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+--- !u!114 &1453596144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1453596140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 386eea0148dd7c546a9fc1d355188187, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CloseButton: {fileID: 2004665170}
+  TitleLabel: {fileID: 441935941}
+  InfoLabel: {fileID: 630103948}
+  Panel: {fileID: 1453596143}
 --- !u!1 &1465464153
 GameObject:
   m_ObjectHideFlags: 0
@@ -21500,7 +21845,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1309160141}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!65 &1548694095
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -21938,7 +22283,7 @@ MonoBehaviour:
       right: 144.792969
       bottom: 21.0195312
     owner: {fileID: 1584805395}
-  renderOrder: 236
+  renderOrder: 240
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -22288,7 +22633,7 @@ MonoBehaviour:
       right: 102
       bottom: 22.1289062
     owner: {fileID: 1627917174}
-  renderOrder: 241
+  renderOrder: 245
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -23606,6 +23951,8 @@ Renderer:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -24612,7 +24959,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1309160141}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!65 &1771373325
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -25447,7 +25794,7 @@ MonoBehaviour:
       right: 666
       bottom: 335
     owner: {fileID: 1802632965}
-  renderOrder: 233
+  renderOrder: 237
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -25699,7 +26046,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1309160141}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!114 &1807516920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28421,7 +28768,7 @@ Transform:
   - {fileID: 1180058240}
   - {fileID: 1418479802}
   m_Father: {fileID: 1309160141}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!65 &1998125591
 BoxCollider:
   m_ObjectHideFlags: 2
@@ -28501,6 +28848,146 @@ MonoBehaviour:
   GenerationLabel: {fileID: 407433228}
   FitnessLabel: {fileID: 490002441}
   TimeLabel: {fileID: 635704357}
+--- !u!1 &2004665167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100012, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2004665168}
+  - 114: {fileID: 2004665170}
+  - 65: {fileID: 2004665169}
+  m_Layer: 10
+  m_Name: Close Button
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2004665168
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400012, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2004665167}
+  m_LocalRotation: {x: 0, y: 0, z: .000172633489, w: 1}
+  m_LocalPosition: {x: .49644047, y: -.989600718, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1453596141}
+  m_RootOrder: 2
+--- !u!65 &2004665169
+BoxCollider:
+  m_ObjectHideFlags: 2
+  m_PrefabParentObject: {fileID: 6500012, guid: 2dae738d9d920dd45b45d96d6d8de6ec,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2004665167}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .551111102, y: .088888891, z: .00100000005}
+  m_Center: {x: .275555551, y: -.0444444455, z: 0}
+--- !u!114 &2004665170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400014, guid: 2dae738d9d920dd45b45d96d6d8de6ec,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2004665167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d87d87d0197634796d0454f524dd4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anchorStyle: 5
+  isEnabled: 1
+  isVisible: 1
+  isInteractive: 1
+  tooltip: 
+  pivot: 0
+  zindex: 0
+  color:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  size: {x: 248, y: 40}
+  minSize: {x: 0, y: 0}
+  maxSize: {x: 0, y: 0}
+  clipChildren: 0
+  tabIndex: -1
+  canFocus: 0
+  autoFocus: 0
+  layout:
+    anchorStyle: 5
+    margins:
+      left: 223.402344
+      top: 445.316406
+      right: 195.597656
+      bottom: 25.6835938
+    owner: {fileID: 2004665170}
+  renderOrder: 234
+  isLocalized: 0
+  hotZoneScale: {x: 1, y: 1}
+  allowSignalEvents: 1
+  atlas: {fileID: 11400000, guid: 061b63b910d71734eb8a953efb83a358, type: 2}
+  backgroundSprite: button-normal
+  hoverSprite: button-hilite
+  disabledSprite: button-disabled
+  focusSprite: button-normal
+  font: {fileID: 11400000, guid: 2a81b54b5f7b64244a608964d52d89e3, type: 2}
+  pressedSprite: button-normal
+  state: 0
+  group: {fileID: 0}
+  text: Close
+  textAlign: 1
+  vertAlign: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverText:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedText:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusText:
+    serializedVersion: 2
+    rgba: 4294967295
+  disabledText:
+    serializedVersion: 2
+    rgba: 4294967295
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  pressedColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  focusColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  textScale: .833333313
+  textScaleMode: 0
+  wordWrap: 0
+  padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  textShadow: 0
+  shadowColor:
+    serializedVersion: 2
+    rgba: 4278190080
+  shadowOffset: {x: 1, y: -1}
+  autoSize: 0
+  clickWhenSpacePressed: 1
 --- !u!1 &2038308257
 GameObject:
   m_ObjectHideFlags: 0
@@ -28908,7 +29395,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1309160141}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!114 &2070436487
 MonoBehaviour:
   m_ObjectHideFlags: 0

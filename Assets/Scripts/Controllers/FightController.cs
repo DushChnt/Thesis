@@ -214,7 +214,7 @@ public class FightController : LevelController {
 
     protected override bool CanRun()
     {
-        return true;
+        return Target != null;
     }
 
     protected override void MeleeAttack()

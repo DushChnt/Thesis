@@ -13,11 +13,31 @@ public class MissionMenu : MonoBehaviour {
         InstructionsButton.Click += new MouseEventHandler(InstructionsButton_Click);
         ResumeButton.Click += new MouseEventHandler(ResumeButton_Click);
         QuitButton.Click += new MouseEventHandler(QuitButton_Click);
+
+        switch (PlayerPrefs.GetString(CameFromScript.CAME_FROM))
+        {
+            case CameFromScript.BOOTCAMP:
+                QuitButton.Text = "Quit mission";
+                break;
+            case CameFromScript.CHAMPIONS_ARENA:
+                QuitButton.Text = "Quit match";
+                InstructionsButton.Hide();
+                break;
+        }
 	}
 
     void QuitButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        Application.LoadLevel("Bootcamp");
+        switch (PlayerPrefs.GetString(CameFromScript.CAME_FROM))
+        {
+            case CameFromScript.BOOTCAMP:
+                Application.LoadLevel("Bootcamp");
+                break;
+            case CameFromScript.CHAMPIONS_ARENA:
+                PhotonNetwork.Disconnect();
+                Application.LoadLevel("Champions arena");
+                break;
+        }
         Time.timeScale = 1;
     }
 
@@ -35,7 +55,16 @@ public class MissionMenu : MonoBehaviour {
 
     public void ShowMissionMenu()
     {
-        Time.timeScale = 0;
+        switch (PlayerPrefs.GetString(CameFromScript.CAME_FROM))
+        {
+            case CameFromScript.BOOTCAMP:
+                Time.timeScale = 0;
+                break;
+            case CameFromScript.CHAMPIONS_ARENA:
+                Time.timeScale = 1;
+                break;
+        }
+        
         panel.Show();
     }
 	

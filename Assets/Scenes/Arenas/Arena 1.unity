@@ -3074,6 +3074,8 @@ MonoBehaviour:
   ZoomSpeed: 20
   ZoomMin: 10
   ZoomMax: 50
+  PanAngleMin: 25
+  PanAngleMax: 50
 --- !u!1 &601551433
 GameObject:
   m_ObjectHideFlags: 0
@@ -11823,91 +11825,91 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400050, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400072, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400026, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400024, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400034, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400032, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400038, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400042, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400044, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400046, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400074, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400068, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400060, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400062, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400094, guid: e3be5dcfd9c9afc45a77bf76811222cf, type: 2}
       propertyPath: m_Enabled

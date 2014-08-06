@@ -13,7 +13,7 @@ public class HammerAttack : MonoBehaviour {
     {
         if (!hasBeenEnabled)
         {
-            animator.enabled = false;
+       //     animator.enabled = false;
             
         }
         

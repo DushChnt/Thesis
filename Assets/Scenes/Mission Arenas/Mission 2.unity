@@ -3166,6 +3166,8 @@ MonoBehaviour:
   ZoomSpeed: 20
   ZoomMin: 10
   ZoomMax: 50
+  PanAngleMin: 25
+  PanAngleMax: 50
 --- !u!1 &535135402
 GameObject:
   m_ObjectHideFlags: 0
@@ -6147,9 +6149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab29464a6e794804f9255644d50797cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explosion: {fileID: 19800000, guid: 137f7081769254d41ba394328a63c704, type: 2}
+  Explosion: {fileID: 19800032, guid: 78adde0cb53bd064fa5501d4d7c08895, type: 2}
   GUI: {fileID: 1201523330}
   IsOpponent: 1
+  MaxHealth: 100
   FollowScript: {fileID: 698283307}
 --- !u!4 &979746665
 Transform:
@@ -7502,6 +7505,7 @@ MonoBehaviour:
   Mission2: {fileID: 407075299}
   Mission3: {fileID: 0}
   Mission4: {fileID: 0}
+  Mission5: {fileID: 0}
   StartButton: {fileID: 901615370}
   MissionDonePanel: {fileID: 1740330590}
   MissionDoneLosePanel: {fileID: 347763168}
@@ -10342,6 +10346,7 @@ MonoBehaviour:
   Mortar: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
   MaxMortarForce: 500
   DamageRadius: 10
+  Opponent: {fileID: 0}
   HealthScript: {fileID: 1777298642}
   OpponentHealth: {fileID: 979746664}
   DummyAttack: 0
@@ -10396,9 +10401,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab29464a6e794804f9255644d50797cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explosion: {fileID: 19800000, guid: 137f7081769254d41ba394328a63c704, type: 2}
+  Explosion: {fileID: 19800000, guid: dc6da1d6e30d6dd42ae82d67fdea65a3, type: 2}
   GUI: {fileID: 1201523330}
   IsOpponent: 0
+  MaxHealth: 100
   FollowScript: {fileID: 1389562693}
 --- !u!65 &1777298643
 BoxCollider:

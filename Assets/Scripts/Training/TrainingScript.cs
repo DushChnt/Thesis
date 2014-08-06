@@ -12,6 +12,7 @@ public class TrainingScript : MonoBehaviour {
     public dfSlicedSprite ZeroDenominator;
     public dfTextbox NameTextBox;
     public TrainingDialogScript TrainingDialog;
+    public HintsDialog HintsDialog;
     dfPanel panel;
 
     Player Player
@@ -28,6 +29,7 @@ public class TrainingScript : MonoBehaviour {
         BackButton.Click += new MouseEventHandler(BackButton_Click);
         DeleteButton.Click += new MouseEventHandler(DeleteButton_Click);
         TrainButton.Click += new MouseEventHandler(TrainButton_Click);
+        InfoButton.Click += new MouseEventHandler(InfoButton_Click);
         Initialize();
         DisableLockedFocusAreas();
 
@@ -36,6 +38,11 @@ public class TrainingScript : MonoBehaviour {
             NameTextBox.Text = Settings.Brain.Name;
         }
 	}
+
+    void InfoButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        HintsDialog.ShowDialog();
+    }
 
     IEnumerator WaitForRequest(Brain brain, bool pop)
     {

@@ -40,6 +40,11 @@ public class MissionDoneDialog : MonoBehaviour {
         {
             Player.Level = mission + 1;
             Player.SaveAsync();
+            
+        }
+        if (mission < 5)
+        {
+            PlayerPrefs.SetInt(MissionPanel.CURRENT_MISSION, mission + 1);
         }
     }
 	

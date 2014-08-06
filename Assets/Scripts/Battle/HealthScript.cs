@@ -154,6 +154,15 @@ public class HealthScript : Photon.MonoBehaviour {
     //    Destroy(ps, ps.duration + ps.startLifetime);
     }
 
+    void OnDestroy()
+    {
+        if (FollowScript != null)
+        {
+            Destroy(FollowScript.gameObject);
+            Destroy(FollowScript);
+        }
+    }
+
 	[RPC]
 	void SetHealth(float health, float damage)
 	{

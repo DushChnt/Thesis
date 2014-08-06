@@ -842,7 +842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab29464a6e794804f9255644d50797cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explosion: {fileID: 19800032, guid: 78adde0cb53bd064fa5501d4d7c08895, type: 2}
+  Explosion: {fileID: 19800056, guid: a36f1da587e2b4a49987ccea8327b70c, type: 2}
   GUI: {fileID: 1201523330}
   IsOpponent: 1
   MaxHealth: 150
@@ -1604,7 +1604,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: ad11a390e314bec46916913327090bdb, type: 2}
+  - {fileID: -1811033265, guid: 5cfd35e82f706004cbbcbef15376cbb7, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3884,7 +3884,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: ad11a390e314bec46916913327090bdb, type: 2}
+  - {fileID: -1811033265, guid: 5cfd35e82f706004cbbcbef15376cbb7, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3894,7 +3894,7 @@ Renderer:
   m_SortingOrder: 0
 --- !u!65 &677508189
 BoxCollider:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 677508187}
@@ -3902,7 +3902,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0, y: 0, z: .00100000005}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &677508190
 MeshFilter:
@@ -7100,6 +7100,15 @@ Prefab:
       propertyPath: MaxHealth
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 96f2abe6c347eb84ba560ec1692d1730, type: 2}
+      propertyPath: IsOpponent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 96f2abe6c347eb84ba560ec1692d1730, type: 2}
+      propertyPath: Explosion
+      value: 
+      objectReference: {fileID: 19800056, guid: a36f1da587e2b4a49987ccea8327b70c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96f2abe6c347eb84ba560ec1692d1730, type: 2}
   m_RootGameObject: {fileID: 76722418}
@@ -9783,7 +9792,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: ba90ed2f9b69023429c4f44a74b9b434, type: 2}
+  - {fileID: 588882535, guid: c9aecbced71bf9647a5598c07af40aaf, type: 3}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

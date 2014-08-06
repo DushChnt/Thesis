@@ -27,7 +27,10 @@ public class MissionPanel : MonoBehaviour {
      //   MissionClick(null, null, Player.Level);
         print("Clicking missions");
         print("Player level: " + Player.Level);
-        switch (Player.Level)
+
+        int mission = PlayerPrefs.GetInt(CURRENT_MISSION, 1);
+
+        switch (mission)
         {
             case 1:
                 Mission1.DoClick();
@@ -45,7 +48,7 @@ public class MissionPanel : MonoBehaviour {
                 Mission4.DoClick();
                 print("Clicking mission 4");
                 break;
-            case 6:
+            case 5:
                 print("Clicking mission 5");
                 Mission5.DoClick();
                 break;
