@@ -171,6 +171,7 @@ public class Optimizer : MonoBehaviour {
 	public void RunBest()
 	{
 		Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
 		NeatGenome genome = null;
 		
 

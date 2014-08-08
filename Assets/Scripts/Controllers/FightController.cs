@@ -311,6 +311,7 @@ public class FightController : LevelController {
 
     protected override void MortarAttack(float mortarForce)
     {
+       
         OnMortarAttackEvent();
         GameObject m = Instantiate(Mortar, turret.transform.position + Vector3.up, Quaternion.identity) as GameObject;
         
@@ -319,7 +320,7 @@ public class FightController : LevelController {
         m.GetComponent<MortarHit>().MortarCollision += new MortarHit.MortarEventHandler(FightController_MortarCollision);
         var direction = (turret.forward + turret.up * 1f) * mortarForce * MaxMortarForce;
         body.AddForce(direction);
-
+        print("----------------------- Mortarforce: " + mortarForce + " direction: " + direction);
         if (!PhotonNetwork.offlineMode)
         {
             photonView.RPC("ShootMortar", PhotonTargets.Others, direction);

@@ -38,11 +38,13 @@ public class RegisterPanel : MonoBehaviour {
 	IEnumerator TryRegister()
 	{
         registerPanel.Disable();
-		var user = new ParseUser()
+		var user = new Player()
 		{
 			Username = Username.Text,
 			Password = Password.Text,
-			Email = Email.Text
+			Email = Email.Text,
+            Level = 1,
+            Health = 100
 		};
 
 

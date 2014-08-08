@@ -10112,7 +10112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18e0e5854c8aa374597bb28d9adf228a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorStyle: 5
+  anchorStyle: 7
   isEnabled: 1
   isVisible: 1
   isInteractive: 1
@@ -10133,7 +10133,7 @@ MonoBehaviour:
   canFocus: 0
   autoFocus: 0
   layout:
-    anchorStyle: 5
+    anchorStyle: 7
     margins:
       left: 28.0039062
       top: 102.003906

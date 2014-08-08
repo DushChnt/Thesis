@@ -7706,7 +7706,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2033257399}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &893638905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12740,7 +12740,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400040, guid: e7478c694e8317c45a39d8ac873fe12b, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7478c694e8317c45a39d8ac873fe12b, type: 2}
@@ -14904,8 +14904,8 @@ Transform:
   m_LocalPosition: {x: -.00650787354, y: -.00325012207, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2099618312}
   - {fileID: 893638904}
+  - {fileID: 2099618312}
   m_Father: {fileID: 1442928704}
   m_RootOrder: 3
 --- !u!65 &2033257400
@@ -15426,7 +15426,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2033257399}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!65 &2099618313
 BoxCollider:
   m_ObjectHideFlags: 2

@@ -30,6 +30,11 @@ public class MissionPanel : MonoBehaviour {
 
         int mission = PlayerPrefs.GetInt(CURRENT_MISSION, 1);
 
+        if (mission > Player.Level)
+        {
+            mission = Player.Level;
+            PlayerPrefs.SetInt(CURRENT_MISSION, mission);
+        }
         switch (mission)
         {
             case 1:
@@ -53,6 +58,7 @@ public class MissionPanel : MonoBehaviour {
                 Mission5.DoClick();
                 break;
         }
+
 	}
 
     void DisableLockedMissions()

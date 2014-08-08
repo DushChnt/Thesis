@@ -68,7 +68,7 @@ public class ManualController : MonoBehaviour {
             m.GetComponent<MortarHit>().MortarCollision += new MortarHit.MortarEventHandler((sender, args) => ManualController_MortarCollision(sender, args, mortarForce, time));
             var direction = (turret.forward + turret.up * 1f) * mortarForce * MaxMortarForce;
             body.AddForce(direction);
-
+            print("----------------------- Mortarforce: " + mortarForce + " direction: " + direction + ", fixedDeltaTime: " + Time.fixedDeltaTime);
             SimulateMortarAttack(mortarForce, turret.position, turret.forward, false);
         }
     }
