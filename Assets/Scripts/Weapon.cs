@@ -8,13 +8,14 @@ public class Weapon  {
     public float AttackSpeed { get; set; }
     public float SlowDown { get; set; }
     public string Name { get; set; }
+    public string AvatarPath { get; set; }
 
     public Weapon()
     {
 
     }
 
-    public Weapon(string name, WeaponType type, float minDmg, float maxDmg, float coolDown, float slowDown)
+    public Weapon(string name, WeaponType type, float minDmg, float maxDmg, float coolDown, float slowDown, string avatar)
     {
         this.Name = name;
         this.Type = type;
@@ -22,5 +23,6 @@ public class Weapon  {
         this.MaximumDamage = maxDmg;
         this.AttackSpeed = coolDown;
         this.SlowDown = slowDown;
+        this.AvatarPath = avatar;
     }
 }

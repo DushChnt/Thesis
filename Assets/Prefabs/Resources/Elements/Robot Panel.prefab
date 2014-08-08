@@ -1179,7 +1179,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0258789062, y: -.0238723755, z: 0}
+  m_LocalPosition: {x: 0, y: -.0238723755, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -1490,7 +1490,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0221093763, y: -.0222135428, z: 0}
+  m_LocalPosition: {x: .0221099854, y: -.0222167969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400056}
@@ -2004,8 +2004,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .242222235, y: .0577777773, z: .00100000005}
-  m_Center: {x: .121111117, y: -.0288888887, z: 0}
+  m_Size: {x: .271111131, y: .0688888878, z: .00100000005}
+  m_Center: {x: .135555565, y: -.0344444439, z: 0}
 --- !u!65 &6500012
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2741,7 +2741,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400000}
-  renderOrder: 60
+  renderOrder: 62
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2824,7 +2824,7 @@ MonoBehaviour:
       right: 15
       bottom: 42.0898438
     owner: {fileID: 11400002}
-  renderOrder: 68
+  renderOrder: 70
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2908,7 +2908,7 @@ MonoBehaviour:
       right: 10.0664062
       bottom: 370.910156
     owner: {fileID: 11400004}
-  renderOrder: 59
+  renderOrder: 61
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3040,7 +3040,7 @@ MonoBehaviour:
       right: 132.054688
       bottom: 10
     owner: {fileID: 11400012}
-  renderOrder: 62
+  renderOrder: 64
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3089,7 +3089,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400014}
-  renderOrder: 61
+  renderOrder: 63
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3171,7 +3171,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 109, y: 26}
+  size: {x: 122, y: 31}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -3181,12 +3181,12 @@ MonoBehaviour:
   layout:
     anchorStyle: 1
     margins:
-      left: 11.6445312
+      left: 0
       top: 10.7421875
-      right: 133.355469
-      bottom: 95.2578125
+      right: 132
+      bottom: 90.2578125
     owner: {fileID: 11400016}
-  renderOrder: 67
+  renderOrder: 69
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3205,12 +3205,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -3224,7 +3224,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -3267,7 +3267,7 @@ MonoBehaviour:
       right: 64.5664062
       bottom: 104.972656
     owner: {fileID: 11400018}
-  renderOrder: 65
+  renderOrder: 67
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3348,7 +3348,7 @@ MonoBehaviour:
       right: 0
       bottom: 513.257812
     owner: {fileID: 11400020}
-  renderOrder: 58
+  renderOrder: 60
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3429,7 +3429,7 @@ MonoBehaviour:
       right: 0
       bottom: 335.792969
     owner: {fileID: 11400022}
-  renderOrder: 57
+  renderOrder: 59
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3510,7 +3510,7 @@ MonoBehaviour:
       right: 60.7695312
       bottom: 803.15625
     owner: {fileID: 11400024}
-  renderOrder: 49
+  renderOrder: 51
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3606,7 +3606,7 @@ MonoBehaviour:
       right: 10.0664062
       bottom: 193.496094
     owner: {fileID: 11400028}
-  renderOrder: 69
+  renderOrder: 71
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3659,7 +3659,7 @@ MonoBehaviour:
       right: 15.0039062
       bottom: 42.0820312
     owner: {fileID: 11400030}
-  renderOrder: 78
+  renderOrder: 80
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3743,7 +3743,7 @@ MonoBehaviour:
       right: 152.417969
       bottom: 566.605469
     owner: {fileID: 11400032}
-  renderOrder: 53
+  renderOrder: 55
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3824,7 +3824,7 @@ MonoBehaviour:
       right: 0
       bottom: 157.625
     owner: {fileID: 11400034}
-  renderOrder: 56
+  renderOrder: 58
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3905,7 +3905,7 @@ MonoBehaviour:
       right: 29.28125
       bottom: 599.722656
     owner: {fileID: 11400036}
-  renderOrder: 55
+  renderOrder: 57
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3986,7 +3986,7 @@ MonoBehaviour:
       right: 190.417969
       bottom: 599.722656
     owner: {fileID: 11400038}
-  renderOrder: 54
+  renderOrder: 56
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4067,7 +4067,7 @@ MonoBehaviour:
       right: 76
       bottom: 644.328125
     owner: {fileID: 11400040}
-  renderOrder: 51
+  renderOrder: 53
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4116,7 +4116,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400042}
-  renderOrder: 70
+  renderOrder: 72
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4199,7 +4199,7 @@ MonoBehaviour:
       right: 3.56640625
       bottom: 8.3984375
     owner: {fileID: 11400044}
-  renderOrder: 74
+  renderOrder: 76
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4280,7 +4280,7 @@ MonoBehaviour:
       right: 23.59375
       bottom: 804.765625
     owner: {fileID: 11400046}
-  renderOrder: 50
+  renderOrder: 52
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4361,7 +4361,7 @@ MonoBehaviour:
       right: 48.28125
       bottom: 566.605469
     owner: {fileID: 11400048}
-  renderOrder: 52
+  renderOrder: 54
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4444,7 +4444,7 @@ MonoBehaviour:
       right: 20
       bottom: 16.9960938
     owner: {fileID: 11400050}
-  renderOrder: 48
+  renderOrder: 50
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4514,7 +4514,7 @@ MonoBehaviour:
       right: 75.9375
       bottom: 75.4101562
     owner: {fileID: 11400054}
-  renderOrder: 66
+  renderOrder: 68
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4642,7 +4642,7 @@ MonoBehaviour:
       right: 2.56640625
       bottom: 33.3789062
     owner: {fileID: 11400058}
-  renderOrder: 63
+  renderOrder: 65
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4787,7 +4787,7 @@ MonoBehaviour:
       right: 3.56640625
       bottom: 8.3984375
     owner: {fileID: 11400064}
-  renderOrder: 101
+  renderOrder: 103
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4868,7 +4868,7 @@ MonoBehaviour:
       right: 2.56640625
       bottom: 33.3789062
     owner: {fileID: 11400066}
-  renderOrder: 100
+  renderOrder: 102
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4949,7 +4949,7 @@ MonoBehaviour:
       right: 75.9375
       bottom: 75.4101562
     owner: {fileID: 11400068}
-  renderOrder: 103
+  renderOrder: 105
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5030,7 +5030,7 @@ MonoBehaviour:
       right: 64.5664062
       bottom: 104.980469
     owner: {fileID: 11400070}
-  renderOrder: 102
+  renderOrder: 104
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5111,7 +5111,7 @@ MonoBehaviour:
       right: 133.351562
       bottom: 95.2617188
     owner: {fileID: 11400072}
-  renderOrder: 104
+  renderOrder: 106
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5130,12 +5130,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -5149,7 +5149,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -5192,7 +5192,7 @@ MonoBehaviour:
       right: 11.7421875
       bottom: 11.21875
     owner: {fileID: 11400074}
-  renderOrder: 98
+  renderOrder: 100
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5284,12 +5284,12 @@ MonoBehaviour:
   layout:
     anchorStyle: 5
     margins:
-      left: 9.94921875
+      left: 9.953125
       top: 9.99609375
-      right: 132.050781
+      right: 132.046875
       bottom: 10.0039062
     owner: {fileID: 11400076}
-  renderOrder: 99
+  renderOrder: 101
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5338,7 +5338,7 @@ MonoBehaviour:
       right: 132.054688
       bottom: 10
     owner: {fileID: 11400078}
-  renderOrder: 106
+  renderOrder: 108
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5387,7 +5387,7 @@ MonoBehaviour:
       right: 322.761719
       bottom: 11.21875
     owner: {fileID: 11400080}
-  renderOrder: 105
+  renderOrder: 107
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5484,7 +5484,7 @@ MonoBehaviour:
       right: 133.355469
       bottom: 95.2617188
     owner: {fileID: 11400082}
-  renderOrder: 111
+  renderOrder: 113
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5503,12 +5503,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -5522,7 +5522,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -5565,7 +5565,7 @@ MonoBehaviour:
       right: 64.5703125
       bottom: 104.976562
     owner: {fileID: 11400084}
-  renderOrder: 109
+  renderOrder: 111
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5646,7 +5646,7 @@ MonoBehaviour:
       right: 75.9453125
       bottom: 75.4101562
     owner: {fileID: 11400086}
-  renderOrder: 110
+  renderOrder: 112
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5727,7 +5727,7 @@ MonoBehaviour:
       right: 2.5703125
       bottom: 33.3789062
     owner: {fileID: 11400088}
-  renderOrder: 107
+  renderOrder: 109
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5808,7 +5808,7 @@ MonoBehaviour:
       right: 3.5703125
       bottom: 8.3984375
     owner: {fileID: 11400090}
-  renderOrder: 108
+  renderOrder: 110
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5937,7 +5937,7 @@ MonoBehaviour:
       right: 3.5703125
       bottom: 8.3984375
     owner: {fileID: 11400098}
-  renderOrder: 94
+  renderOrder: 96
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6018,7 +6018,7 @@ MonoBehaviour:
       right: 2.5703125
       bottom: 33.3789062
     owner: {fileID: 11400100}
-  renderOrder: 93
+  renderOrder: 95
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6099,7 +6099,7 @@ MonoBehaviour:
       right: 75.9414062
       bottom: 75.4101562
     owner: {fileID: 11400102}
-  renderOrder: 96
+  renderOrder: 98
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6180,7 +6180,7 @@ MonoBehaviour:
       right: 64.5703125
       bottom: 104.980469
     owner: {fileID: 11400104}
-  renderOrder: 95
+  renderOrder: 97
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6261,7 +6261,7 @@ MonoBehaviour:
       right: 133.359375
       bottom: 95.2617188
     owner: {fileID: 11400106}
-  renderOrder: 97
+  renderOrder: 99
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6280,12 +6280,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -6299,7 +6299,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -6342,7 +6342,7 @@ MonoBehaviour:
       right: 632.824219
       bottom: 11.21875
     owner: {fileID: 11400108}
-  renderOrder: 91
+  renderOrder: 93
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6439,7 +6439,7 @@ MonoBehaviour:
       right: 132.054688
       bottom: 10.0039062
     owner: {fileID: 11400110}
-  renderOrder: 92
+  renderOrder: 94
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6488,7 +6488,7 @@ MonoBehaviour:
       right: 319.003906
       bottom: 149.742188
     owner: {fileID: 11400112}
-  renderOrder: 90
+  renderOrder: 92
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6569,7 +6569,7 @@ MonoBehaviour:
       right: 328.957031
       bottom: 388.800781
     owner: {fileID: 11400114}
-  renderOrder: 89
+  renderOrder: 91
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6622,7 +6622,7 @@ MonoBehaviour:
       right: 2.56640625
       bottom: 33.3789062
     owner: {fileID: 11400116}
-  renderOrder: 73
+  renderOrder: 75
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6703,7 +6703,7 @@ MonoBehaviour:
       right: 75.9375
       bottom: 75.4101562
     owner: {fileID: 11400118}
-  renderOrder: 76
+  renderOrder: 78
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6784,7 +6784,7 @@ MonoBehaviour:
       right: 64.5664062
       bottom: 104.96875
     owner: {fileID: 11400120}
-  renderOrder: 75
+  renderOrder: 77
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6865,7 +6865,7 @@ MonoBehaviour:
       right: 133.355469
       bottom: 95.2578125
     owner: {fileID: 11400122}
-  renderOrder: 77
+  renderOrder: 79
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6884,12 +6884,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -6903,7 +6903,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -6946,7 +6946,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400124}
-  renderOrder: 71
+  renderOrder: 73
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7043,7 +7043,7 @@ MonoBehaviour:
       right: 132.054688
       bottom: 9.99609375
     owner: {fileID: 11400126}
-  renderOrder: 72
+  renderOrder: 74
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7109,7 +7109,7 @@ MonoBehaviour:
       right: 3.56640625
       bottom: 8.3984375
     owner: {fileID: 11400130}
-  renderOrder: 64
+  renderOrder: 66
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7190,7 +7190,7 @@ MonoBehaviour:
       right: 3.56640625
       bottom: 8.3984375
     owner: {fileID: 11400132}
-  renderOrder: 84
+  renderOrder: 86
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7271,7 +7271,7 @@ MonoBehaviour:
       right: 2.56640625
       bottom: 33.3789062
     owner: {fileID: 11400134}
-  renderOrder: 83
+  renderOrder: 85
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7352,7 +7352,7 @@ MonoBehaviour:
       right: 75.9375
       bottom: 75.4101562
     owner: {fileID: 11400136}
-  renderOrder: 86
+  renderOrder: 88
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7433,7 +7433,7 @@ MonoBehaviour:
       right: 64.5664062
       bottom: 104.972656
     owner: {fileID: 11400138}
-  renderOrder: 85
+  renderOrder: 87
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7514,7 +7514,7 @@ MonoBehaviour:
       right: 133.355469
       bottom: 95.2578125
     owner: {fileID: 11400140}
-  renderOrder: 87
+  renderOrder: 89
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7533,12 +7533,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -7552,7 +7552,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -7595,7 +7595,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400142}
-  renderOrder: 81
+  renderOrder: 83
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7692,7 +7692,7 @@ MonoBehaviour:
       right: 132.054688
       bottom: 10
     owner: {fileID: 11400144}
-  renderOrder: 82
+  renderOrder: 84
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7820,7 +7820,7 @@ MonoBehaviour:
       right: 10.0664062
       bottom: 16.0820312
     owner: {fileID: 11400152}
-  renderOrder: 79
+  renderOrder: 81
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7873,7 +7873,7 @@ MonoBehaviour:
       right: 15
       bottom: 42.0898438
     owner: {fileID: 11400154}
-  renderOrder: 88
+  renderOrder: 90
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7957,7 +7957,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400156}
-  renderOrder: 80
+  renderOrder: 82
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1

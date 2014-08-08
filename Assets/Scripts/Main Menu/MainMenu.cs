@@ -3,17 +3,41 @@ using System.Collections;
 
 public class MainMenu : MonoBehaviour {
 
-    public dfButton BootcampButton, ChampionsButton, StatisticsButton, OptionsButton, LogoutButton, ExitButton;
+    public dfButton BootcampButton, ChampionsButton, LogoutButton, ExitButton;
+    dfPanel panel;
+    public dfPanel WaitPanel;
+    public dfButton ContinueButton, BackButton;
+
+    Player Player
+    {
+        get
+        {
+            return Parse.ParseUser.CurrentUser as Player;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
+        panel = this.GetComponent<dfPanel>();
         BootcampButton.Click += new MouseEventHandler(BootcampButton_Click);
-        ChampionsButton.Click += new MouseEventHandler(ChampionsButton_Click);
-        StatisticsButton.Click += new MouseEventHandler(StatisticsButton_Click);
-        OptionsButton.Click += new MouseEventHandler(OptionsButton_Click);
+        ChampionsButton.Click += new MouseEventHandler(ChampionsButton_Click);        
         LogoutButton.Click += new MouseEventHandler(LogoutButton_Click);
         ExitButton.Click += new MouseEventHandler(ExitButton_Click);
+
+        ContinueButton.Click += new MouseEventHandler(ContinueButton_Click);
+        BackButton.Click += new MouseEventHandler(BackButton_Click);
 	}
+
+    void BackButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        WaitPanel.Hide();
+        panel.Enable();
+    }
+
+    void ContinueButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
+    {
+        Application.LoadLevel("Champions arena");
+    }
 
     void LogoutButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
@@ -23,22 +47,29 @@ public class MainMenu : MonoBehaviour {
 
     void ExitButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        Application.Quit();
+        print("Quit clicked");
+        if (!Application.isEditor)
+        {
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+
+        }
     }
 
-    void OptionsButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
-    {
-        throw new System.NotImplementedException();
-    }
+   
 
-    void StatisticsButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
-    {
-        throw new System.NotImplementedException();
-    }
+    
 
     void ChampionsButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        Application.LoadLevel("Champions arena");
+        if (Player.Level < 4)
+        {
+            WaitPanel.Show();
+            panel.Disable();
+        }
+        else
+        {
+            Application.LoadLevel("Champions arena");
+        }
     }
 
     void BootcampButton_Click(dfControl control, dfMouseEventArgs mouseEvent)

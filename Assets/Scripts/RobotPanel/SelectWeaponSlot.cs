@@ -68,6 +68,7 @@ public class SelectWeaponSlot : MonoBehaviour {
         {
             print("WTF?");
         }
+        WeaponAvatar.SpriteName = weapon.AvatarPath;
         NameLabel.Text = weapon.Name;
         if (weapon.MinimumDamage < weapon.MaximumDamage)
         {

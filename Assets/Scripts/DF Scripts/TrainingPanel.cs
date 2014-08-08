@@ -54,7 +54,7 @@ public class TrainingPanel : MonoBehaviour {
 
         if (mode.Equals("Train"))
         {
-         //   StartCoroutine(clickOnTrain());
+            StartCoroutine(clickOnTrain());
         }
 	}
 

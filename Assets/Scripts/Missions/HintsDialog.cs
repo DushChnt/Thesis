@@ -95,6 +95,8 @@ Click on ? to bring up this dialog again.";
     {
         int mission = PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1);
         
+        
+
         PlayerPrefs.SetInt(string.Format("Mission{0}Seen", mission), 1);
         InfoLabel.ResetLayout();
         switch (mission)

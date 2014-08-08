@@ -51,7 +51,7 @@ public class BrainPanel : MonoBehaviour {
         
         //   _panel.transform.Find("NewBrainButton").GetComponent<dfButton>().Click += button_Click;
 
-        var q = new ParseQuery<Brain>().WhereEqualTo("userId", ParseUser.CurrentUser.ObjectId).OrderBy("createdAt");
+        var q = new ParseQuery<Brain>().WhereEqualTo("userId", ParseUser.CurrentUser.ObjectId).WhereDoesNotExist("originalBrain").OrderBy("createdAt");
         q.FindAsync().ContinueWith(t =>
         {
             IEnumerable<Brain> result = t.Result;

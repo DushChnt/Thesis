@@ -232,6 +232,66 @@ public class TrainingScript : MonoBehaviour {
     private bool GetOptimizerSettings()
     {
       //  OptimizerParameters.Reset();
+        if (!Settings.Brain.IsNewBrain)
+        {
+            var name = NameTextBox.Text;
+            var numInputs = OptimizerParameters.NumInputs;
+            var numOutputs = OptimizerParameters.NumOutputs;
+
+            var moveAround = GameObject.Find("s_MoveAround").GetComponent<dfSlider>().Value;
+            var distanceToKeep = GameObject.Find("s_DistanceToKeep").GetComponent<dfSlider>().Value;
+            var keepDistance = GameObject.Find("s_KeepDistance").GetComponent<dfSlider>().Value;
+            var reachDistance = GameObject.Find("s_ReachDistance").GetComponent<dfSlider>().Value;
+            var faceTarget = GameObject.Find("s_FaceTarget").GetComponent<dfSlider>().Value;
+
+            var meleeAttacks = GameObject.Find("s_MeleeAttacks").GetComponent<dfSlider>().Value;
+            var meleeHits = GameObject.Find("s_MeleeHits").GetComponent<dfSlider>().Value;
+            var meleePrecision = GameObject.Find("s_MeleePrecision").GetComponent<dfSlider>().Value;
+
+            var rifleAttacks = GameObject.Find("s_RifleAttacks").GetComponent<dfSlider>().Value;
+            var rifleHits = GameObject.Find("s_RifleHits").GetComponent<dfSlider>().Value;
+            var riflePrecision = GameObject.Find("s_RiflePrecision").GetComponent<dfSlider>().Value;
+
+            var aimTurret = GameObject.Find("s_TurretFaceTarget").GetComponent<dfSlider>().Value;
+            var mortarAttacks = GameObject.Find("s_MortarAttacks").GetComponent<dfSlider>().Value;
+            var mortarHits = GameObject.Find("s_MortarHits").GetComponent<dfSlider>().Value;
+            var mortarPrecision = GameObject.Find("s_MortarPrecision").GetComponent<dfSlider>().Value;
+            var mortarDamagePerHit = GameObject.Find("s_MortarDamagePerHit").GetComponent<dfSlider>().Value;
+
+            var value = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>().SelectedValue;
+            var targetBehaviourMovement = value;
+            var multiTargets = GameObject.Find("Multiple Targets Checkbox").GetComponent<dfCheckbox>().IsChecked;
+
+            var targetSize = (int)GameObject.Find("TargetSize Slider").GetComponent<dfSlider>().Value;
+
+
+            // Compare slider values
+            bool difference = (!name.Equals(Settings.Brain.Name)) || (moveAround != Settings.Brain.MoveAround) || (distanceToKeep != Settings.Brain.DistanceToKeep) ||
+                (keepDistance != Settings.Brain.KeepDistance) || (reachDistance != Settings.Brain.ReachDistance) || (faceTarget != Settings.Brain.FaceTarget) ||
+                (meleeAttacks != Settings.Brain.MeleeAttacks) || (meleeHits != Settings.Brain.MeleeHits) || (meleePrecision != Settings.Brain.MeleePrecision) ||
+                (rifleAttacks != Settings.Brain.RifleAttacks) || (rifleHits != Settings.Brain.RifleHits) || (riflePrecision != Settings.Brain.RiflePrecision) ||
+                (aimTurret != Settings.Brain.TurretFaceTarget) || (mortarAttacks != Settings.Brain.MortarAttacks) || (mortarHits != Settings.Brain.MortarHits) ||
+                (mortarPrecision != Settings.Brain.MortarPrecision) || (mortarDamagePerHit != Settings.Brain.MortarDamagePerHit) || (!targetBehaviourMovement.Equals(Settings.Brain.TargetBehaviorMovement)) ||
+                (multiTargets != Settings.Brain.MultipleTargets) || (targetSize != Settings.Brain.TargetSize);
+
+            if (difference)
+            {
+                // Create a new brain with the old parameters and archive it
+                Brain archive = Settings.Brain.Branch();
+                archive.Generation = Settings.Brain.Generation;
+                archive.BestFitness = Settings.Brain.BestFitness;
+                archive.TotalTime = Settings.Brain.TotalTime;
+                archive.VersionNumber = Settings.Brain.VersionNumber;
+                archive.Population = Settings.Brain.Population;
+                archive.ChampionGene = Settings.Brain.ChampionGene;
+                archive.OriginalBrain = Settings.Brain;
+
+                archive.SaveAsync();
+
+                Settings.Brain.VersionNumber = Settings.Brain.VersionNumber + 1;
+            }
+        }
+        // CUT
 
         Settings.Brain.Name = NameTextBox.Text;       
         Settings.Brain.NumInputs = OptimizerParameters.NumInputs;
@@ -259,8 +319,8 @@ public class TrainingScript : MonoBehaviour {
 
         Settings.Brain.FitnessMode = Brain.ADVANCED;
 
-        string value = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>().SelectedValue;
-        Settings.Brain.TargetBehaviorMovement = value;
+        var val = GameObject.Find("Target Movement Dropdown").GetComponent<dfDropdown>().SelectedValue;
+        Settings.Brain.TargetBehaviorMovement = val;
         Settings.Brain.MultipleTargets = GameObject.Find("Multiple Targets Checkbox").GetComponent<dfCheckbox>().IsChecked;
 
         Settings.Brain.TargetSize = (int)GameObject.Find("TargetSize Slider").GetComponent<dfSlider>().Value;

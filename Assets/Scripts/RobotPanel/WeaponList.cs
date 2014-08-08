@@ -11,7 +11,8 @@ public static class WeaponList {
         MaximumDamage = 11,
         AttackSpeed = 1.12f,
         SlowDown = 50,
-        Type = WeaponType.Melee
+        Type = WeaponType.Melee,
+        AvatarPath = "axe_one"
     };
 
     public static Weapon M_HAMMER = new Weapon
@@ -21,7 +22,8 @@ public static class WeaponList {
         MaximumDamage = 18,
         AttackSpeed = 0.7f,
         SlowDown = 60,
-        Type = WeaponType.Melee
+        Type = WeaponType.Melee,
+        AvatarPath = "hammer"
     };
 
     public static Weapon M_SWORD = new Weapon
@@ -31,7 +33,8 @@ public static class WeaponList {
         MaximumDamage = 10,
         AttackSpeed = 1.40f,
         SlowDown = 40,
-        Type = WeaponType.Melee
+        Type = WeaponType.Melee,
+        AvatarPath = "sword"
     };
 
     public static Weapon R_CROSSBOW = new Weapon
@@ -41,7 +44,8 @@ public static class WeaponList {
         MaximumDamage = 4,
         AttackSpeed = 2.00f,
         SlowDown = 10,
-        Type = WeaponType.Ranged
+        Type = WeaponType.Ranged,
+        AvatarPath = "cogwheels"
     };
 
     public static Weapon R_RIFLE = new Weapon
@@ -51,7 +55,8 @@ public static class WeaponList {
         MaximumDamage = 3,
         AttackSpeed = 2.40f,
         SlowDown = 8,
-        Type = WeaponType.Ranged
+        Type = WeaponType.Ranged,
+        AvatarPath = "coins"
     };
 
     public static Weapon R_PHASERGUN = new Weapon
@@ -61,7 +66,8 @@ public static class WeaponList {
         MaximumDamage = 1,
         AttackSpeed = 6.00f,
         SlowDown = 3,
-        Type = WeaponType.Ranged
+        Type = WeaponType.Ranged,
+        AvatarPath = "wand"
     };
 
     public static Weapon C_BOMB = new Weapon
@@ -71,7 +77,8 @@ public static class WeaponList {
         MaximumDamage = 30,
         AttackSpeed = 0.5f,
         SlowDown = 90,
-        Type = WeaponType.Mortar
+        Type = WeaponType.Mortar,
+        AvatarPath = "potion_blu"
     };
 
     public static Weapon C_FIREBALL = new Weapon
@@ -81,7 +88,8 @@ public static class WeaponList {
         MaximumDamage = 20,
         AttackSpeed = 0.75f,
         SlowDown = 80,
-        Type = WeaponType.Mortar
+        Type = WeaponType.Mortar,
+        AvatarPath = "potion"
     };
 
     public static Weapon C_DESTROYER = new Weapon
@@ -91,7 +99,8 @@ public static class WeaponList {
         MaximumDamage = 60,
         AttackSpeed = 0.25f,
         SlowDown = 100,
-        Type = WeaponType.Mortar
+        Type = WeaponType.Mortar,
+        AvatarPath = "potion_green"
     };
 
     public static Dictionary<string, Weapon> WeaponDict = new Dictionary<string, Weapon>()

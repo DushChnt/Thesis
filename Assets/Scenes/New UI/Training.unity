@@ -2184,12 +2184,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -3053,7 +3053,7 @@ Transform:
   m_PrefabInternal: {fileID: 607363178}
   m_GameObject: {fileID: 226221260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0258789062, y: -.0238723755, z: 0}
+  m_LocalPosition: {x: 0, y: -.0238723755, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1370347158}
@@ -3069,8 +3069,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .242222235, y: .0577777773, z: .00100000005}
-  m_Center: {x: .121111117, y: -.0288888887, z: 0}
+  m_Size: {x: .271111131, y: .0688888878, z: .00100000005}
+  m_Center: {x: .135555565, y: -.0344444439, z: 0}
 --- !u!114 &226221263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3096,7 +3096,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 109, y: 26}
+  size: {x: 122, y: 31}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -3106,10 +3106,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 1
     margins:
-      left: 11.6445312
+      left: 0
       top: 10.7421875
-      right: 133.355469
-      bottom: 95.2578125
+      right: 132
+      bottom: 90.2578125
     owner: {fileID: 226221263}
   renderOrder: 188
   isLocalized: 0
@@ -3130,12 +3130,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -3149,7 +3149,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -3256,7 +3256,7 @@ GameObject:
   - 114: {fileID: 252343217}
   - 114: {fileID: 252343216}
   m_Layer: 10
-  m_Name: Yes Button
+  m_Name: Only This Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4164,12 +4164,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -4183,7 +4183,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -8102,7 +8102,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 682df8f5af8535d4c87d3672919263f0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .0258789062
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 682df8f5af8535d4c87d3672919263f0, type: 2}
       propertyPath: m_LocalPosition.y
@@ -8346,7 +8346,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400058, guid: 682df8f5af8535d4c87d3672919263f0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .0221099854
+      value: .0221176147
       objectReference: {fileID: 0}
     - target: {fileID: 400058, guid: 682df8f5af8535d4c87d3672919263f0, type: 2}
       propertyPath: m_LocalPosition.y
@@ -17822,12 +17822,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -17841,7 +17841,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -20579,7 +20579,7 @@ Transform:
   m_GameObject: {fileID: 1453596140}
   m_LocalRotation: {x: 0, y: 0, z: -.000172633489, w: 1}
   m_LocalPosition: {x: 1.0355556, y: -.431111127, z: 0}
-  m_LocalScale: {x: 1, y: .999997735, z: 1}
+  m_LocalScale: {x: 1, y: .999996841, z: 1}
   m_Children:
   - {fileID: 441935939}
   - {fileID: 630103946}
@@ -22184,7 +22184,7 @@ GameObject:
   - 114: {fileID: 1584805393}
   - 114: {fileID: 1584805392}
   m_Layer: 10
-  m_Name: No Button
+  m_Name: Yes Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23626,7 +23626,7 @@ Transform:
   m_PrefabInternal: {fileID: 607363178}
   m_GameObject: {fileID: 1702755807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0221099854, y: -.0222167969, z: 0}
+  m_LocalPosition: {x: .0221176147, y: -.0222167969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1081175866}
@@ -23666,9 +23666,9 @@ MonoBehaviour:
   layout:
     anchorStyle: 5
     margins:
-      left: 9.94921875
+      left: 9.953125
       top: 9.99609375
-      right: 132.050781
+      right: 132.046875
       bottom: 10.0039062
     owner: {fileID: 1702755809}
   renderOrder: 220
@@ -27693,12 +27693,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -27712,7 +27712,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -28439,12 +28439,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -28458,7 +28458,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 

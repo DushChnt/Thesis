@@ -261,116 +261,116 @@ public class RobotController : BaseController
     {
         float fit = 1000;
 
-        if (Settings.Brain.SMovement)
-        {
-    //        protected float distanceMoved; maximum is ticks
-    //protected float closestToTarget = int.MaxValue; maximum is diagonal of arena = 141
-            //protected float longestFromTarget = -1; maximum is diagonal of arena = 141
-    //protected float sumOfDistToTarget; maximum is diagonal * ticks = 141 * ticks
+    //    if (Settings.Brain.SMovement)
+    //    {
+    ////        protected float distanceMoved; maximum is ticks
+    ////protected float closestToTarget = int.MaxValue; maximum is diagonal of arena = 141
+    //        //protected float longestFromTarget = -1; maximum is diagonal of arena = 141
+    ////protected float sumOfDistToTarget; maximum is diagonal * ticks = 141 * ticks
 
-            //fit += distanceMoved;
-            //if (distanceMoved < 2)
-            //{
-            //    fit -= 500;
-            //}
-            //// SDistance goes from 0 to 4, 5 values.
-            //float approach = 1 / closestToTarget * 100;
-            //float dist = Settings.Brain.SDistance - 2;
-            //fit += approach * -dist;
+    //        //fit += distanceMoved;
+    //        //if (distanceMoved < 2)
+    //        //{
+    //        //    fit -= 500;
+    //        //}
+    //        //// SDistance goes from 0 to 4, 5 values.
+    //        //float approach = 1 / closestToTarget * 100;
+    //        //float dist = Settings.Brain.SDistance - 2;
+    //        //fit += approach * -dist;
 
-            //float flee = longestFromTarget;
-            //fit += flee * dist;
+    //        //float flee = longestFromTarget;
+    //        //fit += flee * dist;
 
-            //float sumOfApproach = 1.0f / (sumOfDistToTarget / ticks) * -dist * 100;
+    //        //float sumOfApproach = 1.0f / (sumOfDistToTarget / ticks) * -dist * 100;
 
-            //fit += sumOfApproach;
-            const float diagonal = 141;
-            float moved = distanceMoved / ticks; // [0, 1]
-            float closest = closestToTarget / diagonal;
-            float longest = longestFromTarget / diagonal;
-            float sum = sumOfDistToTarget / (diagonal * ticks);
-            float dist = Settings.Brain.SDistance - 2;
-            float towards = totalAngle / ticks;
+    //        //fit += sumOfApproach;
+    //        const float diagonal = 141;
+    //        float moved = distanceMoved / ticks; // [0, 1]
+    //        float closest = closestToTarget / diagonal;
+    //        float longest = longestFromTarget / diagonal;
+    //        float sum = sumOfDistToTarget / (diagonal * ticks);
+    //        float dist = Settings.Brain.SDistance - 2;
+    //        float towards = totalAngle / ticks;
 
-            fit += towards * 10 * -dist;
-            fit += moved * 2;
-            fit += (1 - closest) * -dist * 10;
-            fit += longest * dist * 10;
-            fit += (1 - sum) * -dist * 1000;
+    //        fit += towards * 10 * -dist;
+    //        fit += moved * 2;
+    //        fit += (1 - closest) * -dist * 10;
+    //        fit += longest * dist * 10;
+    //        fit += (1 - sum) * -dist * 1000;
 
-            fit -= MortarAttacks * 10;
-            fit -= RifleAttacks * 10;
-            fit -= MeleeAttacks * 10;
+    //        fit -= MortarAttacks * 10;
+    //        fit -= RifleAttacks * 10;
+    //        fit -= MeleeAttacks * 10;
 
-            if (distanceMoved < 2)
-            {
-                fit = 1;
-            }
-        }
+    //        if (distanceMoved < 2)
+    //        {
+    //            fit = 1;
+    //        }
+    //    }
 
-        if (Settings.Brain.STurret)
-        {
-            float turretFit = totalTurretAngle / ticks;
-            fit += turretFit * 100;
-        }
+    //    if (Settings.Brain.STurret)
+    //    {
+    //        float turretFit = totalTurretAngle / ticks;
+    //        fit += turretFit * 100;
+    //    }
 
-        if (Settings.Brain.SMelee) 
-        {
-            float towards = totalAngle / ticks;
+    //    if (Settings.Brain.SMelee) 
+    //    {
+    //        float towards = totalAngle / ticks;
 
-            fit += towards * 10;
+    //        fit += towards * 10;
 
-            float attacks = MeleeAttacks;
-            fit += attacks * 10;
+    //        float attacks = MeleeAttacks;
+    //        fit += attacks * 10;
 
-            float hits = Hits;
-            fit += hits * 100;
+    //        float hits = Hits;
+    //        fit += hits * 100;
 
-            float precision = MeleeAttacks > 0 ? Hits / MeleeAttacks : 0;
-            fit += precision * 100;
-        }
+    //        float precision = MeleeAttacks > 0 ? Hits / MeleeAttacks : 0;
+    //        fit += precision * 100;
+    //    }
 
-        if (Settings.Brain.SRifle)
-        {
-            float towards = totalAngle / ticks;
+    //    if (Settings.Brain.SRifle)
+    //    {
+    //        float towards = totalAngle / ticks;
 
-            fit += towards * 10;
+    //        fit += towards * 10;
 
-            float rifleAttacks = RifleAttacks;
-            fit += rifleAttacks * 10;
+    //        float rifleAttacks = RifleAttacks;
+    //        fit += rifleAttacks * 10;
 
-            // Rifle fitness
-            float rifle = RifleHits;
-            fit += rifle * 100;
+    //        // Rifle fitness
+    //        float rifle = RifleHits;
+    //        fit += rifle * 100;
 
            
 
-            // Markmanship = precision
-            float precision = RifleAttacks > 0 ? ((float)RifleHits / (float)RifleAttacks) : 0;
-            fit += precision * 100;
-        }
+    //        // Markmanship = precision
+    //        float precision = RifleAttacks > 0 ? ((float)RifleHits / (float)RifleAttacks) : 0;
+    //        fit += precision * 100;
+    //    }
 
-        if (Settings.Brain.SMortar)
-        {
-            float turretFit = totalTurretAngle / ticks;
-            fit += turretFit * 10;
+    //    if (Settings.Brain.SMortar)
+    //    {
+    //        float turretFit = totalTurretAngle / ticks;
+    //        fit += turretFit * 10;
 
-            // Mortar attacks fitness
-            float mAttacks = MortarAttacks;
-            fit += mAttacks * 10;
+    //        // Mortar attacks fitness
+    //        float mAttacks = MortarAttacks;
+    //        fit += mAttacks * 10;
 
-            float mHits = MortarHits;
-            fit += mHits * 100;
+    //        float mHits = MortarHits;
+    //        fit += mHits * 100;
 
-            float mPrecision = MortarAttacks > 0 ? ((float)MortarHits / (float)MortarAttacks) : 0;
-            fit += mPrecision * 1000;
+    //        float mPrecision = MortarAttacks > 0 ? ((float)MortarHits / (float)MortarAttacks) : 0;
+    //        fit += mPrecision * 1000;
 
-            //float mDamage = MortarHits > 0 ? (1 - (AccMortarDamage / (float)MortarAttacks)) * Settings.Brain.mor.WMortarDamage : 0;
-            //fit += mDamage;
+    //        //float mDamage = MortarHits > 0 ? (1 - (AccMortarDamage / (float)MortarAttacks)) * Settings.Brain.mor.WMortarDamage : 0;
+    //        //fit += mDamage;
 
-            float mDamagePerHit = MortarAttacks > 0 ? ((MortarHitDamage / (float)MortarAttacks)) : 0;
-            fit += mDamagePerHit * 100;
-        }
+    //        float mDamagePerHit = MortarAttacks > 0 ? ((MortarHitDamage / (float)MortarAttacks)) : 0;
+    //        fit += mDamagePerHit * 100;
+    //    }
 
        // print("Fitness: " + fit);
         return fit;

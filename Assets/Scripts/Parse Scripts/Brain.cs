@@ -178,48 +178,6 @@ public class Brain : ParseObject {
         set { SetProperty<string>(value, "FitnessMode"); }
     }
 
-    [ParseFieldName("sDistance")]
-    public float SDistance
-    {
-        get { return GetProperty<float>("SDistance"); }
-        set { SetProperty<float>(value, "SDistance"); }
-    }
-
-    [ParseFieldName("sMovement")]
-    public bool SMovement
-    {
-        get { return GetProperty<bool>("SMovement"); }
-        set { SetProperty<bool>(value, "SMovement"); }
-    }
-
-    [ParseFieldName("sTurret")]
-    public bool STurret
-    {
-        get { return GetProperty<bool>("STurret"); }
-        set { SetProperty<bool>(value, "STurret"); }
-    }
-
-    [ParseFieldName("sMelee")]
-    public bool SMelee
-    {
-        get { return GetProperty<bool>("SMelee"); }
-        set { SetProperty<bool>(value, "SMelee"); }
-    }
-
-    [ParseFieldName("sRifle")]
-    public bool SRifle
-    {
-        get { return GetProperty<bool>("SRifle"); }
-        set { SetProperty<bool>(value, "SRifle"); }
-    }
-
-    [ParseFieldName("sMortar")]
-    public bool SMortar
-    {
-        get { return GetProperty<bool>("SMortar"); }
-        set { SetProperty<bool>(value, "SMortar"); }
-    }
-
     [ParseFieldName("bestFitness")]
     public float BestFitness
     {
@@ -239,6 +197,20 @@ public class Brain : ParseObject {
     {
         get { return GetProperty<int>("Generation"); }
         set { SetProperty<int>(value, "Generation"); }
+    }
+
+    [ParseFieldName("versionNumber")]
+    public int VersionNumber
+    {
+        get { return GetProperty<int>("VersionNumber"); }
+        set { SetProperty<int>(value, "VersionNumber"); }
+    }
+
+    [ParseFieldName("originalBrain")]
+    public Brain OriginalBrain
+    {
+        get { return GetProperty<Brain>("OriginalBrain"); }
+        set { SetProperty<Brain>(value, "OriginalBrain"); }
     }
 
     [ParseFieldName("multipleTargets")]
@@ -281,6 +253,9 @@ public class Brain : ParseObject {
         brain.Description = this.Description;
         brain.ParentId = this.ObjectId;
         brain.UserId = this.UserId;
+
+        brain.ReachDistance = this.ReachDistance;
+        brain.MoveAround = this.MoveAround;
         brain.KeepDistance = this.KeepDistance;
         brain.DistanceToKeep = this.DistanceToKeep;
         brain.FaceTarget = this.FaceTarget;
@@ -296,7 +271,8 @@ public class Brain : ParseObject {
         brain.MortarPrecision = this.MortarPrecision;
         brain.MortarDamagePerHit = this.MortarDamagePerHit;
         brain.TargetBehaviorMovement = this.TargetBehaviorMovement;
-        
+        brain.TargetSize = this.TargetSize;
+        brain.MultipleTargets = this.MultipleTargets;
 
         brain.IsNewBrain = true;
 

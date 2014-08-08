@@ -81,7 +81,16 @@ public class DFClicks : MonoBehaviour
         {
             RecurseDelete(b);
         }
-        brain.DeleteAsync();
+        var query = new ParseQuery<Brain>().WhereEqualTo("originalBrain", brain);
+        query.FindAsync().ContinueWith(t =>
+        {
+            foreach (Brain b in t.Result)
+            {
+                b.DeleteAsync();
+            }
+            brain.DeleteAsync();
+        });
+        
     }
 
     public IEnumerator YesDeleteClicked()
@@ -89,11 +98,21 @@ public class DFClicks : MonoBehaviour
         // Delete stuff
         GameObject.Find("Dialog Panel").GetComponent<dfPanel>().Disable();
 
-        foreach (Brain brain in Settings.Brain.Children)
+        if (Settings.Brain.Children != null)
         {
-            RecurseDelete(brain);
+            foreach (Brain brain in Settings.Brain.Children)
+            {
+                RecurseDelete(brain);
+            }
         }
-
+        var query = new ParseQuery<Brain>().WhereEqualTo("originalBrain", Settings.Brain);
+        query.FindAsync().ContinueWith(t =>
+        {
+            foreach (Brain b in t.Result)
+            {
+                b.DeleteAsync();
+            }           
+        });
         var task = Settings.Brain.DeleteAsync();
 
         while (!task.IsCompleted)
@@ -119,7 +138,15 @@ public class DFClicks : MonoBehaviour
             brain.ParentId = parent_id;
             brain.SaveAsync();
         }
-
+        var query = new ParseQuery<Brain>().WhereEqualTo("originalBrain", Settings.Brain);
+        query.FindAsync().ContinueWith(t =>
+        {
+            foreach (Brain b in t.Result)
+            {
+                b.DeleteAsync();
+            }
+           
+        });
         var task = Settings.Brain.DeleteAsync();
 
         while (!task.IsCompleted)
@@ -186,11 +213,11 @@ public class DFClicks : MonoBehaviour
         Settings.Brain.NumOutputs = OptimizerParameters.NumOutputs;
 
         // Simple parameters
-        Settings.Brain.SMovement = GameObject.Find("SMovement Checkbox").GetComponent<dfCheckbox>().IsChecked;
-        Settings.Brain.SDistance = GameObject.Find("SDistance Slider").GetComponent<dfSlider>().Value;        
-        Settings.Brain.SMelee = GameObject.Find("SMelee Checkbox").GetComponent<dfCheckbox>().IsChecked;
-        Settings.Brain.SRifle = GameObject.Find("SRifle Checkbox").GetComponent<dfCheckbox>().IsChecked;
-        Settings.Brain.SMortar = GameObject.Find("SMortar Checkbox").GetComponent<dfCheckbox>().IsChecked;
+        //Settings.Brain.SMovement = GameObject.Find("SMovement Checkbox").GetComponent<dfCheckbox>().IsChecked;
+        //Settings.Brain.SDistance = GameObject.Find("SDistance Slider").GetComponent<dfSlider>().Value;        
+        //Settings.Brain.SMelee = GameObject.Find("SMelee Checkbox").GetComponent<dfCheckbox>().IsChecked;
+        //Settings.Brain.SRifle = GameObject.Find("SRifle Checkbox").GetComponent<dfCheckbox>().IsChecked;
+        //Settings.Brain.SMortar = GameObject.Find("SMortar Checkbox").GetComponent<dfCheckbox>().IsChecked;
 
         // Advanced parameters
         Settings.Brain.KeepDistance = OptimizerParameters.WApproach;

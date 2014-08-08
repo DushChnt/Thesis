@@ -923,7 +923,7 @@ public class dfRichTextLabel : dfControl, IDFMultiRender, IRendersText
 			}
 
 			elements.Release();
-
+            elements = null;
 		}
 
 	}
