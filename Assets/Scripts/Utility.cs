@@ -28,6 +28,11 @@ public class Utility : MonoBehaviour {
         }
     }
 
+    public static float DeltaTime()
+    {
+        return Time.deltaTime;
+    }
+
     public static float GetDistance(Vector3 A, Vector3 B)
     {
         if (A != null && B != null)

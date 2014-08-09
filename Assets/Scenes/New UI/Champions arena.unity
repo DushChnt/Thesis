@@ -1324,12 +1324,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -1343,7 +1343,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -4109,12 +4109,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -4128,7 +4128,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -4556,7 +4556,7 @@ Transform:
   m_PrefabInternal: {fileID: 1440643909}
   m_GameObject: {fileID: 552685984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0221093763, y: -.0222135428, z: 0}
+  m_LocalPosition: {x: .0221099854, y: -.0222167969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 596092512}
@@ -4609,9 +4609,9 @@ MonoBehaviour:
   layout:
     anchorStyle: 5
     margins:
-      left: 9.94921875
+      left: 9.953125
       top: 9.99609375
-      right: 132.050781
+      right: 132.046875
       bottom: 10.0039062
     owner: {fileID: 552685987}
   renderOrder: 97
@@ -5555,12 +5555,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -5574,7 +5574,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -11591,7 +11591,7 @@ Transform:
   m_PrefabInternal: {fileID: 1440643909}
   m_GameObject: {fileID: 1665430762}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0258789062, y: -.0238723755, z: 0}
+  m_LocalPosition: {x: 0, y: -.0238723755, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1173465528}
@@ -11607,8 +11607,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .242222235, y: .0577777773, z: .00100000005}
-  m_Center: {x: .121111117, y: -.0288888887, z: 0}
+  m_Size: {x: .271111131, y: .0688888878, z: .00100000005}
+  m_Center: {x: .135555565, y: -.0344444439, z: 0}
 --- !u!114 &1665430765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11634,7 +11634,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 109, y: 26}
+  size: {x: 122, y: 31}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -11644,10 +11644,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 1
     margins:
-      left: 11.6445312
+      left: 0
       top: 10.7421875
-      right: 133.355469
-      bottom: 95.2578125
+      right: 132
+      bottom: 90.2578125
     owner: {fileID: 1665430765}
   renderOrder: 65
   isLocalized: 0
@@ -11668,12 +11668,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -11687,7 +11687,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -12864,12 +12864,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -12883,7 +12883,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -13412,12 +13412,12 @@ MonoBehaviour:
     rgba: 4294967295
   align: 1
   vertAlign: 0
-  textScale: 1
+  textScale: .916666687
   textScaleMode: 0
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -13431,7 +13431,7 @@ MonoBehaviour:
   padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
+    m_Top: 2
     m_Bottom: 0
   tabSize: 48
   tabStops: 
@@ -14154,6 +14154,7 @@ GameObject:
   - 4: {fileID: 2044489315}
   - 114: {fileID: 2044489314}
   - 114: {fileID: 2044489316}
+  - 114: {fileID: 2044489317}
   m_Layer: 0
   m_Name: _SCRIPTS
   m_TagString: Untagged
@@ -14204,6 +14205,17 @@ MonoBehaviour:
   GameModeDropdown: {fileID: 949168898}
   TrainingDialog: {fileID: 1858534902}
   MainPanel: {fileID: 722833107}
+--- !u!114 &2044489317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2044489313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa745bced8397147a357a9f39af9b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2061834116
 GameObject:
   m_ObjectHideFlags: 0

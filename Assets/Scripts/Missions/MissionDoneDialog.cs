@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Parse;
+using System.Collections.Generic;
 
 public class MissionDoneDialog : MonoBehaviour {
 
@@ -31,16 +33,22 @@ public class MissionDoneDialog : MonoBehaviour {
         {
             LevelUp();
         }
+       
         Application.LoadLevel("Bootcamp");
     }
 
     void LevelUp()
-    {        
+    {
         if (Player.Level <= mission)
         {
             Player.Level = mission + 1;
             Player.SaveAsync();
-            
+            var dimensions = new Dictionary<string, string> 
+            {
+                { "level", "Level " + Player.Level }            
+            };
+
+            ParseAnalytics.TrackEventAsync("Level Up", dimensions);
         }
         if (mission < 5)
         {

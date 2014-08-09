@@ -93,6 +93,8 @@ public class LoginPanel : MonoBehaviour {
     {
         loginPanel.Hide();
         RegisterPanel.Show();
+        RegisterPanel.GetComponent<RegisterPanel>().Username.Text = Username.Text;
+        RegisterPanel.GetComponent<RegisterPanel>().Password.Text = Password.Text;
     }
 	
 	// Update is called once per frame

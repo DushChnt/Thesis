@@ -3,9 +3,8 @@ using System.Collections;
 using Parse;
 using System.Collections.Generic;
 
-public class EventLogger : MonoBehaviour {
-
-    public MissionUI UI;
+public class EventLogger {
+    
     public string Arena;
    
     Player Player
@@ -16,18 +15,22 @@ public class EventLogger : MonoBehaviour {
         }
     }
 
-    Brain activeBrain;   
+    Brain activeBrain;
+    int activeBrainNumber = -1;
     Match match;
     Frame currentFrame;
     float time;
     IList<ParseObject> frames;
     bool IsActive;
     BrainEvent currentBrainEvent;
+    FightController Controller;
 
     private float damageTaken, damageGiven;
 
 	// Use this for initialization
-	void Start () {
+	public EventLogger(FightController controller, string arena) {
+        this.Arena = arena;
+        this.Controller = controller;
         frames = new List<ParseObject>();       
         match = new Match();      
         currentFrame = new Frame();
@@ -39,49 +42,79 @@ public class EventLogger : MonoBehaviour {
             currentFrame.SaveAsync();
         });
 
-        UI.Controller.MeleeAttackEvent += new FightController.AttackEventHandler(Controller_MeleeAttackEvent);
-        UI.Controller.HitMelee += new FightController.HitEventHandler(Controller_HitMelee);
-        UI.Controller.RangedAttackEvent += new FightController.AttackEventHandler(Controller_RangedAttackEvent);
-        UI.Controller.HitRanged += new FightController.HitEventHandler(Controller_HitRanged);
-        UI.Controller.MortarAttackEvent += new FightController.AttackEventHandler(Controller_MortarAttackEvent);
-        UI.Controller.HitMortar += new FightController.HitEventHandler(Controller_HitMortar);
-        UI.Controller.BrainSwitched += new FightController.SwitchBrainEventHandler(Controller_BrainSwitched);
+        controller.MeleeAttackEvent += new FightController.AttackEventHandler(Controller_MeleeAttackEvent);
+        controller.HitMelee += new FightController.HitEventHandler(Controller_HitMelee);
+        controller.RangedAttackEvent += new FightController.AttackEventHandler(Controller_RangedAttackEvent);
+        controller.HitRanged += new FightController.HitEventHandler(Controller_HitRanged);
+        controller.MortarAttackEvent += new FightController.AttackEventHandler(Controller_MortarAttackEvent);
+        controller.HitMortar += new FightController.HitEventHandler(Controller_HitMortar);
+        controller.BrainSwitched += new FightController.SwitchBrainEventHandler(Controller_BrainSwitched);
 
-        UI.Controller.HealthScript.DamageTaken += new HealthScript.DamageTakenHandler(HealthScript_DamageTaken);
+        controller.HealthScript.DamageTaken += new HealthScript.DamageTakenHandler(HealthScript_DamageTaken);
 
-        UI.UIStartPressed += new MissionUI.UIEventHandler(UI_UIStartPressed);
+     //   UI.UIStartPressed += new MissionUI.UIEventHandler(UI_UIStartPressed);
 	}
 
-    void UI_UIStartPressed()
+    public void StartLogging()
     {
         IsActive = true;
 
-        GetBrainSwitch(UI.Controller.GetActiveBrain());
+        GetBrainSwitch(Controller.GetActiveBrain());
     }
+
+    public void StopLogging(string outcome)
+    {
+        if (IsActive)
+        {
+            UpdateBrainEvent();
+
+            currentFrame.Outcome = outcome;
+            currentFrame.DamageGiven = damageGiven;
+            currentFrame.DamageTaken = damageTaken;
+            currentFrame.Time = time;
+            currentFrame.SaveAsync();
+
+            match.Won = outcome.Equals("won");
+            match.SaveAsync();
+
+            IsActive = false;
+        }
+    }
+
+    public void UpdateTime(float deltaTime)
+    {
+        if (IsActive)
+        {            
+            time += deltaTime;
+        }
+    }  
 
     void GetBrainSwitch(int number)
     {
-        Brain b = null;
-        switch (number)
+        if (activeBrainNumber != number)
         {
-            case 1:
-                b = Player.Brain1;
-                break;
-            case 2:
-                b = Player.Brain2;
-                break;
-            case 3:
-                b = Player.Brain3;
-                break;
-            case 4:
-                b = Player.Brain4;
-                break;
-        }
-        if (b != null)
-        {
-            activeBrain = b;
-          //  CreateEvent(SWITCH_BRAIN, 0, 0);
-            CreateBrainEvent();
+            Brain b = null;
+            switch (number)
+            {
+                case 1:
+                    b = Player.Brain1;
+                    break;
+                case 2:
+                    b = Player.Brain2;
+                    break;
+                case 3:
+                    b = Player.Brain3;
+                    break;
+                case 4:
+                    b = Player.Brain4;
+                    break;
+            }
+            if (b != null)
+            {
+                activeBrain = b;
+                //  CreateEvent(SWITCH_BRAIN, 0, 0);
+                CreateBrainEvent();
+            }
         }
     }
 
@@ -151,8 +184,8 @@ public class EventLogger : MonoBehaviour {
     {
         if (currentBrainEvent != null)
         {
-            currentBrainEvent.PlayerHealth = UI.Controller.HealthScript.Health;
-            currentBrainEvent.OpponentHealth = UI.Controller.OpponentHealth.Health;
+            currentBrainEvent.PlayerHealth = Controller.HealthScript.Health;
+            currentBrainEvent.OpponentHealth = Controller.OpponentHealth.Health;
             currentBrainEvent.Duration = time - currentBrainEvent.Time;
             currentBrainEvent.SaveAsync();
         }
@@ -194,17 +227,6 @@ public class EventLogger : MonoBehaviour {
     //}
 
 	// Update is called once per frame
-	void Update () {
-        if (IsActive)
-        {
-            time += Time.deltaTime;
-        }
-	}
+	
 
-    void OnDestroy()
-    {
-        print("DestructinO!");
-        UpdateBrainEvent();
-
-    }
 }

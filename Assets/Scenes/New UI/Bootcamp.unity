@@ -11786,6 +11786,22 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -.911209106
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: zindex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: renderOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: renderOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
+      propertyPath: normalColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2dae738d9d920dd45b45d96d6d8de6ec, type: 2}
   m_RootGameObject: {fileID: 729312814}
@@ -12254,6 +12270,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1705757895}
   - 114: {fileID: 1705757894}
+  - 114: {fileID: 1705757896}
   m_Layer: 0
   m_Name: _SCRIPTS
   m_TagString: Untagged
@@ -12285,6 +12302,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &1705757896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1705757893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa745bced8397147a357a9f39af9b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1730482906
 GameObject:
   m_ObjectHideFlags: 0

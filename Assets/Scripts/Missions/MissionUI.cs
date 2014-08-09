@@ -23,6 +23,8 @@ public class MissionUI : MonoBehaviour {
 
     public dfLabel GoalExplanationLabel, GoalLabel;
 
+    EventLogger logger;
+
     bool initialized;
     Player Player
     {
@@ -47,6 +49,7 @@ public class MissionUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        
         StartButton.Click += new MouseEventHandler(StartButton_Click);
       //  Camera.main.GetComponent<MousePan>().Activated = false;
         PhotonNetwork.offlineMode = true;
@@ -135,32 +138,36 @@ public class MissionUI : MonoBehaviour {
         Controller.SetBrains(brain1, brain2, brain3, brain4);
 
         print("Current mission: " + PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1));
-
+        string arena = "";
         switch (PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1))
         {
             case 1:
-
+                arena = "Mission 1";
 
                 Mission1.Initialize(this);
                 break;
             case 2:
-
+                arena = "Mission 2";
                 Mission2.Initialize(this);
                 break;
             case 3:
+                arena = "Mission 3";
                 Mission3.Initialize(this);
                 break;
 
             case 4:
+                arena = "Mission 4";
                 Mission4.Initialize(this);
                 break;
 
             case 5:
+                arena = "Mission 5";
                 Mission5.Initialize(this);
                 break;
         }
+        logger = new EventLogger(Controller, arena);
 
-        OnUIStartPressed();
+        logger.StartLogging();
     }
 
     public void UpdateQuest(int quest, int maxQuest)
@@ -194,10 +201,12 @@ public class MissionUI : MonoBehaviour {
         yield return new WaitForSeconds(2);
         if (win)
         {
+            logger.StopLogging("won");
             MissionDonePanel.Show();
         }
         else
         {
+            logger.StopLogging("lost");
             MissionDoneLosePanel.Show();
         }
        // Camera.main.GetComponent<MousePan>().Activated = false;
@@ -233,5 +242,17 @@ public class MissionUI : MonoBehaviour {
             Slot4.GetPanel().DoClick();
         }
 
+        if (logger != null)
+        {
+            logger.UpdateTime(Time.deltaTime);
+        }
 	}
+
+    void OnDestroy()
+    {
+        if (logger != null)
+        {
+            logger.StopLogging("quit");
+        }
+    }
 }

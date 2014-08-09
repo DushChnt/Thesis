@@ -19,6 +19,8 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     Frame currentFrame;
     IList<ParseObject> frames;
 
+    public dfProgressBar PlayerHealthbar, OpponentHealthbar;
+
     List<int> occupiedSpawnPositions;
 
     Transform chosenSpawnPosition;

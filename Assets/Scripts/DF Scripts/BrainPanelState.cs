@@ -152,7 +152,8 @@ public class BrainPanelState : MonoBehaviour {
         {
             InUse = true;
             _panel.BackgroundColor = color;
-            Task fetchTask = _brain.FetchAsync();
+
+            Task fetchTask = _brain.FetchIfNeededAsync();
             print("Fetching");
             while (!fetchTask.IsCompleted)
             {

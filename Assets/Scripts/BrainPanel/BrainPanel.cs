@@ -44,16 +44,18 @@ public class BrainPanel : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-
-
+        
+        
         this._panel = GetComponent<dfScrollPanel>();
      //   _dialog = GameObject.Find("Dialog").GetComponent<DialogShow>();
         
         //   _panel.transform.Find("NewBrainButton").GetComponent<dfButton>().Click += button_Click;
 
         var q = new ParseQuery<Brain>().WhereEqualTo("userId", ParseUser.CurrentUser.ObjectId).WhereDoesNotExist("originalBrain").OrderBy("createdAt");
+        
         q.FindAsync().ContinueWith(t =>
         {
+            rootBrains = new List<Brain>();
             IEnumerable<Brain> result = t.Result;
             //     Dictionary<string, Brain> allBrains = new Dictionary<string, Brain>();
 
@@ -75,7 +77,7 @@ public class BrainPanel : MonoBehaviour {
                 }
             }
             allBrains = result;
-
+            Settings.RootBrains = rootBrains;
             DataLoaded = true;
         });
 
@@ -108,6 +110,12 @@ public class BrainPanel : MonoBehaviour {
         slot4.DragLeave += slot1_DragLeave;
 
         BlankBrainButton.Click += new MouseEventHandler(BlankBrainButton_Click);
+
+        if (Settings.RootBrains != null)
+        {
+            rootBrains = Settings.RootBrains;
+            StartCoroutine(DoLayout());
+        }
     }
 
     void BlankBrainButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
@@ -122,17 +130,17 @@ public class BrainPanel : MonoBehaviour {
         AddBrains(rootBrains);
     }
 
-    private string GetNameFromBrain(string objectId)
-    {
-        foreach (Brain b in allBrains)
-        {
-            if (b.ObjectId.Equals(objectId))
-            {
-                return b.Name;
-            }
-        }
-        return null;
-    }
+    //private string GetNameFromBrain(string objectId)
+    //{
+    //    foreach (Brain b in allBrains)
+    //    {
+    //        if (b.ObjectId.Equals(objectId))
+    //        {
+    //            return b.Name;
+    //        }
+    //    }
+    //    return null;
+    //}
 
     void slot1_DragLeave(dfControl control, dfDragEventArgs dragEvent)
     {
@@ -206,10 +214,8 @@ public class BrainPanel : MonoBehaviour {
 
     IEnumerator WaitForRequest(Brain brain)
     {
-        WWW www = new WWW(brain.ChampionGene.Url.AbsoluteUri);
-        print("Downloading");
-        yield return www;
-        print("Done downloading");
+        WWW www = new WWW(brain.ChampionGene.Url.AbsoluteUri);        
+        yield return www;        
 
         string folderPath = Application.persistentDataPath + string.Format("/{0}", ParseUser.CurrentUser.Username);
         DirectoryInfo dirInf = new DirectoryInfo(folderPath);
@@ -492,30 +498,55 @@ public class BrainPanel : MonoBehaviour {
         mouseEvent.Use();
     }
 
+    void RecurseDownloadFiles(List<Brain> brainList)
+    {
+        foreach (Brain b in brainList)
+        {
+            if (b.Children != null && b.Children.Count > 0)
+            {
+                RecurseDownloadFiles(b.Children);
+            }
+            if (b.ChampionGene != null)
+            {
+                StartCoroutine(WaitForRequest(b));
+            }
+        }
+    }
+
+    IEnumerator DoLayout()
+    {
+      //  yield return new WaitForSeconds(0.02f);
+        yield return new WaitForEndOfFrame();
+        RecurseDownloadFiles(rootBrains);
+        if (rootBrains.Count == 0)
+        {
+            Brain b = new Brain();
+            b.Name = "New brain";
+            b.UserId = ParseUser.CurrentUser.ObjectId;
+            b.IsNewBrain = true;
+            rootBrains.Add(b);
+        }
+        AddBrains(rootBrains);
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (DataLoaded)
         {
-            foreach (Brain brain in allBrains)
-            {
-                if (brain.ChampionGene != null)
-                {
-                    print("FILE: " + brain.Population.Name + ", URL: " + brain.Population.Url);
+            StartCoroutine(DoLayout());
 
-                    StartCoroutine(WaitForRequest(brain));
-                }
-            }
-            if (rootBrains.Count == 0)
-            {
-                Brain b = new Brain();
-                b.Name = "New brain";
-                b.UserId = ParseUser.CurrentUser.ObjectId;
-                b.IsNewBrain = true;
-                rootBrains.Add(b);
-            }
-            AddBrains(rootBrains);
-            slot1.GetComponent<BrainPanelState>().Initialize();
+            //foreach (Brain brain in allBrains)
+            //{
+            //    if (brain.ChampionGene != null)
+            //    {
+            // //       print("FILE: " + brain.Population.Name + ", URL: " + brain.Population.Url);
+
+            //        StartCoroutine(WaitForRequest(brain));
+            //    }
+            //}
+        
+       //     slot1.GetComponent<BrainPanelState>().Initialize();
             //Player player = ParseUser.CurrentUser as Player;
             //if (player.Slot1 != null)
             //{
@@ -574,7 +605,7 @@ public class BrainPanel : MonoBehaviour {
             idx++;
         }
 
-        print("Count: " + allBrains.Count());
+    //    print("Count: " + allBrains.Count());
         if (numberOfBrains < 2)
         {
             print("Joe");

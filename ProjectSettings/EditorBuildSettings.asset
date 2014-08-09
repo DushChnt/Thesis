@@ -10,17 +10,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Optimization scene.unity
   - enabled: 0
-    path: Assets/Scenes/Start Menu.unity
+    path: Assets/Scenes/_UNUSED/Start Menu.unity
   - enabled: 0
-    path: Assets/Scenes/Training Overview.unity
+    path: Assets/Scenes/_UNUSED/Training Overview.unity
   - enabled: 0
-    path: Assets/Scenes/Lobby scene.unity
+    path: Assets/Scenes/_UNUSED/Lobby scene.unity
   - enabled: 1
     path: Assets/Scenes/Arenas/Arena 1.unity
   - enabled: 0
     path: Assets/Scenes/Arenas/Arena 2.unity
   - enabled: 0
-    path: Assets/Scenes/Statistics Web scene.unity
+    path: Assets/Scenes/_UNUSED/Statistics Web scene.unity
   - enabled: 1
     path: Assets/Scenes/New UI/Main Menu.unity
   - enabled: 1
