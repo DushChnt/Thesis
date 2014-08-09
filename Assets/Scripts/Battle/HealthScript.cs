@@ -11,6 +11,17 @@ public class HealthScript : Photon.MonoBehaviour {
     public bool IsOpponent;
     public float MaxHealth = 100f;
 
+    public delegate void DamageTakenHandler(float damage);
+    public event DamageTakenHandler DamageTaken;
+
+    protected virtual void OnDamageTaken(float damage)
+    {
+        if (DamageTaken != null)
+        {
+            DamageTaken(damage);
+        }
+    }
+
     public bool IsDead {
         get
         {
@@ -128,6 +139,7 @@ public class HealthScript : Photon.MonoBehaviour {
 		{
 			BattleGUI.Robot2Health = Health;
 		}
+        OnDamageTaken(damage);
 		if (Health <= 0)
 		{
 		//	Destroy(gameObject);

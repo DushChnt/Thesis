@@ -13,17 +13,26 @@ public class FightController : LevelController {
     public HealthScript HealthScript;
     public HealthScript OpponentHealth;
     public bool DummyAttack;
-    public delegate void AttackEventHandler();
+   
     float laserTimer;
     public float LaserExposure = 0.1f;
     public GameObject Bloom;
 
+    public delegate void AttackEventHandler();
     public event AttackEventHandler MeleeAttackEvent;
     public event AttackEventHandler MeleeHitEvent;
     public event AttackEventHandler RangedAttackEvent;
     public event AttackEventHandler RangedHitEvent;
     public event AttackEventHandler MortarAttackEvent;
     public event AttackEventHandler MortarHitEvent;
+
+    public delegate void SwitchBrainEventHandler(int number);
+    public event SwitchBrainEventHandler BrainSwitched;
+
+    public delegate void HitEventHandler(float damage, float ownDamage);
+    public event HitEventHandler HitMelee;
+    public event HitEventHandler HitRanged;
+    public event HitEventHandler HitMortar;
 
     LineRenderer lineRenderer;
 
@@ -104,6 +113,38 @@ public class FightController : LevelController {
         }
     }
 
+    protected virtual void OnHitMelee(float damage)
+    {
+        if (HitMelee != null)
+        {
+            HitMelee(damage, 0);
+        }
+    }
+
+    protected virtual void OnHitRanged(float damage)
+    {
+        if (HitRanged != null)
+        {
+            HitRanged(damage, 0);
+        }
+    }
+
+    protected virtual void OnHitMortar(float damage, float ownDamage)
+    {
+        if (HitMortar != null)
+        {
+            HitMortar(damage, ownDamage);
+        }
+    }
+
+    protected virtual void OnBrainSwitched(int number)
+    {
+        if (BrainSwitched != null)
+        {
+            BrainSwitched(number);
+        }
+    }
+
     void OpponentHealth_Died(object sender, EventArgs e)
     {
         print("Died");
@@ -138,6 +179,28 @@ public class FightController : LevelController {
         this.brain2 = _brain2;
         this.brain3 = _brain3;
         this.brain4 = _brain4;
+
+        if (this.brain.Equals(brain1))
+        {
+            ActiveBrain = 1;
+        }
+        else if (this.brain.Equals(brain2))
+        {
+            ActiveBrain = 2;
+        }
+        else if (this.brain.Equals(brain3))
+        {
+            ActiveBrain = 3;
+        }
+        else if (this.brain.Equals(brain4))
+        {
+            ActiveBrain = 4;
+        }
+    }
+
+    public int GetActiveBrain()
+    {
+        return ActiveBrain;
     }
 
     public void SwitchBrain(int number)
@@ -189,7 +252,7 @@ public class FightController : LevelController {
                 this.brain = defaultBrain;
                 break;
         }
-
+        OnBrainSwitched(number);
         this.brain.ResetState();
     }
 
@@ -221,6 +284,7 @@ public class FightController : LevelController {
     {
        // MeleeAttackEvent();
         hammer.PerformAttack();
+        OnMeleeAttackEvent();
         if (TargetIsInMeleeBox)
         {
             OnMeleeHitEvent();
@@ -230,6 +294,7 @@ public class FightController : LevelController {
                 dmg = MeleeWeapon.MinimumDamage + UnityEngine.Random.value * (MeleeWeapon.MaximumDamage - MeleeWeapon.MinimumDamage);
             }
             OpponentHealth.TakeDamage(dmg);
+            OnHitMelee(dmg);
         }
         if (!PhotonNetwork.offlineMode)
         {
@@ -269,6 +334,7 @@ public class FightController : LevelController {
                 if (OpponentHealth != null)
                 {
                     OpponentHealth.TakeDamage(dmg);
+                    OnHitRanged(dmg);
                 }
                 hitOpponent = true;
             }
@@ -339,6 +405,10 @@ public class FightController : LevelController {
     {
         if (this != null && transform != null && Target != null)
         {
+            bool sendEvent = false;
+            float damageDone = 0;
+            float damageTaken = 0;
+
             float x = args.CollisionPoint.x;
             float z = args.CollisionPoint.z;
 
@@ -367,6 +437,8 @@ public class FightController : LevelController {
                         damage = MortarWeapon.MaximumDamage * dmg;
                     }
                     OpponentHealth.TakeDamage(damage);
+                    damageDone = damage;
+                    sendEvent = true;
                 }
             }
 
@@ -396,9 +468,14 @@ public class FightController : LevelController {
                     {
                         HealthScript.TakeDamage(damage);
                     }
+                    damageTaken = damage;
+                    sendEvent = true;
                 }
             }
-
+            if (sendEvent)
+            {
+                OnHitMortar(damageDone, damageTaken);
+            }
             //GameObject mortar = ((MortarHit)sender).gameObject;
             //Instantiate(Bloom, mortar.transform.position, Quaternion.identity);
         }

@@ -32,6 +32,18 @@ public class MissionUI : MonoBehaviour {
         }
     }
 
+    public delegate void UIEventHandler();
+    public event UIEventHandler UIMissionDone;
+    public event UIEventHandler UIMissionFailed;
+    public event UIEventHandler UIStartPressed;
+
+    protected virtual void OnUIStartPressed()
+    {
+        if (UIStartPressed != null)
+        {
+            UIStartPressed();
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -147,6 +159,8 @@ public class MissionUI : MonoBehaviour {
                 Mission5.Initialize(this);
                 break;
         }
+
+        OnUIStartPressed();
     }
 
     public void UpdateQuest(int quest, int maxQuest)
