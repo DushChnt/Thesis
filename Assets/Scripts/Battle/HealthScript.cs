@@ -180,6 +180,7 @@ public class HealthScript : Photon.MonoBehaviour {
 	{
 		_health = health;
         ShowFloatingText(damage);
+        OnDamageTaken(damage);
         if (photonView.isMine)
         {
             if (Health <= 0)

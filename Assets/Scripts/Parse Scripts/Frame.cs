@@ -34,10 +34,10 @@ public class Frame : ParseObject
     }
 
     [ParseFieldName("match")]
-    public ParseObject Match
+    public Match Match
     {
-        get { return GetProperty<ParseObject>("Match"); }
-        set { SetProperty<ParseObject>(value, "Match"); }
+        get { return GetProperty<Match>("Match"); }
+        set { SetProperty<Match>(value, "Match"); }
     }
 
     [ParseFieldName("player")]

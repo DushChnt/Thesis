@@ -1383,6 +1383,8 @@ MonoBehaviour:
   Spawn2: {fileID: 1230579187}
   Spawn3: {fileID: 344898561}
   Spawn4: {fileID: 1273356075}
+  PlayerHealthbar: {fileID: 0}
+  OpponentHealthbar: {fileID: 0}
 --- !u!114 &298591353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6213,6 +6215,8 @@ MonoBehaviour:
   Spawn2: {fileID: 1230579187}
   Spawn3: {fileID: 344898561}
   Spawn4: {fileID: 1273356075}
+  PlayerHealthbar: {fileID: 420973409}
+  OpponentHealthbar: {fileID: 2035060688}
 --- !u!114 &1087765869
 MonoBehaviour:
   m_ObjectHideFlags: 0

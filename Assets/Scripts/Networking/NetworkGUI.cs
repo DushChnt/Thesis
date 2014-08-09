@@ -129,6 +129,11 @@ public class NetworkGUI : MonoBehaviour {
         }
     }
 
+    public void HideMatchStatus()
+    {
+        CountdownPanel.Hide();
+    }
+
     public void ShowMatchStatus(string status, Color color)
     {
         TipLabel.Hide();
@@ -138,6 +143,12 @@ public class NetworkGUI : MonoBehaviour {
         countdownTitle.Text = "";
         countdownFraction.Hide();
         countdownLabel.Hide();
+    }
+
+    public void UpdateFrameScore(int ownWins, int oppWins)
+    {
+        OwnWinsLabel.Text = ownWins + "";
+        OpponentWinsLabel.Text = oppWins + "";
     }
 
 	void Slot4_Click(dfControl control, dfMouseEventArgs mouseEvent)

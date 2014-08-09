@@ -8194,7 +8194,7 @@ MonoBehaviour:
   disabledSprite: button-disabled
   focusSprite: button-hilite
   font: {fileID: 11400000, guid: 32f3a9f198f13d041a8c9bdf08a834bb, type: 2}
-  selectedIndex: 0
+  selectedIndex: 1
   triggerButton: {fileID: 424044017}
   disabledTextColor:
     serializedVersion: 2
@@ -11339,7 +11339,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1570863390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .195556641, y: -.025100708, z: 0}
+  m_LocalPosition: {x: .0311126709, y: -.0250930786, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1371651432}
@@ -11354,8 +11354,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .233333334, y: .0577777773, z: .00100000005}
-  m_Center: {x: .116666667, y: -.0288888887, z: 0}
+  m_Size: {x: .560000002, y: .0577777773, z: .00100000005}
+  m_Center: {x: .280000001, y: -.0288888887, z: 0}
 --- !u!114 &1570863393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11380,7 +11380,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 105, y: 26}
+  size: {x: 252, y: 26}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -11390,10 +11390,10 @@ MonoBehaviour:
   layout:
     anchorStyle: 65
     margins:
-      left: 88
-      top: 11.2929688
-      right: 87
-      bottom: 522.707031
+      left: 14
+      top: 11.2890625
+      right: 14
+      bottom: 522.710938
     owner: {fileID: 1570863393}
   renderOrder: 45
   isLocalized: 0
@@ -11408,7 +11408,7 @@ MonoBehaviour:
   autoSize: 1
   autoHeight: 0
   wordWrap: 0
-  text: Join game
+  text: Join game (double click)
   bottomColor:
     serializedVersion: 2
     rgba: 4294967295

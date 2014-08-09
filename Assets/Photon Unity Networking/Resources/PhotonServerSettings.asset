@@ -34,4 +34,5 @@ MonoBehaviour:
   - GetPosition
   - ShootMortar
   - GetMeleeAttack
+  - UpdateFrameScore
   DisableAutoOpenWizard: 0

@@ -18,6 +18,13 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     Match match;
     Frame currentFrame;
     IList<ParseObject> frames;
+    EventLogger logger;
+    int distance;
+
+    float NextFrameTimer = 2.0f, _nextFrameTimer;
+    bool waitForNextFrame;
+
+    int ownWins, opponentWins;
 
     public dfProgressBar PlayerHealthbar, OpponentHealthbar;
 
@@ -36,21 +43,39 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        occupiedSpawnPositions = new List<int>();
+        
      //   Connect();
         gui = GameObject.Find("Battle GUI").GetComponent<NetworkGUI>();
         gui.SetOwnName(Player.Username);
 
-        frames = new List<ParseObject>();
-        print("Start");
+        switch (PhotonNetwork.room.customProperties["mode"].ToString())
+        {
+            case "Single":
+                distance = 1;
+                break;
+            case "Best of 3":
+                distance = 3;
+                break;
+            case "Best of 5":
+                distance = 5;
+                break;
+        }
+        print("Distance: " + distance);
+        frames = new List<ParseObject>();        
         match = new Match();
-        print("Match id: " + match.ObjectId);
+
+
+        StartFrame();
+  
+    }
+
+    void StartFrame()
+    {
+        _startTimer = 0;
+        GameStarted = false;
         currentFrame = new Frame();
         frames.Add(currentFrame);
-    
-      //  currentFrame["match"] = match;
-        //print("JOE?");
-    
+
         match["frames"] = frames;
         match.SaveAsync().ContinueWith(t =>
         {
@@ -58,32 +83,15 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             currentFrame.SaveAsync();
         });
 
+        occupiedSpawnPositions = new List<int>();
         if (PhotonNetwork.isMasterClient)
         {
             ChooseSpawn();
         }
-        //currentFrame["match"] = match;
-        //currentFrame.SaveAsync();
-        //currentFrame.SaveAsync().ContinueWith(t =>
-        //{
-        //    if (t.IsCanceled || t.IsFaulted)
-        //    {
-        //        print("What went wrong? " + t.Exception.InnerException.Message);
-        //    }
-        //    else
-        //    {
-        //        print("It's fine apparently");
-        //    }
-        //});
-    //    currentFrame.SaveAsync();
     }
 
     void SaveSequentially()
     {
-        //match.SaveAsync().ContinueWith(t =>
-        //{            
-        //    currentFrame.SaveAsync();
-        //});
         currentFrame.SaveAsync().ContinueWith( t => {
             print("Done saving current frame");  
         });
@@ -97,16 +105,24 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
     void Update()
     {
-        //if (ReadyToStart)
-        //{
-        //    _startTimer += Time.deltaTime;
-        //    if (_startTimer > StartTimer)
-        //    {
-        //        print("Go!");
-        //        ReadyToStart = false;
-        //        photonView.RPC("StartGame", PhotonTargets.AllBuffered);
-        //    }
-        //}
+        if (logger != null)
+        {
+            logger.UpdateTime(Time.unscaledDeltaTime);
+        }
+
+        if (waitForNextFrame)
+        {
+            _nextFrameTimer += Time.deltaTime;
+            if (_nextFrameTimer > NextFrameTimer)
+            {
+                if (PhotonNetwork.isMasterClient)
+                {
+                    PhotonNetwork.DestroyAll();
+                }
+                waitForNextFrame = false;
+                StartFrame();
+            }
+        }
 
         if (!GameStarted && PhotonNetwork.isMasterClient)
         {
@@ -147,9 +163,6 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
     void CalculateWinner()
     {
-        currentFrame.Time = gui.Timer;
-        currentFrame.DamageGiven = 100 - gui.opponentHealth;
-        currentFrame.DamageTaken = 100 - gui.ownHealth;
         string outcome = "draw";
         if ((iDied && opponentDied) || (!iDied && !opponentDied)) 
         {
@@ -164,6 +177,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             print("I lost");
             gui.ShowMatchStatus("You lose...", Color.red);
             outcome = "lost";
+            opponentWins++;
         }
         if (!iDied && opponentDied)
         {
@@ -171,17 +185,67 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             print("I won");
             gui.ShowMatchStatus("You win!", Color.green);
             outcome = "won";
+            ownWins++;
         }
-        currentFrame.Outcome = outcome;
+        if (logger != null)
+        {
+            logger.StopLogging(outcome);
+        }
+        //currentFrame.Outcome = outcome;
 
-       
-        match.Won = !iDied;
-       
+        gui.UpdateFrameScore(ownWins, opponentWins);
+        //match.Won = !iDied;
+        
         iDied = false;
         opponentDied = false;
         gui.StopGame();
-        GameLogger.Instance.StopLogging();
-        SaveSequentially();        
+
+        NextFrame();
+    }
+
+    private void NextFrame()
+    {
+        if (ownWins > distance / 2.0f || opponentWins > distance / 2.0f)
+        {
+
+        }
+        else
+        {
+            _nextFrameTimer = 0;
+            waitForNextFrame = true;
+        }
+    }
+
+    [RPC]
+    protected void UpdateFrameScore(string masterOutcome)
+    {
+        switch (masterOutcome)
+        {
+            case "won":
+                if (PhotonNetwork.isMasterClient)
+                {
+                    ownWins++;
+                }
+                else
+                {
+                    opponentWins++;
+                }
+                break;
+            case "lost":
+                if (PhotonNetwork.isMasterClient)
+                {
+                    opponentWins++;
+                }
+                else
+                {
+                    ownWins++;
+                }
+                break;
+            case "draw":
+
+                break;               
+        }
+        gui.UpdateFrameScore(ownWins, opponentWins);
     }
 
     void OnPhotonPlayerDisconnected(PhotonPlayer otherPlayer)
@@ -190,97 +254,10 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         PhotonNetwork.room.visible = false;
     }   
 
-    //void OnGUI()
-    //{
-    //    GUILayout.Label(PhotonNetwork.connectionStateDetailed.ToString());
-    //}
-
-    //void OnJoinedLobby()
-    //{
-    //    PhotonNetwork.JoinRandomRoom();
-    //}
-
-    //void OnPhotonRandomJoinFailed()
-    //{
-    //    print("FailedW");
-    //    //PhotonNetwork.CreateRoom(null);
-    //    RoomOptions rOpt = new RoomOptions();
-    //    rOpt.isOpen = true;
-    //    rOpt.isVisible = true;
-    //    rOpt.maxPlayers = 2;
-    //    TypedLobby tl = new TypedLobby();
-
-    //    PhotonNetwork.CreateRoom(null, rOpt, tl);
-    //}
-
-    //void OnJoinedRoom()
-    //{
-    //    print("Joined");
-
-    //    SpawnMyPlayer();
-    //}
-
     void SpawnMyPlayer()
     {
-     //   GameObject player = PhotonNetwork.Instantiate("ModRobot", chosenSpawnPosition.position, chosenSpawnPosition.rotation, 0);
         GameObject player = PhotonNetwork.Instantiate("HammerRobot", chosenSpawnPosition.position, chosenSpawnPosition.rotation, 0);
-        //float x = Random.Range(-10, 10);
-        //float z = Random.Range(-10, 10);
-        //if (PhotonNetwork.isMasterClient)
-        //{
-        //    GameObject player = PhotonNetwork.Instantiate("ModRobot", Spawn3.position, Spawn3.rotation, 0);
-            
-        //}
-        //else
-        //{
-        //    GameObject player = PhotonNetwork.Instantiate("ModRobot", Spawn4.position, Spawn4.rotation, 0);
-        //}
-        // NetworkGUI.MyRobot = player.GetComponent<BattleController>();
-
-
-
-        // Make MyRobot red or something
-        //  player.transform.Find("Body").renderer.material = ownColor;
-
     }
-
-    //[RPC]
-    //protected void ChooseSpawn(int[] occupied)
-    //{
-    //    if (chosenSpawnPosition == null)
-    //    {
-    //        int chosen = Random.Range(0, 3);
-    //        while (occupied.Contains(chosen))
-    //        {
-    //            chosen = Random.Range(0, 3);
-    //        }
-
-    //        int[] nocc = new int[occupied.Length + 1];
-    //        for (int i = 0; i < occupied.Length; i++)
-    //        {
-    //            nocc[i] = occupied[i];
-    //        }
-    //        nocc[occupied.Length] = chosen;
-
-    //        switch (chosen)
-    //        {
-    //            case 0:
-    //                chosenSpawnPosition = Spawn1;
-    //                break;
-    //            case 1:
-    //                chosenSpawnPosition = Spawn2;
-    //                break;
-    //            case 2:
-    //                chosenSpawnPosition = Spawn3;
-    //                break;
-    //            case 3:
-    //                chosenSpawnPosition = Spawn4;
-    //                break;
-    //        }
-
-    //        photonView.RPC("ChooseSpawn", PhotonTargets.OthersBuffered, nocc);
-    //    }
-    //}
 
     protected void ChooseSpawn()
     {
@@ -342,7 +319,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     protected void SendInfo(string oppName, string oppId)
     {
         gui.SetOpponentName(oppName);
-        Player opp = Player.CreateWithoutData<Player>(oppId);
+        Player opp = Player.CreateWithoutData<Player>(oppId);       
         match.Opponent = opp;
     }
 
@@ -441,7 +418,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             controller1.SetBrains(brain1, brain2, brain3, brain4);
             print("Joe 2");
             var opponent = other.GetComponent<FightController>();
-
+            gui.ResetTimer();
             gui.MyRobot = controller1;
             gui.OpponentRobot = opponent;
             opponent.Opponent = controller1;
@@ -458,6 +435,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             health.Died += new HealthScript.DeathEventHandler(health_Died);
 
             GameObject HealthBar = Instantiate(Resources.Load("HealthBar")) as GameObject;
+
             dfFollowObject Follow = HealthBar.GetComponent<dfFollowObject>();
             Follow.attach = mine;
             HealthBar.transform.parent = UIRoot.transform;
@@ -467,7 +445,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             dfPropertyBinding prop = HealthBar.GetComponent<dfPropertyBinding>();
             dfComponentMemberInfo info = new dfComponentMemberInfo();
             info.Component = health;
-            info.MemberName = "Health";
+            info.MemberName = "HealthPercentage";
             prop.DataSource = info;
 
             dfComponentMemberInfo targetInfo = new dfComponentMemberInfo();
@@ -486,18 +464,18 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             HealthScript oppHealth = other.GetComponent<HealthScript>();
             oppHealth.Died += new HealthScript.DeathEventHandler(oppHealth_Died);
 
-            GameObject OppHealthBar = Instantiate(Resources.Load("HealthBar")) as GameObject;
+            GameObject OppHealthBar = Instantiate(Resources.Load("OppHealthBar")) as GameObject;
             dfFollowObject OppFollow = OppHealthBar.GetComponent<dfFollowObject>();
             OppFollow.attach = other;
             OppHealthBar.transform.parent = UIRoot.transform;
             OppFollow.enabled = true;
-            OppHealthBar.transform.Find("Me Label").GetComponent<dfLabel>().Hide();
+           // OppHealthBar.transform.Find("Me Label").GetComponent<dfLabel>().Hide();
             oppHealth.FollowScript = OppFollow;
 
             dfPropertyBinding oppProp = OppHealthBar.GetComponent<dfPropertyBinding>();
             dfComponentMemberInfo oppInfo = new dfComponentMemberInfo();
             oppInfo.Component = oppHealth;
-            oppInfo.MemberName = "Health";
+            oppInfo.MemberName = "HealthPercentage";
             oppProp.DataSource = oppInfo;
 
             dfComponentMemberInfo oppTargetInfo = new dfComponentMemberInfo();
@@ -525,6 +503,8 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
             print("Joe 6");
          //   GameLogger.Instance.StartLogging(controller1, controller1.Opponent);
+            logger = new EventLogger(controller1, Application.loadedLevelName, currentFrame);
+            logger.StartLogging();
         }
     }
 
@@ -553,34 +533,11 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         photonView.RPC("ReceiveSpawnPosition", newPlayer, chosen);
     }
 
-    //void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
-    //{
-    //    print("OnPhotonPlayerConnected. ID: " + newPlayer.ID + ", Name: " + newPlayer.name);
-
-    //    GameObject other = null;
-    //    PhotonView[] players = GameObject.FindObjectsOfType<PhotonView>();
-
-    //    ReadyToStart = true;
-
-    //    print("Number of PhotonViews: " + players.Length);
-    //    foreach (PhotonView ph in players)
-    //    {
-    //        print("ViewID: " + ph.viewID + ", SubID: " + ph.subId + ", InstantiationId: " + ph.instantiationId + ", Name: " + ph.name);
-    //        if (!ph.isMine)
-    //        {
-    //            other = ph.gameObject;
-    //            // break;
-    //            print("Is not mine");
-    //        }
-    //        else
-    //        {
-    //            print("Is Mine");
-    //        }
-    //    }
-    //    if (other != null)
-    //    {
-    //        print("JOE");
-    //    }
-
-    //}
+    void OnDestroy()
+    {
+        if (logger != null)
+        {
+            logger.StopLogging("quit");
+        }
+    }
 }

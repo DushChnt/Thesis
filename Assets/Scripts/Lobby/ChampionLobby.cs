@@ -2,6 +2,7 @@
 using System.Collections;
 using Parse;
 using System.Collections.Generic;
+using System.Linq;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class ChampionLobby : MonoBehaviour {
@@ -54,7 +55,7 @@ public class ChampionLobby : MonoBehaviour {
             int idx = 0;
             for (int i = 0; i < 1; i++)
             {
-                foreach (RoomInfo game in PhotonNetwork.GetRoomList())
+                foreach (RoomInfo game in PhotonNetwork.GetRoomList().OrderBy(t => Mathf.Abs((int)t.customProperties["level"] - Player.Level)))
                 {
                     dfPanel listItem = ActiveRoomsPanel.AddPrefab(ListItem) as dfPanel; // as UserListItem;
                     listItem.Width = ActiveRoomsPanel.Width - ActiveRoomsPanel.FlowPadding.left - ActiveRoomsPanel.FlowPadding.right;
@@ -76,7 +77,7 @@ public class ChampionLobby : MonoBehaviour {
                     }
 
                     dfLabel roomName = listItem.Find("Room Name").GetComponent<dfLabel>();
-                    roomName.Text = game.customProperties["name"].ToString();
+                    roomName.Text = string.Format("{0} ({1})", game.customProperties["name"].ToString(), game.customProperties["level"].ToString());
 
                     dfLabel mapName = listItem.Find("Map Type").GetComponent<dfLabel>();
                     mapName.Text = "Map: " + game.customProperties["map"].ToString();
@@ -307,8 +308,8 @@ public class ChampionLobby : MonoBehaviour {
 
         string mode = GameModeDropdown.SelectedValue;
 
-        string[] roomPropsInLobby = { "map", "mode", "name" };
-        Hashtable customRoomProperties = new Hashtable() { { "map", arena }, { "mode", mode }, { "name", Player.CurrentUser.Username } };
+        string[] roomPropsInLobby = { "map", "mode", "name", "level" };
+        Hashtable customRoomProperties = new Hashtable() { { "map", arena }, { "mode", mode }, { "name", Player.CurrentUser.Username }, { "level", Player.Level } };
         if (TestOK())
         {
             PhotonNetwork.CreateRoom(Player.CurrentUser.Username + GenerateRandomTag(), true, true, 2, customRoomProperties, roomPropsInLobby);

@@ -28,9 +28,17 @@ public class EventLogger {
     private float damageTaken, damageGiven;
 
 	// Use this for initialization
-	public EventLogger(FightController controller, string arena) {
-        this.Arena = arena;
-        this.Controller = controller;
+    public EventLogger(FightController controller, string arena, Frame frame)
+    {
+        this.currentFrame = frame;
+        this.match = frame.Match;
+        this.frames = new List<ParseObject>();
+        this.frames.Add(currentFrame);
+
+        Initialize(controller, arena);
+    }
+
+	public EventLogger(FightController controller, string arena) {        
         frames = new List<ParseObject>();       
         match = new Match();      
         currentFrame = new Frame();
@@ -42,6 +50,16 @@ public class EventLogger {
             currentFrame.SaveAsync();
         });
 
+        Initialize(controller, arena);
+
+     //   UI.UIStartPressed += new MissionUI.UIEventHandler(UI_UIStartPressed);
+	}
+
+    private void Initialize(FightController controller, string arena)
+    {
+        this.Arena = arena;
+        this.Controller = controller;       
+
         controller.MeleeAttackEvent += new FightController.AttackEventHandler(Controller_MeleeAttackEvent);
         controller.HitMelee += new FightController.HitEventHandler(Controller_HitMelee);
         controller.RangedAttackEvent += new FightController.AttackEventHandler(Controller_RangedAttackEvent);
@@ -51,9 +69,7 @@ public class EventLogger {
         controller.BrainSwitched += new FightController.SwitchBrainEventHandler(Controller_BrainSwitched);
 
         controller.HealthScript.DamageTaken += new HealthScript.DamageTakenHandler(HealthScript_DamageTaken);
-
-     //   UI.UIStartPressed += new MissionUI.UIEventHandler(UI_UIStartPressed);
-	}
+    }
 
     public void StartLogging()
     {
