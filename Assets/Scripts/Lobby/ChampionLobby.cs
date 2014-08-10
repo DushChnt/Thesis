@@ -53,7 +53,15 @@ public class ChampionLobby : MonoBehaviour {
                 sel_idx = currentlySelected.GetComponent<RoomData>().Index;
             }
             int idx = 0;
-            for (int i = 0; i < 1; i++)
+            if (PhotonNetwork.GetRoomList().Length == 0)
+            {
+                dfLabel label = ActiveRoomsPanel.AddControl<dfLabel>();
+                label.Padding = new RectOffset(10, 10, 10, 10);
+                label.Text = "No games available";
+                label.Color = new Color32(200, 200, 200, 255);
+                label.AutoSize = true;
+            }
+            else
             {
                 foreach (RoomInfo game in PhotonNetwork.GetRoomList().OrderBy(t => Mathf.Abs((int)t.customProperties["level"] - Player.Level)))
                 {
@@ -68,19 +76,19 @@ public class ChampionLobby : MonoBehaviour {
 
                     if (data.Index == sel_idx)
                     {
-                        print("They match!");
+                        // print("They match!");
                         data.Selected = true;
                         listItem.BackgroundColor = new Color32(0, 0, 0, 255);
                         currentlySelected = listItem;
                         currentlySelected.Find("Selected Indicator").GetComponent<dfSprite>().Show();
-                       
+
                     }
 
                     dfLabel roomName = listItem.Find("Room Name").GetComponent<dfLabel>();
                     roomName.Text = string.Format("{0} ({1})", game.customProperties["name"].ToString(), game.customProperties["level"].ToString());
 
                     dfLabel mapName = listItem.Find("Map Type").GetComponent<dfLabel>();
-                    mapName.Text = "Map: " + game.customProperties["map"].ToString();
+                    mapName.Text = game.customProperties["map"].ToString();
 
                     dfLabel modeName = listItem.Find("Game Mode").GetComponent<dfLabel>();
                     modeName.Text = game.customProperties["mode"].ToString();
@@ -207,7 +215,7 @@ public class ChampionLobby : MonoBehaviour {
     
     void OnJoinedLobby()
     {
-        print("Joined lobby");
+        // print("Joined lobby");
         CreateButton.Click += new MouseEventHandler(CreateButton_Click);
         JoinRandomButton.Click += new MouseEventHandler(JoinRandomButton_Click);
     }
@@ -247,25 +255,25 @@ public class ChampionLobby : MonoBehaviour {
         //}
         //
         string arena = PhotonNetwork.room.customProperties["map"].ToString();
-        print("Value of arena: " + arena);
+        // print("Value of arena: " + arena);
         Application.LoadLevel(arena);
     }
 
     void OnReceivedRoomListUpdate()
     {
-        print("Updated room list");
+        // print("Updated room list");
         GenerateRoomList();
     }
 
     void OnPhotonRandomJoinFailed()
     {
-        print("Failed join random");
+        // print("Failed join random");
 
     }
 
     void OnCreatedRoom()
     {
-        print("Joe?");
+        // print("Joe?");
         //  Application.LoadLevel("Network Battle");
 
         //    Application.LoadLevel("Arena2");

@@ -586,10 +586,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab29464a6e794804f9255644d50797cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explosion: {fileID: 19800032, guid: 78adde0cb53bd064fa5501d4d7c08895, type: 2}
+  Explosion: {fileID: 19800056, guid: a36f1da587e2b4a49987ccea8327b70c, type: 2}
   GUI: {fileID: 0}
   IsOpponent: 1
-  MaxHealth: 100
+  MaxHealth: 150
   FollowScript: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -607,8 +607,8 @@ MonoBehaviour:
   TurnSpeed: 180
   OpponentHealth: {fileID: 0}
   OwnHealth: {fileID: 11400000}
-  Mortar: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
-  Bloom: {fileID: 100000, guid: 61175240b1fb0644684152ef8337c8c2, type: 2}
+  Mortar: {fileID: 100000, guid: d9888e92cd89a6c4dadda92db4bdf642, type: 2}
+  Bloom: {fileID: 100000, guid: 8584cd9aec098a245818e024d02e9f86, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

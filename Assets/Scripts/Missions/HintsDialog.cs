@@ -15,7 +15,7 @@ In the <span style=""color: #99ff99"">Focus areas</span> panel you can choose wh
 <br><br>
 In the <span style=""color: #0099ff"">Target behaviour</span> panel you can select how the target should move around. It is easiest to start with a stationary target. If you want the target to follow your robot, select Multiple targets.
 <br><br>
-Click on ? to bring up this dialog again.";
+Click on ! to bring up this dialog again.";
 
     string mission2 = @"<b>You have now unlocked the Melee focus areas. These all relate to your robot's close combat skills.</b>
 
@@ -29,7 +29,7 @@ Remember that each attack slows down the robot according to the slowdown of the 
 <br><br>
 <span style=""color: green""><b>Tip:</b></span> It is a good idea to base your melee attack brains on brains that can approach already. Generally it is a good idea to base advanced brains on simple brains.
 <br><br>
-Click on ? to bring up this dialog again.";
+Click on ! to bring up this dialog again.";
 
     string mission3 = @"<b>You have now unlocked the Ranged focus areas. These all relate to your robot's ranged combat skills.</b>
 <br>
@@ -43,7 +43,7 @@ Click on ? to bring up this dialog again.";
 <br><br>
 <span style=""color: green""><b>Tip 2:</b></span> Bigger targets are easier to hit, smaller targets give more precision.
 <br><br>
-Click on ? to bring up this dialog again.";
+Click on ! to bring up this dialog again.";
 
     string mission4 = @"<b>You have now unlocked the Mortar focus areas. These all relate to your robot's mortar combat skills.</b>
 <br>
@@ -57,7 +57,7 @@ Click on ? to bring up this dialog again.";
 <br><br>
 <span style=""color: green""><b>Tip:</b></span> Don't select too many focus areas at once. Gradually change the focus areas, e.g. first train aiming, then train attacks, then train hits and precision and finally train damage per attack.
 <br><br>
-Click on ? to bring up this dialog again.";
+Click on ! to bring up this dialog again.";
 
     string mission5 = @"<b>Your robot is fully upgraded and has learned all the different combat skills. Now you must fine tune your robot to be able to beat the final mission.</b>
 <br><br>

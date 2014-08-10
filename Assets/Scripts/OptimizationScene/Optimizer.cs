@@ -185,8 +185,8 @@ public class Optimizer : MonoBehaviour {
 		}
 		catch (Exception e1)
 		{
-			print(champFileLoadPath + " Error loading genome from file!\nLoading aborted.\n"
-									  + e1.Message + "\nJoe: " + champFileLoadPath);
+			// print(champFileLoadPath + " Error loading genome from file!\nLoading aborted.\n"
+			//						  + e1.Message + "\nJoe: " + champFileLoadPath);
 			return;
 		}
 
@@ -272,9 +272,9 @@ public class Optimizer : MonoBehaviour {
 	public void StartEA()
 	{
         CleanUpScene();
-		Utility.DebugLog = true;
+		Utility.DebugLog = false;
 		Utility.Log("Starting PhotoTaxis experiment");
-		print("Loading: " + popFileLoadPath);
+		// print("Loading: " + popFileLoadPath);
 		_ea = experiment.CreateEvolutionAlgorithm(popFileLoadPath);
 
 		_ea.UpdateEvent += new EventHandler(ea_UpdateEvent);
@@ -507,7 +507,7 @@ public class Optimizer : MonoBehaviour {
             if (fps < 10)
             {
                 Time.timeScale = Time.timeScale - 1;
-                print("Lowering time scale to " + Time.timeScale);
+                // print("Lowering time scale to " + Time.timeScale);
             }
         }
 	}

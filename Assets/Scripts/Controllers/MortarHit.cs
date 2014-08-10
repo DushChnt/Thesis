@@ -6,7 +6,8 @@ public class MortarHit : Photon.MonoBehaviour {
     public delegate void MortarEventHandler(object sender, MortarEventArgs args);    
 
     public event MortarEventHandler MortarCollision;
-    public GameObject Bloom;
+    public GameObject SmashEffect;
+    public GameObject Bloom;  
 
     protected virtual void OnMortarCollision(MortarEventArgs args)
     {
@@ -38,6 +39,7 @@ public class MortarHit : Photon.MonoBehaviour {
         {
             CollisionPoint = this.transform.position
         };
+        Instantiate(SmashEffect, transform.position, Quaternion.identity);
         Instantiate(Bloom, transform.position, Quaternion.identity);
         OnMortarCollision(args);
         Destroy(gameObject);

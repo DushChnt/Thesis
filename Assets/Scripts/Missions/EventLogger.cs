@@ -32,6 +32,7 @@ public class EventLogger {
     {
         this.currentFrame = frame;
         this.match = frame.Match;
+        this.match.Distance = 1;
         this.frames = new List<ParseObject>();
         this.frames.Add(currentFrame);
 

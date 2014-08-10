@@ -59,7 +59,7 @@ public class BrainPanelState : MonoBehaviour {
         color = _panel.BackgroundColor;
         _panel.BackgroundColor = grey;
 
-        print("Init");
+        // print("Init");
         StartCoroutine(Initialize());
 	}
 
@@ -125,7 +125,7 @@ public class BrainPanelState : MonoBehaviour {
 
     public IEnumerator Initialize()
     {
-        print("Init2");
+        // print("Init2");
         switch (SlotNo)
         {
             case 1:
@@ -154,13 +154,13 @@ public class BrainPanelState : MonoBehaviour {
             _panel.BackgroundColor = color;
 
             Task fetchTask = _brain.FetchIfNeededAsync();
-            print("Fetching");
+            // print("Fetching");
             while (!fetchTask.IsCompleted)
             {
                 yield return null;
             }
-            print("Brain id: " + _brain.ObjectId);
-            print("Brain name: " + _brain.Name);
+            // print("Brain id: " + _brain.ObjectId);
+            // print("Brain name: " + _brain.Name);
 
             _label.Text = _brain.Name;
         }

@@ -613,7 +613,7 @@ MonoBehaviour:
   OpponentHealth: {fileID: 0}
   DummyAttack: 0
   LaserExposure: .100000001
-  Bloom: {fileID: 0}
+  Bloom: {fileID: 100000, guid: f2e79c709ffaa3d4d99d6d763b0e41d4, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

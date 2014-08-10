@@ -15,9 +15,11 @@ public class CameFromScript : MonoBehaviour {
         switch (CameFrom)
         {
             case global::CameFrom.Bootcamp:
+                PhotonNetwork.offlineMode = true;
                 PlayerPrefs.SetString(CAME_FROM, BOOTCAMP);
                 break;
             case global::CameFrom.ChampionsArena:
+                PhotonNetwork.offlineMode = false;
                 PlayerPrefs.SetString(CAME_FROM, CHAMPIONS_ARENA);
                 break;
         }

@@ -217,9 +217,9 @@ public class OpponentController : MonoBehaviour {
                     OwnHealth.TakeDamage(damage);
                 }
             }
-
-            //GameObject mortar = ((MortarHit)sender).gameObject;
-            //Instantiate(Bloom, mortar.transform.position, Quaternion.identity);
+            // print("Instantiating bloom");
+            GameObject mortar = ((MortarHit)sender).gameObject;
+            Instantiate(Bloom, mortar.transform.position, Quaternion.identity);
         }
 
     }
@@ -332,7 +332,7 @@ public class OpponentController : MonoBehaviour {
     {
         if (col.tag.Equals("Robot"))
         {
-            print("Enter!");
+            // print("Enter!");
             TargetIsInMeleeBox = true;
         }
     }
@@ -342,7 +342,7 @@ public class OpponentController : MonoBehaviour {
         //     print("Hammer: " + col.tag);
         if (col.tag.Equals("Robot"))
         {
-            print("Exit!");
+            // print("Exit!");
             TargetIsInMeleeBox = false;
         }
     }
@@ -368,7 +368,7 @@ public class OpponentController : MonoBehaviour {
         Vector3 p_0 = s_0 + transform.forward * 50;
         Vector3 t = new Vector3(p_0.x, transform.position.y, p_0.z);
         Vector3 dir = Vector3.Normalize(t - s_0);
-        print("Dir: " + dir);
+        // print("Dir: " + dir);
         Debug.DrawLine(s_0, t, Color.yellow);
         Vector3 ray = transform.forward;
         if (Random.value > 0.7)
@@ -391,7 +391,7 @@ public class OpponentController : MonoBehaviour {
         if (isHit)
         {
             point = hit.point;
-            print("Hit something at distance " + Utility.GetDistance(gameObject.transform.position, hit.point));
+            // print("Hit something at distance " + Utility.GetDistance(gameObject.transform.position, hit.point));
         }
         else
         {

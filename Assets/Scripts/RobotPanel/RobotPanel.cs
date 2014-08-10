@@ -21,7 +21,7 @@ public class RobotPanel : MonoBehaviour {
         
         UsernameLabel.Text = Player.Username;
         LevelLabel.Text = Player.Level + "";
-        
+        Avatar.SpriteName = string.Format("spell-{0}", (3 + Player.Level));
 	}
 	
 	// Update is called once per frame

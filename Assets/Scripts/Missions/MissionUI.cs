@@ -47,6 +47,11 @@ public class MissionUI : MonoBehaviour {
         }
     }
 
+    void Awake()
+    {
+        PhotonNetwork.offlineMode = true;
+    }
+
 	// Use this for initialization
 	void Start () {
         
@@ -99,7 +104,7 @@ public class MissionUI : MonoBehaviour {
         if (Player.Brain1 != null)
         {
             path = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", Player.Username, Player.Brain1.ObjectId);
-            print("Path: " + path);
+            // print("Path: " + path);
             brain1 = Utility.LoadBrain(path);
             activeBrain = brain1;
         }
@@ -137,7 +142,7 @@ public class MissionUI : MonoBehaviour {
         Controller.Activate(activeBrain, Target);
         Controller.SetBrains(brain1, brain2, brain3, brain4);
 
-        print("Current mission: " + PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1));
+        // print("Current mission: " + PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1));
         string arena = "";
         switch (PlayerPrefs.GetInt(MissionPanel.CURRENT_MISSION, 1))
         {

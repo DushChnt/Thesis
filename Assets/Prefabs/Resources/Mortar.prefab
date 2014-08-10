@@ -46,7 +46,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 2d9a1866ec8620048881be6816612c26, type: 2}
+  - {fileID: 2100000, guid: 032ecbf057e79bd4082725b49673628c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1252da558c3d54e8646db5ebdb63e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bloom: {fileID: 100000, guid: d51c7b73771413e4496cc66abdb0af7d, type: 2}
+  SmashEffect: {fileID: 100000, guid: d51c7b73771413e4496cc66abdb0af7d, type: 2}
+  Bloom: {fileID: 100000, guid: f2e79c709ffaa3d4d99d6d763b0e41d4, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

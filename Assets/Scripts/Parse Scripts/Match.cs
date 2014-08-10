@@ -20,6 +20,13 @@ public class Match : ParseObject
         set { SetProperty<bool>(value, "Won"); }
     }
 
+    [ParseFieldName("distance")]
+    public int Distance
+    {
+        get { return GetProperty<int>("Distance"); }
+        set { SetProperty<int>(value, "Distance"); }
+    }
+
     [ParseFieldName("frames")]
     public IList<ParseObject> Frames
     {

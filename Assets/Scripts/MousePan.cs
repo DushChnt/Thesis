@@ -79,7 +79,7 @@ public class MousePan : MonoBehaviour {
        //     print("Pan clamp: " + pan);
             if (zoomDelta < 0 || camera.transform.position.y < (ZoomMax / 2))
             {
-                print("Apply pan: " + pan + ", zoomDelta: " + zoomDelta + ", camera.y: " + camera.transform.position.y);
+                // print("Apply pan: " + pan + ", zoomDelta: " + zoomDelta + ", camera.y: " + camera.transform.position.y);
                 camera.transform.eulerAngles = new Vector3(pan, 0, 0);
              //   camera.transform.eulerAngles = Vector3.Lerp(camera.transform.eulerAngles, new Vector3(pan, 0, 0), 0.2f);
             }

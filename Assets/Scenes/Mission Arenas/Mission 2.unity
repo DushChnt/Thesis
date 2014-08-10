@@ -127,8 +127,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .448888898, y: .120000005, z: .00100000005}
-  m_Center: {x: .224444449, y: -.0600000024, z: 0}
+  m_Size: {x: .451111108, y: .120000005, z: .00100000005}
+  m_Center: {x: .225555554, y: -.0600000024, z: 0}
 --- !u!114 &1923036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   disabledColor:
     serializedVersion: 2
     rgba: 4294967295
-  size: {x: 202, y: 54}
+  size: {x: 203, y: 54}
   minSize: {x: 0, y: 0}
   maxSize: {x: 0, y: 0}
   clipChildren: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
     margins:
       left: 62.0390625
       top: 183.160156
-      right: 501.960938
+      right: 500.960938
       bottom: 319.839844
     owner: {fileID: 1923036}
   renderOrder: 44
@@ -182,7 +182,7 @@ MonoBehaviour:
   autoSize: 1
   autoHeight: 0
   wordWrap: 0
-  text: 1. 5x hits!
+  text: 1. 3x hits!
   bottomColor:
     serializedVersion: 2
     rgba: 4278248191
@@ -532,7 +532,7 @@ MonoBehaviour:
       right: 215
       bottom: 483.042969
     owner: {fileID: 17959037}
-  renderOrder: 62
+  renderOrder: 56
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -656,7 +656,7 @@ MonoBehaviour:
       right: 57.78125
       bottom: 339.050781
     owner: {fileID: 25204279}
-  renderOrder: 64
+  renderOrder: 58
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -781,7 +781,7 @@ MonoBehaviour:
       right: 4.33984375
       bottom: 3.828125
     owner: {fileID: 37209487}
-  renderOrder: 24
+  renderOrder: 25
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -873,7 +873,7 @@ MonoBehaviour:
       right: 283
       bottom: 17.5039062
     owner: {fileID: 51311682}
-  renderOrder: 61
+  renderOrder: 55
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1086,7 +1086,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 130563785}
-  renderOrder: 16
+  renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1403,7 +1403,7 @@ MonoBehaviour:
       right: -1.3515625
       bottom: 52.9765625
     owner: {fileID: 211142972}
-  renderOrder: 28
+  renderOrder: 29
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1612,7 +1612,7 @@ MonoBehaviour:
       right: 283
       bottom: 17.5039062
     owner: {fileID: 291704121}
-  renderOrder: 55
+  renderOrder: 61
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -1922,7 +1922,7 @@ MonoBehaviour:
       right: 417
       bottom: 171
     owner: {fileID: 347763168}
-  renderOrder: 60
+  renderOrder: 54
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2018,7 +2018,7 @@ MonoBehaviour:
       right: 83.640625
       bottom: -2.03125
     owner: {fileID: 361383336}
-  renderOrder: 27
+  renderOrder: 28
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2283,7 +2283,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 378475183}
-  renderOrder: 21
+  renderOrder: 22
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2428,7 +2428,7 @@ MonoBehaviour:
       right: 173.378906
       bottom: 25.515625
     owner: {fileID: 382791895}
-  renderOrder: 10
+  renderOrder: 11
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -2524,7 +2524,7 @@ MonoBehaviour:
       right: 36
       bottom: 727
     owner: {fileID: 398506713}
-  renderOrder: 1
+  renderOrder: 2
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3458,7 +3458,7 @@ MonoBehaviour:
       right: 4.5
       bottom: 3.828125
     owner: {fileID: 574985181}
-  renderOrder: 19
+  renderOrder: 20
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3690,7 +3690,7 @@ MonoBehaviour:
       right: -1.171875
       bottom: 52.9765625
     owner: {fileID: 614042868}
-  renderOrder: 13
+  renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -3985,7 +3985,7 @@ MonoBehaviour:
       right: 22
       bottom: 11
     owner: {fileID: 692120927}
-  renderOrder: 31
+  renderOrder: 9
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4089,7 +4089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DataSource:
     Component: {fileID: 979746664}
-    MemberName: Health
+    MemberName: HealthPercentage
   DataTarget:
     Component: {fileID: 698283309}
     MemberName: Value
@@ -4292,7 +4292,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  actAsSlider: 1
+  actAsSlider: 0
 --- !u!114 &746160888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4397,7 +4397,7 @@ MonoBehaviour:
       right: 614.792969
       bottom: 22.5
     owner: {fileID: 747456547}
-  renderOrder: 30
+  renderOrder: 31
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -4999,7 +4999,7 @@ MonoBehaviour:
       right: 449.378906
       bottom: 15.515625
     owner: {fileID: 809970453}
-  renderOrder: 25
+  renderOrder: 26
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5786,7 +5786,7 @@ MonoBehaviour:
       right: -1.08203125
       bottom: 52.9765625
     owner: {fileID: 918188177}
-  renderOrder: 18
+  renderOrder: 19
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -5954,7 +5954,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 938773039}
-  renderOrder: 11
+  renderOrder: 12
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6161,7 +6161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab29464a6e794804f9255644d50797cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Explosion: {fileID: 19800032, guid: 78adde0cb53bd064fa5501d4d7c08895, type: 2}
+  Explosion: {fileID: 19800056, guid: a36f1da587e2b4a49987ccea8327b70c, type: 2}
   GUI: {fileID: 1201523330}
   IsOpponent: 1
   MaxHealth: 100
@@ -6198,8 +6198,8 @@ MonoBehaviour:
   TurnSpeed: 180
   OpponentHealth: {fileID: 1777298642}
   OwnHealth: {fileID: 979746664}
-  Mortar: {fileID: 100000, guid: 62d0efc9771bfd0469723354fa29e5b8, type: 2}
-  Bloom: {fileID: 100000, guid: 61175240b1fb0644684152ef8337c8c2, type: 2}
+  Mortar: {fileID: 100000, guid: d9888e92cd89a6c4dadda92db4bdf642, type: 2}
+  Bloom: {fileID: 100000, guid: 8584cd9aec098a245818e024d02e9f86, type: 2}
 --- !u!114 &979746667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6366,7 +6366,7 @@ MonoBehaviour:
       right: 82.9960938
       bottom: -2.0234375
     owner: {fileID: 1002206508}
-  renderOrder: 12
+  renderOrder: 13
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6478,7 +6478,7 @@ MonoBehaviour:
       right: 17
       bottom: 29
     owner: {fileID: 1027686648}
-  renderOrder: 26
+  renderOrder: 27
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6887,7 +6887,7 @@ MonoBehaviour:
       right: 417
       bottom: 11
     owner: {fileID: 1094888026}
-  renderOrder: 9
+  renderOrder: 10
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -6983,7 +6983,7 @@ MonoBehaviour:
       right: 57.78125
       bottom: 104.050781
     owner: {fileID: 1110629998}
-  renderOrder: 57
+  renderOrder: 63
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7279,7 +7279,7 @@ MonoBehaviour:
       right: 64
       bottom: 239.625
     owner: {fileID: 1189199128}
-  renderOrder: 65
+  renderOrder: 59
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7631,7 +7631,7 @@ MonoBehaviour:
       right: 8.96484375
       bottom: 49.515625
     owner: {fileID: 1244529410}
-  renderOrder: 3
+  renderOrder: 4
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -7872,7 +7872,7 @@ MonoBehaviour:
       right: 82.6757812
       bottom: -2.0234375
     owner: {fileID: 1248714943}
-  renderOrder: 17
+  renderOrder: 18
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -8024,7 +8024,7 @@ MonoBehaviour:
       right: 6.5
       bottom: 3.828125
     owner: {fileID: 1293277463}
-  renderOrder: 29
+  renderOrder: 30
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -8137,7 +8137,7 @@ MonoBehaviour:
       right: 311.382812
       bottom: 15.515625
     owner: {fileID: 1310576904}
-  renderOrder: 20
+  renderOrder: 21
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -8404,7 +8404,7 @@ MonoBehaviour:
       right: 6.66015625
       bottom: 3.828125
     owner: {fileID: 1335468712}
-  renderOrder: 14
+  renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -8500,7 +8500,7 @@ MonoBehaviour:
       right: 638
       bottom: 456
     owner: {fileID: 1347064602}
-  renderOrder: 4
+  renderOrder: 1
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -8732,7 +8732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DataSource:
     Component: {fileID: 1777298642}
-    MemberName: Health
+    MemberName: HealthPercentage
   DataTarget:
     Component: {fileID: 1389562695}
     MemberName: Value
@@ -9276,7 +9276,7 @@ MonoBehaviour:
       right: 35.3789062
       bottom: 15.515625
     owner: {fileID: 1481755378}
-  renderOrder: 15
+  renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -9370,7 +9370,7 @@ MonoBehaviour:
       right: 11.9648438
       bottom: 13.3398438
     owner: {fileID: 1490165616}
-  renderOrder: 2
+  renderOrder: 3
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -9494,7 +9494,7 @@ MonoBehaviour:
       right: 84.1367188
       bottom: -2.0234375
     owner: {fileID: 1502375271}
-  renderOrder: 22
+  renderOrder: 23
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -9824,7 +9824,7 @@ MonoBehaviour:
       right: 125
       bottom: 233.632812
     owner: {fileID: 1601128577}
-  renderOrder: 59
+  renderOrder: 65
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -10038,7 +10038,7 @@ MonoBehaviour:
       right: 417
       bottom: 171
     owner: {fileID: 1740330590}
-  renderOrder: 54
+  renderOrder: 60
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -10134,7 +10134,7 @@ MonoBehaviour:
       right: 57.78125
       bottom: 339.050781
     owner: {fileID: 1749260810}
-  renderOrder: 58
+  renderOrder: 64
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -10363,7 +10363,7 @@ MonoBehaviour:
   OpponentHealth: {fileID: 979746664}
   DummyAttack: 0
   LaserExposure: .100000001
-  Bloom: {fileID: 0}
+  Bloom: {fileID: 100000, guid: f2e79c709ffaa3d4d99d6d763b0e41d4, type: 2}
 --- !u!114 &1777298639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10809,7 +10809,7 @@ MonoBehaviour:
       right: 136
       bottom: 483.042969
     owner: {fileID: 1857616905}
-  renderOrder: 56
+  renderOrder: 62
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -10910,6 +10910,10 @@ Prefab:
       propertyPath: OpponentHealth
       value: 
       objectReference: {fileID: 1777298642}
+    - target: {fileID: 11400000, guid: 96f2abe6c347eb84ba560ec1692d1730, type: 2}
+      propertyPath: MaxHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96f2abe6c347eb84ba560ec1692d1730, type: 2}
   m_RootGameObject: {fileID: 979746663}
@@ -11135,7 +11139,7 @@ MonoBehaviour:
   autoSize: 0
   autoHeight: 1
   wordWrap: 1
-  text: Hit the target 5 times.
+  text: Hit the target 3 times.
   bottomColor:
     serializedVersion: 2
     rgba: 4294967295
@@ -11246,7 +11250,7 @@ MonoBehaviour:
       right: 57.78125
       bottom: 103.90625
     owner: {fileID: 1976153587}
-  renderOrder: 63
+  renderOrder: 57
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -11371,7 +11375,7 @@ MonoBehaviour:
       right: -1.26171875
       bottom: 52.9765625
     owner: {fileID: 2037147698}
-  renderOrder: 23
+  renderOrder: 24
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1

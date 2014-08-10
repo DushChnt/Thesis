@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class NetworkGUI : MonoBehaviour {
-
-	public dfButton BackButton;
+public class NetworkGUI : MonoBehaviour {	
    
 	public dfPanel Slot1, Slot2, Slot3, Slot4, CountdownPanel;
 	public FightController MyRobot, OpponentRobot;
-    public dfLabel OwnWinsLabel, OpponentWinsLabel, TimeLabel, OwnNameLabel, OpponentNameLabel, StatusLabel, TipLabel;
+    public dfLabel OwnWinsLabel, OpponentWinsLabel, TimeLabel, OwnNameLabel, OpponentNameLabel, StatusLabel, TipLabel, BestOfLabel;
     public ResetButton ResetButton;
 	BrainPanelState activePanel;
     dfLabel countdownLabel, countdownTitle, countdownFraction;
+    public dfButton BackButton;
 
     string OwnName, OpponentName;
 
@@ -104,6 +103,11 @@ public class NetworkGUI : MonoBehaviour {
     {
         this.OwnName = name;
         OwnNameLabel.Text = name;
+    }
+
+    public void SetDistance(string distance)
+    {
+        BestOfLabel.Text = distance;
     }
 
     public void SetOpponentName(string name)
@@ -201,7 +205,7 @@ public class NetworkGUI : MonoBehaviour {
 	{
 		PhotonNetwork.Disconnect();
 	  //  PhotonNetwork.LeaveLobby();
-		Application.LoadLevel("Start Menu");
+		Application.LoadLevel("Champions arena");
 	}
 
     public void StopGame()
@@ -209,9 +213,60 @@ public class NetworkGUI : MonoBehaviour {
         GameStarted = false;
     }
 
+    public void ShowMatchResult(int ownWins, int oppWins)
+    {
+        TipLabel.Hide();
+        CountdownPanel.Show();
+
+        if (ownWins > oppWins)
+        {
+            StatusLabel.Text = string.Format("You win {0} - {1}", ownWins, oppWins);
+            StatusLabel.Color = new Color32(0, 255, 0, 255);
+        }
+        else
+        {
+            StatusLabel.Text = string.Format("You lose {0} - {1}", ownWins, oppWins);
+            StatusLabel.Color = new Color32(255, 0, 0, 255);
+        }
+        countdownTitle.Text = "";
+        countdownFraction.Hide();
+        countdownLabel.Hide();
+
+        BackButton.Click += new MouseEventHandler(BackButton_Click);
+        BackButton.Show();
+    }
+
+    public void SetSelectedBrain(int number)
+    {
+        switch (number)
+        {
+            case 1:
+                PerformSlotClick(number, Slot1);
+                break;
+            case 2:
+                PerformSlotClick(number, Slot2);
+                break;
+            case 3:
+                PerformSlotClick(number, Slot3);
+                break;
+            case 4:
+                PerformSlotClick(number, Slot4);
+                break;
+        }
+    }
+
     public void ResetTimer()
     {
         timer = 99.99f;
+    }
+
+    public bool TimeOut()
+    {
+        if (GameStarted)
+        {
+            return timer <= 0;
+        }
+        return false;
     }
 
     void Update()

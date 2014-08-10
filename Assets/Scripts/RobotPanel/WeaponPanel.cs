@@ -52,7 +52,7 @@ public class WeaponPanel : MonoBehaviour {
                 if (Player.MeleeWeapon != null)
                 {
                     Weapon = WeaponList.WeaponDict[Player.MeleeWeapon];
-                    print("Weapon: " + Weapon.Name);
+                    // print("Weapon: " + Weapon.Name);
                     weaponSlot.SetWeapon(Weapon);
                 }
                 if (Player.Level > 1)

@@ -23,6 +23,12 @@ public class TrainingScript : MonoBehaviour {
         }
     }
 
+    void Awake()
+    {
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.offlineMode = true;
+    }
+
 	// Use this for initialization
 	void Start () {
         panel = this.GetComponent<dfPanel>();
@@ -47,9 +53,9 @@ public class TrainingScript : MonoBehaviour {
     IEnumerator WaitForRequest(Brain brain, bool pop)
     {
         WWW www = new WWW(pop ? brain.Population.Url.AbsoluteUri : brain.ChampionGene.Url.AbsoluteUri);
-        print("Downloading " + brain.ObjectId);
+        // print("Downloading " + brain.ObjectId);
         yield return www;
-        print("Done downloading");
+        // print("Done downloading");
 
         string folderPath = Application.persistentDataPath + string.Format("/{0}", ParseUser.CurrentUser.Username);
         DirectoryInfo dirInf = new DirectoryInfo(folderPath);
@@ -160,18 +166,27 @@ public class TrainingScript : MonoBehaviour {
 
         if (ok)
         {
-            if (TestWeapons())
+            if (NameTextBox.Text == null || NameTextBox.Text.Length == 0)
             {
-                PlayerPrefs.SetString("Mode", "Train");
-                //   PlayerPrefs.SetInt("Evolution Speed", GetEvolutionSpeed());
-
-                Application.LoadLevel("Optimization scene");
+                panel.Disable();
+                TrainingDialog.ShowDialog("You need to enter a name for the brain before continuing.");
+                TrainingDialog.panel.Click += new MouseEventHandler(panel_Click);
             }
             else
             {
-                panel.Disable();
-                TrainingDialog.ShowDialog("You have to choose a weapon before continuing. Click on the flashing slot to the right to assign.");
-                TrainingDialog.panel.Click += new MouseEventHandler(panel_Click);
+                if (TestWeapons())
+                {
+                    PlayerPrefs.SetString("Mode", "Train");
+                    //   PlayerPrefs.SetInt("Evolution Speed", GetEvolutionSpeed());
+
+                    Application.LoadLevel("Optimization scene");
+                }
+                else
+                {
+                    panel.Disable();
+                    TrainingDialog.ShowDialog("You have to choose a weapon before continuing. Click on the flashing slot to the right to assign.");
+                    TrainingDialog.panel.Click += new MouseEventHandler(panel_Click);
+                }
             }
         }
         else

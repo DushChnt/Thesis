@@ -31,6 +31,8 @@ public class BrainPanel : MonoBehaviour {
     public GameObject ListItem;
     public GameObject Tutorial;
 
+    int AddedBrains;
+
     int numberOfBrains;
 
     Player Player
@@ -55,17 +57,20 @@ public class BrainPanel : MonoBehaviour {
         
         q.FindAsync().ContinueWith(t =>
         {
+            // print("Joe");
             rootBrains = new List<Brain>();
             IEnumerable<Brain> result = t.Result;
             //     Dictionary<string, Brain> allBrains = new Dictionary<string, Brain>();
 
             foreach (Brain brain in result)
             {
+                // print("Brain");
                 if (brain.Population != null)
                 {
-                    print("FILE: " + brain.Population.Name + ", URL: " + brain.Population.Url);
+                    // print("FILE: " + brain.Population.Name + ", URL: " + brain.Population.Url);
 
                     //  StartCoroutine(WaitForRequest(brain));
+
                 }
                 if (brain.ParentId != null)
                 {
@@ -166,7 +171,7 @@ public class BrainPanel : MonoBehaviour {
     void slot1_DragEnter(dfControl control, dfDragEventArgs dragEvent)
     {
         dfPanel panel = control as dfPanel;
-        print("Drag enter");
+        // print("Drag enter");
         if (draggedBrain != null)
         {
             panel.BackgroundColor = new Color32(255, 255, 255, 255);
@@ -208,7 +213,7 @@ public class BrainPanel : MonoBehaviour {
         dragEvent.State = dfDragDropState.Dragging;
         dragEvent.Data = this;
         Cursor.SetCursor(mouseCursor, Vector2.zero, CursorMode.Auto);
-        print("Drag start");       
+        // print("Drag start");       
     }
 
 
@@ -298,6 +303,7 @@ public class BrainPanel : MonoBehaviour {
 
     private float AddBox(Brain b, int level, float prev_center, Color32 color)
     {
+        AddedBrains++;
         var top_padding = 10;
         var spacing = 150;
         //  var button = _panel.AddControl<BrainButton>();
@@ -349,7 +355,7 @@ public class BrainPanel : MonoBehaviour {
             line.Height = HypotenuseLength(prev_center, center, B) + 20;
             Vector3 rot = Vector3.forward;
             float angle = Angle(B, center - prev_center);
-            print("Angle: " + angle);
+            // print("Angle: " + angle);
             line.transform.Rotate(rot, angle);
             float padding = 0;
             if (angle < 0)
@@ -372,6 +378,7 @@ public class BrainPanel : MonoBehaviour {
 
     private float AddButton(Brain b, int level, float ratio, float idx, float prev_center)
     {
+       
         var spacing = 90;
         var count = _panel.Controls.Count;
         var button = _panel.AddControl<BrainButton>();
@@ -404,7 +411,7 @@ public class BrainPanel : MonoBehaviour {
             line.Height = HypotenuseLength(prev_center, center, B);
             Vector3 rot = Vector3.forward;
             float angle = Angle(B, center - prev_center);
-            print("Angle: " + angle);
+            // print("Angle: " + angle);
             line.transform.Rotate(rot, angle);
             float padding = 0;
             if (angle < 0)
@@ -569,6 +576,7 @@ public class BrainPanel : MonoBehaviour {
 
     void AddBrains(List<Brain> brains)
     {
+        AddedBrains = 0;
         var children = new List<GameObject>();
 
         foreach (Transform child in transform)
@@ -600,21 +608,22 @@ public class BrainPanel : MonoBehaviour {
         foreach (Brain b in brains)
         {
             Color32 color = hsvToRgb(idx / (float)numBrains, 1, 0.5f);
-            
+            // print("Hello");
             recurseAdd(b, level, ratio, idx, idx * ratio, 0, color);
             idx++;
         }
 
     //    print("Count: " + allBrains.Count());
-        if (numberOfBrains < 2)
+        // print("Number of brains: " + numberOfBrains);
+        if (AddedBrains < 2)
         {
-            print("Joe");
+            // print("Joe");
             dfTextureSprite sprite = _panel.AddPrefab(Tutorial) as dfTextureSprite;
 
             var center_x = _panel.Width / 2;
             sprite.RelativePosition = new Vector3(center_x - sprite.Width / 2, 7, 0);
             sprite.ZOrder = 0;
-            print("Joe 2");
+            // print("Joe 2");
         }
     }
 
@@ -644,7 +653,7 @@ public class BrainPanel : MonoBehaviour {
         int i = 0;
         while (LevelCount.ContainsKey(i))
         {
-            print("Level " + i + ": " + LevelCount[i]);
+            // print("Level " + i + ": " + LevelCount[i]);
             i++;
         }
     }
@@ -656,7 +665,7 @@ public class BrainPanel : MonoBehaviour {
     {
         //	float center = AddButton(b, level, ratio, startRatio, prev_center);
         var center = AddBox(b, level, prev_center, color);
-        print(level + ". " + b.Name + ", Startratio: " + startRatio + ", center: " + center);
+        // print(level + ". " + b.Name + ", Startratio: " + startRatio + ", center: " + center);
 
         if (b.Children.Count > 0)
         {

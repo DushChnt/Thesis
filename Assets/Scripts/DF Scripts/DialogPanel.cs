@@ -16,13 +16,13 @@ public class DialogPanel : MonoBehaviour {
         dialogPanel = GetComponent<dfPanel>();
         if (DismissButton == null)
         {
-            print("Null");
+            
         }
         DismissButton.Click += new MouseEventHandler(DismissButton_Click);
 
         if (CancelButton != null)
         {
-            print("Not null");
+           
             CancelButton.Click += new MouseEventHandler(CancelButton_Click);
         }
 
@@ -31,7 +31,6 @@ public class DialogPanel : MonoBehaviour {
 
     void CancelButton_Click(dfControl control, dfMouseEventArgs mouseEvent)
     {
-        print("Cancel");
         this.dialogPanel.Hide();
         EventArgs args = new EventArgs();
         
@@ -50,7 +49,6 @@ public class DialogPanel : MonoBehaviour {
     {
         if (EmailReset)
         {
-            print("Resetting for " + EmailTextbox.Text);
             Parse.ParseUser.RequestPasswordResetAsync(EmailTextbox.Text);
         }
 

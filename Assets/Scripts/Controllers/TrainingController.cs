@@ -330,7 +330,7 @@ public class TrainingController : LevelController {
             //        ". Ranged attacks: " + RangedAttacks + ", score: " + rangedAttacks);
             //}
 
-            float rangedPrecision = RangedAttacks > 0 ? RangedHits / RangedAttacks : 0;
+            float rangedPrecision = RangedAttacks > 0 ? (float)RangedHits / (float)RangedAttacks : 0;
             details.RangedPrecision = rangedPrecision * 100;
             rangedPrecision *= Settings.Brain.RiflePrecision;
             fit += rangedPrecision;
@@ -350,7 +350,7 @@ public class TrainingController : LevelController {
             float mortarHits = MortarHits / MaxMortarAttacks * Settings.Brain.MortarHits;
             fit += mortarHits;
 
-            float mortarPrecision = MortarAttacks > 0 ? MortarHits / MortarAttacks : 0;
+            float mortarPrecision = MortarAttacks > 0 ? (float)MortarHits / (float)MortarAttacks : 0;
             details.MortarPrecision = mortarPrecision * 100;
             mortarPrecision *= Settings.Brain.MortarPrecision;
             fit += mortarPrecision;

@@ -14,7 +14,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     NetworkGUI gui;
     public Transform Spawn1, Spawn2, Spawn3, Spawn4;
     bool opponentDied, iDied;
-    float waitForEndTimer, WaitForEndTime = 2f;
+    float waitForEndTimer, WaitForEndTime = 4f;
     Match match;
     Frame currentFrame;
     IList<ParseObject> frames;
@@ -50,7 +50,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
         switch (PhotonNetwork.room.customProperties["mode"].ToString())
         {
-            case "Single":
+            case "Best of 1":
                 distance = 1;
                 break;
             case "Best of 3":
@@ -60,10 +60,12 @@ public class NetworkBattleManager : Photon.MonoBehaviour
                 distance = 5;
                 break;
         }
-        print("Distance: " + distance);
+        // print("Distance: " + distance);
+
+        gui.SetDistance(PhotonNetwork.room.customProperties["mode"].ToString());
         frames = new List<ParseObject>();        
         match = new Match();
-
+        match.Distance = distance;
 
         StartFrame();
   
@@ -88,12 +90,27 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         {
             ChooseSpawn();
         }
+        if (PhotonNetwork.room.playerCount == 2)
+        {
+            if (PhotonNetwork.isMasterClient)
+            {
+                // Send spawn position to new player
+                int chosen = Random.Range(0, 3);
+                while (occupiedSpawnPositions.Contains(chosen))
+                {
+                    chosen = Random.Range(0, 3);
+                }
+                occupiedSpawnPositions.Add(chosen);
+
+                photonView.RPC("ReceiveSpawnPosition", PhotonTargets.Others, chosen);
+            }
+        }
     }
 
     void SaveSequentially()
     {
         currentFrame.SaveAsync().ContinueWith( t => {
-            print("Done saving current frame");  
+            // print("Done saving current frame");  
         });
     }
 
@@ -136,7 +153,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
                 if (_startTimer > StartTimer)
                 {
                     GameStarted = true;
-                    print("RPC call start game");
+                    // print("RPC call start game");
                     photonView.RPC("StartGame", PhotonTargets.All);
                     
                     Camera.main.GetComponent<MousePan>().Activated = true;
@@ -150,7 +167,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             gui.UpdateCountdownPanel(StartTimer - _startTimer);
         }
 
-        if (opponentDied || iDied)
+        if (opponentDied || iDied || gui.TimeOut())
         {
             waitForEndTimer += Time.deltaTime;
             if (waitForEndTimer > WaitForEndTime)
@@ -167,14 +184,14 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         if ((iDied && opponentDied) || (!iDied && !opponentDied)) 
         {
             // It's a draw!
-            print("It's a draw");
+            // print("It's a draw");
             gui.ShowMatchStatus("It's a draw!", Color.white);
             outcome = "draw";
         }
         if (iDied && !opponentDied)
         {
             // I lost!
-            print("I lost");
+            // print("I lost");
             gui.ShowMatchStatus("You lose...", Color.red);
             outcome = "lost";
             opponentWins++;
@@ -182,7 +199,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         if (!iDied && opponentDied)
         {
             // I won!
-            print("I won");
+            // print("I won");
             gui.ShowMatchStatus("You win!", Color.green);
             outcome = "won";
             ownWins++;
@@ -198,6 +215,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         
         iDied = false;
         opponentDied = false;
+        waitForEndTimer = 0;
         gui.StopGame();
 
         NextFrame();
@@ -207,7 +225,9 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     {
         if (ownWins > distance / 2.0f || opponentWins > distance / 2.0f)
         {
-
+            gui.ShowMatchResult(ownWins, opponentWins);
+            match.Won = ownWins > opponentWins;
+            match.SaveAsync();
         }
         else
         {
@@ -328,7 +348,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     {
         gui.SetCountdownVisibility(false);
         ShowingCountdown = false;
-        print("Starting game");
+        // print("Starting game");
         // if (photonView.isMine)
         {
             Stats();
@@ -344,22 +364,22 @@ public class NetworkBattleManager : Photon.MonoBehaviour
         PhotonView[] players = GameObject.FindObjectsOfType<PhotonView>();
         GameObject other = null;
         GameObject mine = null;
-        print("Number of PhotonViews: " + players.Length);
+        // print("Number of PhotonViews: " + players.Length);
         foreach (PhotonView ph in players)
         {
             if (!ph.gameObject.name.Contains("HammerRobot"))
             {
                 continue;
             }
-            print("ViewID: " + ph.viewID + ", SubID: " + ph.subId + ", InstantiationId: " + ph.instantiationId + ", Name: " + ph.name);
+            // print("ViewID: " + ph.viewID + ", SubID: " + ph.subId + ", InstantiationId: " + ph.instantiationId + ", Name: " + ph.name);
             if (!ph.isMine)
             {
                 other = ph.gameObject;
-                print("Is not mine");
+                // print("Is not mine");
             }
             else
             {
-                print("Is Mine");
+                // print("Is Mine");
                 mine = ph.gameObject;
             }
         }
@@ -374,14 +394,17 @@ public class NetworkBattleManager : Photon.MonoBehaviour
             var controller1 = mine.GetComponent<FightController>();
        //     controller1.HitLayers = 1 << LayerMask.NameToLayer("BattleRobot");
 
+            int activeNumber = -1;
+
             IBlackBox brain1 = null, brain2 = null, brain3 = null, brain4 = null, activeBrain = null;
             string path = "";
             if (Player.Brain1 != null)
             {
                 path = Application.persistentDataPath + string.Format("/{0}/{1}.champ.xml", Player.Username, Player.Brain1.ObjectId);
-                print("Path: " + path);
+                // print("Path: " + path);
                 brain1 = Utility.LoadBrain(path);
                 activeBrain = brain1;
+                activeNumber = 1;
             }
             if (Player.Brain2 != null)
             {
@@ -390,6 +413,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
                 if (activeBrain == null)
                 {
                     activeBrain = brain2;
+                    activeNumber = 2;
                 }
             }
 
@@ -400,6 +424,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
                 if (activeBrain == null)
                 {
                     activeBrain = brain3;
+                    activeNumber = 3;
                 }
             }
 
@@ -410,13 +435,14 @@ public class NetworkBattleManager : Photon.MonoBehaviour
                 if (activeBrain == null)
                 {
                     activeBrain = brain4;
+                    activeNumber = 4;
                 }
             }
 
-            print("Joe 1");
+            // print("Joe 1");
             controller1.Activate(activeBrain, other);
             controller1.SetBrains(brain1, brain2, brain3, brain4);
-            print("Joe 2");
+            // print("Joe 2");
             var opponent = other.GetComponent<FightController>();
             gui.ResetTimer();
             gui.MyRobot = controller1;
@@ -425,7 +451,9 @@ public class NetworkBattleManager : Photon.MonoBehaviour
           //  controller1.Opponent.Opponent = controller1;
           //  controller1.Opponent.target = controller1.gameObject;
             gui.ResetButton.Controller = controller1.gameObject;
-            print("Joe 3");
+            // print("Joe 3");
+
+
 
             GameObject UIRoot = GameObject.Find("Battle GUI");
 
@@ -459,7 +487,7 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
             prop.enabled = true;
 
-            print("Joe 4");
+            // print("Joe 4");
 
             HealthScript oppHealth = other.GetComponent<HealthScript>();
             oppHealth.Died += new HealthScript.DeathEventHandler(oppHealth_Died);
@@ -489,22 +517,27 @@ public class NetworkBattleManager : Photon.MonoBehaviour
 
             oppProp.enabled = true;
 
-            print("Joe 5");
+            // print("Joe 5");
 
 
-            if (PhotonNetwork.isMasterClient)
+            if (photonView.isMine)
             {
-                mine.transform.Find("Body").renderer.material = ownColor;
+                // print("Setting color of other");
+                other.transform.Find("Body").renderer.material = ownColor;
             }
             else
             {
+                // print("Not mine, Setting color of other");
                 other.transform.Find("Body").renderer.material = ownColor;
+            //    mine.transform.Find("Body").renderer.material = ownColor;
             }
 
-            print("Joe 6");
+            // print("Joe 6");
          //   GameLogger.Instance.StartLogging(controller1, controller1.Opponent);
             logger = new EventLogger(controller1, Application.loadedLevelName, currentFrame);
             logger.StartLogging();
+
+            gui.SetSelectedBrain(activeNumber);
         }
     }
 
@@ -512,12 +545,27 @@ public class NetworkBattleManager : Photon.MonoBehaviour
     {
         // Wait for two seconds to see if our own robot dies as well (from mortars)
         opponentDied = true;
+        photonView.RPC("SendADeath", PhotonTargets.Others, false);
     }
 
     void health_Died(object sender, System.EventArgs e)
     {
         // Wait for two seconds to see if the other robot dies as well (from mortars)
         iDied = true;
+        photonView.RPC("SendADeath", PhotonTargets.Others, true);
+    }
+
+    [RPC]
+    protected void SendADeath(bool senderDied)
+    {
+        if (senderDied)
+        {
+            opponentDied = true;
+        }
+        else
+        {
+            iDied = true;
+        }
     }
 
     void OnPhotonPlayerConnected(PhotonPlayer newPlayer)

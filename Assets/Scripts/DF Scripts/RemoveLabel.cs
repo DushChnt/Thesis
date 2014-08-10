@@ -10,7 +10,7 @@ public class RemoveLabel : MonoBehaviour {
 
     void RemoveLabel_TweenCompleted(dfTweenPlayableBase sender)
     {
-        print("OnTweenCompleted");
+        // print("OnTweenCompleted");
         Destroy(gameObject);
     }
 	

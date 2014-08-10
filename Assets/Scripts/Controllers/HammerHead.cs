@@ -18,7 +18,7 @@ public class HammerHead : MonoBehaviour {
    //     print("Hammer: " + col.tag);
         if (col.tag.Equals("Robot"))
         {
-            print("BANG!");
+            // print("BANG!");
         }
     }
 }

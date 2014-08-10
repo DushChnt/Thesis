@@ -61,7 +61,7 @@ public class FightController : LevelController {
 
     void HealthScript_Died(object sender, EventArgs e)
     {
-        print("I died");
+        // print("I died");
         Stop();
     }
 
@@ -147,7 +147,7 @@ public class FightController : LevelController {
 
     void OpponentHealth_Died(object sender, EventArgs e)
     {
-        print("Died");
+        // print("Died");
         Stop();
     }
     protected override void Initialize()
@@ -158,7 +158,22 @@ public class FightController : LevelController {
 
         lineRenderer = GetComponent<LineRenderer>();
 
-        Bloom = (GameObject) Resources.Load("Mortar Bloom", typeof(GameObject));
+        if (!PhotonNetwork.offlineMode)
+        {
+            if (photonView.isMine)
+            {
+              //  print("Loading green mortar");
+         //       Bloom = (GameObject)Resources.Load("Green Bloom", typeof(GameObject));
+                Mortar = (GameObject)Resources.Load("Mortar", typeof(GameObject));
+            }
+            else
+            {
+              //  print("Loading red mortar");
+         //       Bloom = (GameObject)Resources.Load("Red Bloom", typeof(GameObject));
+                Mortar = (GameObject)Resources.Load("Red Mortar", typeof(GameObject));
+            }
+        }
+      //  Bloom = (GameObject) Resources.Load("Mortar Bloom", typeof(GameObject));
     }
 
     void Update()
@@ -260,17 +275,17 @@ public class FightController : LevelController {
     {        
         if (col.tag.Equals("Robot"))
         {
-            print("Enter!");
+            // print("Enter!");
             TargetIsInMeleeBox = true;
         }
     }
 
     void OnTriggerExit(Collider col)
     {
-        //     print("Hammer: " + col.tag);
+        //     // print("Hammer: " + col.tag);
         if (col.tag.Equals("Robot"))
         {
-            print("Exit!");
+            // print("Exit!");
             TargetIsInMeleeBox = false;
         }
     }
@@ -386,7 +401,7 @@ public class FightController : LevelController {
         m.GetComponent<MortarHit>().MortarCollision += new MortarHit.MortarEventHandler(FightController_MortarCollision);
         var direction = (turret.forward + turret.up * 1f) * mortarForce * MaxMortarForce;
         body.AddForce(direction);
-        print("----------------------- Mortarforce: " + mortarForce + " direction: " + direction);
+        // print("----------------------- Mortarforce: " + mortarForce + " direction: " + direction);
         if (!PhotonNetwork.offlineMode)
         {
             photonView.RPC("ShootMortar", PhotonTargets.Others, direction);
@@ -507,5 +522,11 @@ public class FightController : LevelController {
         {
             turret.rotation = turretRotation; 
         }
+    }
+
+    public void PickupHealth()
+    {
+        // print("Taking 20 life!");
+        HealthScript.TakeDamage(-20); // Using negative damage as healing
     }
 }

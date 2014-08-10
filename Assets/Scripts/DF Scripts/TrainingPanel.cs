@@ -133,6 +133,7 @@ public class TrainingPanel : MonoBehaviour {
             EARunning = true;
 
             startTime = DateTime.Now.Ticks / (TimeSpan.TicksPerMillisecond * 1000);
+            Time = 0;
 
             RunBestButton.Disable();
         }

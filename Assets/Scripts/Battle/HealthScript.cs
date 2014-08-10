@@ -10,6 +10,7 @@ public class HealthScript : Photon.MonoBehaviour {
     GameObject label;
     public bool IsOpponent;
     public float MaxHealth = 100f;
+    bool isDead;
 
     public delegate void DamageTakenHandler(float damage);
     public event DamageTakenHandler DamageTaken;
@@ -102,7 +103,7 @@ public class HealthScript : Photon.MonoBehaviour {
             glabel.Text = string.Format("-{0:#.##}!", damage);
             glabel.BottomColor = new Color32(254, 0, 0, 254);
         }
-        else if (damage > 0)
+        else if (damage < 0)
         {
             glabel.Text = string.Format("+{0:#.##}!", damage);
             glabel.BottomColor = new Color32(0, 254, 0, 254);
@@ -117,51 +118,69 @@ public class HealthScript : Photon.MonoBehaviour {
 
 	public void TakeDamage(float damage)
 	{
-        print("Taking damage " + damage);
-
-        ShowFloatingText(damage);
-        
-		_health -= damage;
-        if (_health > MaxHealth)
+        if (!isDead)
         {
-            _health = MaxHealth;
-        }
-		photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health, damage);
-        if (photonView.isMine)
-        {
+            // print("Taking damage " + damage);
 
-        }
-		if (isOne)
-		{
-			BattleGUI.Robot1Health = Health;
-		}
-		else
-		{
-			BattleGUI.Robot2Health = Health;
-		}
-        OnDamageTaken(damage);
-		if (Health <= 0)
-		{
-		//	Destroy(gameObject);
-          //  PhotonNetwork.Destroy(photonView);
-         //   Explosion.Play();
-            print("Play explosion");
-            DeathExplosion();
-            if (FollowScript != null)
+            ShowFloatingText(damage);
+
+            _health -= damage;
+            if (_health > MaxHealth)
             {
-                Destroy(FollowScript.gameObject);
-                Destroy(FollowScript);
+                _health = MaxHealth;
             }
-           
-            Destroy(gameObject);
-       //     PhotonNetwork.Destroy(gameObject);
-		}
+            photonView.RPC("SetHealth", PhotonTargets.OthersBuffered, _health, damage);
+            if (photonView.isMine)
+            {
+
+            }
+            if (isOne)
+            {
+                BattleGUI.Robot1Health = Health;
+            }
+            else
+            {
+                BattleGUI.Robot2Health = Health;
+            }
+            OnDamageTaken(damage);
+            if (Health <= 0)
+            {
+                //	Destroy(gameObject);
+                //  PhotonNetwork.Destroy(photonView);
+                //   Explosion.Play();
+                // print("Play explosion");
+                DeathExplosion();
+                if (FollowScript != null)
+                {
+                    Destroy(FollowScript.gameObject);
+                    Destroy(FollowScript);
+                }
+                gameObject.renderer.enabled = false;
+                gameObject.SetActive(false);
+                //     Destroy(gameObject);
+                //     PhotonNetwork.Destroy(gameObject);
+            }
+        }
 	}
+
+    IEnumerator RemoveRobot()
+    {
+        yield return new WaitForSeconds(3.0f);
+        if (this != null && gameObject != null)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void DeathExplosion()
     {
-        Died(this, EventArgs.Empty);
-        ParticleSystem ps = Instantiate(Explosion, transform.position + new Vector3(0, 2, 0), Quaternion.identity) as ParticleSystem;
+        if (!isDead)
+        {
+            Died(this, EventArgs.Empty);
+            ParticleSystem ps = Instantiate(Explosion, transform.position + new Vector3(0, 2, 0), Quaternion.identity) as ParticleSystem;
+            isDead = true;
+            StartCoroutine(RemoveRobot());
+        }
        // ps.Play();
     //    Destroy(ps, ps.duration + ps.startLifetime);
     }
@@ -187,15 +206,16 @@ public class HealthScript : Photon.MonoBehaviour {
             {
              //   Explosion.Play();
                 DeathExplosion();
-                print("RPC: Play explosion");
+                // print("RPC: Play explosion");
                 if (FollowScript != null)
                 {
                     Destroy(FollowScript.gameObject);
                     Destroy(FollowScript);
                 }
-                PhotonNetwork.Destroy(gameObject);
-               
-                print("Death on " + Time.time);
+                gameObject.renderer.enabled = false;
+           //     PhotonNetwork.Destroy(gameObject);
+                gameObject.SetActive(false);
+                // print("Death on " + Time.time);
                 
             }
         }

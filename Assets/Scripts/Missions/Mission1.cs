@@ -62,10 +62,13 @@ public class Mission1 : MonoBehaviour, IMission {
         
         if (dist >= 0)
         {
-            UI.SetGoalText(string.Format("Distance remaining: {0:0.00}", GetDistance() - 2.5f));
+            if (UI != null)
+            {
+                UI.SetGoalText(string.Format("Distance remaining: {0:0.00}", GetDistance() - 2.5f));
+            }
             if (dist < 2.5f)
             {
-                print("Approach done!");
+                // print("Approach done!");
                 StartFlee();
                 
             }
@@ -98,7 +101,7 @@ public class Mission1 : MonoBehaviour, IMission {
 
     private void StartApproach()
     {
-        print("Showing text");
+        // print("Showing text");
         PopupText.ShowText("Get close!");
         state = Mission1State.Approach;
         UI.UpdateQuest(1, MaxQuest);
@@ -112,7 +115,7 @@ public class Mission1 : MonoBehaviour, IMission {
         PastDistances = new Queue<float>(100);
         PopupText.ShowText("Flee!");
         UI.UpdateQuest(2, MaxQuest);
-        UI.SetGoalText("Flee from the target", string.Format("Distance remaining: {0:0.00}", 5f - PastDistances.Average()));
+        UI.SetGoalText("Flee from the target", string.Format("Distance remaining: {0:0.00}", 5f));
     }
 
     private void StartFollow()

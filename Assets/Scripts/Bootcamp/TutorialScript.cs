@@ -27,7 +27,7 @@ Click on the ? to bring up this window again.";
     string page3Title = "Your missions";
     string page3Explanation = @"On the left side you can see the missions that you have to complete in order to make it through the bootcamp. Click on an available mission to get your orders. Keep these in mind and create the right set of brains to be able to complete the mission.
 
-Once your brains are ready, select them for your robot and press on 'Test it!' to see if your robot can complete the mission.";
+Once your brains are ready, select them for your robot and press on 'Go to mission' to see if your robot can complete the mission.";
 
     string page4Title = "Your brains";
     string page4Explanation = @"In the middle you can see the brains you have trained for your robot. It is a good idea to create separate brains for specific tasks. You can use your existing brains as basis for new brains by clicking + on the brains. That way the new brains already know what the existing brains know and you can then train it in a new direction.

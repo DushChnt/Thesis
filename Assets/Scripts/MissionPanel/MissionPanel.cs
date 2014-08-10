@@ -25,8 +25,8 @@ public class MissionPanel : MonoBehaviour {
 
         DisableLockedMissions();
      //   MissionClick(null, null, Player.Level);
-        print("Clicking missions");
-        print("Player level: " + Player.Level);
+        // print("Clicking missions");
+        // print("Player level: " + Player.Level);
 
         int mission = PlayerPrefs.GetInt(CURRENT_MISSION, 1);
 
@@ -39,22 +39,22 @@ public class MissionPanel : MonoBehaviour {
         {
             case 1:
                 Mission1.DoClick();
-                print("Clicking mission 1");
+                // print("Clicking mission 1");
                 break;
             case 2:
                 Mission2.DoClick();  
-                print("Clicking mission 2");              
+                // print("Clicking mission 2");              
                 break;
             case 3:
                 Mission3.DoClick();
-                print("Clicking missions 3");
+                // print("Clicking missions 3");
                 break;
             case 4:
                 Mission4.DoClick();
-                print("Clicking mission 4");
+                // print("Clicking mission 4");
                 break;
             case 5:
-                print("Clicking mission 5");
+                // print("Clicking mission 5");
                 Mission5.DoClick();
                 break;
         }

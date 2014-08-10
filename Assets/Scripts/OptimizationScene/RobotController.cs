@@ -25,7 +25,7 @@ public class RobotController : BaseController
         {
 
             target = GameObject.Find("Target");
-            Utility.DebugLog = true;
+            Utility.DebugLog = false;
         }
         else
         {

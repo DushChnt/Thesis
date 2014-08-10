@@ -121,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0109027782, y: -.0849218741, z: 0}
+  m_LocalPosition: {x: .0109027624, y: -.0849218741, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400010}
@@ -133,7 +133,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0109027782, y: -.132092014, z: 0}
+  m_LocalPosition: {x: .0109027624, y: -.132092014, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400010}
@@ -145,7 +145,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0109027782, y: -.015260417, z: 0}
+  m_LocalPosition: {x: .0109027624, y: -.015260417, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400008}
@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.610946655, y: .0672073364, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -285,12 +285,12 @@ MonoBehaviour:
   layout:
     anchorStyle: 9
     margins:
-      left: 95.3085938
+      left: 95.3125
       top: 60.4882812
-      right: 2.69140625
+      right: 2.6875
       bottom: -48.4882812
     owner: {fileID: 11400000}
-  renderOrder: 7
+  renderOrder: 19
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -391,7 +391,7 @@ MonoBehaviour:
       right: 5.09375
       bottom: 28.7851562
     owner: {fileID: 11400002}
-  renderOrder: 3
+  renderOrder: 15
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -468,11 +468,11 @@ MonoBehaviour:
     anchorStyle: 13
     margins:
       left: 4.90625
-      top: 59.4414062
+      top: 59.4453125
       right: 5.09375
-      bottom: 7.55859375
+      bottom: 7.5546875
     owner: {fileID: 11400004}
-  renderOrder: 4
+  renderOrder: 16
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -553,7 +553,7 @@ MonoBehaviour:
       right: 5.09375
       bottom: 5.1328125
     owner: {fileID: 11400006}
-  renderOrder: 6
+  renderOrder: 18
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -577,7 +577,7 @@ MonoBehaviour:
   charSpacing: 0
   colorizeSymbols: 0
   processMarkup: 0
-  outline: 0
+  outline: 1
   outlineWidth: 1
   enableGradient: 0
   outlineColor:
@@ -634,7 +634,7 @@ MonoBehaviour:
       right: 0
       bottom: 51
     owner: {fileID: 11400008}
-  renderOrder: 5
+  renderOrder: 17
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1
@@ -665,7 +665,7 @@ MonoBehaviour:
   isInteractive: 1
   tooltip: 
   pivot: 0
-  zindex: 0
+  zindex: 1
   color:
     serializedVersion: 2
     rgba: 4294967295
@@ -687,7 +687,7 @@ MonoBehaviour:
       right: 0
       bottom: 0
     owner: {fileID: 11400012}
-  renderOrder: 2
+  renderOrder: 14
   isLocalized: 0
   hotZoneScale: {x: 1, y: 1}
   allowSignalEvents: 1

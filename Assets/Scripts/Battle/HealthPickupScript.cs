@@ -14,12 +14,11 @@ public class HealthPickupScript : MonoBehaviour {
 	}
 
     void OnTriggerEnter(Collider other)
-    {
-        print("Health pickup");
-        print("Tag:" + other.tag);
+    {        
         if (other.tag.Equals("Robot"))
         {
-            BaseController robot = other.gameObject.transform.parent.GetComponent<BaseController>();
+            // print("HEALTH: Hitting a robot");
+            FightController robot = other.gameObject.transform.parent.GetComponent<FightController>();
             robot.PickupHealth();
             Destroy(gameObject);
         }

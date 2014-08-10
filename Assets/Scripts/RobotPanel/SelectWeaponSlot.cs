@@ -53,20 +53,20 @@ public class SelectWeaponSlot : MonoBehaviour {
     {
         if (weaponButton == null)
         {
-            print("Weapon button is null");
+            // print("Weapon button is null");
         }
         if (weapon == null)
         {
-            print("NulL");
+            // print("NulL");
         }
         else
         {
-            print("Notnull");
+            // print("Notnull");
         }
         this.Weapon = weapon;
         if (NameLabel == null)
         {
-            print("WTF?");
+            // print("WTF?");
         }
         WeaponAvatar.SpriteName = weapon.AvatarPath;
         NameLabel.Text = weapon.Name;
